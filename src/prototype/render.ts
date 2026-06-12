@@ -184,7 +184,7 @@ function renderEvidence(state: GameState): void {
 }
 
 /**
- * Effect: Triggers the bot chomp animation and clears it after the configured
+ * Triggers the bot chomp animation and clears it after the configured
  * duration. This is a purely visual effect with no game state meaning.
  */
 export function chompBot(): void {
@@ -194,11 +194,11 @@ export function chompBot(): void {
 }
 
 /**
- * Effect: Renders the entire interface from the given state. While playing it shows
+ * Renders the entire interface from the given state. While playing it shows
  * the dots, evidence, current question, and input row. Once revealed it shows the
  * outcome banner with the machine rule and either a next machine control or the end
- * screen. Primary operations: writes the dots, evidence, machine name, and feedback,
- * then branches on the phase to render either the playing controls or the reveal.
+ * screen. writes the dots, evidence, machine name, and feedback, then branches on the 
+ * phase to render either the playing controls or the reveal.
  * @param state The current game state.
  * @param machines The full machine set.
  * @param handlers The controller callbacks for interface events.
@@ -261,11 +261,10 @@ export function render(state: GameState, machines: readonly Machine[], handlers:
 }
 
 /**
- * Effect: Renders the end of game summary into the rule box: a statistics line, the
- * shareable result text, a copy control, and a restart control. Primary operations:
- * computes the cracked count and share text and appends the summary elements.
- * System interactions: the copy control writes the share text to the clipboard when
- * a clipboard is available.
+ * Renders the end of game summary into the rule box: a statistics line, the
+ * shareable result text, a copy control, and a restart control. Computes the cracked 
+ * count and share text and appends the summary elements. The copy control writes the 
+ * share text to the clipboard when a clipboard is available.
  * @param state The final game state.
  * @param machines The full machine set.
  * @param handlers The controller callbacks for interface events.

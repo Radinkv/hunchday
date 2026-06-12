@@ -29,7 +29,7 @@ injectSpeedInsights();
 let state: GameState = startGame(MACHINES);
 
 /**
- * Effect: Replaces the current state and re renders the interface from it.
+ * Replaces the current state and re renders the interface from it.
  * @param next The state to adopt and render.
  */
 function update(next: GameState): void {
