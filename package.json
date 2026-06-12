@@ -1,12 +1,14 @@
 {
   "name": "hunchday",
   "version": "1.0.0",
-  "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "repository": {
     "type": "git",
@@ -21,7 +23,11 @@
   "homepage": "https://github.com/Radinkv/hunchday#readme",
   "description": "",
   "devDependencies": {
-    "vite": "^8.0.16"
+    "@types/node": "^25.9.3",
+    "jsdom": "^27.0.1",
+    "typescript": "^6.0.3",
+    "vite": "^8.0.16",
+    "vitest": "^3.2.6"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",

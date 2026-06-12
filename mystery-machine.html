@@ -202,7 +202,7 @@ function finishMachine(won){
   }
 }
 function endScreen(box){
-  const cracked = results.filter(r => r).length;
+  const cracked = results.filter(Boolean).length;
   const grid = results.map(r => r ? "\u{1F7E2}" : "\u{1F7E0}").join("");
   const share = "Mystery machine \u00B7 prototype\n" + grid + "\ncracked " + cracked + "/" + MACHINES.length + " \u00B7 " + misses + " misses";
   const p = document.createElement("p");
