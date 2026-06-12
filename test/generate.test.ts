@@ -63,8 +63,8 @@ function daySignature(spec: DaySpec): string {
  * @returns The shifted date string.
  */
 function shiftDate(date: string, days: number): string {
-  const [year, month, day] = date.split("-").map(Number);
-  const shifted = new Date(Date.UTC(year, month - 1, day) + days * MS_PER_DAY);
+  const parts = date.split("-").map(Number);
+  const shifted = new Date(Date.UTC(parts.at(0) ?? 0, (parts.at(1) ?? 1) - 1, parts.at(2) ?? 1) + days * MS_PER_DAY);
   const pad = (value: number): string => String(value).padStart(2, "0");
   return `${shifted.getUTCFullYear()}-${pad(shifted.getUTCMonth() + 1)}-${pad(shifted.getUTCDate())}`;
 }
