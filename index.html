@@ -109,8 +109,10 @@
 <footer>prototype · a daily set would be 3 machines</footer>
 <script type="module">
 import { inject } from "@vercel/analytics";
+import { injectSpeedInsights } from "@vercel/speed-insights";
 
 inject();
+injectSpeedInsights();
 </script>
 <script>
 const MACHINES = [
