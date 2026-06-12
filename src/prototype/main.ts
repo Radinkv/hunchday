@@ -10,7 +10,7 @@
 import { inject } from "@vercel/analytics";
 import { injectSpeedInsights } from "@vercel/speed-insights";
 
-import { MACHINES } from "./machines";
+import { machinesForDate, todayDate } from "./adapter";
 import { feed, nextMachine, restart, startGame } from "./reducer";
 import { chompBot, render, type Handlers } from "./render";
 import { PHASE_PLAYING, type GameState } from "./types";
@@ -21,6 +21,9 @@ const INPUT_KEY_ENTER = "Enter";
 
 inject();
 injectSpeedInsights();
+
+/** Today's generated machine set, the puzzle every local player shares for the date. */
+const MACHINES = machinesForDate(todayDate());
 
 /**
  * The single mutable state cell. Every interaction derives a new state from the pure
