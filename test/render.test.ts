@@ -1,8 +1,8 @@
 // @vitest-environment jsdom
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it } from "vitest";
 import { MACHINES } from "../src/prototype/machines";
 import { feed, startGame, tokenize } from "../src/prototype/reducer";
-import { render, type Handlers } from "../src/prototype/render";
+import { render } from "../src/prototype/render";
 import { MARK_MISS } from "../src/prototype/types";
 import {
   CLASS_CHIP,
@@ -18,14 +18,9 @@ import {
   COPY_SUBTITLE_CRACKED,
   DISPLAY_FLEX,
   DISPLAY_NONE,
-  ELEMENT_ID_BOT,
-  ELEMENT_ID_DOTS,
   ELEMENT_ID_EVIDENCE,
-  ELEMENT_ID_FEED_BUTTON,
   ELEMENT_ID_FEED_ROW,
   ELEMENT_ID_FEEDBACK,
-  ELEMENT_ID_GUESS_INPUT,
-  ELEMENT_ID_LIGHT,
   ELEMENT_ID_MACHINE_NAME,
   ELEMENT_ID_MACHINE_SUBTITLE,
   ELEMENT_ID_QUESTION,
@@ -36,6 +31,7 @@ import {
   MACHINE_NUMBER_PAD_LENGTH,
   TAG_BUTTON,
 } from "../src/prototype/constants";
+import { byClass, byId, DOM_SKELETON, noopHandlers, within } from "./dom-helpers";
 
 /**
  * Guards the document object model mapping: that render turns a game state into the
@@ -50,50 +46,10 @@ const FIRST_MACHINE = MACHINES[0];
 /** A guess that is wrong for the first challenge of the first machine. */
 const WRONG_GUESS = "nope";
 
-/**
- * Builds a selector for an element identifier.
- * @param id The element identifier.
- * @returns The identifier selector.
- */
-function byId(id: string): string {
-  return "#" + id;
-}
-
-/**
- * Builds a selector for one or more class names joined into a single compound.
- * @param names The class names to combine.
- * @returns The compound class selector.
- */
-function byClass(...names: string[]): string {
-  return names.map((name) => "." + name).join("");
-}
-
-/**
- * Builds a descendant selector from a parent identifier and a descendant selector.
- * @param parentId The identifier of the ancestor element.
- * @param descendant The descendant selector.
- * @returns The combined descendant selector.
- */
-function within(parentId: string, descendant: string): string {
-  return byId(parentId) + " " + descendant;
-}
-
-const SKELETON = `
-  <div id="${ELEMENT_ID_DOTS}"></div>
-  <svg id="${ELEMENT_ID_BOT}"><circle id="${ELEMENT_ID_LIGHT}"></circle></svg>
-  <div id="${ELEMENT_ID_MACHINE_NAME}"></div>
-  <div id="${ELEMENT_ID_MACHINE_SUBTITLE}"></div>
-  <div id="${ELEMENT_ID_EVIDENCE}"></div>
-  <p id="${ELEMENT_ID_QUESTION}"></p>
-  <div id="${ELEMENT_ID_FEED_ROW}"><input id="${ELEMENT_ID_GUESS_INPUT}" type="text"><button id="${ELEMENT_ID_FEED_BUTTON}"></button></div>
-  <p id="${ELEMENT_ID_FEEDBACK}"></p>
-  <div id="${ELEMENT_ID_RULE_BOX}"></div>
-`;
-
-const NOOP_HANDLERS: Handlers = { onFeed: vi.fn(), onNext: vi.fn(), onRestart: vi.fn() };
+const NOOP_HANDLERS = noopHandlers();
 
 beforeEach(() => {
-  document.body.innerHTML = SKELETON;
+  document.body.innerHTML = DOM_SKELETON;
 });
 
 describe("render while playing", () => {
