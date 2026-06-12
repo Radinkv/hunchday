@@ -114,7 +114,7 @@ export const OP_SUM: OpMeta = { id: "sum", phrase: "adds all the chips together"
 export const OP_COUNT: OpMeta = { id: "count", phrase: "counts the chips" };
 export const OP_MAX: OpMeta = { id: "max", phrase: "finds the biggest chip" };
 export const OP_MIN: OpMeta = { id: "min", phrase: "finds the smallest chip" };
-export const OP_RANGE: OpMeta = { id: "range", phrase: "biggest chip minus smallest chip" };
+export const OP_RANGE: OpMeta = { id: "range", phrase: "subtracts the smallest chip from the biggest" };
 export const OP_PRODUCT: OpMeta = { id: "product", phrase: "multiplies all the chips together" };
 export const OP_FIRST: OpMeta = { id: "first", phrase: "keeps only the first chip" };
 export const OP_LAST: OpMeta = { id: "last", phrase: "keeps only the last chip" };
@@ -149,7 +149,7 @@ export const OP_INDEX_OF_MAX: OpMeta = {
   id: "index_of_max",
   phrase: "tells you the position of the biggest chip",
 };
-export const OP_DELTAS: OpMeta = { id: "deltas", phrase: "the gaps between neighbouring chips" };
+export const OP_DELTAS: OpMeta = { id: "deltas", phrase: "finds the gaps between neighbouring chips" };
 export const OP_COUNT_DISTINCT: OpMeta = {
   id: "count_distinct",
   phrase: "counts how many different chips there are",
@@ -158,7 +158,7 @@ export const OP_LENGTH_MAP: OpMeta = { id: "length_map", phrase: "counts the let
 export const OP_VOWEL_COUNT_MAP: OpMeta = { id: "vowel_count_map", phrase: "counts the vowels in every chip" };
 export const OP_FIRST_LETTER_POS: OpMeta = {
   id: "first_letter_pos",
-  phrase: "the alphabet position of each chip's first letter",
+  phrase: "reads the alphabet position of each chip's first letter",
 };
 export const OP_SORT_ALPHA: OpMeta = { id: "sort_alpha", phrase: "puts the chips in alphabetical order" };
 export const OP_LONGEST: OpMeta = { id: "longest", phrase: "keeps the chip with the most letters" };
