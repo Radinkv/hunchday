@@ -1,0 +1,218 @@
+[
+  {
+    "word": "fig",
+    "letters": 3,
+    "vowels": 1,
+    "first": "f"
+  },
+  {
+    "word": "plum",
+    "letters": 4,
+    "vowels": 1,
+    "first": "p"
+  },
+  {
+    "word": "pear",
+    "letters": 4,
+    "vowels": 2,
+    "first": "p"
+  },
+  {
+    "word": "lime",
+    "letters": 4,
+    "vowels": 2,
+    "first": "l"
+  },
+  {
+    "word": "kiwi",
+    "letters": 4,
+    "vowels": 2,
+    "first": "k"
+  },
+  {
+    "word": "date",
+    "letters": 4,
+    "vowels": 2,
+    "first": "d"
+  },
+  {
+    "word": "lemon",
+    "letters": 5,
+    "vowels": 2,
+    "first": "l"
+  },
+  {
+    "word": "mango",
+    "letters": 5,
+    "vowels": 2,
+    "first": "m"
+  },
+  {
+    "word": "peach",
+    "letters": 5,
+    "vowels": 2,
+    "first": "p"
+  },
+  {
+    "word": "melon",
+    "letters": 5,
+    "vowels": 2,
+    "first": "m"
+  },
+  {
+    "word": "berry",
+    "letters": 5,
+    "vowels": 1,
+    "first": "b"
+  },
+  {
+    "word": "guava",
+    "letters": 5,
+    "vowels": 3,
+    "first": "g"
+  },
+  {
+    "word": "olive",
+    "letters": 5,
+    "vowels": 3,
+    "first": "o"
+  },
+  {
+    "word": "apple",
+    "letters": 5,
+    "vowels": 2,
+    "first": "a"
+  },
+  {
+    "word": "grape",
+    "letters": 5,
+    "vowels": 2,
+    "first": "g"
+  },
+  {
+    "word": "prune",
+    "letters": 5,
+    "vowels": 2,
+    "first": "p"
+  },
+  {
+    "word": "lychee",
+    "letters": 6,
+    "vowels": 2,
+    "first": "l"
+  },
+  {
+    "word": "banana",
+    "letters": 6,
+    "vowels": 3,
+    "first": "b"
+  },
+  {
+    "word": "cherry",
+    "letters": 6,
+    "vowels": 1,
+    "first": "c"
+  },
+  {
+    "word": "orange",
+    "letters": 6,
+    "vowels": 3,
+    "first": "o"
+  },
+  {
+    "word": "papaya",
+    "letters": 6,
+    "vowels": 3,
+    "first": "p"
+  },
+  {
+    "word": "quince",
+    "letters": 6,
+    "vowels": 3,
+    "first": "q"
+  },
+  {
+    "word": "raisin",
+    "letters": 6,
+    "vowels": 3,
+    "first": "r"
+  },
+  {
+    "word": "damson",
+    "letters": 6,
+    "vowels": 2,
+    "first": "d"
+  },
+  {
+    "word": "apricot",
+    "letters": 7,
+    "vowels": 3,
+    "first": "a"
+  },
+  {
+    "word": "avocado",
+    "letters": 7,
+    "vowels": 4,
+    "first": "a"
+  },
+  {
+    "word": "coconut",
+    "letters": 7,
+    "vowels": 3,
+    "first": "c"
+  },
+  {
+    "word": "currant",
+    "letters": 7,
+    "vowels": 2,
+    "first": "c"
+  },
+  {
+    "word": "satsuma",
+    "letters": 7,
+    "vowels": 3,
+    "first": "s"
+  },
+  {
+    "word": "plantain",
+    "letters": 8,
+    "vowels": 3,
+    "first": "p"
+  },
+  {
+    "word": "mandarin",
+    "letters": 8,
+    "vowels": 3,
+    "first": "m"
+  },
+  {
+    "word": "tangelo",
+    "letters": 7,
+    "vowels": 3,
+    "first": "t"
+  },
+  {
+    "word": "soursop",
+    "letters": 7,
+    "vowels": 3,
+    "first": "s"
+  },
+  {
+    "word": "rhubarb",
+    "letters": 7,
+    "vowels": 2,
+    "first": "r"
+  },
+  {
+    "word": "pawpaw",
+    "letters": 6,
+    "vowels": 2,
+    "first": "p"
+  },
+  {
+    "word": "durian",
+    "letters": 6,
+    "vowels": 3,
+    "first": "d"
+  }
+]

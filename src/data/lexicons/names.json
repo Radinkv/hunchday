@@ -1,0 +1,302 @@
+[
+  {
+    "word": "anna",
+    "letters": 4,
+    "vowels": 2,
+    "first": "a"
+  },
+  {
+    "word": "emma",
+    "letters": 4,
+    "vowels": 2,
+    "first": "e"
+  },
+  {
+    "word": "noah",
+    "letters": 4,
+    "vowels": 2,
+    "first": "n"
+  },
+  {
+    "word": "liam",
+    "letters": 4,
+    "vowels": 2,
+    "first": "l"
+  },
+  {
+    "word": "leo",
+    "letters": 3,
+    "vowels": 2,
+    "first": "l"
+  },
+  {
+    "word": "max",
+    "letters": 3,
+    "vowels": 1,
+    "first": "m"
+  },
+  {
+    "word": "ben",
+    "letters": 3,
+    "vowels": 1,
+    "first": "b"
+  },
+  {
+    "word": "sam",
+    "letters": 3,
+    "vowels": 1,
+    "first": "s"
+  },
+  {
+    "word": "tom",
+    "letters": 3,
+    "vowels": 1,
+    "first": "t"
+  },
+  {
+    "word": "amy",
+    "letters": 3,
+    "vowels": 1,
+    "first": "a"
+  },
+  {
+    "word": "ian",
+    "letters": 3,
+    "vowels": 2,
+    "first": "i"
+  },
+  {
+    "word": "eve",
+    "letters": 3,
+    "vowels": 2,
+    "first": "e"
+  },
+  {
+    "word": "zoe",
+    "letters": 3,
+    "vowels": 2,
+    "first": "z"
+  },
+  {
+    "word": "ada",
+    "letters": 3,
+    "vowels": 2,
+    "first": "a"
+  },
+  {
+    "word": "ella",
+    "letters": 4,
+    "vowels": 2,
+    "first": "e"
+  },
+  {
+    "word": "lily",
+    "letters": 4,
+    "vowels": 1,
+    "first": "l"
+  },
+  {
+    "word": "lucy",
+    "letters": 4,
+    "vowels": 1,
+    "first": "l"
+  },
+  {
+    "word": "jack",
+    "letters": 4,
+    "vowels": 1,
+    "first": "j"
+  },
+  {
+    "word": "ryan",
+    "letters": 4,
+    "vowels": 1,
+    "first": "r"
+  },
+  {
+    "word": "owen",
+    "letters": 4,
+    "vowels": 2,
+    "first": "o"
+  },
+  {
+    "word": "evan",
+    "letters": 4,
+    "vowels": 2,
+    "first": "e"
+  },
+  {
+    "word": "adam",
+    "letters": 4,
+    "vowels": 2,
+    "first": "a"
+  },
+  {
+    "word": "mark",
+    "letters": 4,
+    "vowels": 1,
+    "first": "m"
+  },
+  {
+    "word": "paul",
+    "letters": 4,
+    "vowels": 2,
+    "first": "p"
+  },
+  {
+    "word": "jane",
+    "letters": 4,
+    "vowels": 2,
+    "first": "j"
+  },
+  {
+    "word": "kate",
+    "letters": 4,
+    "vowels": 2,
+    "first": "k"
+  },
+  {
+    "word": "mary",
+    "letters": 4,
+    "vowels": 1,
+    "first": "m"
+  },
+  {
+    "word": "sara",
+    "letters": 4,
+    "vowels": 2,
+    "first": "s"
+  },
+  {
+    "word": "nina",
+    "letters": 4,
+    "vowels": 2,
+    "first": "n"
+  },
+  {
+    "word": "cora",
+    "letters": 4,
+    "vowels": 2,
+    "first": "c"
+  },
+  {
+    "word": "ruby",
+    "letters": 4,
+    "vowels": 1,
+    "first": "r"
+  },
+  {
+    "word": "jade",
+    "letters": 4,
+    "vowels": 2,
+    "first": "j"
+  },
+  {
+    "word": "finn",
+    "letters": 4,
+    "vowels": 1,
+    "first": "f"
+  },
+  {
+    "word": "cole",
+    "letters": 4,
+    "vowels": 2,
+    "first": "c"
+  },
+  {
+    "word": "dean",
+    "letters": 4,
+    "vowels": 2,
+    "first": "d"
+  },
+  {
+    "word": "seth",
+    "letters": 4,
+    "vowels": 1,
+    "first": "s"
+  },
+  {
+    "word": "beth",
+    "letters": 4,
+    "vowels": 1,
+    "first": "b"
+  },
+  {
+    "word": "gwen",
+    "letters": 4,
+    "vowels": 1,
+    "first": "g"
+  },
+  {
+    "word": "hugo",
+    "letters": 4,
+    "vowels": 2,
+    "first": "h"
+  },
+  {
+    "word": "ivan",
+    "letters": 4,
+    "vowels": 2,
+    "first": "i"
+  },
+  {
+    "word": "jude",
+    "letters": 4,
+    "vowels": 2,
+    "first": "j"
+  },
+  {
+    "word": "kyle",
+    "letters": 4,
+    "vowels": 1,
+    "first": "k"
+  },
+  {
+    "word": "lena",
+    "letters": 4,
+    "vowels": 2,
+    "first": "l"
+  },
+  {
+    "word": "milo",
+    "letters": 4,
+    "vowels": 2,
+    "first": "m"
+  },
+  {
+    "word": "nora",
+    "letters": 4,
+    "vowels": 2,
+    "first": "n"
+  },
+  {
+    "word": "otto",
+    "letters": 4,
+    "vowels": 2,
+    "first": "o"
+  },
+  {
+    "word": "rosa",
+    "letters": 4,
+    "vowels": 2,
+    "first": "r"
+  },
+  {
+    "word": "theo",
+    "letters": 4,
+    "vowels": 2,
+    "first": "t"
+  },
+  {
+    "word": "vera",
+    "letters": 4,
+    "vowels": 2,
+    "first": "v"
+  },
+  {
+    "word": "oscar",
+    "letters": 5,
+    "vowels": 2,
+    "first": "o"
+  }
+]

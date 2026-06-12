@@ -1,0 +1,302 @@
+[
+  {
+    "word": "cat",
+    "letters": 3,
+    "vowels": 1,
+    "first": "c"
+  },
+  {
+    "word": "dog",
+    "letters": 3,
+    "vowels": 1,
+    "first": "d"
+  },
+  {
+    "word": "cow",
+    "letters": 3,
+    "vowels": 1,
+    "first": "c"
+  },
+  {
+    "word": "pig",
+    "letters": 3,
+    "vowels": 1,
+    "first": "p"
+  },
+  {
+    "word": "hen",
+    "letters": 3,
+    "vowels": 1,
+    "first": "h"
+  },
+  {
+    "word": "fox",
+    "letters": 3,
+    "vowels": 1,
+    "first": "f"
+  },
+  {
+    "word": "owl",
+    "letters": 3,
+    "vowels": 1,
+    "first": "o"
+  },
+  {
+    "word": "bee",
+    "letters": 3,
+    "vowels": 2,
+    "first": "b"
+  },
+  {
+    "word": "ant",
+    "letters": 3,
+    "vowels": 1,
+    "first": "a"
+  },
+  {
+    "word": "bat",
+    "letters": 3,
+    "vowels": 1,
+    "first": "b"
+  },
+  {
+    "word": "ape",
+    "letters": 3,
+    "vowels": 2,
+    "first": "a"
+  },
+  {
+    "word": "ram",
+    "letters": 3,
+    "vowels": 1,
+    "first": "r"
+  },
+  {
+    "word": "rat",
+    "letters": 3,
+    "vowels": 1,
+    "first": "r"
+  },
+  {
+    "word": "elk",
+    "letters": 3,
+    "vowels": 1,
+    "first": "e"
+  },
+  {
+    "word": "bear",
+    "letters": 4,
+    "vowels": 2,
+    "first": "b"
+  },
+  {
+    "word": "lion",
+    "letters": 4,
+    "vowels": 2,
+    "first": "l"
+  },
+  {
+    "word": "wolf",
+    "letters": 4,
+    "vowels": 1,
+    "first": "w"
+  },
+  {
+    "word": "frog",
+    "letters": 4,
+    "vowels": 1,
+    "first": "f"
+  },
+  {
+    "word": "goat",
+    "letters": 4,
+    "vowels": 2,
+    "first": "g"
+  },
+  {
+    "word": "deer",
+    "letters": 4,
+    "vowels": 2,
+    "first": "d"
+  },
+  {
+    "word": "duck",
+    "letters": 4,
+    "vowels": 1,
+    "first": "d"
+  },
+  {
+    "word": "fish",
+    "letters": 4,
+    "vowels": 1,
+    "first": "f"
+  },
+  {
+    "word": "crab",
+    "letters": 4,
+    "vowels": 1,
+    "first": "c"
+  },
+  {
+    "word": "seal",
+    "letters": 4,
+    "vowels": 2,
+    "first": "s"
+  },
+  {
+    "word": "mole",
+    "letters": 4,
+    "vowels": 2,
+    "first": "m"
+  },
+  {
+    "word": "hawk",
+    "letters": 4,
+    "vowels": 1,
+    "first": "h"
+  },
+  {
+    "word": "swan",
+    "letters": 4,
+    "vowels": 1,
+    "first": "s"
+  },
+  {
+    "word": "toad",
+    "letters": 4,
+    "vowels": 2,
+    "first": "t"
+  },
+  {
+    "word": "mule",
+    "letters": 4,
+    "vowels": 2,
+    "first": "m"
+  },
+  {
+    "word": "lamb",
+    "letters": 4,
+    "vowels": 1,
+    "first": "l"
+  },
+  {
+    "word": "zebra",
+    "letters": 5,
+    "vowels": 2,
+    "first": "z"
+  },
+  {
+    "word": "tiger",
+    "letters": 5,
+    "vowels": 2,
+    "first": "t"
+  },
+  {
+    "word": "horse",
+    "letters": 5,
+    "vowels": 2,
+    "first": "h"
+  },
+  {
+    "word": "sheep",
+    "letters": 5,
+    "vowels": 2,
+    "first": "s"
+  },
+  {
+    "word": "mouse",
+    "letters": 5,
+    "vowels": 3,
+    "first": "m"
+  },
+  {
+    "word": "snake",
+    "letters": 5,
+    "vowels": 2,
+    "first": "s"
+  },
+  {
+    "word": "eagle",
+    "letters": 5,
+    "vowels": 3,
+    "first": "e"
+  },
+  {
+    "word": "koala",
+    "letters": 5,
+    "vowels": 3,
+    "first": "k"
+  },
+  {
+    "word": "panda",
+    "letters": 5,
+    "vowels": 2,
+    "first": "p"
+  },
+  {
+    "word": "otter",
+    "letters": 5,
+    "vowels": 2,
+    "first": "o"
+  },
+  {
+    "word": "camel",
+    "letters": 5,
+    "vowels": 2,
+    "first": "c"
+  },
+  {
+    "word": "shark",
+    "letters": 5,
+    "vowels": 1,
+    "first": "s"
+  },
+  {
+    "word": "whale",
+    "letters": 5,
+    "vowels": 2,
+    "first": "w"
+  },
+  {
+    "word": "robin",
+    "letters": 5,
+    "vowels": 2,
+    "first": "r"
+  },
+  {
+    "word": "moose",
+    "letters": 5,
+    "vowels": 3,
+    "first": "m"
+  },
+  {
+    "word": "llama",
+    "letters": 5,
+    "vowels": 2,
+    "first": "l"
+  },
+  {
+    "word": "sloth",
+    "letters": 5,
+    "vowels": 1,
+    "first": "s"
+  },
+  {
+    "word": "rabbit",
+    "letters": 6,
+    "vowels": 2,
+    "first": "r"
+  },
+  {
+    "word": "monkey",
+    "letters": 6,
+    "vowels": 2,
+    "first": "m"
+  },
+  {
+    "word": "donkey",
+    "letters": 6,
+    "vowels": 2,
+    "first": "d"
+  }
+]
