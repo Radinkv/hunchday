@@ -68,6 +68,11 @@ import {
 
 type ChipRole = typeof CLASS_CHIP_INPUT | typeof CLASS_CHIP_OUTPUT;
 
+const KEY_SEPARATOR_COLON = ":";
+const KEY_SEPARATOR_ARROW = "->";
+const KEY_SEPARATOR_PIPE = "|";
+const KEY_SEPARATOR_HASH = "#";
+
 /** The handlers the card invokes to drive the reducer. */
 export interface MachineHandlers {
   readonly onFeed: (guess: string) => void;
@@ -80,14 +85,21 @@ export interface MachineHandlers {
  * @param props The chip string and the role that colors it.
  */
 function Chips({ value, role }: { readonly value: string; readonly role: ChipRole }) {
-  const cells = tokenize(value).map((token, index) => ({ token, key: index + ":" + token }));
+  const tokenKeyCounts = new Map<string, number>();
+
   return (
     <>
-      {cells.map((cell) => (
-        <span key={cell.key} className={CLASS_CHIP + " " + role} aria-label={cell.token}>
-          {cell.token}
-        </span>
-      ))}
+      {tokenize(value).map((token) => {
+        const seenCount = tokenKeyCounts.get(token) ?? 0;
+        tokenKeyCounts.set(token, seenCount + 1);
+        const key = role + KEY_SEPARATOR_COLON + token + KEY_SEPARATOR_COLON + String(seenCount);
+
+        return (
+          <span key={key} className={CLASS_CHIP + " " + role} aria-label={token}>
+            {token}
+          </span>
+        );
+      })}
     </>
   );
 }
@@ -234,8 +246,19 @@ export function MachineCard({
   const machineName =
     COPY_MACHINE_NAME_PREFIX +
     String(state.machineIndex + 1).padStart(MACHINE_NUMBER_PAD_LENGTH, MACHINE_NUMBER_PAD_CHAR);
-  const subtitle = playing ? COPY_SUBTITLE_PLAYING : won ? COPY_SUBTITLE_CRACKED : COPY_SUBTITLE_REVEALED;
-  const lightColor = playing ? LIGHT_COLOR_IDLE : won ? LIGHT_COLOR_CRACKED : LIGHT_COLOR_REVEALED;
+  let subtitle = COPY_SUBTITLE_REVEALED;
+  if (playing) {
+    subtitle = COPY_SUBTITLE_PLAYING;
+  } else if (won) {
+    subtitle = COPY_SUBTITLE_CRACKED;
+  }
+
+  let lightColor = LIGHT_COLOR_REVEALED;
+  if (playing) {
+    lightColor = LIGHT_COLOR_IDLE;
+  } else if (won) {
+    lightColor = LIGHT_COLOR_CRACKED;
+  }
   const challengeInput = machine.ch.at(state.challengeIndex)?.[0] ?? "";
 
   const handleFeed = (guess: string): void => {
@@ -244,6 +267,8 @@ export function MachineCard({
     setTimeout(() => setChomping(false), CHOMP_DURATION_MS);
     onFeed(guess);
   };
+
+  const evidenceKeyCounts = new Map<string, number>();
 
   return (
     <div className={CLASS_CARD}>
@@ -256,9 +281,14 @@ export function MachineCard({
       </div>
 
       <div className={CLASS_EVIDENCE} aria-live="polite" aria-label="Evidence so far">
-        {state.evidence.map((row, index) => (
-          <Row key={index} row={row} />
-        ))}
+        {state.evidence.map((row) => {
+          const baseKey = row.input + KEY_SEPARATOR_ARROW + row.output + KEY_SEPARATOR_PIPE + (row.mark ?? "");
+          const seenCount = evidenceKeyCounts.get(baseKey) ?? 0;
+          evidenceKeyCounts.set(baseKey, seenCount + 1);
+          const key = baseKey + KEY_SEPARATOR_HASH + String(seenCount);
+
+          return <Row key={key} row={row} />;
+        })}
       </div>
 
       {playing && (
@@ -269,7 +299,7 @@ export function MachineCard({
             {COPY_QUESTION_SUFFIX}
           </p>
           <ChipBuilder
-            key={state.machineIndex + ":" + state.challengeIndex}
+            key={state.machineIndex + KEY_SEPARATOR_COLON + state.challengeIndex}
             challengeInput={challengeInput}
             onFeed={handleFeed}
           />
