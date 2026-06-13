@@ -220,14 +220,24 @@ main {
   margin: 0 0 12px;
 }
 
-/* The answer builder: the prediction tray, the applied trail, and the op palette. */
+/* The answer builder: the work lane, the set aside lane, and the op palette. */
 .builder {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
 }
 
-.tray {
+.lanelabel {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 5px;
+}
+
+.work,
+.bucket {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -235,54 +245,69 @@ main {
   min-height: 46px;
   padding: 9px 11px;
   border-radius: var(--r-control);
-  background: var(--machine-soft);
-  border: 1px solid var(--machine-line);
+  border: 1px solid;
 }
 
-.tray.drop {
+.work {
+  background: var(--machine-soft);
+  border-color: var(--machine-line);
+}
+
+.bucket {
+  background: var(--paper);
+  border-color: var(--line);
+  border-style: dashed;
+}
+
+.lane.drop .work,
+.lane.drop .bucket {
   border-style: dashed;
   border-color: var(--machine);
 }
 
-.tray .chip {
+.work .chip {
   font-size: 15px;
   padding: 5px 12px;
   background: var(--card);
   border-color: var(--machine-line);
   color: var(--machine-ink);
   animation: chip-in var(--base) var(--spring);
+  touch-action: none;
 }
 
-.trail {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 6px;
-  min-height: 28px;
+.bucket .chip {
+  font-size: 15px;
+  padding: 5px 12px;
+  background: transparent;
+  border-color: var(--line);
+  color: var(--ink-2);
+  touch-action: none;
 }
 
-.tempty {
+.bucketempty {
   font-size: 13px;
   color: var(--ink-3);
-}
-
-.tstep {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 3px 4px 3px 11px;
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
-  font-size: 13px;
-  color: var(--ink);
-  background: var(--paper);
-  border: 1px solid var(--line);
-  border-radius: var(--r-chip);
 }
 
 .palette {
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+.tilewrap {
+  display: inline-flex;
+  align-items: stretch;
+}
+
+.tilewrap .tile {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.tilewrap .param {
+  height: 44px;
+  border-radius: 0 var(--r-control) var(--r-control) 0;
 }
 
 .tabs {
@@ -314,12 +339,6 @@ main {
   align-items: center;
   gap: 6px;
   min-height: 44px;
-}
-
-.ready {
-  margin: 0;
-  font-size: 13px;
-  color: var(--ink-3);
 }
 
 .bactions {

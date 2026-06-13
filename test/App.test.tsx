@@ -8,38 +8,38 @@ import { COPY_FEED_BUTTON, COPY_RULE_CRACKED_LABEL, COPY_WORDMARK } from "../src
 /**
  * These tests cover the React interface end to end over the pure reducer, driving the
  * chip builder rather than a text field. They confirm the wordmark and the first machine
- * render, and that applying the right operation twice in a row cracks a machine and
+ * render, and that applying the right transformation twice in a row cracks a machine and
  * prints its rule, for both a number machine and a word machine. The machine sets are
- * purpose built so their outputs are reachable by applying a single palette operation.
+ * purpose built so their outputs are reachable by applying a single palette tile.
  */
 
-const REVERSE_RULE = "It reverses the order.";
-const REVERSE_OP = "reverses the order";
-const REVERSE_TAB = "Order";
-const SORT_TAB = "Words";
+const MULTIPLY_RULE = "It multiplies every chip by 2.";
+const MULTIPLY_OP = "multiplies every chip by 2";
+const MULTIPLY_TAB = "Transform";
 const NUMBER_MACHINE: Machine = {
-  rule: REVERSE_RULE,
+  rule: MULTIPLY_RULE,
   ex: [
-    ["1 2 3", "3 2 1"],
-    ["4 5 6", "6 5 4"],
+    ["1 2 3", "2 4 6"],
+    ["4 5 6", "8 10 12"],
   ],
   ch: [
-    ["7 8 9", "9 8 7"],
-    ["2 4 6", "6 4 2"],
+    ["3 4", "6 8"],
+    ["5 1", "10 2"],
   ],
 };
 
-const SORT_RULE = "It puts the chips in alphabetical order.";
-const SORT_OP = "puts the chips in alphabetical order";
+const LETTERS_RULE = "It counts the letters in every chip.";
+const LETTERS_OP = "counts the letters in every chip";
+const LETTERS_TAB = "To numbers";
 const WORD_MACHINE: Machine = {
-  rule: SORT_RULE,
+  rule: LETTERS_RULE,
   ex: [
-    ["dog ant", "ant dog"],
-    ["sun owl", "owl sun"],
+    ["dog ant", "3 3"],
+    ["horse ox", "5 2"],
   ],
   ch: [
-    ["cat bee", "bee cat"],
-    ["fig ace", "ace fig"],
+    ["cat bee", "3 3"],
+    ["fig ace", "3 3"],
   ],
 };
 
@@ -65,17 +65,17 @@ describe("App", () => {
     expect(screen.getAllByText("1").length).toBeGreaterThan(0);
   });
 
-  it("cracks a number machine when the right operation is applied twice", () => {
+  it("cracks a number machine when the right transformation is applied twice", () => {
     const { container } = render(<App machines={[NUMBER_MACHINE]} />);
-    applyAndFeed(REVERSE_TAB, REVERSE_OP);
-    applyAndFeed(REVERSE_TAB, REVERSE_OP);
-    expect(container.textContent).toContain(COPY_RULE_CRACKED_LABEL + REVERSE_RULE);
+    applyAndFeed(MULTIPLY_TAB, MULTIPLY_OP);
+    applyAndFeed(MULTIPLY_TAB, MULTIPLY_OP);
+    expect(container.textContent).toContain(COPY_RULE_CRACKED_LABEL + MULTIPLY_RULE);
   });
 
-  it("cracks a word machine when the right operation is applied twice", () => {
+  it("cracks a word machine when the right transformation is applied twice", () => {
     const { container } = render(<App machines={[WORD_MACHINE]} />);
-    applyAndFeed(SORT_TAB, SORT_OP);
-    applyAndFeed(SORT_TAB, SORT_OP);
-    expect(container.textContent).toContain(COPY_RULE_CRACKED_LABEL + SORT_RULE);
+    applyAndFeed(LETTERS_TAB, LETTERS_OP);
+    applyAndFeed(LETTERS_TAB, LETTERS_OP);
+    expect(container.textContent).toContain(COPY_RULE_CRACKED_LABEL + LETTERS_RULE);
   });
 });

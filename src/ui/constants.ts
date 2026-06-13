@@ -79,33 +79,34 @@ export const COPY_FEEDBACK_GAVE = " It actually gave that — added to your evid
 /** The label on the button that feeds the built prediction into the machine. */
 export const COPY_FEED_BUTTON = "Feed it";
 
-/** Class names and copy for the chip builder: the tray, the trail, and the palette. */
+/** Class names and copy for the chip builder: the two lanes, the palette, and the ghost. */
 export const CLASS_BUILDER = "builder";
-export const CLASS_TRAY = "tray";
-export const CLASS_TRAIL = "trail";
-export const CLASS_TRAIL_STEP = "tstep";
-export const CLASS_TRAIL_EMPTY = "tempty";
-export const CLASS_PARAM = "param";
-export const CLASS_STEP_REMOVE = "tx";
+export const CLASS_LANE = "lane";
+export const CLASS_LANE_LABEL = "lanelabel";
+export const CLASS_WORK = "work";
+export const CLASS_BUCKET = "bucket";
+export const CLASS_BUCKET_EMPTY = "bucketempty";
+export const CLASS_LANE_DROP = "drop";
 export const CLASS_PALETTE = "palette";
 export const CLASS_PALETTE_GROUP = "pgroup";
 export const CLASS_TILE = "tile";
+export const CLASS_TILE_WRAP = "tilewrap";
+export const CLASS_PARAM = "param";
 export const CLASS_BUILDER_ACTIONS = "bactions";
 export const CLASS_TABS = "tabs";
 export const CLASS_TAB = "tab";
 export const CLASS_TAB_ACTIVE = "on";
-export const CLASS_TRAY_DROP = "drop";
 export const CLASS_DRAG_GHOST = "ghost";
-export const CLASS_BUILDER_READY = "ready";
 
-export const COPY_TRAIL_EMPTY = "Tap or drag an operation onto the chips.";
+export const COPY_WORK_LABEL = "Your prediction";
+export const COPY_BUCKET_LABEL = "Set aside";
+export const COPY_BUCKET_EMPTY = "Drag chips here to leave them out.";
 export const COPY_RESET = "Reset";
-export const COPY_TRAY_LABEL = "Your prediction so far";
-export const COPY_TRAIL_LABEL = "Operations you have applied";
-export const COPY_REMOVE_STEP_PREFIX = "Remove ";
-export const COPY_CYCLE_PARAM_PREFIX = "Change the value of ";
-export const COPY_BUILDER_READY = "Ready — feed your prediction.";
+export const COPY_UNDO = "Undo";
 export const COPY_OPERATIONS_LABEL = "Operations";
+export const COPY_SET_ASIDE_SUFFIX = ", tap to set aside";
+export const COPY_PUT_BACK_SUFFIX = ", tap to put back";
+export const COPY_CYCLE_PARAM_PREFIX = "Change the value of ";
 
 /** Duration in milliseconds that the bot holds its chomp animation after a feed. */
 export const CHOMP_DURATION_MS = 180;

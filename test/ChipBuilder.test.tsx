@@ -1,44 +1,44 @@
 // @vitest-environment jsdom
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { cleanup, fireEvent, render, screen, within } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { ChipBuilder } from "../src/ui/ChipBuilder";
-import { COPY_FEED_BUTTON, COPY_RESET, COPY_TRAIL_LABEL, COPY_TRAY_LABEL } from "../src/ui/constants";
+import {
+  COPY_BUCKET_LABEL,
+  COPY_CYCLE_PARAM_PREFIX,
+  COPY_FEED_BUTTON,
+  COPY_PUT_BACK_SUFFIX,
+  COPY_RESET,
+  COPY_SET_ASIDE_SUFFIX,
+  COPY_UNDO,
+  COPY_WORK_LABEL,
+} from "../src/ui/constants";
 
 /**
- * These tests cover the chip builder. Operations are grouped into tabs, so a tab is
- * selected before an operation in it is applied. The tray must show the live result, a
- * parameter must cycle in place, reset must restore the question chips, the active
- * section must follow the chip type, and feeding must submit the transformed chips as
- * the same string the reducer compares.
+ * These tests cover the chip builder. Operations are grouped into tabs and act only on
+ * the work lane. Tapping a chip moves it to or from the set aside lane, where it is
+ * frozen against later transforms, undo and reset walk the history, and feeding submits
+ * the work lane as the same string the reducer compares.
  */
 
 const MULTIPLY_BY_TWO = "multiplies every chip by 2";
+const MULTIPLY_BY_THREE = "multiplies every chip by 3";
 const SUM = "adds all the chips together";
-const REVERSE = "reverses the order";
-const SORT_ALPHA = "puts the chips in alphabetical order";
 const COUNT_LETTERS = "counts the letters in every chip";
-const MAX = "finds the biggest chip";
-const PARAM_TWO = "2";
+const COUNT_VOWELS = "counts the vowels in every chip";
+const CYCLE_MULTIPLY = COPY_CYCLE_PARAM_PREFIX + MULTIPLY_BY_TWO;
 
-const TAB_PICK = "Pick";
-const TAB_ORDER = "Order";
-const TAB_WORDS = "Words";
-
-const INPUT_NUMBERS_MULTI = "3 1 4 1";
-const INPUT_NUMBERS_PAIR = "2 5";
-const INPUT_NUMBERS_RESET = "1 2 3";
-const INPUT_WORDS_SORT = "dog ant cat";
-const INPUT_WORDS_NUMERIC = "ox cat horse";
+const TAB_COMBINE = "Combine";
 
 afterEach(cleanup);
 
 /**
- * Reads the chip tokens currently shown in the prediction tray.
- * @returns The tray chip tokens in order.
+ * Reads the chip tokens in the lane with the given accessible label.
+ * @param label The lane label.
+ * @returns The chip tokens in order.
  */
-function trayChips(): string[] {
-  const tray = screen.getByLabelText(COPY_TRAY_LABEL);
-  return Array.from(tray.querySelectorAll("span")).map((chip) => chip.textContent ?? "");
+function laneChips(label: string): string[] {
+  const lane = screen.getByLabelText(label);
+  return Array.from(lane.querySelectorAll("[data-chip-id]")).map((chip) => chip.textContent ?? "");
 }
 
 /**
@@ -57,84 +57,84 @@ function clickButton(name: string): void {
   fireEvent.click(screen.getByRole("button", { name }));
 }
 
-describe("ChipBuilder over the Numbers section", () => {
-  it("transforms the chips by applying operations and feeds the result", () => {
+describe("ChipBuilder transforms", () => {
+  it("applies an operation to the work lane and feeds the result", () => {
     const onFeed = vi.fn();
-    render(<ChipBuilder challengeInput={INPUT_NUMBERS_MULTI} onFeed={onFeed} />);
-    expect(trayChips()).toEqual(["3", "1", "4", "1"]);
+    render(<ChipBuilder challengeInput="3 1 4 1" onFeed={onFeed} />);
+    expect(laneChips(COPY_WORK_LABEL)).toEqual(["3", "1", "4", "1"]);
 
     clickButton(MULTIPLY_BY_TWO);
-    expect(trayChips()).toEqual(["6", "2", "8", "2"]);
+    expect(laneChips(COPY_WORK_LABEL)).toEqual(["6", "2", "8", "2"]);
 
-    selectTab(TAB_PICK);
+    selectTab(TAB_COMBINE);
     clickButton(SUM);
-    expect(trayChips()).toEqual(["18"]);
+    expect(laneChips(COPY_WORK_LABEL)).toEqual(["18"]);
 
     clickButton(COPY_FEED_BUTTON);
     expect(onFeed).toHaveBeenCalledWith("18");
   });
 
-  it("cycles a parameter in place and updates the chips", () => {
+  it("cycles a tile parameter before applying it", () => {
     const onFeed = vi.fn();
-    render(<ChipBuilder challengeInput={INPUT_NUMBERS_PAIR} onFeed={onFeed} />);
+    render(<ChipBuilder challengeInput="2 5" onFeed={onFeed} />);
 
-    clickButton(MULTIPLY_BY_TWO);
-    expect(trayChips()).toEqual(["4", "10"]);
-
-    const trail = screen.getByLabelText(COPY_TRAIL_LABEL);
-    fireEvent.click(within(trail).getByText(PARAM_TWO));
-    expect(trayChips()).toEqual(["6", "15"]);
+    clickButton(CYCLE_MULTIPLY);
+    clickButton(MULTIPLY_BY_THREE);
+    expect(laneChips(COPY_WORK_LABEL)).toEqual(["6", "15"]);
   });
 
-  it("rewinds the trail and resets to the question chips", () => {
+  it("undoes and resets through the history", () => {
     const onFeed = vi.fn();
-    render(<ChipBuilder challengeInput={INPUT_NUMBERS_RESET} onFeed={onFeed} />);
+    render(<ChipBuilder challengeInput="1 2 3" onFeed={onFeed} />);
 
-    selectTab(TAB_ORDER);
-    clickButton(REVERSE);
-    expect(trayChips()).toEqual(["3", "2", "1"]);
+    clickButton(MULTIPLY_BY_TWO);
+    expect(laneChips(COPY_WORK_LABEL)).toEqual(["2", "4", "6"]);
+    clickButton(COPY_UNDO);
+    expect(laneChips(COPY_WORK_LABEL)).toEqual(["1", "2", "3"]);
 
+    clickButton(MULTIPLY_BY_TWO);
     clickButton(COPY_RESET);
-    expect(trayChips()).toEqual(["1", "2", "3"]);
+    expect(laneChips(COPY_WORK_LABEL)).toEqual(["1", "2", "3"]);
+  });
+});
+
+describe("ChipBuilder set aside lane", () => {
+  it("freezes a set aside chip while the work lane is transformed, then returns it", () => {
+    const onFeed = vi.fn();
+    render(<ChipBuilder challengeInput="2 5 9" onFeed={onFeed} />);
+
+    clickButton("5" + COPY_SET_ASIDE_SUFFIX);
+    expect(laneChips(COPY_WORK_LABEL)).toEqual(["2", "9"]);
+    expect(laneChips(COPY_BUCKET_LABEL)).toEqual(["5"]);
+
+    clickButton(MULTIPLY_BY_TWO);
+    expect(laneChips(COPY_WORK_LABEL)).toEqual(["4", "18"]);
+    expect(laneChips(COPY_BUCKET_LABEL)).toEqual(["5"]);
+
+    clickButton("5" + COPY_PUT_BACK_SUFFIX);
+    expect(laneChips(COPY_WORK_LABEL)).toEqual(["4", "18", "5"]);
+    expect(laneChips(COPY_BUCKET_LABEL)).toEqual([]);
+  });
+
+  it("feeds only the chips left in the work lane", () => {
+    const onFeed = vi.fn();
+    render(<ChipBuilder challengeInput="dog ant cat" onFeed={onFeed} />);
+
+    clickButton("ant" + COPY_SET_ASIDE_SUFFIX);
+    clickButton(COPY_FEED_BUTTON);
+    expect(onFeed).toHaveBeenCalledWith("dog cat");
   });
 });
 
 describe("ChipBuilder type sectioning", () => {
-  it("offers only vocab operations for word chips and feeds a word answer", () => {
-    const onFeed = vi.fn();
-    render(<ChipBuilder challengeInput={INPUT_WORDS_SORT} onFeed={onFeed} />);
-    expect(screen.queryByRole("button", { name: SUM })).toBeNull();
-
-    selectTab(TAB_WORDS);
-    clickButton(SORT_ALPHA);
-    expect(trayChips()).toEqual(["ant", "cat", "dog"]);
-
-    clickButton(COPY_FEED_BUTTON);
-    expect(onFeed).toHaveBeenCalledWith("ant cat dog");
-  });
-
   it("flips from vocab to numbers when a translate operation is applied", () => {
     const onFeed = vi.fn();
-    render(<ChipBuilder challengeInput={INPUT_WORDS_NUMERIC} onFeed={onFeed} />);
-    expect(screen.queryByRole("button", { name: MAX })).toBeNull();
+    render(<ChipBuilder challengeInput="ox cat horse" onFeed={onFeed} />);
+    expect(screen.queryByRole("button", { name: MULTIPLY_BY_TWO })).toBeNull();
 
     clickButton(COUNT_LETTERS);
-    expect(trayChips()).toEqual(["2", "3", "5"]);
-    expect(screen.queryByRole("button", { name: SORT_ALPHA })).toBeNull();
-
-    selectTab(TAB_PICK);
-    expect(screen.getByRole("button", { name: MAX })).toBeTruthy();
-  });
-
-  it("locks the palette once a reducer makes the chips terminal", () => {
-    const onFeed = vi.fn();
-    render(<ChipBuilder challengeInput={INPUT_WORDS_NUMERIC} onFeed={onFeed} />);
-
-    clickButton(COUNT_LETTERS);
-    selectTab(TAB_PICK);
-    clickButton(MAX);
-    expect(trayChips()).toEqual(["5"]);
-    expect(screen.queryByRole("button", { name: MAX })).toBeNull();
-    expect(screen.queryByRole("button", { name: SUM })).toBeNull();
+    expect(laneChips(COPY_WORK_LABEL)).toEqual(["2", "3", "5"]);
+    expect(screen.getByRole("button", { name: MULTIPLY_BY_TWO })).toBeTruthy();
+    expect(screen.queryByRole("button", { name: COUNT_VOWELS })).toBeNull();
   });
 });
