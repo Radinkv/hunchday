@@ -392,6 +392,8 @@ main {
   display: flex;
   flex-direction: column;
   gap: 2px;
+  max-height: 15rem;
+  overflow-y: auto;
   border: 1px solid var(--machine-line);
   border-radius: 0 var(--r-control) var(--r-control) var(--r-control);
   background: var(--card);

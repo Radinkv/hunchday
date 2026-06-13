@@ -62,6 +62,9 @@ const NO_STEPS: readonly Step[] = [];
 /** The empty result list used while the search box is blank. */
 const NO_TILES: readonly OpTile[] = [];
 
+/** The active tab value meaning every folder is collapsed. */
+const NO_TAB = "";
+
 /**
  * Returns the parameters a freshly added step starts with: its single parameter at the
  * low end of its range, or none when the operation takes no parameter.
@@ -132,13 +135,13 @@ export function ChipBuilder({
   readonly onFeed: (guess: string) => void;
 }) {
   const [steps, setSteps] = useState<readonly Step[]>(NO_STEPS);
-  const [activeTab, setActiveTab] = useState("");
+  const [activeTab, setActiveTab] = useState(NO_TAB);
   const [query, setQuery] = useState("");
 
   const runningType = typeAfter(seedTypeOf(parseChips(challengeInput)), steps);
   const tabs = groupedTilesForType(runningType);
   const terminal = tabs.length === 0;
-  const activeFolder = tabs.find((tab) => tab.group === activeTab) ?? tabs.at(0);
+  const activeFolder = tabs.find((tab) => tab.group === activeTab);
   const searching = query.trim().length > 0;
   const results = searching ? searchTiles(runningType, query) : NO_TILES;
 
@@ -217,7 +220,7 @@ export function ChipBuilder({
         {steps.length === 0 ? <li className={CLASS_RECIPE_EMPTY}>{COPY_RECIPE_EMPTY}</li> : steps.map((element, index) => renderStep(element, index))}
       </ol>
 
-      {terminal || !activeFolder ? (
+      {terminal ? (
         <p className={CLASS_TERMINAL_HINT}>{COPY_TERMINAL_HINT}</p>
       ) : (
         <div className={CLASS_PICKER} aria-label={COPY_PICKER_LABEL}>
@@ -245,17 +248,19 @@ export function ChipBuilder({
                     key={tab.group}
                     type="button"
                     role="tab"
-                    aria-selected={tab.group === activeFolder.group}
-                    className={CLASS_TAB + (tab.group === activeFolder.group ? " " + CLASS_TAB_ACTIVE : "")}
-                    onClick={() => setActiveTab(tab.group)}
+                    aria-selected={tab.group === activeTab}
+                    className={CLASS_TAB + (tab.group === activeTab ? " " + CLASS_TAB_ACTIVE : "")}
+                    onClick={() => setActiveTab(activeTab === tab.group ? NO_TAB : tab.group)}
                   >
                     {tab.label}
                   </button>
                 ))}
               </div>
-              <ul className={CLASS_PAGE} role="tabpanel">
-                {activeFolder.tiles.map(renderOp)}
-              </ul>
+              {activeFolder ? (
+                <ul className={CLASS_PAGE} role="tabpanel">
+                  {activeFolder.tiles.map(renderOp)}
+                </ul>
+              ) : null}
             </>
           )}
         </div>
