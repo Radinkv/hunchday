@@ -149,6 +149,14 @@ export const OP_SORT_BY_LENGTH: OpMeta = {
   phrase: "sorts the chips from fewest letters to most",
 };
 export const OP_SHORTEST: OpMeta = { id: "shortest", phrase: "keeps the chip with the fewest letters" };
+export const OP_KEEP_FIRST_K: OpMeta = {
+  id: "keep_first_k",
+  phrase: (params) => `keeps only the first ${params[PARAM_K]} chips`,
+};
+export const OP_KEEP_LAST_K: OpMeta = {
+  id: "keep_last_k",
+  phrase: (params) => `keeps only the last ${params[PARAM_K]} chips`,
+};
 
 const NO_PARAMS: readonly ParamSpec[] = [];
 
@@ -503,19 +511,19 @@ const MAP_OPS: readonly OpDef[] = [
   defNumListToNumList({
     op: OP_ADD_K,
     rung: 1,
-    params: [{ name: PARAM_K, min: 1, max: 5 }],
+    params: [{ name: PARAM_K, min: 1, max: 9 }],
     apply: (input, params) => input.map((value) => value + params[PARAM_K]),
   }),
   defNumListToNumList({
     op: OP_SUB_K,
     rung: 1,
-    params: [{ name: PARAM_K, min: 1, max: 3 }],
+    params: [{ name: PARAM_K, min: 1, max: 5 }],
     apply: (input, params) => input.map((value) => value - params[PARAM_K]),
   }),
   defNumListToNumList({
     op: OP_MUL_K,
     rung: 1,
-    params: [{ name: PARAM_K, min: 2, max: 3 }],
+    params: [{ name: PARAM_K, min: 2, max: 4 }],
     apply: (input, params) => input.map((value) => value * params[PARAM_K]),
   }),
   defNumListToNumList({
@@ -729,6 +737,20 @@ const FILTER_OPS: readonly OpDef[] = [
     rung: 4,
     apply: (input) => input.filter((_value, index) => index % 2 === 0),
     isInteresting: (input) => input.length >= TRIPLE_LENGTH,
+  }),
+  defNumListToNumList({
+    op: OP_KEEP_FIRST_K,
+    rung: 2,
+    params: [{ name: PARAM_K, min: 2, max: 4 }],
+    apply: (input, params) => input.slice(0, params[PARAM_K]),
+    isInteresting: (input, params) => input.length > params[PARAM_K],
+  }),
+  defNumListToNumList({
+    op: OP_KEEP_LAST_K,
+    rung: 2,
+    params: [{ name: PARAM_K, min: 2, max: 4 }],
+    apply: (input, params) => input.slice(input.length - params[PARAM_K]),
+    isInteresting: (input, params) => input.length > params[PARAM_K],
   }),
 ];
 

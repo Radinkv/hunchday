@@ -23,8 +23,10 @@ import {
   OP_INDEX_OF_MAX,
   OP_KEEP_DUPS,
   OP_KEEP_EVEN,
+  OP_KEEP_FIRST_K,
   OP_KEEP_GT_FIRST,
   OP_KEEP_GT_K,
+  OP_KEEP_LAST_K,
   OP_KEEP_LT_K,
   OP_KEEP_ODD,
   OP_KEEP_STARTSWITH_VOWEL,
@@ -175,6 +177,8 @@ const FN_CASES: readonly FnCase[] = [
   { op: OP_LAST_LETTER_POS, input: ["cat", "dog"], expected: [20, 7] },
   { op: OP_SORT_BY_LENGTH, input: ["house", "ox", "cat"], expected: ["ox", "cat", "house"] },
   { op: OP_SHORTEST, input: ["cat", "house", "ox"], expected: "ox" },
+  { op: OP_KEEP_FIRST_K, input: [1, 2, 3, 4, 5], params: { k: 2 }, expected: [1, 2] },
+  { op: OP_KEEP_LAST_K, input: [1, 2, 3, 4, 5], params: { k: 2 }, expected: [4, 5] },
 ];
 
 interface PredicateCase {
@@ -254,6 +258,10 @@ const PREDICATE_CASES: readonly PredicateCase[] = [
   { op: OP_SORT_BY_LENGTH, input: ["ox", "cat"], interesting: false },
   { op: OP_SHORTEST, input: ["cat", "ox"], interesting: true },
   { op: OP_SHORTEST, input: ["cat", "dog"], interesting: false },
+  { op: OP_KEEP_FIRST_K, input: [1, 2, 3], params: { k: 2 }, interesting: true },
+  { op: OP_KEEP_FIRST_K, input: [1, 2], params: { k: 2 }, interesting: false },
+  { op: OP_KEEP_LAST_K, input: [1, 2, 3], params: { k: 2 }, interesting: true },
+  { op: OP_KEEP_LAST_K, input: [1, 2], params: { k: 2 }, interesting: false },
 ];
 
 interface PhraseCase {
@@ -271,6 +279,8 @@ const PHRASE_CASES: readonly PhraseCase[] = [
   { op: OP_KEEP_LT_K, params: { k: 5 }, expected: "keeps only chips smaller than 5" },
   { op: OP_REVERSE, expected: "reverses the order" },
   { op: OP_LONGEST, expected: "keeps the chip with the most letters" },
+  { op: OP_KEEP_FIRST_K, params: { k: 2 }, expected: "keeps only the first 2 chips" },
+  { op: OP_KEEP_LAST_K, params: { k: 3 }, expected: "keeps only the last 3 chips" },
 ];
 
 describe("registry structure", () => {

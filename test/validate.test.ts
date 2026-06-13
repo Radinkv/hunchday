@@ -118,7 +118,12 @@ const REJECTION_CASES: readonly RejectionCase[] = [
   },
   {
     name: "an ambiguous easy machine",
-    candidate: candidate([step(OP_ADD_K, { k: 1 })], DIFFICULTY_EASY, [[1, 1], [3, 5]], [[2, 4]]),
+    candidate: candidate(
+      [step(OP_ADD_K, { k: 1 }), step(OP_REVERSE)],
+      DIFFICULTY_EASY,
+      [[1, 2], [2, 1]],
+      [[2, 4]],
+    ),
     reason: REASON_EASY_NOT_UNIQUE,
   },
   {

@@ -23,7 +23,7 @@
  * other decoy still fitting both, so the rule stays uncertain until the challenges.
  *
  * Repeat suppression rejects a pipeline whose signature appeared in the shipped puzzle
- * of any of the previous thirteen days, looking back no earlier than the launch date.
+ * of any of the previous eighty nine days, looking back no earlier than the launch date.
  * Those previous days are generated the same way and cached, so the lookback is bounded
  * and needs no stored history beyond the cache. When a slot cannot be filled the
  * generator reseeds with the next nonce and tries again, so every client walks the same
@@ -101,8 +101,8 @@ const MAX_INPUT_DRAWS = 240;
 /** The largest nonce a slot may reach before generation is considered deadlocked. */
 const MAX_SLOT_NONCE = 96;
 
-/** The no repeat window in days, so a pipeline must differ from the previous thirteen. */
-const REPEAT_WINDOW = 14;
+/** The no repeat window in days, so a pipeline must differ from the previous eighty nine. */
+const REPEAT_WINDOW = 90;
 
 const MIN_DRAW_LENGTH = 2;
 const MAX_DRAW_LENGTH = 6;
@@ -757,7 +757,7 @@ function forbiddenSignatures(date: string): Set<string> {
 /**
  * Generates the puzzle for a date, caching the result. A registered override wins
  * outright; otherwise the four slots are filled while avoiding any pipeline shipped in
- * the previous thirteen days. The same date always yields the same puzzle.
+ * the previous eighty nine days. The same date always yields the same puzzle.
  * @param date The date in year month day form.
  * @returns The day specification.
  */

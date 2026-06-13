@@ -30,12 +30,12 @@ const SLOT_ORDER: readonly Difficulty[] = [
 
 const SOAK_START = "2026-06-20";
 const SOAK_DAYS = 30;
-const NO_REPEAT_WINDOW = 13;
+const NO_REPEAT_WINDOW = 89;
 const MS_PER_DAY = 86400000;
 
 const PINNED_SIGNATURES: Readonly<Record<string, string>> = {
-  "2026-06-20": 'sub_k{"k":3}>drop_first{} ## keep_lt_k{"k":5}>sub_k{"k":3}>drop_last{} ## units_digit{}>keep_gt_k{"k":5}>count_distinct{} ## deltas{}>keep_lt_k{"k":6}>add_k{"k":5}',
-  "2026-07-01": 'add_k{"k":4}>sum{} ## letter_count_squared{}>digit_sum_map{} ## units_digit{}>sort_asc{}>keep_gt_k{"k":3} ## reverse_digits{}>keep_gt_k{"k":4}>affine{"a":3,"b":1}',
+  "2026-06-20": 'sub_k{"k":5}>keep_first_k{"k":2} ## drop_first{}>keep_lt_k{"k":7}>affine{"a":3,"b":3} ## keep_odd{}>swap_ends{}>index_of_max{} ## reverse_digits{}>keep_gt_k{"k":5}>affine{"a":3,"b":1}',
+  "2026-07-01": 'add_k{"k":1}>keep_first_k{"k":2} ## letter_count_squared{}>mul_k{"k":2} ## add_k{"k":4}>every_other{}>every_other{} ## keep_gt_first{}>reverse_digits{}>sum{}',
 };
 
 /**
