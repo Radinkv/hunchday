@@ -30,7 +30,6 @@ export const CLASS_CHIP_OUTPUT = "out";
 export const CLASS_ARROW = "arrow";
 
 export const CLASS_QUESTION = "question";
-export const CLASS_FEED_ROW = "feedrow";
 export const CLASS_FEEDBACK = "feedback";
 export const CLASS_FEEDBACK_OK = "ok";
 export const CLASS_FEEDBACK_NOPE = "nope";
@@ -76,16 +75,45 @@ export const COPY_FEEDBACK_MORE = " One more to confirm you have it.";
 export const COPY_FEEDBACK_NOT_QUITE = "Not quite.";
 export const COPY_FEEDBACK_GAVE = " It actually gave that — added to your evidence.";
 
-/** Placeholder and labels for the prediction input. */
-export const COPY_INPUT_PLACEHOLDER = "type chips, space between";
-export const COPY_INPUT_LABEL = "Your prediction for the chips that come out";
+/** The label on the button that feeds the built prediction into the machine. */
 export const COPY_FEED_BUTTON = "Feed it";
+
+/** Class names for the recipe builder: the step list, the tabbed folder, and the tags. */
+export const CLASS_BUILDER = "builder";
+export const CLASS_RECIPE = "recipe";
+export const CLASS_RECIPE_EMPTY = "recipeempty";
+export const CLASS_STEP = "step";
+export const CLASS_STEP_NUM = "stepnum";
+export const CLASS_STEP_TEXT = "steptext";
+export const CLASS_STEP_REMOVE = "stepx";
+export const CLASS_NUM_TAG = "numtag";
+export const CLASS_PICKER = "picker";
+export const CLASS_SEARCH = "search";
+export const CLASS_NO_MATCHES = "nomatch";
+export const CLASS_FOLDER_ICON = "foldericon";
+export const CLASS_TABS = "tabs";
+export const CLASS_TAB = "tab";
+export const CLASS_TAB_ACTIVE = "on";
+export const CLASS_PAGE = "page";
+export const CLASS_PICKER_OP = "pickop";
+export const CLASS_TERMINAL_HINT = "terminal";
+export const CLASS_BUILDER_ACTIONS = "bactions";
+
+/** Copy for the recipe builder: the labels, the hints, and the step controls. */
+export const COPY_RECIPE_LABEL = "Your recipe";
+export const COPY_RECIPE_EMPTY = "Write a recipe you think the machine follows.";
+export const COPY_PICKER_LABEL = "Operations to add";
+export const COPY_SEARCH_LABEL = "Search operations";
+export const COPY_SEARCH_PLACEHOLDER = "Search operations…";
+export const COPY_NO_MATCHES = "Nothing matches that. Try a tab, or different words.";
+export const COPY_TERMINAL_HINT = "Your recipe ends on a single chip. Feed it.";
+export const COPY_CLEAR = "Clear";
+export const COPY_NUMBER_TAG_PREFIX = "Change the number in step ";
+export const COPY_REMOVE_FROM_PREFIX = "Remove from step ";
+export const COPY_STEP_REMOVE_GLYPH = "✕";
 
 /** Duration in milliseconds that the bot holds its chomp animation after a feed. */
 export const CHOMP_DURATION_MS = 180;
-
-/** The keyboard key that submits the current guess. */
-export const INPUT_KEY_ENTER = "Enter";
 
 /** Page level copy. */
 export const COPY_WORDMARK = "Hunchday";
