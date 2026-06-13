@@ -155,7 +155,7 @@ export function ChipBuilder({
   return (
     <div className={CLASS_BUILDER}>
       <ol className={CLASS_RECIPE} aria-label={COPY_RECIPE_LABEL} aria-live="polite">
-        {steps.length === 0 ? <li className={CLASS_RECIPE_EMPTY}>{COPY_RECIPE_EMPTY}</li> : steps.map(renderStep)}
+        {steps.length === 0 ? <li className={CLASS_RECIPE_EMPTY}>{COPY_RECIPE_EMPTY}</li> : steps.map((element, index) => renderStep(element, index))}
       </ol>
 
       {terminal ? (
