@@ -92,6 +92,54 @@ export const PROBE_BATTERY: ReadonlyArray<readonly number[]> = [
 ];
 
 /**
+ * The frozen word probe battery. Forty word lists chosen to discriminate the word
+ * operations across letter count, vowel count, first letter, alphabetical order,
+ * repetition, and list length, so word pipelines can be fingerprinted the same way.
+ */
+export const WORD_PROBE_BATTERY: ReadonlyArray<readonly string[]> = [
+  ["cat", "dog"],
+  ["ox", "ant"],
+  ["apple", "fig"],
+  ["fig", "apple"],
+  ["cat", "cat"],
+  ["bee", "ant", "owl"],
+  ["owl", "ant", "bee"],
+  ["dog", "dog", "dog"],
+  ["cat", "ox", "fig"],
+  ["sun", "moon", "star"],
+  ["apple", "banana", "kiwi", "fig"],
+  ["kiwi", "fig", "apple", "banana"],
+  ["egg", "ant", "ox", "owl"],
+  ["zebra", "ant", "owl", "ox"],
+  ["red", "blue", "green"],
+  ["green", "blue", "red"],
+  ["ice", "oak", "elm"],
+  ["elm", "oak", "ice"],
+  ["ant", "ape", "owl", "eel", "ox"],
+  ["dog", "fox", "cow", "hen", "pig"],
+  ["egg", "ice", "owl"],
+  ["apple", "egg", "ice", "owl"],
+  ["cat", "dog", "egg", "fox"],
+  ["kiwi", "kiwi", "fig"],
+  ["plum", "pear", "lime"],
+  ["lime", "pear", "plum"],
+  ["bat", "bee", "bug"],
+  ["sun", "sky"],
+  ["sky", "sun"],
+  ["star", "sun", "sky", "space"],
+  ["alpha", "beta", "gamma"],
+  ["gamma", "beta", "alpha"],
+  ["echo", "ant", "ice"],
+  ["owl", "eel", "ape", "ear"],
+  ["fox", "wolf", "bear", "lion", "deer"],
+  ["one", "two", "six", "ten"],
+  ["ten", "six", "two", "one"],
+  ["mango", "melon", "lemon"],
+  ["lemon", "melon", "mango"],
+  ["ant", "bee", "cat", "dog", "elk", "fox"],
+];
+
+/**
  * Serializes a probe output into a canonical string. Each kind of value carries a
  * leading tag so that a number, a word, and a single item list never collide, and
  * lists serialize their items in order.
@@ -108,16 +156,21 @@ function serializeProbeValue(value: ProbeValue): string {
 }
 
 /**
- * Computes the behavioral fingerprint of a pipeline by running it over the frozen
- * probe battery, serializing each output, and hashing the joined serialization. A
- * probe input on which the pipeline throws contributes a fixed error token, so a
- * single failing probe does not prevent fingerprinting and still distinguishes a
- * pipeline that fails there from one that does not.
+ * Computes the behavioral fingerprint of a pipeline over an arbitrary probe battery by
+ * running it on each probe input, serializing each output, and hashing the joined
+ * serialization. A probe input on which the pipeline throws contributes a fixed error
+ * token, so a single failing probe does not prevent fingerprinting and still
+ * distinguishes a pipeline that fails there from one that does not. The battery element
+ * type is generic so the same primitive fingerprints both numeric and word pipelines.
+ * @param battery The probe inputs to run the pipeline over.
  * @param run The pipeline executor to fingerprint.
  * @returns A stable sixteen character hex fingerprint of the pipeline behavior.
  */
-export function fingerprint(run: ProbeRun): string {
-  const records = PROBE_BATTERY.map((probe) => {
+export function fingerprintOver<Probe>(
+  battery: ReadonlyArray<readonly Probe[]>,
+  run: (probe: readonly Probe[]) => ProbeValue,
+): string {
+  const records = battery.map((probe) => {
     try {
       return serializeProbeValue(run(probe));
     } catch {
@@ -125,4 +178,14 @@ export function fingerprint(run: ProbeRun): string {
     }
   });
   return hash64hex(records.join(SERIAL_RECORD_SEPARATOR));
+}
+
+/**
+ * Computes the behavioral fingerprint of a numeric pipeline over the frozen numeric
+ * probe battery.
+ * @param run The pipeline executor to fingerprint.
+ * @returns A stable sixteen character hex fingerprint of the pipeline behavior.
+ */
+export function fingerprint(run: ProbeRun): string {
+  return fingerprintOver(PROBE_BATTERY, run);
 }

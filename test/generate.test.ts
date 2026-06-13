@@ -34,8 +34,8 @@ const NO_REPEAT_WINDOW = 13;
 const MS_PER_DAY = 86400000;
 
 const PINNED_SIGNATURES: Readonly<Record<string, string>> = {
-  "2026-06-20": 'add_k{"k":5} ## keep_gt_k{"k":4} ## keep_lt_k{"k":7}>mul_k{"k":3} ## length_map{}>sum{}',
-  "2026-07-01": 'max{} ## keep_gt_k{"k":9} ## keep_lt_k{"k":4}>sub_k{"k":3} ## length_map{}>min{}',
+  "2026-06-20": 'sub_k{"k":3}>drop_first{} ## keep_lt_k{"k":5}>sub_k{"k":3}>drop_last{} ## units_digit{}>keep_gt_k{"k":5}>count_distinct{} ## deltas{}>keep_lt_k{"k":6}>add_k{"k":5}',
+  "2026-07-01": 'add_k{"k":4}>sum{} ## letter_count_squared{}>digit_sum_map{} ## units_digit{}>sort_asc{}>keep_gt_k{"k":3} ## reverse_digits{}>keep_gt_k{"k":4}>affine{"a":3,"b":1}',
 };
 
 /**

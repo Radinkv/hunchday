@@ -12,10 +12,12 @@
  * ambiguity scoring reduce to looking a candidate up by its fingerprint and reasoning
  * about classes rather than about individual pipelines.
  *
- * The universe is numeric: a pipeline begins with a list of numbers, applies zero or
- * more list to list operations, and may end in a single reducer to a number. Word
- * operations take a word list and never appear in such a pipeline, so they are outside
- * this universe and are handled separately by the validators.
+ * The numeric universe is the primary one: a pipeline begins with a list of numbers,
+ * applies zero or more list to list operations, and may end in a single reducer to a
+ * number. A parallel word universe begins with a list of words, applies a word
+ * operation, and may flow into the numeric operations once a word operation has
+ * produced numbers, so word machines receive the same collapse and ambiguity reasoning
+ * as numeric machines. The two universes are built and cached independently.
  *
  * Each class keeps its simplest member as the representative, where simpler means
  * fewer operations and then a lower top rung. Collapse asks whether a class has a
@@ -24,9 +26,16 @@
  */
 
 import { compose, execute, type PipelineStep } from "./compose";
-import { fingerprint } from "./fingerprint";
+import { fingerprint, fingerprintOver, WORD_PROBE_BATTERY } from "./fingerprint";
 import { getOp, REGISTRY } from "./ops";
-import { TYPE_NUM, TYPE_NUM_LIST, type ParamSpec, type Params } from "./ops-types";
+import {
+  TYPE_NUM,
+  TYPE_NUM_LIST,
+  TYPE_WORD_LIST,
+  type ParamSpec,
+  type Params,
+  type ValueType,
+} from "./ops-types";
 
 /** A bound op instance: an operation identifier with one fixed parameter binding. */
 interface OpInstance {
@@ -160,19 +169,32 @@ export function fingerprintOfSteps(steps: readonly PipelineStep[]): string {
 let cachedClasses: Map<string, BehaviorClass> | null = null;
 
 /**
- * Records a pipeline in the class map, keeping the simplest member of each class as
- * its representative.
+ * Records a pipeline under its fingerprint in the class map, keeping the simplest
+ * member of each class as its representative.
  * @param classes The class map being built.
  * @param steps The pipeline to record.
+ * @param key The behavior fingerprint the pipeline is recorded under.
  */
-function recordPipeline(classes: Map<string, BehaviorClass>, steps: readonly PipelineStep[]): void {
-  const key = fingerprintOfSteps(steps);
+function recordClass(
+  classes: Map<string, BehaviorClass>,
+  steps: readonly PipelineStep[],
+  key: string,
+): void {
   const length = steps.length;
   const maxRung = maxRungOf(steps);
   const existing = classes.get(key);
   if (!existing || isStrictlySimpler({ length, maxRung }, existing)) {
     classes.set(key, { representative: steps, length, maxRung });
   }
+}
+
+/**
+ * Records a numeric pipeline in the class map under its numeric fingerprint.
+ * @param classes The class map being built.
+ * @param steps The pipeline to record.
+ */
+function recordPipeline(classes: Map<string, BehaviorClass>, steps: readonly PipelineStep[]): void {
+  recordClass(classes, steps, fingerprintOfSteps(steps));
 }
 
 /**
@@ -217,4 +239,77 @@ function buildClasses(): Map<string, BehaviorClass> {
 export function behaviorClasses(): Map<string, BehaviorClass> {
   cachedClasses ??= buildClasses();
   return cachedClasses;
+}
+
+let cachedWordInstances: Map<ValueType, readonly OpInstance[]> | null = null;
+
+/**
+ * Groups every bound operation instance by the value type it consumes, so the word
+ * enumeration can extend a pipeline by the operations that accept the current type.
+ * @returns A map from input value type to the bound instances that consume it.
+ */
+function instancesByInputType(): Map<ValueType, readonly OpInstance[]> {
+  const grouped = new Map<ValueType, OpInstance[]>();
+  for (const op of REGISTRY) {
+    const bucket = grouped.get(op.inputType) ?? [];
+    for (const params of paramCombinations(op.params)) {
+      bucket.push({ opId: op.id, params });
+    }
+    grouped.set(op.inputType, bucket);
+  }
+  return grouped;
+}
+
+/**
+ * Computes the behavior fingerprint of a word pipeline by running it over the word
+ * probe battery.
+ * @param steps The pipeline steps, beginning with a word operation.
+ * @returns The fingerprint of the pipeline behavior over word inputs.
+ */
+export function fingerprintWordSteps(steps: readonly PipelineStep[]): string {
+  const pipeline = compose(steps);
+  return fingerprintOver(WORD_PROBE_BATTERY, (probe) => execute(pipeline, [...probe]));
+}
+
+/**
+ * Records a word pipeline in the class map under its word fingerprint.
+ * @param classes The class map being built.
+ * @param steps The pipeline to record.
+ */
+function recordWordPipeline(classes: Map<string, BehaviorClass>, steps: readonly PipelineStep[]): void {
+  recordClass(classes, steps, fingerprintWordSteps(steps));
+}
+
+let cachedWordClasses: Map<string, BehaviorClass> | null = null;
+
+/**
+ * Builds the word behavior class map by enumerating every pipeline that begins with a
+ * word operation, follows the value type flow through later operations up to the
+ * maximum length, and groups them by their behavior over the word probe battery.
+ * @returns The word class map keyed by fingerprint.
+ */
+function buildWordClasses(): Map<string, BehaviorClass> {
+  const classes = new Map<string, BehaviorClass>();
+  cachedWordInstances ??= instancesByInputType();
+  const instances = cachedWordInstances;
+
+  const extend = (currentType: ValueType, steps: readonly PipelineStep[]): void => {
+    if (steps.length >= 1) recordWordPipeline(classes, steps);
+    if (steps.length >= MAX_PIPELINE_LENGTH) return;
+    for (const instance of instances.get(currentType) ?? []) {
+      extend(getOp(instance.opId).outputType, [...steps, toStep(instance)]);
+    }
+  };
+
+  extend(TYPE_WORD_LIST, []);
+  return classes;
+}
+
+/**
+ * Returns the word behavior class map, building it once and caching it for reuse.
+ * @returns The word class map keyed by fingerprint.
+ */
+export function wordBehaviorClasses(): Map<string, BehaviorClass> {
+  cachedWordClasses ??= buildWordClasses();
+  return cachedWordClasses;
 }

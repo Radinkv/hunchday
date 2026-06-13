@@ -4,16 +4,28 @@ import {
   behaviorClasses,
   complexityOf,
   fingerprintOfSteps,
+  fingerprintWordSteps,
   isStrictlySimpler,
+  wordBehaviorClasses,
 } from "../src/engine/universe";
-import { OP_MUL_K, OP_REVERSE, OP_SORT_ASC, OP_SORT_DESC, OP_SUM } from "../src/engine/ops";
+import {
+  OP_LENGTH_MAP,
+  OP_MUL_K,
+  OP_REVERSE,
+  OP_SORT_ALPHA,
+  OP_SORT_ASC,
+  OP_SORT_DESC,
+  OP_SUM,
+} from "../src/engine/ops";
 
 /**
  * These tests cover the behavior universe that the validators reason over. Pipelines
  * that compute the same function must share a fingerprint and a class, the class must
  * keep its simplest member as the representative, and the complexity comparison must
  * order pipelines by operation count and then by top rung. The map is built once and
- * cached.
+ * cached. The word universe enumerates pipelines that begin with a word operation and
+ * follow the value type flow, and it is built and cached independently of the numeric
+ * universe.
  */
 
 describe("fingerprintOfSteps", () => {
@@ -64,5 +76,41 @@ describe("behaviorClasses", () => {
   it("keeps the simplest pipeline as the representative of a class", () => {
     const sortClass = behaviorClasses().get(fingerprintOfSteps([step(OP_SORT_ASC)]));
     expect(sortClass?.length).toBe(1);
+  });
+});
+
+describe("fingerprintWordSteps", () => {
+  it("gives behaviorally identical word pipelines the same fingerprint", () => {
+    expect(fingerprintWordSteps([step(OP_SORT_ALPHA), step(OP_LENGTH_MAP)])).toBe(
+      fingerprintWordSteps([step(OP_SORT_ALPHA), step(OP_LENGTH_MAP)]),
+    );
+  });
+
+  it("gives word pipelines that order their output differently distinct fingerprints", () => {
+    expect(fingerprintWordSteps([step(OP_LENGTH_MAP)])).not.toBe(
+      fingerprintWordSteps([step(OP_LENGTH_MAP), step(OP_SORT_ASC)]),
+    );
+  });
+});
+
+describe("wordBehaviorClasses", () => {
+  it("is a non empty cached map distinct from the numeric universe", () => {
+    const first = wordBehaviorClasses();
+    const second = wordBehaviorClasses();
+    expect(first).toBe(second);
+    expect(first.size).toBeGreaterThan(0);
+    expect(first).not.toBe(behaviorClasses());
+  });
+
+  it("classifies a single word operation as a length one pipeline", () => {
+    const lengthClass = wordBehaviorClasses().get(fingerprintWordSteps([step(OP_LENGTH_MAP)]));
+    expect(lengthClass?.length).toBe(1);
+  });
+
+  it("contains only pipelines that begin with a word operation", () => {
+    for (const behaviorClass of wordBehaviorClasses().values()) {
+      const firstStep = behaviorClass.representative.at(0);
+      expect(firstStep).toBeDefined();
+    }
   });
 });

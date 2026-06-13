@@ -121,6 +121,34 @@ export const OP_KEEP_STARTSWITH_VOWEL: OpMeta = {
   id: "keep_startswith_vowel",
   phrase: "keeps chips that start with a vowel",
 };
+export const OP_UNITS_DIGIT: OpMeta = { id: "units_digit", phrase: "keeps just the last digit of every chip" };
+export const OP_MIN_NORMALIZE: OpMeta = {
+  id: "min_normalize",
+  phrase: "takes the smallest chip away from every chip",
+};
+export const OP_RUNNING_TOTAL: OpMeta = {
+  id: "running_total",
+  phrase: "replaces every chip with the running total so far",
+};
+export const OP_SECOND_LARGEST: OpMeta = { id: "second_largest", phrase: "finds the second biggest chip" };
+export const OP_COUNT_EVEN: OpMeta = { id: "count_even", phrase: "counts how many chips are even" };
+export const OP_LETTER_COUNT_SQUARED: OpMeta = {
+  id: "letter_count_squared",
+  phrase: "squares the number of letters in every chip",
+};
+export const OP_DISTINCT_LETTERS_MAP: OpMeta = {
+  id: "distinct_letters_map",
+  phrase: "counts the different letters in every chip",
+};
+export const OP_LAST_LETTER_POS: OpMeta = {
+  id: "last_letter_pos",
+  phrase: "reads the alphabet position of each chip's last letter",
+};
+export const OP_SORT_BY_LENGTH: OpMeta = {
+  id: "sort_by_length",
+  phrase: "sorts the chips from fewest letters to most",
+};
+export const OP_SHORTEST: OpMeta = { id: "shortest", phrase: "keeps the chip with the fewest letters" };
 
 const NO_PARAMS: readonly ParamSpec[] = [];
 
@@ -135,6 +163,12 @@ const PAIR_LENGTH = 2;
 
 /** Smallest list length for an operation that needs at least three chips to be useful. */
 const TRIPLE_LENGTH = 3;
+
+/** Smallest value with two decimal digits, used by the last digit operation. */
+const MIN_TWO_DIGIT = 10;
+
+/** The rank of the second largest chip in a list sorted from largest to smallest. */
+const SECOND_RANK_INDEX = 1;
 
 /** Input length and chip ceiling for the product reducer, kept small to bound the result. */
 const PRODUCT_MAX_LENGTH = 3;
@@ -280,6 +314,49 @@ function vowelCount(word: string): number {
  */
 function firstLetterPosition(word: string): number {
   return ALPHABET.indexOf(word[0].toLowerCase()) + 1;
+}
+
+/**
+ * Returns the alphabet position of the last letter of a word, counting from one.
+ * @param word The word whose last letter is measured.
+ * @returns The position of the last letter, where a is one and z is twenty six.
+ */
+function lastLetterPosition(word: string): number {
+  return ALPHABET.indexOf((word.at(-1) ?? "").toLowerCase()) + 1;
+}
+
+/**
+ * Counts the distinct letters in a word, ignoring letter case.
+ * @param word The word to scan.
+ * @returns The number of different letters.
+ */
+function distinctLetterCount(word: string): number {
+  return new Set(word.toLowerCase()).size;
+}
+
+/**
+ * Returns the last decimal digit of an integer, read from its decimal text so no
+ * division is involved.
+ * @param value The integer whose last digit is read.
+ * @returns The last decimal digit.
+ */
+function lastDigit(value: number): number {
+  return Number(String(value).at(-1) ?? "0");
+}
+
+/**
+ * Replaces every chip with the running total of the chips up to and including it.
+ * @param values The list to accumulate.
+ * @returns The list of running totals.
+ */
+function runningTotals(values: readonly number[]): number[] {
+  const totals: number[] = [];
+  let total = 0;
+  for (const value of values) {
+    total += value;
+    totals.push(total);
+  }
+  return totals;
 }
 
 /**
@@ -462,6 +539,12 @@ const MAP_OPS: readonly OpDef[] = [
     apply: (input) => input.map(digitSum),
     isInteresting: (input) => !listsEqual(input.map(digitSum), input),
   }),
+  defNumListToNumList({
+    op: OP_UNITS_DIGIT,
+    rung: 4,
+    apply: (input) => input.map(lastDigit),
+    isInteresting: (input) => input.some((value) => value >= MIN_TWO_DIGIT),
+  }),
 ];
 
 /** Reorders that rearrange a number list without changing its contents. */
@@ -566,6 +649,19 @@ const REDUCER_OPS: readonly OpDef[] = [
     apply: (input) => mostFrequentValue(input),
     isInteresting: (input) => hasUniqueMode(input),
   }),
+  defNumListToNum({
+    op: OP_SECOND_LARGEST,
+    rung: 4,
+    apply: (input) => sortedDescending(input)[SECOND_RANK_INDEX],
+    isInteresting: (input) => input.length >= PAIR_LENGTH,
+  }),
+  defNumListToNum({
+    op: OP_COUNT_EVEN,
+    rung: 3,
+    apply: (input) => input.filter((value) => value % 2 === 0).length,
+    isInteresting: (input) =>
+      input.some((value) => value % 2 === 0) && input.some((value) => value % 2 === 1),
+  }),
 ];
 
 /** Filters that drop some chips from a number list. */
@@ -662,6 +758,21 @@ const RELATIONAL_OPS: readonly OpDef[] = [
     apply: (input) => new Set(input).size,
     isInteresting: (input) => new Set(input).size < input.length,
   }),
+  defNumListToNumList({
+    op: OP_MIN_NORMALIZE,
+    rung: 4,
+    apply: (input) => {
+      const smallest = minOf(input);
+      return input.map((value) => value - smallest);
+    },
+    isInteresting: (input) => maxOf(input) !== minOf(input),
+  }),
+  defNumListToNumList({
+    op: OP_RUNNING_TOTAL,
+    rung: 5,
+    apply: (input) => runningTotals(input),
+    isInteresting: (input) => input.length >= PAIR_LENGTH,
+  }),
 ];
 
 /** Word operations that read chips as words rather than numbers. */
@@ -706,6 +817,39 @@ const WORD_OPS: readonly OpDef[] = [
     isInteresting: (input) => {
       const kept = input.filter((word) => VOWELS.includes(word[0].toLowerCase())).length;
       return kept >= 1 && kept < input.length;
+    },
+  }),
+  defWordListToNumList({
+    op: OP_LETTER_COUNT_SQUARED,
+    rung: 5,
+    apply: (input) => input.map((word) => word.length * word.length),
+    isInteresting: (input) => new Set(input.map((word) => word.length)).size > 1,
+  }),
+  defWordListToNumList({
+    op: OP_DISTINCT_LETTERS_MAP,
+    rung: 5,
+    apply: (input) => input.map(distinctLetterCount),
+    isInteresting: (input) => input.some((word) => distinctLetterCount(word) < word.length),
+  }),
+  defWordListToNumList({
+    op: OP_LAST_LETTER_POS,
+    rung: 5,
+    apply: (input) => input.map(lastLetterPosition),
+    isInteresting: (input) => new Set(input.map(lastLetterPosition)).size > 1,
+  }),
+  defWordListToWordList({
+    op: OP_SORT_BY_LENGTH,
+    rung: 4,
+    apply: (input) => [...input].sort((a, b) => a.length - b.length),
+    isInteresting: (input) => !wordListsEqual([...input].sort((a, b) => a.length - b.length), input),
+  }),
+  defWordListToWord({
+    op: OP_SHORTEST,
+    rung: 3,
+    apply: (input) => input.reduce((best, word) => (word.length < best.length ? word : best), input[0]),
+    isInteresting: (input) => {
+      const shortestLength = minOf(input.map((word) => word.length));
+      return input.filter((word) => word.length === shortestLength).length === 1;
     },
   }),
 ];

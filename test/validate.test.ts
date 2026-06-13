@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { step, type PipelineStep } from "../src/engine/compose";
+import { generateDay } from "../src/engine/generate";
 import {
   OP_ADD_K,
-  OP_AFFINE,
   OP_COUNT,
   OP_KEEP_EVEN,
   OP_REVERSE,
@@ -54,23 +54,18 @@ function candidate(
 }
 
 describe("validate accepts a well formed machine", () => {
-  it("passes a medium affine machine that is uniquely determined", () => {
-    const result = validate(
-      candidate(
-        [step(OP_AFFINE, { a: 2, b: 1 })],
-        DIFFICULTY_MEDIUM,
-        [
-          [1, 3],
-          [2, 4],
-        ],
-        [
-          [5, 2],
-          [3, 6],
-          [4, 1],
-        ],
-      ),
-    );
-    expect(result.ok).toBe(true);
+  it("passes every machine the generator ships for a day", () => {
+    for (const machine of generateDay("2026-06-20").machines) {
+      const result = validate(
+        candidate(
+          machine.steps,
+          machine.difficulty,
+          machine.examples.map((pair) => pair.input),
+          machine.challenges.map((pair) => pair.input),
+        ),
+      );
+      expect(result.ok).toBe(true);
+    }
   });
 });
 
@@ -129,10 +124,10 @@ const REJECTION_CASES: readonly RejectionCase[] = [
   {
     name: "a challenge that fails to discriminate a decoy",
     candidate: candidate(
-      [step(OP_ADD_K, { k: 2 })],
-      DIFFICULTY_MEDIUM,
-      [[2, 2], [2, 2, 2]],
-      [[2, 2, 2, 2], [1, 5]],
+      [step(OP_KEEP_EVEN), step(OP_SUM)],
+      DIFFICULTY_HARD,
+      [[2, 3, 4, 1], [6, 5, 2, 7]],
+      [[8, 1, 3], [4, 2, 5], [2, 9, 6]],
     ),
     reason: REASON_NOT_DISCRIMINATING,
   },

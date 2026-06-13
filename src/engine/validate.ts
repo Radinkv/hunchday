@@ -11,17 +11,25 @@
  * The gates are, in order: sanity of inputs and outputs, interestingness of every
  * operation on every example, collapse onto a simpler pipeline, ambiguity of the rule
  * after the examples, and discrimination of the challenges. The collapse, ambiguity,
- * and discrimination gates reason over the precomputed behavior classes and apply only
- * to numeric machines, whose inputs are lists of numbers. Word machines, whose inputs
- * are lists of words, are checked for sanity and interestingness; their ambiguity is
- * left to the required decoy structure and the human curation pass.
+ * and discrimination gates reason over the precomputed behavior classes. A candidate is
+ * routed to the numeric universe when its pipeline consumes a list of numbers and to the
+ * word universe when it consumes a list of words, so word machines receive the same
+ * collapse and ambiguity reasoning as numeric machines.
  */
 
 import { compose, execute, type PipelineStep } from "./compose";
 import { getOp } from "./ops";
 import { TYPE_NUM_LIST, type Value } from "./ops-types";
 import { phrasePipeline } from "./phrase";
-import { behaviorClasses, complexityOf, fingerprintOfSteps, isStrictlySimpler } from "./universe";
+import {
+  type BehaviorClass,
+  behaviorClasses,
+  complexityOf,
+  fingerprintOfSteps,
+  fingerprintWordSteps,
+  isStrictlySimpler,
+  wordBehaviorClasses,
+} from "./universe";
 
 export const DIFFICULTY_EASY = "easy";
 export const DIFFICULTY_MEDIUM = "medium";
@@ -80,11 +88,14 @@ const MAX_LIST_LENGTH = 6;
 const MIN_OUTPUT_VALUE = 0;
 const MAX_OUTPUT_VALUE = 99;
 
-/** The largest number of surviving theories a solvable slot may leave after examples. */
+/** The largest number of surviving decoys a solvable slot may leave after examples. */
 const MAX_SURVIVORS_SOLVABLE = 2;
 
-/** The smallest number of survivors a mystery slot needs so a clue is required. */
-const MIN_SURVIVORS_MYSTERY = 2;
+/**
+ * The smallest number of decoys a mystery slot needs to survive both examples, so a
+ * simple but wrong theory still fits the examples and the player cannot be certain.
+ */
+const MIN_SURVIVORS_MYSTERY = 1;
 
 /** The index of the first example, used when reading the example outputs. */
 const FIRST_EXAMPLE = 0;
@@ -100,12 +111,43 @@ export interface SlotPolicy {
   readonly requireDecoy: boolean;
 }
 
+/**
+ * The decoy theory space each slot is judged against. The difficulty of a machine is
+ * its operation count, set by the generator, while these policies bound the simple
+ * rules a player would actually test against the examples. The space is kept to short
+ * pipelines so the harder slots, whose true rules are longer, are reasoned against the
+ * near misses a player would really consider rather than against the whole universe.
+ */
 export const SLOT_POLICIES: Readonly<Record<Difficulty, SlotPolicy>> = {
-  [DIFFICULTY_EASY]: { maxLength: 1, ceiling: 2, requireDecoy: false },
-  [DIFFICULTY_MEDIUM]: { maxLength: 1, ceiling: 3, requireDecoy: false },
+  [DIFFICULTY_EASY]: { maxLength: 2, ceiling: 2, requireDecoy: false },
+  [DIFFICULTY_MEDIUM]: { maxLength: 2, ceiling: 3, requireDecoy: false },
   [DIFFICULTY_HARD]: { maxLength: 2, ceiling: 4, requireDecoy: false },
-  [DIFFICULTY_MYSTERY]: { maxLength: 3, ceiling: 5, requireDecoy: true },
+  [DIFFICULTY_MYSTERY]: { maxLength: 2, ceiling: 4, requireDecoy: true },
 };
+
+/**
+ * The behavior universe a candidate is reasoned against: the class map to draw decoys
+ * from and the fingerprint function that places the candidate within it. A numeric
+ * candidate uses the numeric universe and a word candidate uses the word universe, so
+ * the collapse and ambiguity gates work the same way for both.
+ */
+interface UniverseView {
+  readonly classes: Map<string, BehaviorClass>;
+  readonly fingerprintSteps: (steps: readonly PipelineStep[]) => string;
+}
+
+/**
+ * Selects the behavior universe a candidate is reasoned against from the type its
+ * pipeline consumes.
+ * @param candidate The candidate to route.
+ * @returns The numeric universe for a numeric pipeline, the word universe otherwise.
+ */
+function universeFor(candidate: Candidate): UniverseView {
+  const isNumeric = compose(candidate.steps).inputType === TYPE_NUM_LIST;
+  return isNumeric
+    ? { classes: behaviorClasses(), fingerprintSteps: fingerprintOfSteps }
+    : { classes: wordBehaviorClasses(), fingerprintSteps: fingerprintWordSteps };
+}
 
 /**
  * Reports whether two values are equal, comparing lists element by element.
@@ -235,10 +277,11 @@ function checkInterestingness(candidate: Candidate): ValidationResult {
  * Checks the collapse gate: the candidate must not behave identically to a strictly
  * simpler pipeline.
  * @param candidate The candidate to check.
+ * @param universe The behavior universe the candidate is reasoned against.
  * @returns A passing result or the collapse failure.
  */
-function checkCollapse(candidate: Candidate): ValidationResult {
-  const behaviorClass = behaviorClasses().get(fingerprintOfSteps(candidate.steps));
+function checkCollapse(candidate: Candidate, universe: UniverseView): ValidationResult {
+  const behaviorClass = universe.classes.get(universe.fingerprintSteps(candidate.steps));
   if (behaviorClass && isStrictlySimpler(behaviorClass, complexityOf(candidate.steps))) {
     return fail(REASON_COLLAPSE);
   }
@@ -264,11 +307,16 @@ interface AmbiguitySnapshot {
  * survival and discrimination can be read from the outputs without re-running anything.
  * @param policy The slot policy bounding which classes a player would consider.
  * @param inputs The inputs to evaluate, the examples followed by the challenges.
+ * @param universe The behavior universe whose classes are the candidate theories.
  * @returns One evaluation per admissible class.
  */
-function evaluateAdmissibleClasses(policy: SlotPolicy, inputs: readonly Value[]): Evaluation[] {
+function evaluateAdmissibleClasses(
+  policy: SlotPolicy,
+  inputs: readonly Value[],
+  universe: UniverseView,
+): Evaluation[] {
   const evaluations: Evaluation[] = [];
-  for (const [classFingerprint, behaviorClass] of behaviorClasses()) {
+  for (const [classFingerprint, behaviorClass] of universe.classes) {
     if (behaviorClass.length > policy.maxLength || behaviorClass.maxRung > policy.ceiling) continue;
     const pipeline = compose(behaviorClass.representative);
     evaluations.push({
@@ -283,9 +331,10 @@ function evaluateAdmissibleClasses(policy: SlotPolicy, inputs: readonly Value[])
  * Builds the shared ambiguity snapshot once so the gate can work from one derived
  * view of the candidate instead of recomputing the same pieces in place.
  * @param candidate The candidate to inspect.
+ * @param universe The behavior universe the candidate is reasoned against.
  * @returns The derived ambiguity snapshot.
  */
-function buildAmbiguitySnapshot(candidate: Candidate): AmbiguitySnapshot {
+function buildAmbiguitySnapshot(candidate: Candidate, universe: UniverseView): AmbiguitySnapshot {
   const policy = SLOT_POLICIES[candidate.difficulty];
   const pipeline = compose(candidate.steps);
   const inputs = [...candidate.exampleInputs, ...candidate.challengeInputs];
@@ -293,9 +342,9 @@ function buildAmbiguitySnapshot(candidate: Candidate): AmbiguitySnapshot {
 
   return {
     policy,
-    trueFingerprint: fingerprintOfSteps(candidate.steps),
+    trueFingerprint: universe.fingerprintSteps(candidate.steps),
     trueOutputs,
-    evaluations: evaluateAdmissibleClasses(policy, inputs),
+    evaluations: evaluateAdmissibleClasses(policy, inputs, universe),
   };
 }
 
@@ -335,11 +384,12 @@ function findTrapDecoy(
 /**
  * Derives the note text for a trap decoy when the mystery slot keeps one alive.
  * @param trapDecoy The surviving decoy.
+ * @param universe The behavior universe the decoy is drawn from.
  * @returns The note text, or undefined when the decoy cannot be resolved.
  */
-function noteForTrapDecoy(trapDecoy: Evaluation | undefined): string | undefined {
+function noteForTrapDecoy(trapDecoy: Evaluation | undefined, universe: UniverseView): string | undefined {
   if (!trapDecoy) return undefined;
-  const trapClass = behaviorClasses().get(trapDecoy.fingerprint);
+  const trapClass = universe.classes.get(trapDecoy.fingerprint);
   if (!trapClass) return undefined;
   return phrasePipeline(compose(trapClass.representative));
 }
@@ -349,9 +399,14 @@ function noteForTrapDecoy(trapDecoy: Evaluation | undefined): string | undefined
  * be destroyed by the second one.
  * @param snapshot The derived ambiguity snapshot.
  * @param candidate The candidate under inspection.
+ * @param universe The behavior universe the candidate is reasoned against.
  * @returns A passing result, possibly carrying a note, or the first failure.
  */
-function checkMysteryAmbiguity(snapshot: AmbiguitySnapshot, candidate: Candidate): ValidationResult {
+function checkMysteryAmbiguity(
+  snapshot: AmbiguitySnapshot,
+  candidate: Candidate,
+  universe: UniverseView,
+): ValidationResult {
   const survivorsAfterFirst = survivorsAtExample(snapshot.evaluations, snapshot.trueOutputs, FIRST_EXAMPLE);
   const trapDecoy = findTrapDecoy(survivorsAfterFirst, snapshot.trueFingerprint, snapshot.trueOutputs);
   if (!trapDecoy) return fail(REASON_NO_DECOY);
@@ -363,7 +418,7 @@ function checkMysteryAmbiguity(snapshot: AmbiguitySnapshot, candidate: Candidate
   const discrimination = checkDiscrimination(decoysAfterBoth, snapshot.trueOutputs, candidate.exampleInputs.length);
   if (!discrimination.ok) return discrimination;
 
-  const notes = noteForTrapDecoy(trapDecoy);
+  const notes = noteForTrapDecoy(trapDecoy, universe);
   return notes === undefined ? PASS : { ok: true, notes };
 }
 
@@ -391,32 +446,38 @@ function checkSolvableAmbiguity(snapshot: AmbiguitySnapshot, candidate: Candidat
 }
 
 /**
- * Checks the numeric-slot ambiguity and discrimination rules from a derived
- * snapshot, returning a pass or the first named failure.
+ * Checks the slot ambiguity and discrimination rules from a derived snapshot,
+ * returning a pass or the first named failure.
  * @param snapshot The derived ambiguity snapshot.
  * @param candidate The candidate under inspection.
+ * @param universe The behavior universe the candidate is reasoned against.
  * @returns A passing result, possibly carrying a note, or the first failure.
  */
-function checkAmbiguitySnapshot(snapshot: AmbiguitySnapshot, candidate: Candidate): ValidationResult {
+function checkAmbiguitySnapshot(
+  snapshot: AmbiguitySnapshot,
+  candidate: Candidate,
+  universe: UniverseView,
+): ValidationResult {
   if (snapshot.policy.requireDecoy) {
-    return checkMysteryAmbiguity(snapshot, candidate);
+    return checkMysteryAmbiguity(snapshot, candidate, universe);
   }
 
   return checkSolvableAmbiguity(snapshot, candidate);
 }
 
 /**
- * Checks the ambiguity and discrimination gates for a numeric candidate. A solvable
- * slot must leave at most two surviving theories after the examples, and the easy slot
- * must be uniquely determined by the first example alone. A mystery slot must leave a
- * trap decoy that the second example kills and must stay ambiguous after both examples.
- * In every case each surviving decoy must give a different answer from the true rule on
+ * Checks the ambiguity and discrimination gates for a candidate. A solvable slot must
+ * leave at most two surviving theories after the examples, and the easy slot must be
+ * uniquely determined by the first example alone. A mystery slot must leave a trap
+ * decoy that the second example kills and must stay ambiguous after both examples. In
+ * every case each surviving decoy must give a different answer from the true rule on
  * every challenge.
- * @param candidate The numeric candidate to check.
+ * @param candidate The candidate to check.
+ * @param universe The behavior universe the candidate is reasoned against.
  * @returns A passing result, possibly carrying a decoy note, or the first failure.
  */
-function checkAmbiguity(candidate: Candidate): ValidationResult {
-  return checkAmbiguitySnapshot(buildAmbiguitySnapshot(candidate), candidate);
+function checkAmbiguity(candidate: Candidate, universe: UniverseView): ValidationResult {
+  return checkAmbiguitySnapshot(buildAmbiguitySnapshot(candidate, universe), candidate, universe);
 }
 
 /**
@@ -442,7 +503,8 @@ function checkDiscrimination(
 
 /**
  * Runs every quality gate against a candidate and returns the first failure or a pass.
- * The collapse, ambiguity, and discrimination gates run only for numeric candidates.
+ * The collapse, ambiguity, and discrimination gates reason over the numeric universe
+ * for a numeric candidate and the word universe for a word candidate.
  * @param candidate The candidate machine to validate.
  * @returns The validation result.
  */
@@ -453,11 +515,10 @@ export function validate(candidate: Candidate): ValidationResult {
   const interestingness = checkInterestingness(candidate);
   if (!interestingness.ok) return interestingness;
 
-  const pipeline = compose(candidate.steps);
-  if (pipeline.inputType !== TYPE_NUM_LIST) return PASS;
+  const universe = universeFor(candidate);
 
-  const collapse = checkCollapse(candidate);
+  const collapse = checkCollapse(candidate, universe);
   if (!collapse.ok) return collapse;
 
-  return checkAmbiguity(candidate);
+  return checkAmbiguity(candidate, universe);
 }

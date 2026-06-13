@@ -20,23 +20,23 @@ const SLOT_COUNT = 4;
 const MS_PER_DAY = 86400000;
 const SOAK_TIMEOUT_MS = 120000;
 
-const EXPECTED_CLASS_COUNT = 31394;
-const EXPECTED_CLASS_KEY_HASH = "8b1b527600728088";
+const EXPECTED_CLASS_COUNT = 43378;
+const EXPECTED_CLASS_KEY_HASH = "ce367e698ef76647";
 
 /** The fewest distinct pipelines each slot must draw over the soak, in slot order. */
-const VARIETY_FLOOR: readonly number[] = [15, 25, 100, 12];
+const VARIETY_FLOOR: readonly number[] = [80, 220, 260, 260];
 
 const PINNED_SIGNATURES: Readonly<Record<string, string>> = {
-  "2026-06-16": 'sub_k{"k":2} ## keep_gt_k{"k":7} ## add_k{"k":2}>keep_gt_k{"k":5} ## vowel_count_map{}>sum{}',
-  "2026-06-18": 'min{} ## keep_odd{} ## sub_k{"k":1}>keep_lt_k{"k":6} ## first_letter_pos{}>sum{}',
-  "2026-06-20": 'add_k{"k":5} ## keep_gt_k{"k":4} ## keep_lt_k{"k":7}>mul_k{"k":3} ## length_map{}>sum{}',
-  "2026-06-22": 'sub_k{"k":1} ## dedup{} ## drop_last{}>sort_asc{} ## longest{}',
-  "2026-06-25": 'sub_k{"k":3} ## keep_lt_k{"k":9} ## keep_lt_k{"k":7}>every_other{} ## vowel_count_map{}>range{}',
-  "2026-06-28": 'reverse{} ## affine{"a":3,"b":3} ## mul_k{"k":3}>keep_gt_k{"k":9} ## sort_alpha{}',
-  "2026-07-01": 'max{} ## keep_gt_k{"k":9} ## keep_lt_k{"k":4}>sub_k{"k":3} ## length_map{}>min{}',
-  "2026-07-05": 'add_k{"k":3} ## affine{"a":3,"b":2} ## mul_k{"k":3}>affine{"a":3,"b":3} ## length_map{}>sum{}',
-  "2026-07-10": 'sub_k{"k":3} ## range{} ## keep_gt_k{"k":3}>keep_lt_k{"k":7} ## first_letter_pos{}>max{}',
-  "2026-07-15": 'add_k{"k":4} ## median{} ## keep_gt_k{"k":5}>mul_k{"k":3} ## vowel_count_map{}>sum{}',
+  "2026-06-16": 'add_k{"k":2}>drop_first{} ## sub_k{"k":1}>keep_gt_k{"k":5}>affine{"a":3,"b":1} ## add_k{"k":1}>keep_gt_k{"k":5}>every_other{} ## reverse_digits{}>add_k{"k":4}>keep_lt_k{"k":8}',
+  "2026-06-18": 'sub_k{"k":3}>sort_asc{} ## last_letter_pos{}>count_even{} ## add_k{"k":4}>keep_gt_first{}>sort_asc{} ## reverse{}>running_total{}>keep_gt_k{"k":4}',
+  "2026-06-20": 'sub_k{"k":3}>drop_first{} ## keep_lt_k{"k":5}>sub_k{"k":3}>drop_last{} ## units_digit{}>keep_gt_k{"k":5}>count_distinct{} ## deltas{}>keep_lt_k{"k":6}>add_k{"k":5}',
+  "2026-06-22": 'add_k{"k":5}>sort_asc{} ## add_k{"k":2}>keep_gt_k{"k":9}>affine{"a":3,"b":1} ## keep_startswith_vowel{}>length_map{}>keep_odd{} ## add_k{"k":3}>reverse_digits{}>keep_gt_k{"k":7}',
+  "2026-06-25": 'reverse{}>drop_last{} ## keep_gt_k{"k":7}>add_k{"k":3}>drop_first{} ## units_digit{}>keep_lt_k{"k":3}>sum{} ## last_letter_pos{}>digit_sum_map{}>median{}',
+  "2026-06-28": 'mul_k{"k":2}>sort_desc{} ## keep_lt_k{"k":7}>every_other{} ## min_normalize{}>keep_lt_k{"k":8}>rotate_left{} ## units_digit{}>deltas{}>sub_k{"k":2}',
+  "2026-07-01": 'add_k{"k":4}>sum{} ## letter_count_squared{}>digit_sum_map{} ## units_digit{}>sort_asc{}>keep_gt_k{"k":3} ## reverse_digits{}>keep_gt_k{"k":4}>affine{"a":3,"b":1}',
+  "2026-07-05": 'mul_k{"k":2}>first{} ## keep_lt_k{"k":9}>drop_first{} ## keep_gt_first{}>every_other{}>keep_gt_k{"k":6} ## mul_k{"k":2}>running_total{}>keep_gt_k{"k":4}',
+  "2026-07-10": 'add_k{"k":3}>sort_desc{} ## keep_even{}>swap_ends{}>mul_k{"k":3} ## reverse{}>keep_gt_k{"k":4}>keep_dups{} ## keep_gt_k{"k":7}>reverse_digits{}>sum{}',
+  "2026-07-15": 'reverse{}>drop_last{} ## affine{"a":3,"b":3}>affine{"a":3,"b":2}>last{} ## sort_desc{}>units_digit{}>affine{"a":2,"b":1} ## reverse_digits{}>dedup{}>drop_last{}',
 };
 
 /**
