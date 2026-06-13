@@ -15,6 +15,8 @@ import { COPY_FEED_BUTTON, COPY_RULE_CRACKED_LABEL, COPY_WORDMARK } from "../src
 
 const REVERSE_RULE = "It reverses the order.";
 const REVERSE_OP = "reverses the order";
+const REVERSE_TAB = "Order";
+const SORT_TAB = "Words";
 const NUMBER_MACHINE: Machine = {
   rule: REVERSE_RULE,
   ex: [
@@ -44,10 +46,12 @@ const WORD_MACHINE: Machine = {
 afterEach(cleanup);
 
 /**
- * Applies the named operation and feeds the resulting chips.
+ * Selects the palette tab, applies the named operation, and feeds the resulting chips.
+ * @param tab The label of the tab holding the operation.
  * @param operation The accessible name of the operation tile to apply.
  */
-function applyAndFeed(operation: string): void {
+function applyAndFeed(tab: string, operation: string): void {
+  fireEvent.click(screen.getByRole("tab", { name: tab }));
   fireEvent.click(screen.getByRole("button", { name: operation }));
   fireEvent.click(screen.getByRole("button", { name: COPY_FEED_BUTTON }));
 }
@@ -63,15 +67,15 @@ describe("App", () => {
 
   it("cracks a number machine when the right operation is applied twice", () => {
     const { container } = render(<App machines={[NUMBER_MACHINE]} />);
-    applyAndFeed(REVERSE_OP);
-    applyAndFeed(REVERSE_OP);
+    applyAndFeed(REVERSE_TAB, REVERSE_OP);
+    applyAndFeed(REVERSE_TAB, REVERSE_OP);
     expect(container.textContent).toContain(COPY_RULE_CRACKED_LABEL + REVERSE_RULE);
   });
 
   it("cracks a word machine when the right operation is applied twice", () => {
     const { container } = render(<App machines={[WORD_MACHINE]} />);
-    applyAndFeed(SORT_OP);
-    applyAndFeed(SORT_OP);
+    applyAndFeed(SORT_TAB, SORT_OP);
+    applyAndFeed(SORT_TAB, SORT_OP);
     expect(container.textContent).toContain(COPY_RULE_CRACKED_LABEL + SORT_RULE);
   });
 });

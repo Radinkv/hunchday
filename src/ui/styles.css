@@ -239,6 +239,11 @@ main {
   border: 1px solid var(--machine-line);
 }
 
+.tray.drop {
+  border-style: dashed;
+  border-color: var(--machine);
+}
+
 .tray .chip {
   font-size: 15px;
   padding: 5px 12px;
@@ -280,18 +285,40 @@ main {
   gap: 10px;
 }
 
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  border-bottom: 1px solid var(--line);
+}
+
+.tab {
+  height: auto;
+  min-width: 0;
+  padding: 7px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-2);
+  background: transparent;
+  border-radius: var(--r-control) var(--r-control) 0 0;
+}
+
+.tab.on {
+  color: var(--machine);
+  background: var(--machine-soft);
+}
+
 .pgroup {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 6px;
+  min-height: 44px;
 }
 
-.plabel {
-  width: 100%;
-  font-size: 11px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+.ready {
+  margin: 0;
+  font-size: 13px;
   color: var(--ink-3);
 }
 
@@ -300,6 +327,21 @@ main {
   justify-content: flex-end;
   gap: 8px;
   margin-top: 2px;
+}
+
+.ghost {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 50;
+  padding: 8px 13px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--machine);
+  border-radius: var(--r-control);
+  box-shadow: var(--shadow-card);
+  pointer-events: none;
 }
 
 @keyframes chip-in {

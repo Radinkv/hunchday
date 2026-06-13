@@ -89,16 +89,23 @@ export const CLASS_PARAM = "param";
 export const CLASS_STEP_REMOVE = "tx";
 export const CLASS_PALETTE = "palette";
 export const CLASS_PALETTE_GROUP = "pgroup";
-export const CLASS_PALETTE_LABEL = "plabel";
 export const CLASS_TILE = "tile";
 export const CLASS_BUILDER_ACTIONS = "bactions";
+export const CLASS_TABS = "tabs";
+export const CLASS_TAB = "tab";
+export const CLASS_TAB_ACTIVE = "on";
+export const CLASS_TRAY_DROP = "drop";
+export const CLASS_DRAG_GHOST = "ghost";
+export const CLASS_BUILDER_READY = "ready";
 
-export const COPY_TRAIL_EMPTY = "Tap operations below to transform the chips.";
+export const COPY_TRAIL_EMPTY = "Tap or drag an operation onto the chips.";
 export const COPY_RESET = "Reset";
 export const COPY_TRAY_LABEL = "Your prediction so far";
 export const COPY_TRAIL_LABEL = "Operations you have applied";
 export const COPY_REMOVE_STEP_PREFIX = "Remove ";
 export const COPY_CYCLE_PARAM_PREFIX = "Change the value of ";
+export const COPY_BUILDER_READY = "Ready — feed your prediction.";
+export const COPY_OPERATIONS_LABEL = "Operations";
 
 /** Duration in milliseconds that the bot holds its chomp animation after a feed. */
 export const CHOMP_DURATION_MS = 180;
