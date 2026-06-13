@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { generateDay, type DayMachine, type DaySpec } from "../src/engine/generate";
-import { behaviorClasses } from "../src/engine/universe";
+import { behaviorClasses, wordBehaviorClasses } from "../src/engine/universe";
 import { hash64hex } from "../src/engine/rng";
 import { validate } from "../src/engine/validate";
 
@@ -20,23 +20,24 @@ const SLOT_COUNT = 4;
 const MS_PER_DAY = 86400000;
 const SOAK_TIMEOUT_MS = 120000;
 
-const EXPECTED_CLASS_COUNT = 82686;
-const EXPECTED_CLASS_KEY_HASH = "939f88d58855fd0c";
+const EXPECTED_CLASS_COUNT = 82044;
+const EXPECTED_WORD_CLASS_COUNT = 13383;
+const EXPECTED_CLASS_KEY_HASH = "46e882e31a60d3a0";
 
 /** The fewest distinct pipelines each slot must draw over the soak, in slot order. */
 const VARIETY_FLOOR: readonly number[] = [180, 300, 300, 300];
 
 const PINNED_SIGNATURES: Readonly<Record<string, string>> = {
-  "2026-06-16": 'add_k{"k":9}>reverse{} ## sub_k{"k":3}>keep_gt_k{"k":6}>affine{"a":3,"b":1} ## keep_even{}>keep_gt_first{}>sum{} ## deltas{}>affine{"a":3,"b":1}>sum{}',
-  "2026-06-18": 'add_k{"k":1}>keep_last_k{"k":3} ## distinct_letters_map{}>keep_dups{} ## add_k{"k":1}>keep_dups{}>drop_last{} ## add_k{"k":7}>digit_sum_map{}>drop_first{}',
-  "2026-06-20": 'sub_k{"k":5}>keep_first_k{"k":2} ## drop_first{}>keep_lt_k{"k":7}>affine{"a":3,"b":3} ## keep_odd{}>swap_ends{}>index_of_max{} ## reverse_digits{}>keep_gt_k{"k":5}>affine{"a":3,"b":1}',
-  "2026-06-22": 'add_k{"k":8}>keep_last_k{"k":2} ## mul_k{"k":3}>keep_gt_k{"k":3}>median{} ## length_map{}>drop_last{}>drop_last{} ## deltas{}>keep_lt_k{"k":8}>every_other{}',
-  "2026-06-25": 'sub_k{"k":3}>sort_desc{} ## keep_lt_k{"k":6}>keep_first_k{"k":3}>sort_desc{} ## mul_k{"k":3}>units_digit{}>mul_k{"k":2} ## keep_gt_first{}>reverse_digits{}>keep_lt_k{"k":9}',
-  "2026-06-28": 'add_k{"k":1}>drop_last{} ## drop_first{}>sort_asc{}>keep_first_k{"k":2} ## affine{"a":3,"b":1}>keep_gt_k{"k":4}>keep_gt_first{} ## keep_gt_k{"k":9}>reverse_digits{}>median{}',
-  "2026-07-01": 'add_k{"k":1}>keep_first_k{"k":2} ## letter_count_squared{}>mul_k{"k":2} ## add_k{"k":4}>every_other{}>every_other{} ## keep_gt_first{}>reverse_digits{}>sum{}',
-  "2026-07-05": 'add_k{"k":5}>sort_asc{} ## mul_k{"k":2}>keep_last_k{"k":4}>range{} ## keep_lt_k{"k":9}>min_normalize{}>affine{"a":2,"b":3} ## affine{"a":3,"b":3}>digit_sum_map{}>range{}',
-  "2026-07-10": 'sub_k{"k":1}>drop_last{} ## rotate_left{}>keep_odd{}>drop_last{} ## sub_k{"k":5}>every_other{}>keep_gt_first{} ## deltas{}>keep_gt_first{}>reverse{}',
-  "2026-07-15": 'add_k{"k":1}>reverse{} ## first_letter_pos{}>mode{} ## min_normalize{}>add_k{"k":1}>keep_gt_k{"k":8} ## distinct_letters_map{}>add_k{"k":2}>first{}',
+  "2026-06-16": 'add_k{"k":9}>reverse{} ## keep_gt_k{"k":6}>sum{} ## min_normalize{}>affine{"a":3,"b":1}>keep_last_k{"k":3} ## deltas{}>running_total{}>keep_gt_k{"k":3}',
+  "2026-06-18": 'add_k{"k":1}>keep_last_k{"k":3} ## distinct_letters_map{}>keep_dups{} ## drop_last{}>rotate_left{}>units_digit{} ## running_total{}>add_k{"k":1}>keep_gt_k{"k":5}',
+  "2026-06-20": 'sub_k{"k":5}>keep_first_k{"k":2} ## add_k{"k":3}>keep_gt_k{"k":4}>keep_first_k{"k":4} ## mul_k{"k":3}>min_normalize{}>keep_dups{} ## running_total{}>every_other{}>range{}',
+  "2026-06-22": 'add_k{"k":8}>keep_last_k{"k":2} ## sub_k{"k":3}>keep_lt_k{"k":4}>keep_first_k{"k":2} ## length_map{}>add_k{"k":2}>keep_first_k{"k":2} ## first_letter_pos{}>keep_lt_k{"k":5}>min{}',
+  "2026-06-25": 'sub_k{"k":3}>sort_desc{} ## sub_k{"k":3}>drop_last{}>keep_lt_k{"k":7} ## units_digit{}>add_k{"k":9}>keep_odd{} ## deltas{}>keep_last_k{"k":3}>keep_lt_k{"k":5}',
+  "2026-06-28": 'add_k{"k":1}>drop_last{} ## sub_k{"k":2}>keep_odd{}>dedup{} ## keep_lt_k{"k":5}>add_k{"k":9}>mode{} ## add_k{"k":3}>digit_sum_map{}>add_k{"k":9}',
+  "2026-07-01": 'add_k{"k":1}>keep_first_k{"k":2} ## letter_count_squared{}>mul_k{"k":2} ## units_digit{}>keep_last_k{"k":4}>max{} ## affine{"a":2,"b":2}>digit_sum_map{}>keep_lt_k{"k":9}',
+  "2026-07-05": 'add_k{"k":5}>sort_asc{} ## add_k{"k":1}>keep_last_k{"k":3}>keep_gt_k{"k":8} ## mul_k{"k":3}>min_normalize{}>keep_odd{} ## dedup{}>deltas{}>keep_lt_k{"k":6}',
+  "2026-07-10": 'sub_k{"k":1}>drop_last{} ## sub_k{"k":2}>drop_last{}>keep_gt_k{"k":5} ## reverse{}>keep_gt_first{}>rotate_left{} ## reverse_digits{}>keep_gt_k{"k":5}>keep_first_k{"k":3}',
+  "2026-07-15": 'add_k{"k":1}>reverse{} ## keep_lt_k{"k":5}>keep_first_k{"k":2}>sum{} ## units_digit{}>keep_lt_k{"k":9}>keep_dups{} ## deltas{}>keep_lt_k{"k":9}>running_total{}',
 };
 
 /**
@@ -87,6 +88,10 @@ function machineValidates(machine: DayMachine): boolean {
 describe("behavior class table", () => {
   it("holds the pinned number of classes", () => {
     expect(behaviorClasses().size).toBe(EXPECTED_CLASS_COUNT);
+  });
+
+  it("holds the pinned number of word classes, guarding against a word universe blow up", () => {
+    expect(wordBehaviorClasses().size).toBe(EXPECTED_WORD_CLASS_COUNT);
   });
 
   it("holds the pinned class identity", () => {

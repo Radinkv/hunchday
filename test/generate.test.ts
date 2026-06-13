@@ -34,8 +34,8 @@ const NO_REPEAT_WINDOW = 89;
 const MS_PER_DAY = 86400000;
 
 const PINNED_SIGNATURES: Readonly<Record<string, string>> = {
-  "2026-06-20": 'sub_k{"k":5}>keep_first_k{"k":2} ## drop_first{}>keep_lt_k{"k":7}>affine{"a":3,"b":3} ## keep_odd{}>swap_ends{}>index_of_max{} ## reverse_digits{}>keep_gt_k{"k":5}>affine{"a":3,"b":1}',
-  "2026-07-01": 'add_k{"k":1}>keep_first_k{"k":2} ## letter_count_squared{}>mul_k{"k":2} ## add_k{"k":4}>every_other{}>every_other{} ## keep_gt_first{}>reverse_digits{}>sum{}',
+  "2026-06-20": 'sub_k{"k":5}>keep_first_k{"k":2} ## add_k{"k":3}>keep_gt_k{"k":4}>keep_first_k{"k":4} ## mul_k{"k":3}>min_normalize{}>keep_dups{} ## running_total{}>every_other{}>range{}',
+  "2026-07-01": 'add_k{"k":1}>keep_first_k{"k":2} ## letter_count_squared{}>mul_k{"k":2} ## units_digit{}>keep_last_k{"k":4}>max{} ## affine{"a":2,"b":2}>digit_sum_map{}>keep_lt_k{"k":9}',
 };
 
 /**

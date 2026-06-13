@@ -628,6 +628,7 @@ function buildMachine(
  */
 function drawerFor(rng: Rng, universe: Universe): (() => Value) | null {
   if (!universe.isWord) return () => drawNumList(rng);
+  if (ALL_LEXICON_NAMES.length === 0) return null;
   const lexicon = ALL_LEXICON_NAMES.at(rng.intInRange(0, ALL_LEXICON_NAMES.length - 1));
   if (!lexicon) return null;
   return () => drawWordList(rng, lexicon);

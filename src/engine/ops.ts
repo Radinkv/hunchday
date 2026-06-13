@@ -660,7 +660,10 @@ const REDUCER_OPS: readonly OpDef[] = [
   defNumListToNum({
     op: OP_SECOND_LARGEST,
     rung: 4,
-    apply: (input) => sortedDescending(input)[SECOND_RANK_INDEX],
+    apply: (input) => {
+      const ranked = sortedDescending(input);
+      return ranked[Math.min(SECOND_RANK_INDEX, ranked.length - 1)];
+    },
     isInteresting: (input) => input.length >= PAIR_LENGTH,
   }),
   defNumListToNum({

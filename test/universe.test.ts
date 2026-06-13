@@ -80,9 +80,9 @@ describe("behaviorClasses", () => {
 });
 
 describe("fingerprintWordSteps", () => {
-  it("gives behaviorally identical word pipelines the same fingerprint", () => {
-    expect(fingerprintWordSteps([step(OP_SORT_ALPHA), step(OP_LENGTH_MAP)])).toBe(
-      fingerprintWordSteps([step(OP_SORT_ALPHA), step(OP_LENGTH_MAP)]),
+  it("gives two different but behaviorally equivalent word pipelines the same fingerprint", () => {
+    expect(fingerprintWordSteps([step(OP_SORT_ALPHA), step(OP_SORT_ALPHA)])).toBe(
+      fingerprintWordSteps([step(OP_SORT_ALPHA)]),
     );
   });
 

@@ -93,9 +93,10 @@ const MAX_SURVIVORS_SOLVABLE = 2;
 
 /**
  * The smallest number of decoys a mystery slot needs to survive both examples, so a
- * simple but wrong theory still fits the examples and the player cannot be certain.
+ * simple but wrong theory still fits the examples and the player cannot be certain. The
+ * true rule is more complex than the decoy space and so is never counted here.
  */
-const MIN_SURVIVORS_MYSTERY = 1;
+const MIN_DECOY_SURVIVORS_MYSTERY = 1;
 
 /** The index of the first example, used when reading the example outputs. */
 const FIRST_EXAMPLE = 0;
@@ -412,7 +413,7 @@ function checkMysteryAmbiguity(
   if (!trapDecoy) return fail(REASON_NO_DECOY);
 
   const survivorsAfterBoth = survivorsAtExample(survivorsAfterFirst, snapshot.trueOutputs, SECOND_EXAMPLE);
-  if (survivorsAfterBoth.length < MIN_SURVIVORS_MYSTERY) return fail(REASON_NOT_AMBIGUOUS_ENOUGH);
+  if (survivorsAfterBoth.length < MIN_DECOY_SURVIVORS_MYSTERY) return fail(REASON_NOT_AMBIGUOUS_ENOUGH);
 
   const decoysAfterBoth = survivorsAfterBoth.filter((evaluation) => evaluation.fingerprint !== snapshot.trueFingerprint);
   const discrimination = checkDiscrimination(decoysAfterBoth, snapshot.trueOutputs, candidate.exampleInputs.length);
