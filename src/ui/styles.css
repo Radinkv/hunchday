@@ -220,28 +220,97 @@ main {
   margin: 0 0 12px;
 }
 
-.feedrow {
+/* The answer builder: the prediction tray, the applied trail, and the op palette. */
+.builder {
   display: flex;
-  gap: 8px;
+  flex-direction: column;
+  gap: 14px;
 }
 
-input[type="text"] {
-  flex: 1;
-  min-width: 0;
-  height: 48px;
-  padding: 0 14px;
-  font-size: 17px;
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
-  border: 1.5px solid var(--line);
+.tray {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  min-height: 46px;
+  padding: 9px 11px;
   border-radius: var(--r-control);
-  background: var(--card);
-  color: var(--ink);
+  background: var(--machine-soft);
+  border: 1px solid var(--machine-line);
 }
 
-input[type="text"]:focus {
-  outline: none;
-  border-color: var(--machine);
-  box-shadow: 0 0 0 3px var(--machine-soft);
+.tray .chip {
+  font-size: 15px;
+  padding: 5px 12px;
+  background: var(--card);
+  border-color: var(--machine-line);
+  color: var(--machine-ink);
+  animation: chip-in var(--base) var(--spring);
+}
+
+.trail {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  min-height: 28px;
+}
+
+.tempty {
+  font-size: 13px;
+  color: var(--ink-3);
+}
+
+.tstep {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 4px 3px 11px;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 13px;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r-chip);
+}
+
+.palette {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pgroup {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.plabel {
+  width: 100%;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.bactions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+@keyframes chip-in {
+  from {
+    transform: scale(0.82);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
 }
 
 button {
@@ -271,6 +340,53 @@ button.quiet {
   background: transparent;
   color: var(--machine);
   border: 1.5px solid var(--machine-line);
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* Palette tiles: calm by default, brand tinted on hover, at least a 44px tap target. */
+.tile {
+  height: 44px;
+  min-width: 44px;
+  padding: 0 13px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  background: var(--card);
+  border: 1.5px solid var(--line);
+}
+
+.tile:hover {
+  border-color: var(--machine-line);
+  background: var(--machine-soft);
+}
+
+/* The cycle and remove controls inside a trail step, sized down from the global button. */
+.tstep button {
+  height: 26px;
+  min-width: 26px;
+}
+
+.param {
+  padding: 2px 8px;
+  font-size: 13px;
+  font-weight: 600;
+  background: var(--machine);
+  border-radius: var(--r-chip);
+}
+
+.tx {
+  padding: 2px 7px;
+  font-size: 13px;
+  background: transparent;
+  color: var(--ink-3);
+}
+
+.tx:hover {
+  color: var(--amber);
 }
 
 .feedback {

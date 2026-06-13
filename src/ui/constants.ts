@@ -76,16 +76,32 @@ export const COPY_FEEDBACK_MORE = " One more to confirm you have it.";
 export const COPY_FEEDBACK_NOT_QUITE = "Not quite.";
 export const COPY_FEEDBACK_GAVE = " It actually gave that — added to your evidence.";
 
-/** Placeholder and labels for the prediction input. */
-export const COPY_INPUT_PLACEHOLDER = "type chips, space between";
-export const COPY_INPUT_LABEL = "Your prediction for the chips that come out";
+/** The label on the button that feeds the built prediction into the machine. */
 export const COPY_FEED_BUTTON = "Feed it";
+
+/** Class names and copy for the chip builder: the tray, the trail, and the palette. */
+export const CLASS_BUILDER = "builder";
+export const CLASS_TRAY = "tray";
+export const CLASS_TRAIL = "trail";
+export const CLASS_TRAIL_STEP = "tstep";
+export const CLASS_TRAIL_EMPTY = "tempty";
+export const CLASS_PARAM = "param";
+export const CLASS_STEP_REMOVE = "tx";
+export const CLASS_PALETTE = "palette";
+export const CLASS_PALETTE_GROUP = "pgroup";
+export const CLASS_PALETTE_LABEL = "plabel";
+export const CLASS_TILE = "tile";
+export const CLASS_BUILDER_ACTIONS = "bactions";
+
+export const COPY_TRAIL_EMPTY = "Tap operations below to transform the chips.";
+export const COPY_RESET = "Reset";
+export const COPY_TRAY_LABEL = "Your prediction so far";
+export const COPY_TRAIL_LABEL = "Operations you have applied";
+export const COPY_REMOVE_STEP_PREFIX = "Remove ";
+export const COPY_CYCLE_PARAM_PREFIX = "Change the value of ";
 
 /** Duration in milliseconds that the bot holds its chomp animation after a feed. */
 export const CHOMP_DURATION_MS = 180;
-
-/** The keyboard key that submits the current guess. */
-export const INPUT_KEY_ENTER = "Enter";
 
 /** Page level copy. */
 export const COPY_WORDMARK = "Hunchday";

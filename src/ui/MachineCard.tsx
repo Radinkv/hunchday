@@ -1,4 +1,5 @@
 import { useState, type ReactNode } from "react";
+import { ChipBuilder } from "./ChipBuilder";
 import { crackedCount, isLastMachine, shareText, tokenize } from "../game/reducer";
 import {
   FEEDBACK_CORRECT_MORE,
@@ -22,7 +23,6 @@ import {
   CLASS_CHOMP,
   CLASS_END_STATS,
   CLASS_EVIDENCE,
-  CLASS_FEED_ROW,
   CLASS_FEEDBACK,
   CLASS_FEEDBACK_NOPE,
   CLASS_FEEDBACK_OK,
@@ -44,14 +44,11 @@ import {
   COPY_END_STATS_MISSES,
   COPY_END_STATS_PREFIX,
   COPY_END_STATS_SUFFIX,
-  COPY_FEED_BUTTON,
   COPY_FEEDBACK_CORRECT,
   COPY_FEEDBACK_GAVE,
   COPY_FEEDBACK_MORE,
   COPY_FEEDBACK_NOT_QUITE,
   COPY_FEEDBACK_TWICE,
-  COPY_INPUT_LABEL,
-  COPY_INPUT_PLACEHOLDER,
   COPY_MACHINE_NAME_PREFIX,
   COPY_NEXT_MACHINE,
   COPY_PLAY_AGAIN,
@@ -62,7 +59,6 @@ import {
   COPY_SUBTITLE_CRACKED,
   COPY_SUBTITLE_PLAYING,
   COPY_SUBTITLE_REVEALED,
-  INPUT_KEY_ENTER,
   LIGHT_COLOR_CRACKED,
   LIGHT_COLOR_IDLE,
   LIGHT_COLOR_REVEALED,
@@ -84,11 +80,12 @@ export interface MachineHandlers {
  * @param props The chip string and the role that colors it.
  */
 function Chips({ value, role }: { readonly value: string; readonly role: ChipRole }) {
+  const cells = tokenize(value).map((token, index) => ({ token, key: index + ":" + token }));
   return (
     <>
-      {tokenize(value).map((token, index) => (
-        <span key={index} className={CLASS_CHIP + " " + role} aria-label={token}>
-          {token}
+      {cells.map((cell) => (
+        <span key={cell.key} className={CLASS_CHIP + " " + role} aria-label={cell.token}>
+          {cell.token}
         </span>
       ))}
     </>
@@ -227,7 +224,6 @@ export function MachineCard({
   readonly machines: readonly Machine[];
   readonly state: GameState;
 } & MachineHandlers) {
-  const [guess, setGuess] = useState("");
   const [chomping, setChomping] = useState(false);
 
   const machine = machines.at(state.machineIndex);
@@ -242,14 +238,11 @@ export function MachineCard({
   const lightColor = playing ? LIGHT_COLOR_IDLE : won ? LIGHT_COLOR_CRACKED : LIGHT_COLOR_REVEALED;
   const challengeInput = machine.ch.at(state.challengeIndex)?.[0] ?? "";
 
-  const submit = (): void => {
+  const handleFeed = (guess: string): void => {
     if (tokenize(guess).length === 0) return;
-    if (playing) {
-      setChomping(true);
-      setTimeout(() => setChomping(false), CHOMP_DURATION_MS);
-    }
+    setChomping(true);
+    setTimeout(() => setChomping(false), CHOMP_DURATION_MS);
     onFeed(guess);
-    setGuess("");
   };
 
   return (
@@ -275,21 +268,11 @@ export function MachineCard({
             <Chips value={challengeInput} role={CLASS_CHIP_INPUT} />
             {COPY_QUESTION_SUFFIX}
           </p>
-          <div className={CLASS_FEED_ROW}>
-            <input
-              type="text"
-              value={guess}
-              aria-label={COPY_INPUT_LABEL}
-              placeholder={COPY_INPUT_PLACEHOLDER}
-              autoComplete="off"
-              inputMode="text"
-              onChange={(event) => setGuess(event.target.value)}
-              onKeyDown={(event) => {
-                if (event.key === INPUT_KEY_ENTER) submit();
-              }}
-            />
-            <button onClick={submit}>{COPY_FEED_BUTTON}</button>
-          </div>
+          <ChipBuilder
+            key={state.machineIndex + ":" + state.challengeIndex}
+            challengeInput={challengeInput}
+            onFeed={handleFeed}
+          />
         </>
       )}
 
