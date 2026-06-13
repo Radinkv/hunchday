@@ -13,17 +13,20 @@ import {
   type Step,
 } from "./palette";
 import {
+  CLASS_BOTTOM,
   CLASS_BUILDER,
-  CLASS_BUILDER_ACTIONS,
+  CLASS_CLEAR,
+  CLASS_FEED,
   CLASS_FOLDER_ICON,
   CLASS_NO_MATCHES,
   CLASS_NUM_TAG,
   CLASS_PAGE,
   CLASS_PICKER,
   CLASS_PICKER_OP,
-  CLASS_QUIET_BUTTON,
   CLASS_RECIPE,
   CLASS_RECIPE_EMPTY,
+  CLASS_RECIPE_HEAD,
+  CLASS_RECIPE_HEAD_LABEL,
   CLASS_SEARCH,
   CLASS_STEP,
   CLASS_STEP_NUM,
@@ -215,7 +218,15 @@ export function ChipBuilder({
   };
 
   return (
-    <div className={CLASS_BUILDER}>
+    <div className={CLASS_BUILDER + " " + CLASS_BOTTOM}>
+      {steps.length > 0 ? (
+        <div className={CLASS_RECIPE_HEAD}>
+          <span className={CLASS_RECIPE_HEAD_LABEL}>{COPY_RECIPE_LABEL}</span>
+          <button type="button" className={CLASS_CLEAR} onClick={clear}>
+            {COPY_CLEAR}
+          </button>
+        </div>
+      ) : null}
       <ol className={CLASS_RECIPE} aria-label={COPY_RECIPE_LABEL} aria-live="polite">
         {steps.length === 0 ? <li className={CLASS_RECIPE_EMPTY}>{COPY_RECIPE_EMPTY}</li> : steps.map((element, index) => renderStep(element, index))}
       </ol>
@@ -266,16 +277,9 @@ export function ChipBuilder({
         </div>
       )}
 
-      <div className={CLASS_BUILDER_ACTIONS}>
-        {steps.length > 0 ? (
-          <button type="button" className={CLASS_QUIET_BUTTON} onClick={clear}>
-            {COPY_CLEAR}
-          </button>
-        ) : null}
-        <button type="button" onClick={feed}>
-          {COPY_FEED_BUTTON}
-        </button>
-      </div>
+      <button type="button" className={CLASS_FEED} onClick={feed}>
+        {COPY_FEED_BUTTON}
+      </button>
     </div>
   );
 }

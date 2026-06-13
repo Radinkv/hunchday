@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { ChipBuilder } from "./ChipBuilder";
 import { crackedCount, isLastMachine, shareText, tokenize } from "../game/reducer";
 import {
@@ -16,7 +16,7 @@ import {
   CHOMP_DURATION_MS,
   CLASS_ARROW,
   CLASS_BOT,
-  CLASS_CARD,
+  CLASS_BOTTOM,
   CLASS_CHIP,
   CLASS_CHIP_INPUT,
   CLASS_CHIP_OUTPUT,
@@ -27,8 +27,9 @@ import {
   CLASS_FEEDBACK_NOPE,
   CLASS_FEEDBACK_OK,
   CLASS_LIGHT,
-  CLASS_MACHINE_HEAD,
+  CLASS_MACHINE_CAPTION,
   CLASS_MACHINE_NAME,
+  CLASS_MACHINE_ZONE,
   CLASS_MACHINE_SUBTITLE,
   CLASS_QUESTION,
   CLASS_QUIET_BUTTON,
@@ -124,7 +125,7 @@ function Row({ row }: { readonly row: EvidenceRow }) {
  * Renders the bot, coloring its status light and squashing it while chomping.
  * @param props The light color and whether the bot is mid chomp.
  */
-function Bot({ lightColor, chomping }: { readonly lightColor: string; readonly chomping: boolean }) {
+export function Bot({ lightColor, chomping }: { readonly lightColor: string; readonly chomping: boolean }) {
   return (
     <svg
       className={CLASS_BOT + (chomping ? " " + CLASS_CHOMP : "")}
@@ -237,6 +238,11 @@ export function MachineCard({
   readonly state: GameState;
 } & MachineHandlers) {
   const [chomping, setChomping] = useState(false);
+  const logRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const log = logRef.current;
+    if (log) log.scrollTop = log.scrollHeight;
+  }, [state.evidence.length]);
 
   const machine = machines.at(state.machineIndex);
   if (!machine) return null;
@@ -271,16 +277,24 @@ export function MachineCard({
   const evidenceKeyCounts = new Map<string, number>();
 
   return (
-    <div className={CLASS_CARD}>
-      <div className={CLASS_MACHINE_HEAD}>
+    <>
+      <section className={CLASS_MACHINE_ZONE}>
         <Bot lightColor={lightColor} chomping={chomping} />
-        <div>
-          <div className={CLASS_MACHINE_NAME}>{machineName}</div>
-          <div className={CLASS_MACHINE_SUBTITLE}>{subtitle}</div>
+        <div className={CLASS_MACHINE_CAPTION}>
+          <span className={CLASS_MACHINE_NAME}>{machineName}</span>
+          <span className={CLASS_MACHINE_SUBTITLE}>{subtitle}</span>
         </div>
-      </div>
+      </section>
 
-      <div className={CLASS_EVIDENCE} aria-live="polite" aria-label="Evidence so far">
+      {playing && (
+        <p className={CLASS_QUESTION}>
+          {COPY_QUESTION_PREFIX}
+          <Chips value={challengeInput} role={CLASS_CHIP_INPUT} />
+          {COPY_QUESTION_SUFFIX}
+        </p>
+      )}
+
+      <div ref={logRef} className={CLASS_EVIDENCE} aria-live="polite" aria-label="Evidence so far">
         {state.evidence.map((row) => {
           const baseKey = row.input + KEY_SEPARATOR_ARROW + row.output + KEY_SEPARATOR_PIPE + (row.mark ?? "");
           const seenCount = evidenceKeyCounts.get(baseKey) ?? 0;
@@ -291,23 +305,14 @@ export function MachineCard({
         })}
       </div>
 
-      {playing && (
-        <>
-          <p className={CLASS_QUESTION}>
-            {COPY_QUESTION_PREFIX}
-            <Chips value={challengeInput} role={CLASS_CHIP_INPUT} />
-            {COPY_QUESTION_SUFFIX}
-          </p>
-          <ChipBuilder key={state.machineIndex} challengeInput={challengeInput} onFeed={handleFeed} />
-        </>
-      )}
-
       <p className={CLASS_FEEDBACK} aria-live="polite">
         {feedbackContent(state.feedback)}
       </p>
 
-      {!playing && (
-        <div className={CLASS_RULE_BOX}>
+      {playing ? (
+        <ChipBuilder key={state.machineIndex} challengeInput={challengeInput} onFeed={handleFeed} />
+      ) : (
+        <div className={CLASS_BOTTOM + " " + CLASS_RULE_BOX}>
           <RuleBanner won={won} rule={machine.rule} />
           {isLastMachine(state, machines) ? (
             <EndScreen state={state} machines={machines} onRestart={onRestart} />
@@ -316,6 +321,6 @@ export function MachineCard({
           )}
         </div>
       )}
-    </div>
+    </>
   );
 }

@@ -3,7 +3,7 @@ import { afterEach, describe, expect, it } from "vitest";
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { App } from "../src/ui/App";
 import type { Machine } from "../src/game/types";
-import { COPY_FEED_BUTTON, COPY_RULE_CRACKED_LABEL, COPY_WORDMARK } from "../src/ui/constants";
+import { COPY_FEED_BUTTON, COPY_PLAY, COPY_RULE_CRACKED_LABEL, COPY_WORDMARK } from "../src/ui/constants";
 
 /**
  * These tests cover the React interface end to end over the pure reducer, driving the
@@ -44,7 +44,17 @@ const WORD_MACHINE: Machine = {
   ],
 };
 
-afterEach(cleanup);
+afterEach(() => {
+  cleanup();
+  localStorage.clear();
+});
+
+/**
+ * Presses Play to start a fresh game from the intro.
+ */
+function play(): void {
+  fireEvent.click(screen.getByRole("button", { name: COPY_PLAY }));
+}
 
 /**
  * Switches to the named tab, pulls the operation into the recipe, and feeds it.
@@ -65,9 +75,12 @@ function feedAgain(): void {
 }
 
 describe("App", () => {
-  it("renders the wordmark, the first machine, and its example chips", () => {
+  it("shows the intro, then the first machine after pressing Play", () => {
     render(<App machines={[NUMBER_MACHINE]} />);
     expect(screen.getByText(COPY_WORDMARK)).toBeTruthy();
+    expect(screen.queryByText(/What comes out for/)).toBeNull();
+
+    play();
     expect(screen.getByText("Machine 01")).toBeTruthy();
     expect(screen.getByText(/What comes out for/)).toBeTruthy();
     expect(screen.getAllByText("1").length).toBeGreaterThan(0);
@@ -75,6 +88,7 @@ describe("App", () => {
 
   it("cracks a number machine when a matching recipe is proven twice", () => {
     const { container } = render(<App machines={[NUMBER_MACHINE]} />);
+    play();
     pullOutAndFeed(TAB_MATH, MULTIPLY_OP);
     feedAgain();
     expect(container.textContent).toContain(COPY_RULE_CRACKED_LABEL + MULTIPLY_RULE);
@@ -82,8 +96,20 @@ describe("App", () => {
 
   it("cracks a word machine when a matching recipe is proven twice", () => {
     const { container } = render(<App machines={[WORD_MACHINE]} />);
+    play();
     pullOutAndFeed(TAB_LETTERS, LETTERS_OP);
     feedAgain();
     expect(container.textContent).toContain(COPY_RULE_CRACKED_LABEL + LETTERS_RULE);
+  });
+
+  it("resumes the saved game on reload instead of showing the intro", () => {
+    const first = render(<App machines={[NUMBER_MACHINE]} />);
+    play();
+    pullOutAndFeed(TAB_MATH, MULTIPLY_OP);
+    first.unmount();
+
+    render(<App machines={[NUMBER_MACHINE]} />);
+    expect(screen.queryByRole("button", { name: COPY_PLAY })).toBeNull();
+    expect(screen.getByText(/What comes out for/)).toBeTruthy();
   });
 });
