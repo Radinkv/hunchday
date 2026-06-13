@@ -1,9 +1,20 @@
 import { describe, expect, it } from "vitest";
-import { getOp, OP_AFFINE, OP_LENGTH_MAP, OP_MUL_K, OP_REVERSE, OP_SORT_ALPHA, OP_SUM } from "../src/engine/ops";
+import {
+  getOp,
+  OP_AFFINE,
+  OP_KEEP_FIRST_K,
+  OP_LENGTH_MAP,
+  OP_MAX,
+  OP_MUL_K,
+  OP_REVERSE,
+  OP_SORT_ALPHA,
+  OP_SUM,
+} from "../src/engine/ops";
 import { TYPE_NUM, TYPE_NUM_LIST, TYPE_WORD_LIST } from "../src/engine/ops-types";
 import {
   groupedTilesForType,
   OP_TILES,
+  searchTiles,
   SECTION_NUMBERS,
   SECTION_VOCAB,
   sectionForType,
@@ -76,5 +87,27 @@ describe("groups follow the chip type", () => {
   it("offers no groups once the chips reduce to a single terminal value", () => {
     expect(sectionForType(TYPE_NUM)).toBeNull();
     expect(groupedTilesForType(TYPE_NUM)).toHaveLength(0);
+  });
+});
+
+describe("searching operations", () => {
+  it("finds an operation by a synonym within the section", () => {
+    const hits = searchTiles(TYPE_NUM_LIST, "double");
+    expect(hits.some((tile) => tile.opId === OP_MUL_K.id)).toBe(true);
+    expect(hits.every((tile) => tile.section === SECTION_NUMBERS)).toBe(true);
+  });
+
+  it("ranks a closer match ahead of a looser one", () => {
+    const hits = searchTiles(TYPE_NUM_LIST, "biggest");
+    expect(hits.at(0)?.opId).toBe(OP_MAX.id);
+  });
+
+  it("matches a whole tab by its label", () => {
+    const hits = searchTiles(TYPE_NUM_LIST, "keep");
+    expect(hits.some((tile) => tile.opId === OP_KEEP_FIRST_K.id)).toBe(true);
+  });
+
+  it("returns nothing for a blank query", () => {
+    expect(searchTiles(TYPE_NUM_LIST, "   ")).toHaveLength(0);
   });
 });

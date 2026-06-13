@@ -255,17 +255,18 @@ main {
   animation: step-in var(--base) var(--ease-out);
 }
 
+/* The step ordinal: muted, so the interactive number tag is the only emphasized circle. */
 .stepnum {
   flex: 0 0 auto;
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   display: grid;
   place-items: center;
   border-radius: var(--r-chip);
-  background: var(--machine);
-  color: #fff;
-  font-size: 12px;
-  font-weight: 700;
+  border: 1px solid var(--machine-line);
+  color: var(--ink-3);
+  font-size: 11px;
+  font-weight: 600;
 }
 
 .steptext {
@@ -274,27 +275,29 @@ main {
   color: var(--machine-ink);
 }
 
-.stepper {
-  flex: 0 0 auto;
+/* The modifiable number in a step: a small circular tag whose ring says it is tappable. */
+.numtag {
   display: inline-flex;
-  gap: 4px;
-}
-
-.stepperbtn {
-  height: 36px;
-  min-width: 36px;
-  padding: 0;
-  font-size: 18px;
+  align-items: center;
+  justify-content: center;
+  height: 26px;
+  min-width: 26px;
+  padding: 0 7px;
+  margin: 0 1px;
+  vertical-align: middle;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 13px;
   font-weight: 700;
-  color: var(--machine);
+  color: var(--machine-ink);
   background: var(--card);
-  border: 1.5px solid var(--machine-line);
+  border: 1.5px solid var(--machine);
+  border-radius: var(--r-chip);
 }
 
 .stepx {
   flex: 0 0 auto;
-  height: 36px;
-  min-width: 36px;
+  height: 32px;
+  min-width: 32px;
   padding: 0;
   font-size: 13px;
   color: var(--ink-3);
@@ -305,55 +308,112 @@ main {
   color: var(--amber);
 }
 
-.addstep {
-  align-self: flex-start;
-  color: var(--machine);
-  background: transparent;
-  border: 1.5px dashed var(--machine-line);
-}
-
+/* The operations drawer: a search box over a manila folder with tabs. */
 .picker {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-top: 10px;
-  padding: 12px;
+}
+
+.search {
+  width: 100%;
+  height: 44px;
+  padding: 0 14px;
+  margin-bottom: 8px;
+  font-family: inherit;
+  font-size: 15px;
+  color: var(--ink);
+  background: var(--card);
   border: 1px solid var(--line);
   border-radius: var(--r-control);
-  background: var(--paper);
-  animation: step-in var(--base) var(--ease-out);
 }
 
-.pickgroup {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 6px;
-}
-
-.picklabel {
-  flex-basis: 100%;
-  font-size: 11px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+.search::placeholder {
   color: var(--ink-3);
 }
 
+.search:focus-visible {
+  outline: 3px solid var(--machine-soft);
+  outline-offset: 2px;
+  border-color: var(--machine-line);
+}
+
+.nomatch {
+  margin: 0;
+  padding: 14px 12px;
+  font-size: 14px;
+  text-align: center;
+  color: var(--ink-3);
+  border: 1px dashed var(--line);
+  border-radius: var(--r-control);
+}
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 3px;
+  padding-left: 2px;
+}
+
+.foldericon {
+  flex: 0 0 auto;
+  align-self: center;
+  margin-right: 6px;
+  color: var(--machine);
+}
+
+.tab {
+  height: 36px;
+  min-width: 0;
+  padding: 0 13px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-2);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-bottom: none;
+  border-radius: var(--r-control) var(--r-control) 0 0;
+}
+
+.tab:hover {
+  color: var(--ink);
+}
+
+.tab.on {
+  color: var(--machine);
+  background: var(--card);
+  border-color: var(--machine-line);
+}
+
+.page {
+  list-style: none;
+  margin: 0;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border: 1px solid var(--machine-line);
+  border-radius: 0 var(--r-control) var(--r-control) var(--r-control);
+  background: var(--card);
+}
+
 .pickop {
+  width: 100%;
   height: auto;
   min-height: 44px;
-  padding: 8px 13px;
-  font-size: 14px;
-  font-weight: 500;
+  padding: 10px 12px;
   text-align: left;
+  font-size: 15px;
+  font-weight: 400;
   color: var(--ink);
-  background: var(--card);
-  border: 1.5px solid var(--line);
+  background: transparent;
+  border: none;
+  border-radius: var(--r-control);
 }
 
 .pickop:hover {
-  border-color: var(--machine-line);
   background: var(--machine-soft);
+  color: var(--machine-ink);
 }
 
 .terminal {

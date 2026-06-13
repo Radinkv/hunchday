@@ -78,35 +78,37 @@ export const COPY_FEEDBACK_GAVE = " It actually gave that — added to your evid
 /** The label on the button that feeds the built prediction into the machine. */
 export const COPY_FEED_BUTTON = "Feed it";
 
-/** Class names for the recipe builder: the step list, the op picker, and the steppers. */
+/** Class names for the recipe builder: the step list, the tabbed folder, and the tags. */
 export const CLASS_BUILDER = "builder";
 export const CLASS_RECIPE = "recipe";
 export const CLASS_RECIPE_EMPTY = "recipeempty";
 export const CLASS_STEP = "step";
 export const CLASS_STEP_NUM = "stepnum";
 export const CLASS_STEP_TEXT = "steptext";
-export const CLASS_STEPPER = "stepper";
-export const CLASS_STEPPER_BUTTON = "stepperbtn";
 export const CLASS_STEP_REMOVE = "stepx";
-export const CLASS_ADD_STEP = "addstep";
+export const CLASS_NUM_TAG = "numtag";
 export const CLASS_PICKER = "picker";
-export const CLASS_PICKER_GROUP = "pickgroup";
-export const CLASS_PICKER_GROUP_LABEL = "picklabel";
+export const CLASS_SEARCH = "search";
+export const CLASS_NO_MATCHES = "nomatch";
+export const CLASS_FOLDER_ICON = "foldericon";
+export const CLASS_TABS = "tabs";
+export const CLASS_TAB = "tab";
+export const CLASS_TAB_ACTIVE = "on";
+export const CLASS_PAGE = "page";
 export const CLASS_PICKER_OP = "pickop";
 export const CLASS_TERMINAL_HINT = "terminal";
 export const CLASS_BUILDER_ACTIONS = "bactions";
 
-/** Copy for the recipe builder: the labels, the empty hint, and the step controls. */
+/** Copy for the recipe builder: the labels, the hints, and the step controls. */
 export const COPY_RECIPE_LABEL = "Your recipe";
 export const COPY_RECIPE_EMPTY = "Write a recipe you think the machine follows.";
-export const COPY_ADD_STEP = "Add a step";
-export const COPY_PICKER_LABEL = "Choose a step to add";
+export const COPY_PICKER_LABEL = "Operations to add";
+export const COPY_SEARCH_LABEL = "Search operations";
+export const COPY_SEARCH_PLACEHOLDER = "Search operations…";
+export const COPY_NO_MATCHES = "Nothing matches that. Try a tab, or different words.";
 export const COPY_TERMINAL_HINT = "Your recipe ends on a single chip. Feed it.";
 export const COPY_CLEAR = "Clear";
-export const COPY_PARAM_DOWN = "−";
-export const COPY_PARAM_UP = "+";
-export const COPY_PARAM_DOWN_PREFIX = "Use a smaller number in step ";
-export const COPY_PARAM_UP_PREFIX = "Use a bigger number in step ";
+export const COPY_NUMBER_TAG_PREFIX = "Change the number in step ";
 export const COPY_REMOVE_FROM_PREFIX = "Remove from step ";
 export const COPY_STEP_REMOVE_GLYPH = "✕";
 

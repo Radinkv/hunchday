@@ -3,7 +3,7 @@ import { afterEach, describe, expect, it } from "vitest";
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { App } from "../src/ui/App";
 import type { Machine } from "../src/game/types";
-import { COPY_ADD_STEP, COPY_FEED_BUTTON, COPY_RULE_CRACKED_LABEL, COPY_WORDMARK } from "../src/ui/constants";
+import { COPY_FEED_BUTTON, COPY_RULE_CRACKED_LABEL, COPY_WORDMARK } from "../src/ui/constants";
 
 /**
  * These tests cover the React interface end to end over the pure reducer, driving the
@@ -16,6 +16,7 @@ import { COPY_ADD_STEP, COPY_FEED_BUTTON, COPY_RULE_CRACKED_LABEL, COPY_WORDMARK
 
 const MULTIPLY_RULE = "It multiplies every chip by 2.";
 const MULTIPLY_OP = "multiplies every chip by 2";
+const TAB_MATH = "Math";
 const NUMBER_MACHINE: Machine = {
   rule: MULTIPLY_RULE,
   ex: [
@@ -30,6 +31,7 @@ const NUMBER_MACHINE: Machine = {
 
 const LETTERS_RULE = "It counts the letters in every chip.";
 const LETTERS_OP = "counts the letters in every chip";
+const TAB_LETTERS = "Letters";
 const WORD_MACHINE: Machine = {
   rule: LETTERS_RULE,
   ex: [
@@ -45,11 +47,12 @@ const WORD_MACHINE: Machine = {
 afterEach(cleanup);
 
 /**
- * Opens the picker, adds the named operation to the recipe, and feeds it.
- * @param operation The accessible name of the operation in the picker.
+ * Switches to the named tab, pulls the operation into the recipe, and feeds it.
+ * @param tab The tab heading holding the operation.
+ * @param operation The operation phrase to pull out.
  */
-function addStepAndFeed(operation: string): void {
-  fireEvent.click(screen.getByRole("button", { name: COPY_ADD_STEP }));
+function pullOutAndFeed(tab: string, operation: string): void {
+  fireEvent.click(screen.getByRole("tab", { name: tab }));
   fireEvent.click(screen.getByRole("button", { name: operation }));
   fireEvent.click(screen.getByRole("button", { name: COPY_FEED_BUTTON }));
 }
@@ -72,14 +75,14 @@ describe("App", () => {
 
   it("cracks a number machine when a matching recipe is proven twice", () => {
     const { container } = render(<App machines={[NUMBER_MACHINE]} />);
-    addStepAndFeed(MULTIPLY_OP);
+    pullOutAndFeed(TAB_MATH, MULTIPLY_OP);
     feedAgain();
     expect(container.textContent).toContain(COPY_RULE_CRACKED_LABEL + MULTIPLY_RULE);
   });
 
   it("cracks a word machine when a matching recipe is proven twice", () => {
     const { container } = render(<App machines={[WORD_MACHINE]} />);
-    addStepAndFeed(LETTERS_OP);
+    pullOutAndFeed(TAB_LETTERS, LETTERS_OP);
     feedAgain();
     expect(container.textContent).toContain(COPY_RULE_CRACKED_LABEL + LETTERS_RULE);
   });
