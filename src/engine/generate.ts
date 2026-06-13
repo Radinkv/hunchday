@@ -41,9 +41,8 @@ import {
   OP_SORT_ALPHA,
   OP_SUM,
   OP_VOWEL_COUNT_MAP,
-  type OpMeta,
-  type Value,
 } from "./ops";
+import type { OpMeta, Value } from "./ops-types";
 import { phrasePipeline } from "./phrase";
 import { behaviorClasses, fingerprintOfSteps, type BehaviorClass } from "./universe";
 import {

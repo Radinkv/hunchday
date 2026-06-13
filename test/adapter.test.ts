@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { machinesForDate, todayDate } from "../src/prototype/adapter";
-import { feed, startGame } from "../src/prototype/reducer";
+import { machinesForDate, todayDate } from "../src/game/adapter";
+import { feed, startGame } from "../src/game/reducer";
 
 /**
  * These tests cover the bridge from the generated day to the prototype reducer. They

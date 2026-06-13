@@ -18,7 +18,8 @@
  */
 
 import { compose, execute, type PipelineStep } from "./compose";
-import { getOp, TYPE_NUM_LIST, type Value } from "./ops";
+import { getOp } from "./ops";
+import { TYPE_NUM_LIST, type Value } from "./ops-types";
 import { phrasePipeline } from "./phrase";
 import { behaviorClasses, complexityOf, fingerprintOfSteps, isStrictlySimpler } from "./universe";
 

@@ -16,7 +16,8 @@
  * same pipeline on the same input always yields the same result.
  */
 
-import { getOp, type OpDef, type OpMeta, type Params, type Value, type ValueType } from "./ops";
+import { getOp } from "./ops";
+import type { OpDef, OpMeta, Params, Value, ValueType } from "./ops-types";
 
 /** One step of a pipeline: the operation to apply and the parameters bound to it. */
 export interface PipelineStep {

@@ -1,0 +1,354 @@
+/* Light tokens. Color carries state, never decoration. */
+:root {
+  --paper: #faf9f6;
+  --card: #ffffff;
+  --line: #e7e5df;
+  --ink: #1b1a20;
+  --ink-2: #5c5b63;
+  --ink-3: #9c9ba3;
+  --machine: #44418f;
+  --machine-soft: #edecfa;
+  --machine-line: #cfcdf2;
+  --machine-ink: #2e2b6b;
+  --amber: #b97a1c;
+  --amber-soft: #faeeda;
+  --amber-line: #ebcd96;
+  --amber-ink: #4a2e05;
+  --green: #0f6e56;
+  --green-soft: #e1f5ee;
+  --green-ink: #06432f;
+
+  --r-control: 10px;
+  --r-card: 14px;
+  --r-chip: 999px;
+  --fast: 120ms;
+  --base: 200ms;
+  --feature: 320ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --shadow-card: 0 1px 2px rgba(27, 26, 32, 0.04), 0 6px 24px rgba(27, 26, 32, 0.06);
+}
+
+/* Dark tokens. Required at launch; the puzzle flips at local midnight. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #131217;
+    --card: #1c1b22;
+    --line: #2c2b33;
+    --ink: #edeceF;
+    --ink-2: #a6a5ae;
+    --ink-3: #6e6d77;
+    --machine: #8b87e8;
+    --machine-soft: #2a2840;
+    --machine-line: #3c3a5c;
+    --machine-ink: #c9c6f2;
+    --amber: #d69a45;
+    --amber-soft: #3a2e18;
+    --amber-line: #5a4a28;
+    --amber-ink: #f2d9a8;
+    --green: #4fb89a;
+    --green-soft: #16382e;
+    --green-ink: #cdefe2;
+    --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 28px rgba(0, 0, 0, 0.45);
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 15px;
+  line-height: 1.55;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px 16px 48px;
+}
+
+header {
+  text-align: center;
+  margin: 8px 0 20px;
+}
+
+h1 {
+  font-family: "Bricolage Grotesque", system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+header p {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+
+main {
+  width: 100%;
+  max-width: 440px;
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: var(--r-chip);
+  border: 1.5px solid var(--ink-3);
+  background: transparent;
+  transition: background-color var(--base) var(--ease-out), border-color var(--base) var(--ease-out);
+}
+
+.dot.now {
+  border-color: var(--machine);
+  background: var(--machine-soft);
+}
+
+.dot.crack {
+  border-color: var(--green);
+  background: var(--green);
+}
+
+.dot.open {
+  border-color: var(--amber);
+  background: var(--amber);
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  padding: 16px 16px 20px;
+  box-shadow: var(--shadow-card);
+}
+
+.mhead {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.mname {
+  font-family: "Bricolage Grotesque", system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+}
+
+.msub {
+  font-size: 13px;
+  color: var(--ink-2);
+  margin-top: 1px;
+}
+
+.bot {
+  flex: 0 0 auto;
+  transition: transform var(--fast) var(--ease-out);
+}
+
+.bot.chomp {
+  transform: translateY(4px) scaleY(0.9);
+}
+
+.evidence {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 8px 10px;
+  border-radius: var(--r-control);
+  background: var(--paper);
+  border: 1px solid transparent;
+}
+
+.row.miss {
+  border-color: var(--amber-line);
+}
+
+.row.hit {
+  border-color: var(--green-soft);
+}
+
+.chip {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-weight: 500;
+  font-size: 13px;
+  padding: 3px 9px;
+  border-radius: var(--r-chip);
+  border: 1px solid;
+}
+
+.chip.in {
+  background: var(--machine-soft);
+  border-color: var(--machine-line);
+  color: var(--machine-ink);
+}
+
+.chip.out {
+  background: var(--amber-soft);
+  border-color: var(--amber-line);
+  color: var(--amber-ink);
+}
+
+.arrow {
+  color: var(--ink-3);
+  font-size: 15px;
+  margin: 0 2px;
+}
+
+.question {
+  font-size: 15px;
+  margin: 0 0 12px;
+}
+
+.feedrow {
+  display: flex;
+  gap: 8px;
+}
+
+input[type="text"] {
+  flex: 1;
+  min-width: 0;
+  height: 48px;
+  padding: 0 14px;
+  font-size: 17px;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  border: 1.5px solid var(--line);
+  border-radius: var(--r-control);
+  background: var(--card);
+  color: var(--ink);
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: var(--machine);
+  box-shadow: 0 0 0 3px var(--machine-soft);
+}
+
+button {
+  height: 48px;
+  min-width: 48px;
+  padding: 0 18px;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--r-control);
+  background: var(--machine);
+  color: #fff;
+  cursor: pointer;
+  transition: transform var(--fast) var(--ease-out);
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+button:focus-visible {
+  outline: 3px solid var(--machine-soft);
+  outline-offset: 2px;
+}
+
+button.quiet {
+  background: transparent;
+  color: var(--machine);
+  border: 1.5px solid var(--machine-line);
+}
+
+.feedback {
+  min-height: 22px;
+  font-size: 13px;
+  margin: 12px 0 0;
+  color: var(--ink-2);
+}
+
+.feedback .ok {
+  color: var(--green);
+  font-weight: 600;
+}
+
+.feedback .nope {
+  color: var(--amber);
+  font-weight: 600;
+}
+
+.rulebox {
+  margin-top: 12px;
+}
+
+.rule {
+  border-radius: var(--r-control);
+  padding: 12px 13px;
+  font-size: 15px;
+}
+
+.rule.crack {
+  background: var(--green-soft);
+  color: var(--green-ink);
+}
+
+.rule.open {
+  background: var(--amber-soft);
+  color: var(--amber-ink);
+}
+
+.rule b {
+  font-family: "Bricolage Grotesque", system-ui, sans-serif;
+}
+
+.endstats {
+  font-size: 17px;
+  margin: 4px 0 12px;
+}
+
+.share {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 13px;
+  white-space: pre-wrap;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r-control);
+  padding: 10px 12px;
+  margin-bottom: 10px;
+}
+
+footer {
+  margin-top: 20px;
+  font-size: 13px;
+  color: var(--ink-3);
+  text-align: center;
+}
+
+.light {
+  transition: fill var(--base) var(--ease-out);
+}
+
+/* All movement collapses to a near instant change when motion is not wanted. */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition-duration: 1ms !important;
+    animation-duration: 1ms !important;
+  }
+
+  .bot.chomp {
+    transform: none;
+  }
+}

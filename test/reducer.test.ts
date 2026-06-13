@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { MACHINES } from "../src/prototype/machines";
+import { MACHINES } from "../src/game/machines";
 import {
   crackedCount,
   feed,
@@ -8,7 +8,7 @@ import {
   shareText,
   startGame,
   tokenize,
-} from "../src/prototype/reducer";
+} from "../src/game/reducer";
 import {
   FEEDBACK_CORRECT_MORE,
   FEEDBACK_CORRECT_TWICE,
@@ -20,7 +20,7 @@ import {
   PHASE_REVEALED,
   type GameState,
   type Machine,
-} from "../src/prototype/types";
+} from "../src/game/types";
 import {
   EMOJI_CRACKED,
   SHARE_COUNT_SEPARATOR,
@@ -29,7 +29,7 @@ import {
   SHARE_LINE_BREAK,
   SHARE_MISS_SUFFIX,
   SHARE_STAT_SEPARATOR,
-} from "../src/prototype/constants";
+} from "../src/game/constants";
 
 /**
  * These tests pin the reducer to the exact behavior of the prototype's original feed

@@ -3,110 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mystery Machine</title>
+<meta name="color-scheme" content="light dark">
+<title>Hunchday</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --paper:#F7F6F2; --card:#FFFFFF; --ink:#1C1B22; --ink-2:#5F5E66; --ink-3:#9A99A2;
-    --machine:#44418F; --machine-soft:#EDEDFB; --machine-line:#C9C7EE;
-    --token:#B97A1C; --token-soft:#FAEEDA; --token-line:#EBCD96; --token-ink:#4A2E05;
-    --good:#0F6E56; --good-soft:#E1F5EE;
-    --line:#E4E2DC; --radius:14px;
-  }
-  *{box-sizing:border-box}
-  body{margin:0; background:var(--paper); color:var(--ink);
-    font-family:system-ui,-apple-system,"Segoe UI",sans-serif; font-size:16px; line-height:1.55;
-    display:flex; flex-direction:column; align-items:center; min-height:100vh; padding:20px 16px 48px;}
-  header{text-align:center; margin:8px 0 18px;}
-  h1{font-family:"Bricolage Grotesque",system-ui,sans-serif; font-weight:800; font-size:26px;
-    letter-spacing:-0.02em; margin:0;}
-  header p{margin:2px 0 0; font-size:13px; color:var(--ink-2);}
-  main{width:100%; max-width:440px;}
-  .dots{display:flex; justify-content:center; gap:7px; margin-bottom:14px;}
-  .dot{width:9px; height:9px; border-radius:50%; border:1.5px solid var(--ink-3); background:transparent;}
-  .dot.now{border-color:var(--machine); background:var(--machine-soft);}
-  .dot.crack{border-color:var(--good); background:var(--good);}
-  .dot.open{border-color:var(--token); background:var(--token);}
-  .card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
-    padding:18px 18px 20px;}
-  .mhead{display:flex; align-items:center; gap:12px; margin-bottom:14px;}
-  .mname{font-family:"Bricolage Grotesque",system-ui,sans-serif; font-weight:600; font-size:17px;}
-  .msub{font-size:12.5px; color:var(--ink-2); margin-top:1px;}
-  .bot{flex:0 0 auto; transition:transform .18s ease;}
-  .bot.chomp{transform:translateY(3px) scale(.96);}
-  .evidence{display:flex; flex-direction:column; gap:7px; margin-bottom:16px;}
-  .row{display:flex; align-items:center; flex-wrap:wrap; gap:6px; padding:8px 10px;
-    border-radius:10px; background:var(--paper);}
-  .row.miss{outline:1px dashed var(--token-line); outline-offset:-1px;}
-  .row.hit{outline:1px dashed #9FD8C6; outline-offset:-1px;}
-  .chip{font-family:"IBM Plex Mono",ui-monospace,monospace; font-weight:500; font-size:13.5px;
-    padding:3px 9px; border-radius:999px; border:1px solid;}
-  .chip.in{background:var(--machine-soft); border-color:var(--machine-line); color:#2E2B6B;}
-  .chip.out{background:var(--token-soft); border-color:var(--token-line); color:var(--token-ink);}
-  .arrow{color:var(--ink-3); font-size:14px; margin:0 2px;}
-  .question{font-size:15px; margin:0 0 10px;}
-  .question .chip{font-size:14px;}
-  .feedrow{display:flex; gap:8px;}
-  input[type=text]{flex:1; min-width:0; height:46px; padding:0 14px; font-size:16px;
-    font-family:"IBM Plex Mono",ui-monospace,monospace;
-    border:1.5px solid var(--line); border-radius:11px; background:var(--card); color:var(--ink);}
-  input[type=text]:focus{outline:none; border-color:var(--machine); box-shadow:0 0 0 3px var(--machine-soft);}
-  button{height:46px; padding:0 18px; font-size:15px; font-weight:600; border:none;
-    border-radius:11px; background:var(--machine); color:#fff; cursor:pointer;}
-  button:active{transform:scale(.97);}
-  button:focus-visible{outline:3px solid var(--machine-soft); outline-offset:2px;}
-  button.quiet{background:transparent; color:var(--machine); border:1.5px solid var(--machine-line);}
-  .feedback{min-height:22px; font-size:13.5px; margin:10px 0 0; color:var(--ink-2);}
-  .feedback .ok{color:var(--good); font-weight:600;}
-  .feedback .nope{color:var(--token); font-weight:600;}
-  .rulebox{margin-top:12px;}
-  .rule{border-radius:11px; padding:11px 13px; font-size:14px;}
-  .rule.crack{background:var(--good-soft); color:#06432F;}
-  .rule.open{background:var(--token-soft); color:var(--token-ink);}
-  .rule b{font-family:"Bricolage Grotesque",system-ui,sans-serif;}
-  .endstats{font-size:15px; margin:4px 0 12px;}
-  .share{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:13px; white-space:pre-wrap;
-    background:var(--paper); border:1px solid var(--line); border-radius:10px; padding:10px 12px; margin-bottom:10px;}
-  footer{margin-top:20px; font-size:12px; color:var(--ink-3); text-align:center;}
-  .light{transition:fill .2s;}
-  @media (prefers-reduced-motion: reduce){ .bot{transition:none} .bot.chomp{transform:none} }
-</style>
 </head>
 <body>
-<header>
-  <h1>Mystery machine</h1>
-  <p>Figure out what each machine does. Prove it twice.</p>
-</header>
-<main>
-  <div class="dots" id="dots"></div>
-  <div class="card">
-    <div class="mhead">
-      <svg class="bot" id="bot" width="46" height="42" viewBox="0 0 46 42" aria-hidden="true">
-        <rect x="4" y="8" width="38" height="28" rx="8" fill="#44418F"/>
-        <rect x="11" y="16" width="24" height="7" rx="3.5" fill="#EDEDFB"/>
-        <circle class="light" id="light" cx="23" cy="30" r="2.6" fill="#C9C7EE"/>
-        <rect x="20" y="2" width="6" height="6" rx="2" fill="#44418F"/>
-        <rect x="0" y="18" width="5" height="9" rx="2.5" fill="#44418F"/>
-        <rect x="41" y="18" width="5" height="9" rx="2.5" fill="#44418F"/>
-      </svg>
-      <div>
-        <div class="mname" id="mname">Machine 01</div>
-        <div class="msub" id="msub">What does it do?</div>
-      </div>
-    </div>
-    <div class="evidence" id="evidence"></div>
-    <p class="question" id="question"></p>
-    <div class="feedrow" id="feedrow">
-      <input type="text" id="guess" placeholder="type chips, space between" autocomplete="off" inputmode="text">
-      <button id="feed">Feed it</button>
-    </div>
-    <p class="feedback" id="feedback"></p>
-    <div class="rulebox" id="rulebox"></div>
-  </div>
-</main>
-<footer>hunchday · today's set of four machines</footer>
-<script type="module" src="/src/prototype/main.ts"></script>
+<div id="root"></div>
+<script type="module" src="/src/ui/main.tsx"></script>
 </body>
 </html>

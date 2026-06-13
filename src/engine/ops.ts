@@ -31,56 +31,11 @@
  * simpler one, live in the validators rather than here.
  */
 
-export const TYPE_NUM_LIST = "NumList";
-export const TYPE_NUM = "Num";
-export const TYPE_WORD_LIST = "WordList";
-export const TYPE_WORD = "Word";
+import { TYPE_NUM, TYPE_NUM_LIST, TYPE_WORD, TYPE_WORD_LIST } from "./ops-types";
+import type { OpDef, OpMeta, ParamSpec, Params, PhraseSource } from "./ops-types";
 
-/** The four value types that flow through a pipeline. */
-export type ValueType = typeof TYPE_NUM_LIST | typeof TYPE_NUM | typeof TYPE_WORD_LIST | typeof TYPE_WORD;
-
-/** A concrete value of one of the four types. */
-export type Value = number | number[] | string | string[];
-
-/** Bound parameter values for one operation instance, keyed by parameter name. */
-export type Params = Readonly<Record<string, number>>;
-
-/** A parameter an operation accepts, with the inclusive range it may take. */
-export interface ParamSpec {
-  readonly name: string;
-  readonly min: number;
-  readonly max: number;
-}
-
-/** A phrase given either as a fixed fragment or as a builder over the parameters. */
-export type PhraseSource = string | ((params: Params) => string);
-
-/**
- * The descriptive half of an operation: its stable identifier and the phrase that
- * renders it on the reveal screen. Identifier and phrase are grouped here because
- * they always describe the same operation and change together, so the registry never
- * has to keep a separate identifier and a separate phrase in agreement by hand.
- */
-export interface OpMeta {
-  readonly id: string;
-  readonly phrase: PhraseSource;
-}
-
-/**
- * A single operation definition. The apply function transforms a value of the input
- * type into a value of the output type, the phrase function renders the operation as
- * a clause, and isInteresting reports whether an input is worth showing.
- */
-export interface OpDef {
-  readonly id: string;
-  readonly inputType: ValueType;
-  readonly outputType: ValueType;
-  readonly rung: number;
-  readonly params: readonly ParamSpec[];
-  apply(input: Value, params: Params): Value;
-  phrase(params: Params): string;
-  isInteresting(input: Value, params: Params): boolean;
-}
+export { TYPE_NUM, TYPE_NUM_LIST, TYPE_WORD, TYPE_WORD_LIST } from "./ops-types";
+export type { OpDef, OpMeta, ParamSpec, Params, PhraseSource, Value, ValueType } from "./ops-types";
 
 /** Parameter names shared between an operation's range, function, and phrase. */
 const PARAM_K = "k";

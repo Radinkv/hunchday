@@ -25,7 +25,8 @@
 
 import { compose, execute, type PipelineStep } from "./compose";
 import { fingerprint } from "./fingerprint";
-import { getOp, REGISTRY, TYPE_NUM, TYPE_NUM_LIST, type ParamSpec, type Params } from "./ops";
+import { getOp, REGISTRY } from "./ops";
+import { TYPE_NUM, TYPE_NUM_LIST, type ParamSpec, type Params } from "./ops-types";
 
 /** A bound op instance: an operation identifier with one fixed parameter binding. */
 interface OpInstance {
