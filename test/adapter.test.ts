@@ -1,12 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { machinesForDate, todayDate } from "../src/game/adapter";
+import { generateMachinesForDate } from "../src/game/adapter";
 import { feed, startGame } from "../src/game/reducer";
 
 /**
- * These tests cover the bridge from the generated day to the prototype reducer. They
- * confirm a date yields four playable machines with the right shape, that the chip
+ * These tests cover the build time bridge from the generated day to the reducer. They
+ * confirm a date yields four playable machines with the right shape and that the chip
  * strings the adapter produces are exactly what the reducer accepts as a correct
- * answer, including a word machine, and that the local date is well formed.
+ * answer, including a word machine.
  */
 
 const SAMPLE_DATE = "2026-06-20";
@@ -14,10 +14,9 @@ const EXPECTED_MACHINE_COUNT = 4;
 const EXAMPLE_COUNT = 2;
 const CHALLENGE_COUNT = 5;
 const MYSTERY_SLOT = 3;
-const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
 
-describe("machinesForDate", () => {
-  const machines = machinesForDate(SAMPLE_DATE);
+describe("generateMachinesForDate", () => {
+  const machines = generateMachinesForDate(SAMPLE_DATE);
 
   it("produces four machines with the expected shape", () => {
     expect(machines).toHaveLength(EXPECTED_MACHINE_COUNT);
@@ -45,11 +44,5 @@ describe("machinesForDate", () => {
     const mystery = machines[MYSTERY_SLOT];
     const state = feed(startGame([mystery]), [mystery], mystery.ch[0][1]);
     expect(state.streak).toBe(1);
-  });
-});
-
-describe("todayDate", () => {
-  it("returns a year month day string", () => {
-    expect(todayDate()).toMatch(DATE_PATTERN);
   });
 });
