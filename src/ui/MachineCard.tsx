@@ -298,11 +298,7 @@ export function MachineCard({
             <Chips value={challengeInput} role={CLASS_CHIP_INPUT} />
             {COPY_QUESTION_SUFFIX}
           </p>
-          <ChipBuilder
-            key={state.machineIndex + KEY_SEPARATOR_COLON + state.challengeIndex}
-            challengeInput={challengeInput}
-            onFeed={handleFeed}
-          />
+          <ChipBuilder key={state.machineIndex} challengeInput={challengeInput} onFeed={handleFeed} />
         </>
       )}
 

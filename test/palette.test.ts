@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { getOp, OP_AFFINE, OP_LENGTH_MAP, OP_MUL_K, OP_REVERSE, OP_SORT_ALPHA, OP_SUM } from "../src/engine/ops";
-import { TYPE_NUM_LIST, TYPE_WORD_LIST } from "../src/engine/ops-types";
+import { TYPE_NUM, TYPE_NUM_LIST, TYPE_WORD_LIST } from "../src/engine/ops-types";
 import {
   groupedTilesForType,
   OP_TILES,
@@ -11,11 +11,10 @@ import {
 } from "../src/ui/palette";
 
 /**
- * These tests cover the palette tile model. Tiles are the operations that change a
- * chip's value or type; reordering and filtering operations have no tile because the
- * player does those by hand. Each tile sits in the section its input type implies and
- * carries its operation's single parameter, and the offered groups follow the chip type
- * until the chips are missing or mixed.
+ * These tests cover the palette tile model. Every operation becomes a recipe step
+ * except affine, which multiply then add reproduces. Each tile sits in the section its
+ * input type implies and carries its operation's single parameter, and the offered
+ * groups follow the chip type until the chips reduce to a single terminal value.
  */
 
 describe("palette tiles", () => {
@@ -27,13 +26,13 @@ describe("palette tiles", () => {
     }
   });
 
-  it("includes the value and type transforms and excludes reorder, filter, and affine", () => {
+  it("includes every operation as a step and excludes only affine", () => {
     const tiled = new Set(OP_TILES.map((tile) => tile.opId));
     expect(tiled.has(OP_MUL_K.id)).toBe(true);
     expect(tiled.has(OP_SUM.id)).toBe(true);
     expect(tiled.has(OP_LENGTH_MAP.id)).toBe(true);
-    expect(tiled.has(OP_REVERSE.id)).toBe(false);
-    expect(tiled.has(OP_SORT_ALPHA.id)).toBe(false);
+    expect(tiled.has(OP_REVERSE.id)).toBe(true);
+    expect(tiled.has(OP_SORT_ALPHA.id)).toBe(true);
     expect(tiled.has(OP_AFFINE.id)).toBe(false);
   });
 
@@ -58,7 +57,7 @@ describe("palette tiles", () => {
 
   it("looks up a tile by operation", () => {
     expect(tileOf(OP_MUL_K.id)?.opId).toBe(OP_MUL_K.id);
-    expect(tileOf(OP_REVERSE.id)).toBeUndefined();
+    expect(tileOf(OP_AFFINE.id)).toBeUndefined();
   });
 });
 
@@ -74,8 +73,8 @@ describe("groups follow the chip type", () => {
     expect(groups.every((group) => group.tiles.every((tile) => tile.section === SECTION_VOCAB))).toBe(true);
   });
 
-  it("offers no groups when the chips are missing or mixed", () => {
-    expect(sectionForType(null)).toBeNull();
-    expect(groupedTilesForType(null)).toHaveLength(0);
+  it("offers no groups once the chips reduce to a single terminal value", () => {
+    expect(sectionForType(TYPE_NUM)).toBeNull();
+    expect(groupedTilesForType(TYPE_NUM)).toHaveLength(0);
   });
 });
