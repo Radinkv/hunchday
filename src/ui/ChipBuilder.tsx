@@ -151,7 +151,7 @@ export function ChipBuilder({
     setSteps([...steps, { opId: tile.opId, params: defaultParams(tile) }]);
     setQuery("");
   };
-  const removeFrom = (index: number): void => setSteps(steps.slice(0, index));
+  const removeStep = (index: number): void => setSteps(steps.filter((_, at) => at !== index));
   const cycleParam = (index: number): void => {
     const spec = getOp(steps[index].opId).params.at(0);
     if (!spec) return;
@@ -208,7 +208,7 @@ export function ChipBuilder({
           type="button"
           className={CLASS_STEP_REMOVE}
           aria-label={COPY_REMOVE_FROM_PREFIX + stepNumber}
-          onClick={() => removeFrom(index)}
+          onClick={() => removeStep(index)}
         >
           {COPY_STEP_REMOVE_GLYPH}
         </button>

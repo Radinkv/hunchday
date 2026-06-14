@@ -86,22 +86,24 @@ describe("ChipBuilder recipe", () => {
     expect(onFeed).toHaveBeenCalledWith("6 15");
   });
 
-  it("rolls the recipe back when a step is removed", () => {
+  it("removes only the chosen step and keeps the rest", () => {
+    const onFeed = vi.fn();
+    render(<ChipBuilder challengeInput="3 1 4 1" onFeed={onFeed} />);
+
+    pullOut(TAB_MATH, MULTIPLY_BY_TWO);
+    pullOut(TAB_TOTALS, SUM);
+    clickButton(FIRST_STEP_REMOVE);
+    clickButton(COPY_FEED_BUTTON);
+    expect(onFeed).toHaveBeenCalledWith("9");
+  });
+
+  it("removes the last remaining step back to the unchanged input", () => {
     const onFeed = vi.fn();
     render(<ChipBuilder challengeInput="3 1 4 1" onFeed={onFeed} />);
 
     pullOut(TAB_MATH, MULTIPLY_BY_TWO);
     pullOut(TAB_TOTALS, SUM);
     clickButton(SECOND_STEP_REMOVE);
-    clickButton(COPY_FEED_BUTTON);
-    expect(onFeed).toHaveBeenCalledWith("6 2 8 2");
-  });
-
-  it("removes the whole recipe when the first step is removed", () => {
-    const onFeed = vi.fn();
-    render(<ChipBuilder challengeInput="3 1 4 1" onFeed={onFeed} />);
-
-    pullOut(TAB_MATH, MULTIPLY_BY_TWO);
     clickButton(FIRST_STEP_REMOVE);
     clickButton(COPY_FEED_BUTTON);
     expect(onFeed).toHaveBeenCalledWith("3 1 4 1");

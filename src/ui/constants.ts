@@ -118,13 +118,13 @@ export const CLASS_CLEAR = "clearbtn";
 /** Copy for the recipe builder: the labels, the hints, and the step controls. */
 export const COPY_RECIPE_LABEL = "Your recipe";
 export const COPY_RECIPE_EMPTY = "Write a recipe you think the machine follows.";
-export const COPY_PICKER_LABEL = "Operations to add";
+export const COPY_PICKER_LABEL = "Add to your recipe";
 export const COPY_SEARCH_LABEL = "Search your hunch in words";
 export const COPY_SEARCH_PLACEHOLDER = COPY_SEARCH_LABEL + "…";
 export const COPY_NO_MATCHES = "Nothing matches that. Try a tab, or different words.";
 export const COPY_CLEAR = "Clear";
 export const COPY_NUMBER_TAG_PREFIX = "Change the number in step ";
-export const COPY_REMOVE_FROM_PREFIX = "Remove from step ";
+export const COPY_REMOVE_FROM_PREFIX = "Remove step ";
 export const COPY_STEP_REMOVE_GLYPH = "✕";
 
 /** Duration in milliseconds that the bot holds its chomp animation after a feed. */

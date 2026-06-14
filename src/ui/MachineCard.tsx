@@ -254,9 +254,11 @@ export function MachineCard({
 } & MachineHandlers) {
   const [chomping, setChomping] = useState(false);
   const logRef = useRef<HTMLDivElement>(null);
+  const lastEvidenceLength = useRef(state.evidence.length);
   useEffect(() => {
     const log = logRef.current;
-    if (log) log.scrollTop = log.scrollHeight;
+    if (log && state.evidence.length > lastEvidenceLength.current) log.scrollTop = log.scrollHeight;
+    lastEvidenceLength.current = state.evidence.length;
   }, [state.evidence.length]);
 
   const machine = machines.at(state.machineIndex);
