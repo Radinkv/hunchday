@@ -132,6 +132,7 @@ describe("feed", () => {
       input: FIRST_MACHINE.ch[1][0],
       output: FIRST_MACHINE.ch[1][1],
       mark: MARK_MISS,
+      guess: WRONG_GUESS,
     });
     expect(state.feedback).toBe(FEEDBACK_WRONG);
   });

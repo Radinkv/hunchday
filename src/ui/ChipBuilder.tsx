@@ -4,6 +4,7 @@ import type { OpDef, Params, ParamSpec } from "../engine/ops-types";
 import {
   applyTrail,
   groupedTilesForType,
+  listTypeOf,
   parseChips,
   searchTiles,
   seedTypeOf,
@@ -13,17 +14,20 @@ import {
   type Step,
 } from "./palette";
 import {
+  CLASS_BOTTOM,
   CLASS_BUILDER,
-  CLASS_BUILDER_ACTIONS,
+  CLASS_CLEAR,
+  CLASS_FEED,
   CLASS_FOLDER_ICON,
   CLASS_NO_MATCHES,
   CLASS_NUM_TAG,
   CLASS_PAGE,
   CLASS_PICKER,
   CLASS_PICKER_OP,
-  CLASS_QUIET_BUTTON,
   CLASS_RECIPE,
   CLASS_RECIPE_EMPTY,
+  CLASS_RECIPE_HEAD,
+  CLASS_RECIPE_HEAD_LABEL,
   CLASS_SEARCH,
   CLASS_STEP,
   CLASS_STEP_NUM,
@@ -32,7 +36,6 @@ import {
   CLASS_TAB,
   CLASS_TAB_ACTIVE,
   CLASS_TABS,
-  CLASS_TERMINAL_HINT,
   COPY_CLEAR,
   COPY_FEED_BUTTON,
   COPY_NO_MATCHES,
@@ -44,7 +47,6 @@ import {
   COPY_SEARCH_LABEL,
   COPY_SEARCH_PLACEHOLDER,
   COPY_STEP_REMOVE_GLYPH,
-  COPY_TERMINAL_HINT,
 } from "./constants";
 
 /** The amount added to a zero based step index to show it as a human step number. */
@@ -138,12 +140,12 @@ export function ChipBuilder({
   const [activeTab, setActiveTab] = useState(NO_TAB);
   const [query, setQuery] = useState("");
 
-  const runningType = typeAfter(seedTypeOf(parseChips(challengeInput)), steps);
-  const tabs = groupedTilesForType(runningType);
-  const terminal = tabs.length === 0;
+  const seedType = seedTypeOf(parseChips(challengeInput));
+  const pickerType = listTypeOf(typeAfter(seedType, steps));
+  const tabs = groupedTilesForType(pickerType);
   const activeFolder = tabs.find((tab) => tab.group === activeTab);
   const searching = query.trim().length > 0;
-  const results = searching ? searchTiles(runningType, query) : NO_TILES;
+  const results = searching ? searchTiles(pickerType, query) : NO_TILES;
 
   const addStep = (tile: OpTile): void => {
     setSteps([...steps, { opId: tile.opId, params: defaultParams(tile) }]);
@@ -215,67 +217,69 @@ export function ChipBuilder({
   };
 
   return (
-    <div className={CLASS_BUILDER}>
+    <div className={CLASS_BUILDER + " " + CLASS_BOTTOM}>
+      {steps.length > 0 ? (
+        <div className={CLASS_RECIPE_HEAD}>
+          <span className={CLASS_RECIPE_HEAD_LABEL}>{COPY_RECIPE_LABEL}</span>
+          <button type="button" className={CLASS_CLEAR} onClick={clear}>
+            {COPY_CLEAR}
+          </button>
+        </div>
+      ) : null}
       <ol className={CLASS_RECIPE} aria-label={COPY_RECIPE_LABEL} aria-live="polite">
         {steps.length === 0 ? <li className={CLASS_RECIPE_EMPTY}>{COPY_RECIPE_EMPTY}</li> : steps.map((element, index) => renderStep(element, index))}
       </ol>
 
-      {terminal ? (
-        <p className={CLASS_TERMINAL_HINT}>{COPY_TERMINAL_HINT}</p>
-      ) : (
-        <div className={CLASS_PICKER} aria-label={COPY_PICKER_LABEL}>
-          <input
-            type="search"
-            className={CLASS_SEARCH}
-            value={query}
-            aria-label={COPY_SEARCH_LABEL}
-            placeholder={COPY_SEARCH_PLACEHOLDER}
-            onChange={(event) => setQuery(event.target.value)}
-          />
-          {searching ? (
-            (() => {
-              if (results.length > 0) {
-                return <ul className={CLASS_PAGE}>{results.map(renderOp)}</ul>;
+      <div className={CLASS_PICKER} aria-label={COPY_PICKER_LABEL}>
+        <input
+          type="search"
+          className={CLASS_SEARCH}
+          value={query}
+          aria-label={COPY_SEARCH_LABEL}
+          placeholder={COPY_SEARCH_PLACEHOLDER}
+          onChange={(event) => setQuery(event.target.value)}
+        />
+        {searching ? (
+          (() => {
+            if (results.length > 0) {
+              return <ul className={CLASS_PAGE}>{results.map(renderOp)}</ul>;
+            }
+            return <p className={CLASS_NO_MATCHES}>{COPY_NO_MATCHES}</p>;
+          })()
+        ) : (
+          <>
+            <div className={CLASS_TABS} role="tablist">
+              <FolderIcon />
+              {tabs.map((tab) => (
+                <button
+                  key={tab.group}
+                  type="button"
+                  role="tab"
+                  aria-selected={tab.group === activeTab}
+                  className={CLASS_TAB + (tab.group === activeTab ? " " + CLASS_TAB_ACTIVE : "")}
+                  onClick={() => setActiveTab(activeTab === tab.group ? NO_TAB : tab.group)}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+            {(() => {
+              if (activeFolder) {
+                return (
+                  <ul className={CLASS_PAGE} role="tabpanel">
+                    {activeFolder.tiles.map(renderOp)}
+                  </ul>
+                );
               }
-              return <p className={CLASS_NO_MATCHES}>{COPY_NO_MATCHES}</p>;
-            })()
-          ) : (
-            <>
-              <div className={CLASS_TABS} role="tablist">
-                <FolderIcon />
-                {tabs.map((tab) => (
-                  <button
-                    key={tab.group}
-                    type="button"
-                    role="tab"
-                    aria-selected={tab.group === activeTab}
-                    className={CLASS_TAB + (tab.group === activeTab ? " " + CLASS_TAB_ACTIVE : "")}
-                    onClick={() => setActiveTab(activeTab === tab.group ? NO_TAB : tab.group)}
-                  >
-                    {tab.label}
-                  </button>
-                ))}
-              </div>
-              {activeFolder ? (
-                <ul className={CLASS_PAGE} role="tabpanel">
-                  {activeFolder.tiles.map(renderOp)}
-                </ul>
-              ) : null}
-            </>
-          )}
-        </div>
-      )}
-
-      <div className={CLASS_BUILDER_ACTIONS}>
-        {steps.length > 0 ? (
-          <button type="button" className={CLASS_QUIET_BUTTON} onClick={clear}>
-            {COPY_CLEAR}
-          </button>
-        ) : null}
-        <button type="button" onClick={feed}>
-          {COPY_FEED_BUTTON}
-        </button>
+              return null;
+            })()}
+          </>
+        )}
       </div>
+
+      <button type="button" className={CLASS_FEED} onClick={feed}>
+        {COPY_FEED_BUTTON}
+      </button>
     </div>
   );
 }

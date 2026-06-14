@@ -73,7 +73,15 @@ import {
   OP_UNITS_DIGIT,
   OP_VOWEL_COUNT_MAP,
 } from "../engine/ops";
-import { TYPE_NUM_LIST, TYPE_WORD_LIST, type OpMeta, type ParamSpec, type Value, type ValueType } from "../engine/ops-types";
+import {
+  TYPE_NUM_LIST,
+  TYPE_WORD,
+  TYPE_WORD_LIST,
+  type OpMeta,
+  type ParamSpec,
+  type Value,
+  type ValueType,
+} from "../engine/ops-types";
 import type { PipelineStep } from "../engine/compose";
 import { tokenize } from "../game/reducer";
 
@@ -276,8 +284,23 @@ export function tileOf(opId: string): OpTile | undefined {
 }
 
 /**
+ * Wraps a value into a list so an operation always receives the list it expects. A list
+ * passes through; a single value produced by a reducing operation becomes a one element
+ * list, which lets the player keep applying operations in any order after a reduction
+ * rather than the recipe being locked once it collapses to one chip.
+ * @param value The current trail value.
+ * @returns The value as a list.
+ */
+function asList(value: Value): Value {
+  if (Array.isArray(value)) return value;
+  return [value] as Value;
+}
+
+/**
  * Folds an ordered trail of applied operations over a seed value using the engine's own
- * operation functions, so the resulting chips match what the machine would produce.
+ * operation functions, so the resulting chips match what the machine would produce. Each
+ * step is fed the running value as a list, so a reduction to a single chip does not end
+ * the trail and further operations can still apply.
  * @param seed The starting chips, the question's input.
  * @param steps The operations applied so far, in order.
  * @returns The chips after applying every step.
@@ -285,7 +308,7 @@ export function tileOf(opId: string): OpTile | undefined {
 export function applyTrail(seed: Value, steps: readonly Step[]): Value {
   let value = seed;
   for (const appliedStep of steps) {
-    value = getOp(appliedStep.opId).apply(value, appliedStep.params);
+    value = getOp(appliedStep.opId).apply(asList(value), appliedStep.params);
   }
   return value;
 }
@@ -314,6 +337,17 @@ export function typeAfter(seedType: ValueType, steps: readonly Step[]): ValueTyp
     type = getOp(appliedStep.opId).outputType;
   }
   return type;
+}
+
+/**
+ * Maps any running value type to the list type the player keeps operating on, treating a
+ * single reduced value as a one item list. This keeps a section of operations available
+ * at every step instead of locking the recipe once it reduces to one chip.
+ * @param type The running value type.
+ * @returns The word list type for words, the number list type otherwise.
+ */
+export function listTypeOf(type: ValueType): ValueType {
+  return type === TYPE_WORD || type === TYPE_WORD_LIST ? TYPE_WORD_LIST : TYPE_NUM_LIST;
 }
 
 /**

@@ -56,6 +56,12 @@
   box-sizing: border-box;
 }
 
+html,
+body,
+#root {
+  height: 100%;
+}
+
 body {
   margin: 0;
   background: var(--paper);
@@ -63,16 +69,28 @@ body {
   font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
   font-size: 15px;
   line-height: 1.55;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 100vh;
-  padding: 20px 16px 48px;
 }
 
-header {
-  text-align: center;
-  margin: 8px 0 20px;
+/* The whole game is one full height flex column; only the evidence log grows. */
+.app {
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header: wordmark and tagline left, progress dots right, on the raw background. */
+.hdr {
+  flex: 0 0 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+}
+
+.wblock {
+  display: flex;
+  flex-direction: column;
 }
 
 h1 {
@@ -83,22 +101,45 @@ h1 {
   margin: 0;
 }
 
-header p {
-  margin: 4px 0 0;
+.tagline {
   font-size: 13px;
-  color: var(--ink-2);
-}
-
-main {
-  width: 100%;
-  max-width: 440px;
+  line-height: 1.2;
+  color: var(--ink-3);
 }
 
 .dots {
   display: flex;
-  justify-content: center;
   gap: 8px;
-  margin-bottom: 16px;
+}
+
+/* Intro: the machine, a one line lead, and the play button, centered in the open space. */
+.intro {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  padding: 16px;
+  text-align: center;
+}
+
+.intro .bot {
+  width: auto;
+  height: 140px;
+}
+
+.introlead {
+  max-width: 30ch;
+  margin: 0;
+  font-size: 17px;
+  color: var(--ink-2);
+}
+
+.intro .feed {
+  width: 100%;
+  max-width: 260px;
 }
 
 .dot {
@@ -125,19 +166,21 @@ main {
   background: var(--amber);
 }
 
-.card {
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: var(--r-card);
-  padding: 16px 16px 20px;
-  box-shadow: var(--shadow-card);
+/* Machine zone: the machine on the raw background, scaled up, with a small caption. */
+.mzone {
+  flex: 0 0 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  overflow: hidden;
 }
 
-.mhead {
+.mcap {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 16px;
 }
 
 .mname {
@@ -161,22 +204,32 @@ main {
   transform: translateY(4px) scaleY(0.9);
 }
 
+/* The machine fills its zone, scaled up from its intrinsic size, proportions kept. */
+.mzone .bot {
+  width: auto;
+  height: 140px;
+}
+
+/* Evidence log: the only region that grows, scrolling with chips floating on the page. */
 .evidence {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin-bottom: 16px;
+  padding: 8px 16px;
 }
 
 .row {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 6px;
-  padding: 8px 10px;
-  border-radius: var(--r-control);
-  background: var(--paper);
-  border: 1px solid transparent;
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
 }
 
 .row.miss {
@@ -208,22 +261,95 @@ main {
   color: var(--amber-ink);
 }
 
+/* The player's guess on a miss row: muted, so the true output reads as the answer. */
+.chip.guess {
+  background: transparent;
+  border-color: var(--line);
+  color: var(--ink-3);
+}
+
 .arrow {
   color: var(--ink-3);
   font-size: 15px;
   margin: 0 2px;
 }
 
-.question {
-  font-size: 15px;
-  margin: 0 0 12px;
+.vs {
+  color: var(--amber);
+  font-size: 13px;
+  margin: 0 2px;
 }
 
-/* The recipe builder: the ordered step list, the op picker, and the actions. */
+/* Question strip: fixed height, centered, never grows. */
+.question {
+  flex: 0 0 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0 16px;
+  font-size: 15px;
+  text-align: center;
+}
+
+/* The bottom block, pinned under the evidence log: recipe, operations, and feed. Its
+   only border is the top hairline; its content is inset, and the feed button breaks out
+   to the full width of the screen. */
+.bottom {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 22px 16px 22px;
+}
+
+/* The panel band spans the screen, but its controls sit in the same centered column as
+   the content above, so the feed and tabs keep a margin instead of stretching edge to edge. */
+.bottom > * {
+  width: 100%;
+  max-width: 440px;
+}
+
 .builder {
   display: flex;
   flex-direction: column;
   gap: 12px;
+}
+
+.feed {
+  height: 52px;
+}
+
+/* Recipe header: a quiet label with the clear action tucked to the right. */
+.recipehead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.recipehl {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.clearbtn {
+  height: auto;
+  min-width: 0;
+  padding: 2px 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-3);
+  background: transparent;
+  border: none;
+}
+
+.clearbtn:hover {
+  color: var(--amber);
 }
 
 .recipe {
@@ -392,7 +518,7 @@ main {
   display: flex;
   flex-direction: column;
   gap: 2px;
-  max-height: 15rem;
+  max-height: 8.5rem;
   overflow-y: auto;
   border: 1px solid var(--machine-line);
   border-radius: 0 var(--r-control) var(--r-control) var(--r-control);
@@ -416,19 +542,6 @@ main {
 .pickop:hover {
   background: var(--machine-soft);
   color: var(--machine-ink);
-}
-
-.terminal {
-  margin: 0;
-  font-size: 14px;
-  color: var(--ink-2);
-}
-
-.bactions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 8px;
-  margin-top: 2px;
 }
 
 @keyframes step-in {
@@ -477,9 +590,12 @@ button:disabled {
 }
 
 .feedback {
+  flex: 0 0 auto;
   min-height: 22px;
+  margin: 0;
+  padding: 4px 16px;
   font-size: 13px;
-  margin: 12px 0 0;
+  text-align: center;
   color: var(--ink-2);
 }
 
@@ -494,7 +610,7 @@ button:disabled {
 }
 
 .rulebox {
-  margin-top: 12px;
+  margin-top: 0;
 }
 
 .rule {

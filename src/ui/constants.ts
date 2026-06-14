@@ -12,8 +12,18 @@ export const CLASS_DOT_CURRENT = "now";
 export const CLASS_DOT_CRACKED = "crack";
 export const CLASS_DOT_REVEALED = "open";
 
-export const CLASS_CARD = "card";
-export const CLASS_MACHINE_HEAD = "mhead";
+/** The full screen layout regions, stacked top to bottom in one flex column. */
+export const CLASS_APP = "app";
+export const CLASS_HEADER = "hdr";
+export const CLASS_WORDMARK_BLOCK = "wblock";
+export const CLASS_TAGLINE = "tagline";
+export const CLASS_MACHINE_ZONE = "mzone";
+export const CLASS_MACHINE_CAPTION = "mcap";
+export const CLASS_INTRO = "intro";
+export const CLASS_INTRO_LEAD = "introlead";
+export const CLASS_BOTTOM = "bottom";
+export const CLASS_FEED = "feed";
+
 export const CLASS_MACHINE_NAME = "mname";
 export const CLASS_MACHINE_SUBTITLE = "msub";
 export const CLASS_BOT = "bot";
@@ -27,7 +37,9 @@ export const CLASS_ROW_MISS = "miss";
 export const CLASS_CHIP = "chip";
 export const CLASS_CHIP_INPUT = "in";
 export const CLASS_CHIP_OUTPUT = "out";
+export const CLASS_CHIP_GUESS = "guess";
 export const CLASS_ARROW = "arrow";
+export const CLASS_VERSUS = "vs";
 
 export const CLASS_QUESTION = "question";
 export const CLASS_FEEDBACK = "feedback";
@@ -68,12 +80,15 @@ export const COPY_END_STATS_MISSES = " misses.";
 /** The arrow glyph shown between an input and an output chip. */
 export const ARROW_GLYPH = "→";
 
+/** The glyph shown on a miss row between the player's output and the true output. */
+export const VERSUS_GLYPH = "✗";
+
 /** Feedback copy. The leading status word is colored; the remainder is plain. */
 export const COPY_FEEDBACK_TWICE = "Correct, twice in a row.";
 export const COPY_FEEDBACK_CORRECT = "Correct.";
 export const COPY_FEEDBACK_MORE = " One more to confirm you have it.";
 export const COPY_FEEDBACK_NOT_QUITE = "Not quite.";
-export const COPY_FEEDBACK_GAVE = " It actually gave that — added to your evidence.";
+export const COPY_FEEDBACK_GAVE = " It actually gave that. Added to your evidence!";
 
 /** The label on the button that feeds the built prediction into the machine. */
 export const COPY_FEED_BUTTON = "Feed it";
@@ -96,17 +111,17 @@ export const CLASS_TAB = "tab";
 export const CLASS_TAB_ACTIVE = "on";
 export const CLASS_PAGE = "page";
 export const CLASS_PICKER_OP = "pickop";
-export const CLASS_TERMINAL_HINT = "terminal";
-export const CLASS_BUILDER_ACTIONS = "bactions";
+export const CLASS_RECIPE_HEAD = "recipehead";
+export const CLASS_RECIPE_HEAD_LABEL = "recipehl";
+export const CLASS_CLEAR = "clearbtn";
 
 /** Copy for the recipe builder: the labels, the hints, and the step controls. */
 export const COPY_RECIPE_LABEL = "Your recipe";
 export const COPY_RECIPE_EMPTY = "Write a recipe you think the machine follows.";
 export const COPY_PICKER_LABEL = "Operations to add";
-export const COPY_SEARCH_LABEL = "Search operations";
-export const COPY_SEARCH_PLACEHOLDER = "Search operations…";
+export const COPY_SEARCH_LABEL = "Search your hunch in words";
+export const COPY_SEARCH_PLACEHOLDER = COPY_SEARCH_LABEL + "…";
 export const COPY_NO_MATCHES = "Nothing matches that. Try a tab, or different words.";
-export const COPY_TERMINAL_HINT = "Your recipe ends on a single chip. Feed it.";
 export const COPY_CLEAR = "Clear";
 export const COPY_NUMBER_TAG_PREFIX = "Change the number in step ";
 export const COPY_REMOVE_FROM_PREFIX = "Remove from step ";
@@ -117,5 +132,6 @@ export const CHOMP_DURATION_MS = 180;
 
 /** Page level copy. */
 export const COPY_WORDMARK = "Hunchday";
-export const COPY_TAGLINE = "Figure out what each machine does. Prove it twice.";
-export const COPY_FOOTER = "hunchday · today's set of four machines";
+export const COPY_TAGLINE = "Daily machine puzzles";
+export const COPY_PLAY = "Play";
+export const COPY_INTRO_LEAD = "Four machines today. Work out what each one does, then prove it twice.";
