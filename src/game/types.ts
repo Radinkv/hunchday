@@ -62,12 +62,14 @@ export interface Machine {
 
 /**
  * A single line of evidence shown to the player, holding the input chips, the output
- * chips, and the mark that classifies the row.
+ * chips, and the mark that classifies the row. A miss row also carries the guess the
+ * player's recipe produced, so the row can show what they got against the true output.
  */
 export interface EvidenceRow {
   readonly input: string;
   readonly output: string;
   readonly mark: Mark;
+  readonly guess?: string;
 }
 
 /**

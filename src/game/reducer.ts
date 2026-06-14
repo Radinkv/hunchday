@@ -67,14 +67,16 @@ function chipsEqual(a: string, b: string): boolean {
 
 /**
  * Builds one evidence row with a mark that remains inside the EvidenceRow mark
- * vocabulary instead of widening to a generic string.
+ * vocabulary instead of widening to a generic string. A guess is attached only when
+ * given, so a miss row can show the player's output beside the true output.
  * @param input The challenge input chips.
  * @param output The challenge output chips.
  * @param mark The evidence mark token.
+ * @param guess The player's guessed output, for a miss row.
  * @returns One evidence row.
  */
-function buildEvidenceRow(input: string, output: string, mark: EvidenceRow["mark"]): EvidenceRow {
-  return { input, output, mark };
+function buildEvidenceRow(input: string, output: string, mark: EvidenceRow["mark"], guess?: string): EvidenceRow {
+  return guess === undefined ? { input, output, mark } : { input, output, mark, guess };
 }
 
 /**
@@ -191,7 +193,7 @@ export function feed(state: GameState, machines: readonly Machine[], guess: stri
   }
 
   const misses = state.misses + NEXT_INDEX_DELTA;
-  const evidence = [...state.evidence, buildEvidenceRow(challengeInput, challengeOutput, MARK_MISS)];
+  const evidence = [...state.evidence, buildEvidenceRow(challengeInput, challengeOutput, MARK_MISS, guess)];
   const challengeIndex = state.challengeIndex + NEXT_INDEX_DELTA;
   if (challengeIndex >= machine.ch.length) {
     return reveal(state, evidence, RESET_STREAK, misses, false, FEEDBACK_WRONG);

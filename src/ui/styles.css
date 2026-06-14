@@ -261,9 +261,22 @@ h1 {
   color: var(--amber-ink);
 }
 
+/* The player's guess on a miss row: muted, so the true output reads as the answer. */
+.chip.guess {
+  background: transparent;
+  border-color: var(--line);
+  color: var(--ink-3);
+}
+
 .arrow {
   color: var(--ink-3);
   font-size: 15px;
+  margin: 0 2px;
+}
+
+.vs {
+  color: var(--amber);
+  font-size: 13px;
   margin: 0 2px;
 }
 
@@ -529,12 +542,6 @@ h1 {
 .pickop:hover {
   background: var(--machine-soft);
   color: var(--machine-ink);
-}
-
-.terminal {
-  margin: 0;
-  font-size: 14px;
-  color: var(--ink-2);
 }
 
 @keyframes step-in {

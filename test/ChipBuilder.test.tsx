@@ -2,7 +2,7 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { ChipBuilder } from "../src/ui/ChipBuilder";
-import { COPY_FEED_BUTTON, COPY_NUMBER_TAG_PREFIX, COPY_REMOVE_FROM_PREFIX, COPY_TERMINAL_HINT } from "../src/ui/constants";
+import { COPY_FEED_BUTTON, COPY_NUMBER_TAG_PREFIX, COPY_REMOVE_FROM_PREFIX } from "../src/ui/constants";
 
 /**
  * These tests cover the recipe builder. Operations are filed into tabs the player flips
@@ -51,11 +51,21 @@ describe("ChipBuilder recipe", () => {
 
     pullOut(TAB_MATH, MULTIPLY_BY_TWO);
     pullOut(TAB_TOTALS, SUM);
-    expect(screen.getByText(COPY_TERMINAL_HINT)).toBeTruthy();
-    expect(screen.queryByRole("tab", { name: TAB_MATH })).toBeNull();
 
     clickButton(COPY_FEED_BUTTON);
     expect(onFeed).toHaveBeenCalledWith("18");
+  });
+
+  it("keeps building after a reduction, applying the next op to the single result", () => {
+    const onFeed = vi.fn();
+    render(<ChipBuilder challengeInput="2 3" onFeed={onFeed} />);
+
+    pullOut(TAB_TOTALS, SUM);
+    expect((screen.getByRole("tab", { name: TAB_MATH }) as HTMLButtonElement).disabled).toBe(false);
+    pullOut(TAB_MATH, MULTIPLY_BY_TWO);
+
+    clickButton(COPY_FEED_BUTTON);
+    expect(onFeed).toHaveBeenCalledWith("10");
   });
 
   it("feeds the unchanged input when the recipe is empty", () => {

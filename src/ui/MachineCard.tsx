@@ -13,14 +13,17 @@ import {
 } from "../game/types";
 import {
   ARROW_GLYPH,
+  VERSUS_GLYPH,
   CHOMP_DURATION_MS,
   CLASS_ARROW,
   CLASS_BOT,
   CLASS_BOTTOM,
   CLASS_CHIP,
+  CLASS_CHIP_GUESS,
   CLASS_CHIP_INPUT,
   CLASS_CHIP_OUTPUT,
   CLASS_CHOMP,
+  CLASS_VERSUS,
   CLASS_END_STATS,
   CLASS_EVIDENCE,
   CLASS_FEEDBACK,
@@ -67,7 +70,7 @@ import {
   MACHINE_NUMBER_PAD_LENGTH,
 } from "./constants";
 
-type ChipRole = typeof CLASS_CHIP_INPUT | typeof CLASS_CHIP_OUTPUT;
+type ChipRole = typeof CLASS_CHIP_INPUT | typeof CLASS_CHIP_OUTPUT | typeof CLASS_CHIP_GUESS;
 
 const KEY_SEPARATOR_COLON = ":";
 const KEY_SEPARATOR_ARROW = "->";
@@ -106,7 +109,9 @@ function Chips({ value, role }: { readonly value: string; readonly role: ChipRol
 }
 
 /**
- * Renders one evidence row: the input chips, an arrow, and the output chips.
+ * Renders one evidence row: the input chips, an arrow, and the output chips. A miss row
+ * also carries the player's guess, shown as muted chips before the true output so they
+ * can see what their recipe produced against what the machine actually gave.
  * @param props The evidence row to render.
  */
 function Row({ row }: { readonly row: EvidenceRow }) {
@@ -116,7 +121,17 @@ function Row({ row }: { readonly row: EvidenceRow }) {
       <span className={CLASS_ARROW} aria-hidden="true">
         {ARROW_GLYPH}
       </span>
-      <Chips value={row.output} role={CLASS_CHIP_OUTPUT} />
+      {row.guess === undefined ? (
+        <Chips value={row.output} role={CLASS_CHIP_OUTPUT} />
+      ) : (
+        <>
+          <Chips value={row.guess} role={CLASS_CHIP_GUESS} />
+          <span className={CLASS_VERSUS} aria-hidden="true">
+            {VERSUS_GLYPH}
+          </span>
+          <Chips value={row.output} role={CLASS_CHIP_OUTPUT} />
+        </>
+      )}
     </div>
   );
 }
