@@ -42,6 +42,7 @@ function pairToChipPair(pair: IoPair): ChipPair {
  */
 function machineFromDay(machine: DayMachine): Machine {
   return {
+    difficulty: machine.difficulty,
     rule: machine.rule,
     ex: machine.examples.map(pairToChipPair),
     ch: machine.challenges.map(pairToChipPair),

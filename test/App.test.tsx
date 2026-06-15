@@ -3,7 +3,13 @@ import { afterEach, describe, expect, it } from "vitest";
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { App } from "../src/ui/App";
 import type { Machine } from "../src/game/types";
-import { COPY_FEED_BUTTON, COPY_PLAY, COPY_RULE_CRACKED_LABEL, COPY_WORDMARK } from "../src/ui/constants";
+import {
+  COPY_FEED_BUTTON,
+  COPY_NEXT_MACHINE,
+  COPY_PLAY,
+  COPY_RULE_CRACKED_LABEL,
+  COPY_WORDMARK,
+} from "../src/ui/constants";
 
 /**
  * These tests cover the React interface end to end over the pure reducer, driving the
@@ -18,6 +24,7 @@ const MULTIPLY_RULE = "It multiplies every chip by 2.";
 const MULTIPLY_OP = "multiplies every chip by 2";
 const TAB_MATH = "Math";
 const NUMBER_MACHINE: Machine = {
+  difficulty: "easy",
   rule: MULTIPLY_RULE,
   ex: [
     ["1 2 3", "2 4 6"],
@@ -33,6 +40,7 @@ const LETTERS_RULE = "It counts the letters in every chip.";
 const LETTERS_OP = "counts the letters in every chip";
 const TAB_LETTERS = "Letters";
 const WORD_MACHINE: Machine = {
+  difficulty: "medium",
   rule: LETTERS_RULE,
   ex: [
     ["dog ant", "3 3"],
@@ -43,6 +51,23 @@ const WORD_MACHINE: Machine = {
     ["fig ace", "3 3"],
   ],
 };
+
+const MYSTERY_MACHINE: Machine = {
+  difficulty: "mystery",
+  rule: MULTIPLY_RULE,
+  ex: [
+    ["1 2 3", "2 4 6"],
+    ["4 5 6", "8 10 12"],
+  ],
+  ch: [
+    ["3 4", "6 8"],
+    ["5 1", "10 2"],
+  ],
+};
+
+const LABEL_EASY = "Easy";
+const LABEL_MEDIUM = "Medium";
+const LABEL_MYSTERY = "???";
 
 afterEach(() => {
   cleanup();
@@ -100,6 +125,24 @@ describe("App", () => {
     pullOutAndFeed(TAB_LETTERS, LETTERS_OP);
     feedAgain();
     expect(container.textContent).toContain(COPY_RULE_CRACKED_LABEL + LETTERS_RULE);
+  });
+
+  it("shows the live difficulty label and updates it when the machine advances", () => {
+    render(<App machines={[NUMBER_MACHINE, WORD_MACHINE]} />);
+    play();
+    expect(screen.getByText(LABEL_EASY)).toBeTruthy();
+
+    pullOutAndFeed(TAB_MATH, MULTIPLY_OP);
+    feedAgain();
+    fireEvent.click(screen.getByRole("button", { name: COPY_NEXT_MACHINE }));
+
+    expect(screen.getByText(LABEL_MEDIUM)).toBeTruthy();
+    expect(screen.queryByText(LABEL_EASY)).toBeNull();
+  });
+
+  it("shows the mystery slot as ???", () => {
+    render(<App machines={[MYSTERY_MACHINE]} />);
+    expect(screen.getByText(LABEL_MYSTERY)).toBeTruthy();
   });
 
   it("resumes the saved game on reload instead of showing the intro", () => {

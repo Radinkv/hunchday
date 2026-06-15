@@ -1,6 +1,7 @@
 {
   "2026-06-08": [
     {
+      "difficulty": "easy",
       "rule": "It multiplies every chip by 4, then adds them together.",
       "ex": [
         [
@@ -36,6 +37,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It counts the different letters in every chip, then adds 9 to them.",
       "ex": [
         [
@@ -71,6 +73,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It adds 7 to every chip, then throws away the first chip, then keeps only chips bigger than the first one.",
       "ex": [
         [
@@ -106,6 +109,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It sorts the chips smallest to biggest, then throws away the first chip, then finds the gaps between neighbouring chips.",
       "ex": [
         [
@@ -143,6 +147,7 @@
   ],
   "2026-06-09": [
     {
+      "difficulty": "easy",
       "rule": "It takes 3 away from every chip, then keeps only the last 2 chips.",
       "ex": [
         [
@@ -178,6 +183,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It keeps only chips bigger than 5, then swaps the first and last chips, then keeps only chips smaller than 9.",
       "ex": [
         [
@@ -213,6 +219,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It keeps only chips bigger than the first one, then moves the first chip to the end, then keeps only chips smaller than 6.",
       "ex": [
         [
@@ -248,6 +255,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It flips the digits of every chip, then multiplies them by 2, then adds 3, then keeps only the first 3 chips.",
       "ex": [
         [
@@ -285,6 +293,7 @@
   ],
   "2026-06-10": [
     {
+      "difficulty": "easy",
       "rule": "It adds 9 to every chip, then sorts them biggest to smallest.",
       "ex": [
         [
@@ -320,6 +329,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It keeps only the last 3 chips, then keeps only chips smaller than 9, then counts them.",
       "ex": [
         [
@@ -355,6 +365,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It counts the letters in every chip, then moves the first chip to the end, then reverses the order.",
       "ex": [
         [
@@ -390,6 +401,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It adds 6 to every chip, then flips the digits of them, then keeps only the first 2 chips.",
       "ex": [
         [
@@ -427,6 +439,7 @@
   ],
   "2026-06-11": [
     {
+      "difficulty": "easy",
       "rule": "It adds 4 to every chip, then keeps only the last 2 chips.",
       "ex": [
         [
@@ -462,6 +475,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It counts the letters in every chip, then multiplies them by 3.",
       "ex": [
         [
@@ -497,6 +511,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It adds 4 to every chip, then keeps only the last 4 chips, then keeps every other chip, starting with the first.",
       "ex": [
         [
@@ -532,6 +547,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It reads the alphabet position of each chip's first letter, then keeps only the last 4 chips, then counts how many different chips there are.",
       "ex": [
         [
@@ -569,6 +585,7 @@
   ],
   "2026-06-12": [
     {
+      "difficulty": "easy",
       "rule": "It multiplies every chip by 2, then sorts them smallest to biggest.",
       "ex": [
         [
@@ -604,6 +621,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It takes 3 away from every chip, then reverses the order, then keeps only chips bigger than 4.",
       "ex": [
         [
@@ -639,6 +657,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It takes 1 away from every chip, then keeps only chips bigger than 3, then keeps only chips that appear more than once.",
       "ex": [
         [
@@ -674,6 +693,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It multiplies every chip by 4, then flips the digits of them, then keeps only the first chip.",
       "ex": [
         [
@@ -711,6 +731,7 @@
   ],
   "2026-06-13": [
     {
+      "difficulty": "easy",
       "rule": "It multiplies every chip by 4, then keeps only the first 2 chips.",
       "ex": [
         [
@@ -746,6 +767,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It keeps only chips bigger than 9, then adds 4 to them, then multiplies them by 4.",
       "ex": [
         [
@@ -781,6 +803,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It takes the smallest chip away from every chip, then keeps only the last 3 chips, then keeps only the even chips.",
       "ex": [
         [
@@ -816,6 +839,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It adds 7 to every chip, then keeps just the last digit of them, then replaces them with the running total so far.",
       "ex": [
         [
@@ -853,6 +877,7 @@
   ],
   "2026-06-14": [
     {
+      "difficulty": "easy",
       "rule": "It keeps only the first 3 chips, then sorts them biggest to smallest.",
       "ex": [
         [
@@ -888,6 +913,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It keeps only chips smaller than 7, then adds 4 to them, then keeps only chips bigger than 6.",
       "ex": [
         [
@@ -923,6 +949,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It counts the letters in every chip, then multiplies them by 4, then swaps the first and last chips.",
       "ex": [
         [
@@ -958,6 +985,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It finds the gaps between neighbouring chips, then keeps only chips smaller than 9, then adds 9 to them.",
       "ex": [
         [
@@ -995,6 +1023,7 @@
   ],
   "2026-06-15": [
     {
+      "difficulty": "easy",
       "rule": "It adds 5 to every chip, then adds them together.",
       "ex": [
         [
@@ -1030,6 +1059,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It reads the alphabet position of each chip's first letter, then multiplies them by 3.",
       "ex": [
         [
@@ -1065,6 +1095,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It swaps the first and last chips, then keeps only chips bigger than the first one, then keeps only chips smaller than 8.",
       "ex": [
         [
@@ -1100,6 +1131,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It multiplies every chip by 3, then adds 3, then adds together the digits of them, then keeps only chips smaller than 7.",
       "ex": [
         [
@@ -1137,6 +1169,7 @@
   ],
   "2026-06-16": [
     {
+      "difficulty": "easy",
       "rule": "It adds 9 to every chip, then reverses the order.",
       "ex": [
         [
@@ -1172,6 +1205,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It keeps only chips bigger than 6, then adds them together.",
       "ex": [
         [
@@ -1207,6 +1241,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It takes the smallest chip away from every chip, then multiplies them by 3, then adds 1, then keeps only the last 3 chips.",
       "ex": [
         [
@@ -1242,6 +1277,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It finds the gaps between neighbouring chips, then replaces them with the running total so far, then keeps only chips bigger than 3.",
       "ex": [
         [
@@ -1279,6 +1315,7 @@
   ],
   "2026-06-17": [
     {
+      "difficulty": "easy",
       "rule": "It takes 4 away from every chip, then sorts them biggest to smallest.",
       "ex": [
         [
@@ -1314,6 +1351,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It reverses the order, then keeps only the odd chips, then keeps only chips bigger than 7.",
       "ex": [
         [
@@ -1349,6 +1387,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It keeps only chips bigger than 4, then keeps just the last digit of them, then multiplies them by 2, then adds 2.",
       "ex": [
         [
@@ -1384,6 +1423,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It keeps only the last 2 chips, then replaces them with the running total so far, then keeps only chips bigger than 6.",
       "ex": [
         [
@@ -1421,6 +1461,7 @@
   ],
   "2026-06-18": [
     {
+      "difficulty": "easy",
       "rule": "It adds 1 to every chip, then keeps only the last 3 chips.",
       "ex": [
         [
@@ -1456,6 +1497,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It counts the different letters in every chip, then keeps only chips that appear more than once.",
       "ex": [
         [
@@ -1491,6 +1533,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It throws away the last chip, then moves the first chip to the end, then keeps just the last digit of them.",
       "ex": [
         [
@@ -1526,6 +1569,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It replaces every chip with the running total so far, then adds 1 to them, then keeps only chips bigger than 5.",
       "ex": [
         [
@@ -1563,6 +1607,7 @@
   ],
   "2026-06-19": [
     {
+      "difficulty": "easy",
       "rule": "It keeps only the last 2 chips, then throws away the last chip.",
       "ex": [
         [
@@ -1598,6 +1643,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It keeps only the even chips, then takes 1 away from them, then moves the first chip to the end.",
       "ex": [
         [
@@ -1633,6 +1679,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It keeps every other chip, starting with the first, then keeps only chips bigger than 6, then multiplies them by 3.",
       "ex": [
         [
@@ -1668,6 +1715,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It finds the gaps between neighbouring chips, then keeps only chips that appear more than once, then multiplies them together.",
       "ex": [
         [
@@ -1705,6 +1753,7 @@
   ],
   "2026-06-20": [
     {
+      "difficulty": "easy",
       "rule": "It takes 5 away from every chip, then keeps only the first 2 chips.",
       "ex": [
         [
@@ -1740,6 +1789,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It takes 4 away from every chip, then takes 5 away from them, then multiplies them by 3, then adds 2.",
       "ex": [
         [
@@ -1775,6 +1825,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It multiplies every chip by 3, then takes the smallest chip away from them, then keeps only chips that appear more than once.",
       "ex": [
         [
@@ -1810,6 +1861,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It keeps only chips bigger than 3, then adds together the digits of them, then keeps only the first 2 chips.",
       "ex": [
         [
@@ -1847,6 +1899,7 @@
   ],
   "2026-06-21": [
     {
+      "difficulty": "easy",
       "rule": "It takes 4 away from every chip, then keeps only the first 2 chips.",
       "ex": [
         [
@@ -1882,6 +1935,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It reads the alphabet position of each chip's first letter, then keeps only chips bigger than 3.",
       "ex": [
         [
@@ -1917,6 +1971,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It keeps just the last digit of every chip, then throws away the last chip, then keeps only chips smaller than 8.",
       "ex": [
         [
@@ -1952,6 +2007,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It finds the gaps between neighbouring chips, then keeps only chips smaller than 8, then adds 5 to them.",
       "ex": [
         [
@@ -1989,6 +2045,7 @@
   ],
   "2026-06-22": [
     {
+      "difficulty": "easy",
       "rule": "It adds 8 to every chip, then keeps only the last 2 chips.",
       "ex": [
         [
@@ -2024,6 +2081,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It takes 3 away from every chip, then keeps only chips smaller than 4, then keeps only the first 2 chips.",
       "ex": [
         [
@@ -2059,6 +2117,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It counts the letters in every chip, then adds 2 to them, then keeps only the first 2 chips.",
       "ex": [
         [
@@ -2094,6 +2153,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It finds the gaps between neighbouring chips, then adds 1 to them, then multiplies them together.",
       "ex": [
         [
@@ -2131,6 +2191,7 @@
   ],
   "2026-06-23": [
     {
+      "difficulty": "easy",
       "rule": "It takes 3 away from every chip, then sorts them smallest to biggest.",
       "ex": [
         [
@@ -2166,6 +2227,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It multiplies every chip by 3, then keeps only the last 2 chips, then subtracts the smallest chip from the biggest.",
       "ex": [
         [
@@ -2201,6 +2263,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It counts the letters in every chip, then adds 3 to them, then keeps only the last chip.",
       "ex": [
         [
@@ -2236,6 +2299,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It replaces every chip with the running total so far, then takes 3 away from them, then keeps only chips bigger than 9.",
       "ex": [
         [
@@ -2273,6 +2337,7 @@
   ],
   "2026-06-24": [
     {
+      "difficulty": "easy",
       "rule": "It adds 5 to every chip, then throws away the last chip.",
       "ex": [
         [
@@ -2308,6 +2373,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It multiplies every chip by 3, then adds 1, then keeps only the first 2 chips, then sorts them biggest to smallest.",
       "ex": [
         [
@@ -2343,6 +2409,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It counts the letters in every chip, then takes 4 away from them, then keeps only the first 3 chips.",
       "ex": [
         [
@@ -2378,6 +2445,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It flips the digits of every chip, then adds 4 to them, then keeps only chips bigger than 6.",
       "ex": [
         [
@@ -2415,6 +2483,7 @@
   ],
   "2026-06-25": [
     {
+      "difficulty": "easy",
       "rule": "It takes 3 away from every chip, then sorts them biggest to smallest.",
       "ex": [
         [
@@ -2450,6 +2519,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It takes 3 away from every chip, then throws away the last chip, then keeps only chips smaller than 7.",
       "ex": [
         [
@@ -2485,6 +2555,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It keeps just the last digit of every chip, then adds 9 to them, then keeps only the odd chips.",
       "ex": [
         [
@@ -2520,6 +2591,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It finds the gaps between neighbouring chips, then keeps only the last 3 chips, then keeps only chips smaller than 5.",
       "ex": [
         [
@@ -2557,6 +2629,7 @@
   ],
   "2026-06-26": [
     {
+      "difficulty": "easy",
       "rule": "It adds 9 to every chip, then sorts them biggest to smallest.",
       "ex": [
         [
@@ -2592,6 +2665,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It counts the letters in every chip, then sorts them and keeps the middle one.",
       "ex": [
         [
@@ -2627,6 +2701,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It counts the letters in every chip, then takes the smallest chip away from them, then keeps only the first 3 chips.",
       "ex": [
         [
@@ -2662,6 +2737,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It finds the gaps between neighbouring chips, then replaces them with the running total so far, then swaps the first and last chips.",
       "ex": [
         [
@@ -2699,6 +2775,7 @@
   ],
   "2026-06-27": [
     {
+      "difficulty": "easy",
       "rule": "It takes 3 away from every chip, then keeps only the first 3 chips.",
       "ex": [
         [
@@ -2734,6 +2811,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It reads the alphabet position of each chip's last letter, then multiplies them by 2.",
       "ex": [
         [
@@ -2769,6 +2847,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It keeps only chips bigger than 7, then takes the smallest chip away from them, then multiplies them by 2, then adds 3.",
       "ex": [
         [
@@ -2804,6 +2883,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It finds the gaps between neighbouring chips, then adds 5 to them, then keeps only the even chips.",
       "ex": [
         [
@@ -2841,6 +2921,7 @@
   ],
   "2026-06-28": [
     {
+      "difficulty": "easy",
       "rule": "It adds 1 to every chip, then throws away the last chip.",
       "ex": [
         [
@@ -2876,6 +2957,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It takes 2 away from every chip, then keeps only the odd chips, then throws away duplicates.",
       "ex": [
         [
@@ -2911,6 +2993,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It multiplies every chip by 2, then swaps the first and last chips, then keeps only chips bigger than the first one.",
       "ex": [
         [
@@ -2946,6 +3029,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It adds 3 to every chip, then adds together the digits of them, then adds 9 to them.",
       "ex": [
         [
@@ -2983,6 +3067,7 @@
   ],
   "2026-06-29": [
     {
+      "difficulty": "easy",
       "rule": "It multiplies every chip by 4, then finds the smallest chip.",
       "ex": [
         [
@@ -3018,6 +3103,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It multiplies every chip by 2, then adds 3, then multiplies them by 3, then adds 2, then keeps only the first chip.",
       "ex": [
         [
@@ -3053,6 +3139,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It counts the letters in every chip, then adds 5 to them, then keeps only the first 3 chips.",
       "ex": [
         [
@@ -3088,6 +3175,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It adds 1 to every chip, then flips the digits of them, then keeps only the last 3 chips.",
       "ex": [
         [
@@ -3125,6 +3213,7 @@
   ],
   "2026-06-30": [
     {
+      "difficulty": "easy",
       "rule": "It adds 3 to every chip, then keeps only the last 2 chips.",
       "ex": [
         [
@@ -3160,6 +3249,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It squares the number of letters in every chip, then multiplies them by 3.",
       "ex": [
         [
@@ -3195,6 +3285,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It takes 1 away from every chip, then keeps just the last digit of them, then keeps only chips bigger than 7.",
       "ex": [
         [
@@ -3230,6 +3321,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It keeps only the even chips, then throws away the first chip, then replaces them with the running total so far.",
       "ex": [
         [
@@ -3267,6 +3359,7 @@
   ],
   "2026-07-01": [
     {
+      "difficulty": "easy",
       "rule": "It adds 1 to every chip, then keeps only the first 2 chips.",
       "ex": [
         [
@@ -3302,6 +3395,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It squares the number of letters in every chip, then multiplies them by 2.",
       "ex": [
         [
@@ -3337,6 +3431,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It throws away the last chip, then keeps only the odd chips, then takes the smallest chip away from them.",
       "ex": [
         [
@@ -3372,6 +3467,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It adds together the digits of every chip, then adds 6 to them, then keeps only the first 4 chips.",
       "ex": [
         [
@@ -3409,6 +3505,7 @@
   ],
   "2026-07-02": [
     {
+      "difficulty": "easy",
       "rule": "It adds 6 to every chip, then sorts them smallest to biggest.",
       "ex": [
         [
@@ -3444,6 +3541,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It keeps only chips bigger than 6, then multiplies them by 3, then adds 3, then throws away the first chip.",
       "ex": [
         [
@@ -3479,6 +3577,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It keeps just the last digit of every chip, then adds 2 to them, then finds the smallest chip.",
       "ex": [
         [
@@ -3514,6 +3613,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It takes the smallest chip away from every chip, then replaces them with the running total so far, then keeps only chips bigger than 6.",
       "ex": [
         [
@@ -3551,6 +3651,7 @@
   ],
   "2026-07-03": [
     {
+      "difficulty": "easy",
       "rule": "It sorts the chips biggest to smallest, then keeps only the last 3 chips.",
       "ex": [
         [
@@ -3586,6 +3687,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It adds 4 to every chip, then sorts them biggest to smallest, then throws away the last chip.",
       "ex": [
         [
@@ -3621,6 +3723,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It multiplies every chip by 2, then adds 3, then keeps only chips bigger than 9, then keeps only chips that appear more than once.",
       "ex": [
         [
@@ -3656,6 +3759,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It multiplies every chip by 3, then adds 2, then adds together the digits of them, then keeps only chips bigger than 3.",
       "ex": [
         [
@@ -3693,6 +3797,7 @@
   ],
   "2026-07-04": [
     {
+      "difficulty": "easy",
       "rule": "It takes 2 away from every chip, then keeps only the last 2 chips.",
       "ex": [
         [
@@ -3728,6 +3833,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It adds 4 to every chip, then keeps only chips bigger than 5, then multiplies them by 3, then adds 1.",
       "ex": [
         [
@@ -3763,6 +3869,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It counts the letters in every chip, then multiplies them by 4, then keeps only the last chip.",
       "ex": [
         [
@@ -3798,6 +3905,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It multiplies every chip by 3, then adds 2, then adds together the digits of them, then takes 3 away from them.",
       "ex": [
         [
@@ -3835,6 +3943,7 @@
   ],
   "2026-07-05": [
     {
+      "difficulty": "easy",
       "rule": "It adds 5 to every chip, then sorts them smallest to biggest.",
       "ex": [
         [
@@ -3870,6 +3979,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It adds 1 to every chip, then keeps only the last 3 chips, then keeps only chips bigger than 8.",
       "ex": [
         [
@@ -3905,6 +4015,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It multiplies every chip by 3, then takes the smallest chip away from them, then keeps only the odd chips.",
       "ex": [
         [
@@ -3940,6 +4051,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It finds the gaps between neighbouring chips, then keeps only chips bigger than 4, then keeps just the last digit of them.",
       "ex": [
         [
@@ -3977,6 +4089,7 @@
   ],
   "2026-07-06": [
     {
+      "difficulty": "easy",
       "rule": "It adds 6 to every chip, then reverses the order.",
       "ex": [
         [
@@ -4012,6 +4125,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It takes 5 away from every chip, then keeps only the first 3 chips, then sorts them biggest to smallest.",
       "ex": [
         [
@@ -4047,6 +4161,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It counts the letters in every chip, then adds 9 to them, then finds the smallest chip.",
       "ex": [
         [
@@ -4082,6 +4197,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It moves the first chip to the end, then finds the gaps between neighbouring chips, then sorts them smallest to biggest.",
       "ex": [
         [
@@ -4119,6 +4235,7 @@
   ],
   "2026-07-07": [
     {
+      "difficulty": "easy",
       "rule": "It takes 3 away from every chip, then reverses the order.",
       "ex": [
         [
@@ -4154,6 +4271,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It adds 9 to every chip, then multiplies them by 4, then keeps only the first chip.",
       "ex": [
         [
@@ -4189,6 +4307,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It keeps just the last digit of every chip, then multiplies them by 3, then swaps the first and last chips.",
       "ex": [
         [
@@ -4224,6 +4343,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It counts the different letters in every chip, then keeps only chips that appear more than once, then throws away duplicates.",
       "ex": [
         [
@@ -4261,6 +4381,7 @@
   ],
   "2026-07-08": [
     {
+      "difficulty": "easy",
       "rule": "It adds 4 to every chip, then sorts them smallest to biggest.",
       "ex": [
         [
@@ -4296,6 +4417,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It adds together the digits of every chip, then throws away the last chip.",
       "ex": [
         [
@@ -4331,6 +4453,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It keeps only the first 4 chips, then takes the smallest chip away from them, then keeps the chip that appears most often.",
       "ex": [
         [
@@ -4366,6 +4489,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It finds the gaps between neighbouring chips, then keeps only chips smaller than 9, then multiplies them by 3.",
       "ex": [
         [
@@ -4403,6 +4527,7 @@
   ],
   "2026-07-09": [
     {
+      "difficulty": "easy",
       "rule": "It adds 5 to every chip, then keeps only the last 2 chips.",
       "ex": [
         [
@@ -4438,6 +4563,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It reverses the order, then keeps only chips smaller than 4, then multiplies them by 3.",
       "ex": [
         [
@@ -4473,6 +4599,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It adds 3 to every chip, then keeps every other chip, starting with the first, then throws away the last chip.",
       "ex": [
         [
@@ -4508,6 +4635,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It counts the vowels in every chip, then adds 2 to them, then keeps only the odd chips.",
       "ex": [
         [
@@ -4545,6 +4673,7 @@
   ],
   "2026-07-10": [
     {
+      "difficulty": "easy",
       "rule": "It takes 1 away from every chip, then throws away the last chip.",
       "ex": [
         [
@@ -4580,6 +4709,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It takes 2 away from every chip, then throws away the last chip, then keeps only chips bigger than 5.",
       "ex": [
         [
@@ -4615,6 +4745,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It reverses the order, then keeps only chips bigger than the first one, then moves the first chip to the end.",
       "ex": [
         [
@@ -4650,6 +4781,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It keeps only chips bigger than 6, then flips the digits of them, then keeps every other chip, starting with the first.",
       "ex": [
         [
@@ -4687,6 +4819,7 @@
   ],
   "2026-07-11": [
     {
+      "difficulty": "easy",
       "rule": "It multiplies every chip by 2, then keeps only the last 2 chips.",
       "ex": [
         [
@@ -4722,6 +4855,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It keeps only the last 4 chips, then keeps only chips smaller than 6, then multiplies them by 2, then adds 3.",
       "ex": [
         [
@@ -4757,6 +4891,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It multiplies every chip by 3, then adds 1, then multiplies them by 3, then adds 3, then keeps only chips bigger than the first one.",
       "ex": [
         [
@@ -4792,6 +4927,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It adds together the digits of every chip, then keeps only chips smaller than 6, then throws away duplicates.",
       "ex": [
         [
@@ -4829,6 +4965,7 @@
   ],
   "2026-07-12": [
     {
+      "difficulty": "easy",
       "rule": "It adds 1 to every chip, then adds them together.",
       "ex": [
         [
@@ -4864,6 +5001,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It counts the letters in every chip, then multiplies them by 2, then adds 1.",
       "ex": [
         [
@@ -4899,6 +5037,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It adds 9 to every chip, then keeps just the last digit of them, then multiplies them by 3, then adds 1.",
       "ex": [
         [
@@ -4934,6 +5073,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It replaces every chip with the running total so far, then keeps only chips bigger than 4, then keeps just the last digit of them.",
       "ex": [
         [
@@ -4971,6 +5111,7 @@
   ],
   "2026-07-13": [
     {
+      "difficulty": "easy",
       "rule": "It sorts the chips biggest to smallest, then keeps only the last 2 chips.",
       "ex": [
         [
@@ -5006,6 +5147,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It adds 4 to every chip, then multiplies them by 2, then adds 3, then swaps the first and last chips.",
       "ex": [
         [
@@ -5041,6 +5183,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It takes 2 away from every chip, then keeps only chips smaller than 8, then finds the second biggest chip.",
       "ex": [
         [
@@ -5076,6 +5219,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It finds the gaps between neighbouring chips, then adds 7 to them, then sorts them and keeps the middle one.",
       "ex": [
         [
@@ -5113,6 +5257,7 @@
   ],
   "2026-07-14": [
     {
+      "difficulty": "easy",
       "rule": "It adds 8 to every chip, then reverses the order.",
       "ex": [
         [
@@ -5148,6 +5293,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It reads the alphabet position of each chip's first letter, then keeps only chips smaller than 3.",
       "ex": [
         [
@@ -5183,6 +5329,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It keeps only chips bigger than the first one, then swaps the first and last chips, then takes the smallest chip away from them.",
       "ex": [
         [
@@ -5218,6 +5365,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It keeps only the even chips, then replaces them with the running total so far, then keeps only chips bigger than 8.",
       "ex": [
         [
@@ -5255,6 +5403,7 @@
   ],
   "2026-07-15": [
     {
+      "difficulty": "easy",
       "rule": "It adds 1 to every chip, then reverses the order.",
       "ex": [
         [
@@ -5290,6 +5439,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It keeps only chips smaller than 5, then keeps only the first 2 chips, then adds them together.",
       "ex": [
         [
@@ -5325,6 +5475,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It keeps just the last digit of every chip, then keeps only chips smaller than 9, then keeps only chips that appear more than once.",
       "ex": [
         [
@@ -5360,6 +5511,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It finds the gaps between neighbouring chips, then keeps only chips smaller than 9, then replaces them with the running total so far.",
       "ex": [
         [
@@ -5397,6 +5549,7 @@
   ],
   "2026-07-16": [
     {
+      "difficulty": "easy",
       "rule": "It multiplies every chip by 3, then finds the biggest chip.",
       "ex": [
         [
@@ -5432,6 +5585,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It counts the different letters in every chip, then multiplies them by 4.",
       "ex": [
         [
@@ -5467,6 +5621,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It takes the smallest chip away from every chip, then throws away the first chip, then swaps the first and last chips.",
       "ex": [
         [
@@ -5502,6 +5657,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It finds the gaps between neighbouring chips, then multiplies them by 2, then adds 3, then keeps the chip that appears most often.",
       "ex": [
         [
@@ -5539,6 +5695,7 @@
   ],
   "2026-07-17": [
     {
+      "difficulty": "easy",
       "rule": "It takes 1 away from every chip, then keeps only the last 3 chips.",
       "ex": [
         [
@@ -5574,6 +5731,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It adds 6 to every chip, then keeps only chips smaller than 8, then multiplies them by 4.",
       "ex": [
         [
@@ -5609,6 +5767,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It counts the letters in every chip, then throws away the first chip, then moves the first chip to the end.",
       "ex": [
         [
@@ -5644,6 +5803,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It takes 1 away from every chip, then adds together the digits of them, then multiplies them by 2.",
       "ex": [
         [
@@ -5681,6 +5841,7 @@
   ],
   "2026-07-18": [
     {
+      "difficulty": "easy",
       "rule": "It adds 1 to every chip, then keeps only the last 2 chips.",
       "ex": [
         [
@@ -5716,6 +5877,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It throws away the first chip, then keeps only chips smaller than 7, then adds 8 to them.",
       "ex": [
         [
@@ -5751,6 +5913,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It counts the letters in every chip, then throws away the first chip, then throws away the first chip.",
       "ex": [
         [
@@ -5786,6 +5949,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It finds the gaps between neighbouring chips, then takes 1 away from them, then keeps only chips bigger than the first one.",
       "ex": [
         [
@@ -5823,6 +5987,7 @@
   ],
   "2026-07-19": [
     {
+      "difficulty": "easy",
       "rule": "It adds 4 to every chip, then reverses the order.",
       "ex": [
         [
@@ -5858,6 +6023,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It reads the alphabet position of each chip's last letter, then takes the smallest chip away from them.",
       "ex": [
         [
@@ -5893,6 +6059,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It keeps only the last 3 chips, then keeps only chips bigger than 3, then takes the smallest chip away from them.",
       "ex": [
         [
@@ -5928,6 +6095,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It keeps just the last digit of every chip, then keeps only chips smaller than 6, then finds the gaps between neighbouring chips.",
       "ex": [
         [
@@ -5965,6 +6133,7 @@
   ],
   "2026-07-20": [
     {
+      "difficulty": "easy",
       "rule": "It takes 3 away from every chip, then finds the smallest chip.",
       "ex": [
         [
@@ -6000,6 +6169,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It adds 9 to every chip, then keeps only the even chips, then multiplies them by 2, then adds 3.",
       "ex": [
         [
@@ -6035,6 +6205,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It counts the letters in every chip, then reverses the order, then moves the first chip to the end.",
       "ex": [
         [
@@ -6070,6 +6241,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It sorts the chips biggest to smallest, then replaces them with the running total so far, then keeps only chips bigger than 6.",
       "ex": [
         [
@@ -6107,6 +6279,7 @@
   ],
   "2026-07-21": [
     {
+      "difficulty": "easy",
       "rule": "It multiplies every chip by 4, then keeps only the last 2 chips.",
       "ex": [
         [
@@ -6142,6 +6315,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It adds 1 to every chip, then keeps only chips smaller than 5, then multiplies them by 4.",
       "ex": [
         [
@@ -6177,6 +6351,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It swaps the first and last chips, then keeps only chips bigger than 4, then keeps just the last digit of them.",
       "ex": [
         [
@@ -6212,6 +6387,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It keeps only chips bigger than 4, then adds together the digits of them, then sorts them smallest to biggest.",
       "ex": [
         [
@@ -6249,6 +6425,7 @@
   ],
   "2026-07-22": [
     {
+      "difficulty": "easy",
       "rule": "It takes 2 away from every chip, then keeps only the first 3 chips.",
       "ex": [
         [
@@ -6284,6 +6461,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It adds 5 to every chip, then keeps only the last 3 chips, then keeps only chips bigger than 8.",
       "ex": [
         [
@@ -6319,6 +6497,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It counts the letters in every chip, then multiplies them by 3, then adds 2, then keeps only the last 4 chips.",
       "ex": [
         [
@@ -6354,6 +6533,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It flips the digits of every chip, then adds 1 to them, then keeps only the first 3 chips.",
       "ex": [
         [
@@ -6391,6 +6571,7 @@
   ],
   "2026-07-23": [
     {
+      "difficulty": "easy",
       "rule": "It adds 8 to every chip, then keeps only the first 3 chips.",
       "ex": [
         [
@@ -6426,6 +6607,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It multiplies every chip by 2, then keeps only chips bigger than 4, then throws away the first chip.",
       "ex": [
         [
@@ -6461,6 +6643,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It counts the letters in every chip, then adds 6 to them, then throws away the last chip.",
       "ex": [
         [
@@ -6496,6 +6679,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It adds together the digits of every chip, then keeps only chips bigger than 3, then replaces them with the running total so far.",
       "ex": [
         [
@@ -6533,6 +6717,7 @@
   ],
   "2026-07-24": [
     {
+      "difficulty": "easy",
       "rule": "It takes 1 away from every chip, then sorts them biggest to smallest.",
       "ex": [
         [
@@ -6568,6 +6753,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It reads the alphabet position of each chip's first letter, then keeps only chips smaller than 4.",
       "ex": [
         [
@@ -6603,6 +6789,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It keeps only chips smaller than 9, then adds 4 to them, then keeps only chips that appear more than once.",
       "ex": [
         [
@@ -6638,6 +6825,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It finds the gaps between neighbouring chips, then adds 9 to them, then swaps the first and last chips.",
       "ex": [
         [
@@ -6675,6 +6863,7 @@
   ],
   "2026-07-25": [
     {
+      "difficulty": "easy",
       "rule": "It adds 7 to every chip, then adds them together.",
       "ex": [
         [
@@ -6710,6 +6899,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It counts the different letters in every chip, then multiplies them by 3, then adds 2.",
       "ex": [
         [
@@ -6745,6 +6935,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It keeps just the last digit of every chip, then multiplies them by 3, then adds 2, then keeps only the last 3 chips.",
       "ex": [
         [
@@ -6780,6 +6971,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It keeps just the last digit of every chip, then moves the first chip to the end, then replaces them with the running total so far.",
       "ex": [
         [
@@ -6817,6 +7009,7 @@
   ],
   "2026-07-26": [
     {
+      "difficulty": "easy",
       "rule": "It multiplies every chip by 4, then keeps only the first 2 chips.",
       "ex": [
         [
@@ -6852,6 +7045,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It throws away the last chip, then keeps only chips smaller than 5, then moves the first chip to the end.",
       "ex": [
         [
@@ -6887,6 +7081,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It counts the letters in every chip, then multiplies them by 3, then keeps only chips that appear more than once.",
       "ex": [
         [
@@ -6922,6 +7117,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It keeps just the last digit of every chip, then finds the gaps between neighbouring chips, then keeps only chips smaller than 7.",
       "ex": [
         [
@@ -6959,6 +7155,7 @@
   ],
   "2026-07-27": [
     {
+      "difficulty": "easy",
       "rule": "It takes 1 away from every chip, then adds them together.",
       "ex": [
         [
@@ -6994,6 +7191,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It adds 4 to every chip, then multiplies them by 2, then adds 3, then multiplies them by 4.",
       "ex": [
         [
@@ -7029,6 +7227,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It counts the letters in every chip, then adds 5 to them, then keeps just the last digit of them.",
       "ex": [
         [
@@ -7064,6 +7263,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It moves the first chip to the end, then keeps only chips bigger than 7, then adds together the digits of them.",
       "ex": [
         [
@@ -7101,6 +7301,7 @@
   ],
   "2026-07-28": [
     {
+      "difficulty": "easy",
       "rule": "It adds 6 to every chip, then sorts them biggest to smallest.",
       "ex": [
         [
@@ -7136,6 +7337,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It adds 6 to every chip, then keeps only the odd chips, then sorts them and keeps the middle one.",
       "ex": [
         [
@@ -7171,6 +7373,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It counts the letters in every chip, then keeps every other chip, starting with the first, then counts how many different chips there are.",
       "ex": [
         [
@@ -7206,6 +7409,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It keeps only the odd chips, then replaces them with the running total so far, then sorts them and keeps the middle one.",
       "ex": [
         [
@@ -7243,6 +7447,7 @@
   ],
   "2026-07-29": [
     {
+      "difficulty": "easy",
       "rule": "It adds 2 to every chip, then sorts them biggest to smallest.",
       "ex": [
         [
@@ -7278,6 +7483,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It keeps only chips bigger than 7, then adds 7 to them.",
       "ex": [
         [
@@ -7313,6 +7519,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It takes the smallest chip away from every chip, then multiplies them by 3, then adds 1, then multiplies them by 3, then adds 2.",
       "ex": [
         [
@@ -7348,6 +7555,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It flips the digits of every chip, then keeps only chips bigger than 7, then throws away the last chip.",
       "ex": [
         [
@@ -7385,6 +7593,7 @@
   ],
   "2026-07-30": [
     {
+      "difficulty": "easy",
       "rule": "It adds 4 to every chip, then keeps only the first 3 chips.",
       "ex": [
         [
@@ -7420,6 +7629,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It takes 1 away from every chip, then keeps only the last 2 chips, then keeps only chips smaller than 5.",
       "ex": [
         [
@@ -7455,6 +7665,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It counts the letters in every chip, then takes 3 away from them, then multiplies them by 2, then adds 1.",
       "ex": [
         [
@@ -7490,6 +7701,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It keeps only chips smaller than 9, then multiplies them by 2, then adds 2, then adds together the digits of them.",
       "ex": [
         [
@@ -7527,6 +7739,7 @@
   ],
   "2026-07-31": [
     {
+      "difficulty": "easy",
       "rule": "It adds 6 to every chip, then keeps only the last 2 chips.",
       "ex": [
         [
@@ -7562,6 +7775,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It puts the chips in alphabetical order, then counts the vowels in them.",
       "ex": [
         [
@@ -7597,6 +7811,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It counts the letters in every chip, then keeps only chips bigger than 3, then takes 2 away from them.",
       "ex": [
         [
@@ -7632,6 +7847,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It counts the different letters in every chip, then keeps only the odd chips, then throws away the last chip.",
       "ex": [
         [
@@ -7669,6 +7885,7 @@
   ],
   "2026-08-01": [
     {
+      "difficulty": "easy",
       "rule": "It takes 2 away from every chip, then sorts them smallest to biggest.",
       "ex": [
         [
@@ -7704,6 +7921,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It counts the different letters in every chip, then takes 2 away from them.",
       "ex": [
         [
@@ -7739,6 +7957,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It counts the letters in every chip, then takes 2 away from them, then throws away duplicates.",
       "ex": [
         [
@@ -7774,6 +7993,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It moves the first chip to the end, then finds the gaps between neighbouring chips, then moves the first chip to the end.",
       "ex": [
         [
@@ -7811,6 +8031,7 @@
   ],
   "2026-08-02": [
     {
+      "difficulty": "easy",
       "rule": "It keeps only the first 3 chips, then sorts them smallest to biggest.",
       "ex": [
         [
@@ -7846,6 +8067,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It takes 2 away from every chip, then keeps only chips bigger than 4, then keeps only the last chip.",
       "ex": [
         [
@@ -7881,6 +8103,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It counts the letters in every chip, then keeps only chips bigger than the first one, then reverses the order.",
       "ex": [
         [
@@ -7916,6 +8139,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It keeps only chips bigger than 4, then adds together the digits of them, then multiplies them together.",
       "ex": [
         [
@@ -7953,6 +8177,7 @@
   ],
   "2026-08-03": [
     {
+      "difficulty": "easy",
       "rule": "It adds 8 to every chip, then sorts them smallest to biggest.",
       "ex": [
         [
@@ -7988,6 +8213,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It multiplies every chip by 3, then adds 3, then multiplies them by 3, then adds 3, then keeps only the last chip.",
       "ex": [
         [
@@ -8023,6 +8249,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It adds 8 to every chip, then multiplies them by 3, then adds 2, then keeps every other chip, starting with the first.",
       "ex": [
         [
@@ -8058,6 +8285,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It keeps only chips bigger than 8, then flips the digits of them, then keeps every other chip, starting with the first.",
       "ex": [
         [
@@ -8095,6 +8323,7 @@
   ],
   "2026-08-04": [
     {
+      "difficulty": "easy",
       "rule": "It adds 9 to every chip, then keeps only the first 2 chips.",
       "ex": [
         [
@@ -8130,6 +8359,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It counts the different letters in every chip, then throws away the first chip.",
       "ex": [
         [
@@ -8165,6 +8395,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It counts the letters in every chip, then adds 8 to them, then keeps only the last 3 chips.",
       "ex": [
         [
@@ -8200,6 +8431,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It flips the digits of every chip, then adds 9 to them, then keeps only the last 4 chips.",
       "ex": [
         [
@@ -8237,6 +8469,7 @@
   ],
   "2026-08-05": [
     {
+      "difficulty": "easy",
       "rule": "It sorts the chips smallest to biggest, then keeps only the last 2 chips.",
       "ex": [
         [
@@ -8272,6 +8505,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It multiplies every chip by 2, then keeps only chips smaller than 9, then keeps only the first 2 chips.",
       "ex": [
         [
@@ -8307,6 +8541,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It counts the letters in every chip, then keeps only chips smaller than 5, then adds 9 to them.",
       "ex": [
         [
@@ -8342,6 +8577,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It adds together the digits of every chip, then keeps only the last 4 chips, then throws away the last chip.",
       "ex": [
         [
@@ -8379,6 +8615,7 @@
   ],
   "2026-08-06": [
     {
+      "difficulty": "easy",
       "rule": "It adds 7 to every chip, then sorts them smallest to biggest.",
       "ex": [
         [
@@ -8414,6 +8651,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It keeps only chips bigger than 6, then adds 5 to them, then adds them together.",
       "ex": [
         [
@@ -8449,6 +8687,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It adds 7 to every chip, then multiplies them by 3, then adds 2, then keeps only chips bigger than the first one.",
       "ex": [
         [
@@ -8484,6 +8723,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It swaps the first and last chips, then finds the gaps between neighbouring chips, then replaces them with the running total so far.",
       "ex": [
         [
@@ -8521,6 +8761,7 @@
   ],
   "2026-08-07": [
     {
+      "difficulty": "easy",
       "rule": "It keeps only the first 3 chips, then adds them together.",
       "ex": [
         [
@@ -8556,6 +8797,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It keeps only chips bigger than 3, then takes 3 away from them, then keeps only chips smaller than 8.",
       "ex": [
         [
@@ -8591,6 +8833,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It counts the letters in every chip, then adds 6 to them, then keeps only the first 3 chips.",
       "ex": [
         [
@@ -8626,6 +8869,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It finds the gaps between neighbouring chips, then multiplies them by 2, then adds 1, then keeps every other chip, starting with the first.",
       "ex": [
         [
@@ -8663,6 +8907,7 @@
   ],
   "2026-08-08": [
     {
+      "difficulty": "easy",
       "rule": "It takes 5 away from every chip, then finds the smallest chip.",
       "ex": [
         [
@@ -8698,6 +8943,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It reads the alphabet position of each chip's last letter, then adds 4 to them.",
       "ex": [
         [
@@ -8733,6 +8979,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It counts the letters in every chip, then keeps only the first 2 chips, then throws away the last chip.",
       "ex": [
         [
@@ -8768,6 +9015,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It reads the alphabet position of each chip's last letter, then keeps only the first 4 chips, then finds the second biggest chip.",
       "ex": [
         [
@@ -8805,6 +9053,7 @@
   ],
   "2026-08-09": [
     {
+      "difficulty": "easy",
       "rule": "It adds 1 to every chip, then keeps only the first 3 chips.",
       "ex": [
         [
@@ -8840,6 +9089,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It keeps only chips bigger than 3, then moves the first chip to the end.",
       "ex": [
         [
@@ -8875,6 +9125,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It counts the letters in every chip, then throws away the first chip, then keeps only the even chips.",
       "ex": [
         [
@@ -8910,6 +9161,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It adds 4 to every chip, then flips the digits of them, then sorts them and keeps the middle one.",
       "ex": [
         [
@@ -8947,6 +9199,7 @@
   ],
   "2026-08-10": [
     {
+      "difficulty": "easy",
       "rule": "It keeps only the last 3 chips, then sorts them biggest to smallest.",
       "ex": [
         [
@@ -8982,6 +9235,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It keeps only chips smaller than 3, then moves the first chip to the end, then adds 8 to them.",
       "ex": [
         [
@@ -9017,6 +9271,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It sorts the chips biggest to smallest, then takes the smallest chip away from them, then adds 8 to them.",
       "ex": [
         [
@@ -9052,6 +9307,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It keeps only the last 3 chips, then finds the gaps between neighbouring chips, then keeps only chips bigger than 4.",
       "ex": [
         [
@@ -9089,6 +9345,7 @@
   ],
   "2026-08-11": [
     {
+      "difficulty": "easy",
       "rule": "It adds 4 to every chip, then finds the biggest chip.",
       "ex": [
         [
@@ -9124,6 +9381,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It reads the alphabet position of each chip's last letter, then keeps only chips smaller than 7.",
       "ex": [
         [
@@ -9159,6 +9417,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It throws away the last chip, then keeps only chips smaller than 9, then counts how many different chips there are.",
       "ex": [
         [
@@ -9194,6 +9453,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It keeps every other chip, starting with the first, then keeps only chips smaller than 7, then replaces them with the running total so far.",
       "ex": [
         [
@@ -9231,6 +9491,7 @@
   ],
   "2026-08-12": [
     {
+      "difficulty": "easy",
       "rule": "It takes 4 away from every chip, then keeps only the last 3 chips.",
       "ex": [
         [
@@ -9266,6 +9527,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It reads the alphabet position of each chip's last letter, then adds 9 to them.",
       "ex": [
         [
@@ -9301,6 +9563,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It counts the letters in every chip, then keeps only chips bigger than 6, then swaps the first and last chips.",
       "ex": [
         [
@@ -9336,6 +9599,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It replaces every chip with the running total so far, then takes 1 away from them, then keeps only chips smaller than 6.",
       "ex": [
         [
@@ -9373,6 +9637,7 @@
   ],
   "2026-08-13": [
     {
+      "difficulty": "easy",
       "rule": "It adds 6 to every chip, then throws away the last chip.",
       "ex": [
         [
@@ -9408,6 +9673,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It multiplies every chip by 3, then adds 1, then sorts them smallest to biggest, then keeps only the even chips.",
       "ex": [
         [
@@ -9443,6 +9709,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It keeps just the last digit of every chip, then keeps only chips smaller than 6, then multiplies them together.",
       "ex": [
         [
@@ -9478,6 +9745,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It flips the digits of every chip, then multiplies them by 3, then adds 3, then sorts them and keeps the middle one.",
       "ex": [
         [
@@ -9515,6 +9783,7 @@
   ],
   "2026-08-14": [
     {
+      "difficulty": "easy",
       "rule": "It adds 2 to every chip, then keeps only the first 2 chips.",
       "ex": [
         [
@@ -9550,6 +9819,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It counts the different letters in every chip, then takes the smallest chip away from them.",
       "ex": [
         [
@@ -9585,6 +9855,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It counts the letters in every chip, then multiplies them by 2, then adds 3, then keeps the chip that appears most often.",
       "ex": [
         [
@@ -9620,6 +9891,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It replaces every chip with the running total so far, then adds 1 to them, then finds the biggest chip.",
       "ex": [
         [
@@ -9657,6 +9929,7 @@
   ],
   "2026-08-15": [
     {
+      "difficulty": "easy",
       "rule": "It takes 2 away from every chip, then finds the smallest chip.",
       "ex": [
         [
@@ -9692,6 +9965,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It takes 5 away from every chip, then throws away the first chip, then finds the biggest chip.",
       "ex": [
         [
@@ -9727,6 +10001,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It counts the letters in every chip, then multiplies them by 2, then adds 1, then multiplies them by 3, then adds 3.",
       "ex": [
         [
@@ -9762,6 +10037,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It swaps the first and last chips, then keeps every other chip, starting with the first, then finds the gaps between neighbouring chips.",
       "ex": [
         [
@@ -9799,6 +10075,7 @@
   ],
   "2026-08-16": [
     {
+      "difficulty": "easy",
       "rule": "It takes 1 away from every chip, then keeps only the first 2 chips.",
       "ex": [
         [
@@ -9834,6 +10111,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It keeps only chips bigger than 4, then takes 5 away from them, then keeps only the last 2 chips.",
       "ex": [
         [
@@ -9869,6 +10147,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It takes the smallest chip away from every chip, then keeps only chips smaller than 9, then keeps only chips bigger than the first one.",
       "ex": [
         [
@@ -9904,6 +10183,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It adds together the digits of every chip, then takes 1 away from them, then keeps only chips bigger than the first one.",
       "ex": [
         [
@@ -9941,6 +10221,7 @@
   ],
   "2026-08-17": [
     {
+      "difficulty": "easy",
       "rule": "It adds 4 to every chip, then keeps only the last 3 chips.",
       "ex": [
         [
@@ -9976,6 +10257,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It counts the letters in every chip, then adds 1 to them.",
       "ex": [
         [
@@ -10011,6 +10293,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It takes the smallest chip away from every chip, then keeps only the first 4 chips, then keeps only chips bigger than 7.",
       "ex": [
         [
@@ -10046,6 +10329,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It keeps only the odd chips, then replaces them with the running total so far, then adds them together.",
       "ex": [
         [
@@ -10083,6 +10367,7 @@
   ],
   "2026-08-18": [
     {
+      "difficulty": "easy",
       "rule": "It adds 6 to every chip, then keeps only the first 3 chips.",
       "ex": [
         [
@@ -10118,6 +10403,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It counts the vowels in every chip, then replaces them with the running total so far.",
       "ex": [
         [
@@ -10153,6 +10439,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It keeps only chips bigger than 4, then takes the smallest chip away from them, then adds 7 to them.",
       "ex": [
         [
@@ -10188,6 +10475,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It flips the digits of every chip, then takes the smallest chip away from them, then keeps only chips smaller than 8.",
       "ex": [
         [
@@ -10225,6 +10513,7 @@
   ],
   "2026-08-19": [
     {
+      "difficulty": "easy",
       "rule": "It takes 3 away from every chip, then keeps only the last 3 chips.",
       "ex": [
         [
@@ -10260,6 +10549,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It adds 1 to every chip, then keeps only chips bigger than 6, then keeps only the first chip.",
       "ex": [
         [
@@ -10295,6 +10585,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It counts the letters in every chip, then multiplies them by 4, then swaps the first and last chips.",
       "ex": [
         [
@@ -10330,6 +10621,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It takes the smallest chip away from every chip, then replaces them with the running total so far, then keeps only chips bigger than 7.",
       "ex": [
         [
@@ -10367,6 +10659,7 @@
   ],
   "2026-08-20": [
     {
+      "difficulty": "easy",
       "rule": "It adds 7 to every chip, then keeps only the last 3 chips.",
       "ex": [
         [
@@ -10402,6 +10695,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It keeps only the last 3 chips, then keeps only chips bigger than 3, then takes 3 away from them.",
       "ex": [
         [
@@ -10437,6 +10731,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It multiplies every chip by 3, then adds 3, then keeps only chips that appear more than once, then keeps just the last digit of them.",
       "ex": [
         [
@@ -10472,6 +10767,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It keeps only chips bigger than 4, then keeps just the last digit of them, then replaces them with the running total so far.",
       "ex": [
         [
@@ -10509,6 +10805,7 @@
   ],
   "2026-08-21": [
     {
+      "difficulty": "easy",
       "rule": "It adds 3 to every chip, then throws away the last chip.",
       "ex": [
         [
@@ -10544,6 +10841,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It keeps only chips bigger than 7, then adds 7 to them, then adds them together.",
       "ex": [
         [
@@ -10579,6 +10877,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It multiplies every chip by 4, then throws away the first chip, then keeps only chips bigger than the first one.",
       "ex": [
         [
@@ -10614,6 +10913,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It keeps just the last digit of every chip, then finds the gaps between neighbouring chips, then multiplies them by 2, then adds 2.",
       "ex": [
         [
@@ -10651,6 +10951,7 @@
   ],
   "2026-08-22": [
     {
+      "difficulty": "easy",
       "rule": "It adds 4 to every chip, then keeps only the first 2 chips.",
       "ex": [
         [
@@ -10686,6 +10987,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It counts the different letters in every chip, then keeps every other chip, starting with the first.",
       "ex": [
         [
@@ -10721,6 +11023,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It keeps chips that start with a vowel, then counts the letters in them, then swaps the first and last chips.",
       "ex": [
         [
@@ -10756,6 +11059,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It replaces every chip with the running total so far, then keeps every other chip, starting with the first, then keeps only chips bigger than 5.",
       "ex": [
         [
@@ -10793,6 +11097,7 @@
   ],
   "2026-08-23": [
     {
+      "difficulty": "easy",
       "rule": "It adds 6 to every chip, then finds the biggest chip.",
       "ex": [
         [
@@ -10828,6 +11133,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It keeps only chips bigger than 5, then adds 8 to them, then multiplies them by 4.",
       "ex": [
         [
@@ -10863,6 +11169,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It takes 4 away from every chip, then keeps only chips smaller than 8, then keeps only chips bigger than the first one.",
       "ex": [
         [
@@ -10898,6 +11205,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It keeps only chips bigger than 4, then flips the digits of them, then sorts them smallest to biggest.",
       "ex": [
         [
@@ -10935,6 +11243,7 @@
   ],
   "2026-08-24": [
     {
+      "difficulty": "easy",
       "rule": "It takes 5 away from every chip, then sorts them biggest to smallest.",
       "ex": [
         [
@@ -10970,6 +11279,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It adds 1 to every chip, then keeps only chips bigger than 9.",
       "ex": [
         [
@@ -11005,6 +11315,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It puts the chips in alphabetical order, then counts the letters in them, then throws away duplicates.",
       "ex": [
         [
@@ -11040,6 +11351,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It flips the digits of every chip, then keeps only chips bigger than 5, then takes 5 away from them.",
       "ex": [
         [
@@ -11077,6 +11389,7 @@
   ],
   "2026-08-25": [
     {
+      "difficulty": "easy",
       "rule": "It takes 5 away from every chip, then sorts them smallest to biggest.",
       "ex": [
         [
@@ -11112,6 +11425,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It adds 4 to every chip, then keeps only the odd chips, then finds the biggest chip.",
       "ex": [
         [
@@ -11147,6 +11461,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It keeps just the last digit of every chip, then multiplies them by 4, then multiplies them by 3, then adds 1.",
       "ex": [
         [
@@ -11182,6 +11497,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It flips the digits of every chip, then multiplies them by 2, then adds 3, then throws away the last chip.",
       "ex": [
         [
@@ -11219,6 +11535,7 @@
   ],
   "2026-08-26": [
     {
+      "difficulty": "easy",
       "rule": "It takes 4 away from every chip, then keeps only the first 3 chips.",
       "ex": [
         [
@@ -11254,6 +11571,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It keeps only chips smaller than 7, then adds 6 to them.",
       "ex": [
         [
@@ -11289,6 +11607,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It throws away the last chip, then takes the smallest chip away from them, then adds 7 to them.",
       "ex": [
         [
@@ -11324,6 +11643,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It replaces every chip with the running total so far, then swaps the first and last chips, then keeps only chips bigger than 5.",
       "ex": [
         [
@@ -11361,6 +11681,7 @@
   ],
   "2026-08-27": [
     {
+      "difficulty": "easy",
       "rule": "It takes 2 away from every chip, then adds them together.",
       "ex": [
         [
@@ -11396,6 +11717,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It keeps only chips smaller than 9, then throws away the last chip, then throws away the last chip.",
       "ex": [
         [
@@ -11431,6 +11753,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It keeps only chips smaller than 7, then multiplies them by 2, then adds 2, then keeps every other chip, starting with the first.",
       "ex": [
         [
@@ -11466,6 +11789,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It multiplies every chip by 2, then adds 3, then adds together the digits of them, then adds them together.",
       "ex": [
         [
@@ -11503,6 +11827,7 @@
   ],
   "2026-08-28": [
     {
+      "difficulty": "easy",
       "rule": "It adds 8 to every chip, then sorts them biggest to smallest.",
       "ex": [
         [
@@ -11538,6 +11863,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It reads the alphabet position of each chip's first letter, then keeps only the first chip.",
       "ex": [
         [
@@ -11573,6 +11899,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It throws away the last chip, then keeps only chips smaller than 9, then takes the smallest chip away from them.",
       "ex": [
         [
@@ -11608,6 +11935,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It finds the gaps between neighbouring chips, then adds 3 to them, then keeps only chips smaller than 7.",
       "ex": [
         [
@@ -11645,6 +11973,7 @@
   ],
   "2026-08-29": [
     {
+      "difficulty": "easy",
       "rule": "It keeps only the last 3 chips, then adds them together.",
       "ex": [
         [
@@ -11680,6 +12009,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It adds 2 to every chip, then keeps only the first 3 chips, then adds them together.",
       "ex": [
         [
@@ -11715,6 +12045,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It counts the letters in every chip, then keeps only chips bigger than the first one, then subtracts the smallest chip from the biggest.",
       "ex": [
         [
@@ -11750,6 +12081,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It finds the gaps between neighbouring chips, then keeps just the last digit of them, then keeps only the first chip.",
       "ex": [
         [
@@ -11787,6 +12119,7 @@
   ],
   "2026-08-30": [
     {
+      "difficulty": "easy",
       "rule": "It sorts the chips smallest to biggest, then keeps only the last 3 chips.",
       "ex": [
         [
@@ -11822,6 +12155,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It reads the alphabet position of each chip's first letter, then keeps only chips bigger than 6.",
       "ex": [
         [
@@ -11857,6 +12191,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It reverses the order, then keeps only chips bigger than the first one, then sorts them smallest to biggest.",
       "ex": [
         [
@@ -11892,6 +12227,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It adds 3 to every chip, then multiplies them by 3, then adds 3, then adds together the digits of them.",
       "ex": [
         [
@@ -11929,6 +12265,7 @@
   ],
   "2026-08-31": [
     {
+      "difficulty": "easy",
       "rule": "It sorts the chips biggest to smallest, then keeps only the first 3 chips.",
       "ex": [
         [
@@ -11964,6 +12301,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It reads the alphabet position of each chip's first letter, then reverses the order.",
       "ex": [
         [
@@ -11999,6 +12337,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It counts the letters in every chip, then swaps the first and last chips, then keeps only the first 4 chips.",
       "ex": [
         [
@@ -12034,6 +12373,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It adds together the digits of every chip, then keeps only the first 3 chips, then multiplies them together.",
       "ex": [
         [
@@ -12071,6 +12411,7 @@
   ],
   "2026-09-01": [
     {
+      "difficulty": "easy",
       "rule": "It takes 4 away from every chip, then adds them together.",
       "ex": [
         [
@@ -12106,6 +12447,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It reads the alphabet position of each chip's first letter, then finds the second biggest chip.",
       "ex": [
         [
@@ -12141,6 +12483,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It counts the letters in every chip, then adds 2 to them, then keeps every other chip, starting with the first.",
       "ex": [
         [
@@ -12176,6 +12519,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It keeps just the last digit of every chip, then replaces them with the running total so far, then keeps only chips smaller than 4.",
       "ex": [
         [
@@ -12213,6 +12557,7 @@
   ],
   "2026-09-02": [
     {
+      "difficulty": "easy",
       "rule": "It adds 3 to every chip, then keeps only the first 2 chips.",
       "ex": [
         [
@@ -12248,6 +12593,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It keeps only the first 4 chips, then keeps only chips bigger than 3, then adds 7 to them.",
       "ex": [
         [
@@ -12283,6 +12629,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It multiplies every chip by 3, then adds 3, then keeps just the last digit of them, then multiplies them by 3, then adds 3.",
       "ex": [
         [
@@ -12318,6 +12665,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It reads the alphabet position of each chip's last letter, then keeps only chips smaller than 6, then finds the gaps between neighbouring chips.",
       "ex": [
         [
@@ -12355,6 +12703,7 @@
   ],
   "2026-09-03": [
     {
+      "difficulty": "easy",
       "rule": "It multiplies every chip by 4, then keeps only the first chip.",
       "ex": [
         [
@@ -12390,6 +12739,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It keeps every other chip, starting with the first, then keeps only chips that appear more than once.",
       "ex": [
         [
@@ -12425,6 +12775,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It counts the letters in every chip, then keeps only chips smaller than 5, then counts how many different chips there are.",
       "ex": [
         [
@@ -12460,6 +12811,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It flips the digits of every chip, then multiplies them by 2, then adds 2, then adds them together.",
       "ex": [
         [
@@ -12497,6 +12849,7 @@
   ],
   "2026-09-04": [
     {
+      "difficulty": "easy",
       "rule": "It adds 9 to every chip, then keeps only the last 3 chips.",
       "ex": [
         [
@@ -12532,6 +12885,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It moves the first chip to the end, then swaps the first and last chips, then keeps only chips smaller than 7.",
       "ex": [
         [
@@ -12567,6 +12921,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It counts the letters in every chip, then adds 4 to them, then throws away duplicates.",
       "ex": [
         [
@@ -12602,6 +12957,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It replaces every chip with the running total so far, then multiplies them by 3, then adds 3, then adds them together.",
       "ex": [
         [
@@ -12639,6 +12995,7 @@
   ],
   "2026-09-05": [
     {
+      "difficulty": "easy",
       "rule": "It multiplies every chip by 3, then keeps only the first 2 chips.",
       "ex": [
         [
@@ -12674,6 +13031,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It takes 1 away from every chip, then keeps only chips smaller than 9, then keeps only the first 2 chips.",
       "ex": [
         [
@@ -12709,6 +13067,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It takes 5 away from every chip, then keeps only the even chips, then finds the second biggest chip.",
       "ex": [
         [
@@ -12744,6 +13103,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It reads the alphabet position of each chip's last letter, then flips the digits of them, then keeps the chip that appears most often.",
       "ex": [
         [
@@ -12781,6 +13141,7 @@
   ],
   "2026-09-06": [
     {
+      "difficulty": "easy",
       "rule": "It adds 7 to every chip, then keeps only the first 2 chips.",
       "ex": [
         [
@@ -12816,6 +13177,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It adds 1 to every chip, then keeps only chips smaller than 6, then throws away the first chip.",
       "ex": [
         [
@@ -12851,6 +13213,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It adds 6 to every chip, then keeps just the last digit of them, then adds 7 to them.",
       "ex": [
         [
@@ -12886,6 +13249,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It flips the digits of every chip, then takes 3 away from them, then throws away the last chip.",
       "ex": [
         [
@@ -12923,6 +13287,7 @@
   ],
   "2026-09-07": [
     {
+      "difficulty": "easy",
       "rule": "It adds 4 to every chip, then throws away the last chip.",
       "ex": [
         [
@@ -12958,6 +13323,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It counts the vowels in every chip, then adds them together.",
       "ex": [
         [
@@ -12993,6 +13359,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It keeps just the last digit of every chip, then keeps only chips smaller than 9, then keeps only the last 3 chips.",
       "ex": [
         [
@@ -13028,6 +13395,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It finds the gaps between neighbouring chips, then keeps only chips bigger than 5, then swaps the first and last chips.",
       "ex": [
         [
@@ -13065,6 +13433,7 @@
   ],
   "2026-09-08": [
     {
+      "difficulty": "easy",
       "rule": "It takes 5 away from every chip, then reverses the order.",
       "ex": [
         [
@@ -13100,6 +13469,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It counts the letters in every chip, then finds the biggest chip.",
       "ex": [
         [
@@ -13135,6 +13505,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It counts the letters in every chip, then adds 2 to them, then swaps the first and last chips.",
       "ex": [
         [
@@ -13170,6 +13541,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It flips the digits of every chip, then keeps only chips bigger than 7, then multiplies them by 3, then adds 2.",
       "ex": [
         [
@@ -13207,6 +13579,7 @@
   ],
   "2026-09-09": [
     {
+      "difficulty": "easy",
       "rule": "It adds 2 to every chip, then keeps only the first 3 chips.",
       "ex": [
         [
@@ -13242,6 +13615,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It adds 8 to every chip, then swaps the first and last chips, then keeps only the first 2 chips.",
       "ex": [
         [
@@ -13277,6 +13651,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It counts the letters in every chip, then throws away the first chip, then keeps only the first 2 chips.",
       "ex": [
         [
@@ -13312,6 +13687,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It reverses the order, then takes the smallest chip away from them, then replaces them with the running total so far.",
       "ex": [
         [
@@ -13349,6 +13725,7 @@
   ],
   "2026-09-10": [
     {
+      "difficulty": "easy",
       "rule": "It takes 5 away from every chip, then keeps only the last 3 chips.",
       "ex": [
         [
@@ -13384,6 +13761,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It counts the letters in every chip, then keeps only the first 4 chips.",
       "ex": [
         [
@@ -13419,6 +13797,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It throws away duplicates, then takes the smallest chip away from them, then keeps only chips bigger than 7.",
       "ex": [
         [
@@ -13454,6 +13833,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It flips the digits of every chip, then keeps only chips bigger than the first one, then keeps only chips bigger than the first one.",
       "ex": [
         [
@@ -13491,6 +13871,7 @@
   ],
   "2026-09-11": [
     {
+      "difficulty": "easy",
       "rule": "It takes 1 away from every chip, then sorts them smallest to biggest.",
       "ex": [
         [
@@ -13526,6 +13907,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It reads the alphabet position of each chip's first letter, then takes 3 away from them.",
       "ex": [
         [
@@ -13561,6 +13943,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It counts the letters in every chip, then adds 6 to them, then keeps only the last 2 chips.",
       "ex": [
         [
@@ -13596,6 +13979,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It replaces every chip with the running total so far, then keeps only chips bigger than 4, then multiplies them by 2, then adds 2.",
       "ex": [
         [
@@ -13633,6 +14017,7 @@
   ],
   "2026-09-12": [
     {
+      "difficulty": "easy",
       "rule": "It multiplies every chip by 2, then keeps only the last 3 chips.",
       "ex": [
         [
@@ -13668,6 +14053,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It counts the letters in every chip, then moves the first chip to the end.",
       "ex": [
         [
@@ -13703,6 +14089,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It counts the letters in every chip, then multiplies them by 3, then adds 3, then finds the second biggest chip.",
       "ex": [
         [
@@ -13738,6 +14125,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It finds the gaps between neighbouring chips, then keeps just the last digit of them, then keeps only chips smaller than 5.",
       "ex": [
         [
@@ -13775,6 +14163,7 @@
   ],
   "2026-09-13": [
     {
+      "difficulty": "easy",
       "rule": "It adds 3 to every chip, then sorts them smallest to biggest.",
       "ex": [
         [
@@ -13810,6 +14199,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It multiplies every chip by 4, then multiplies them by 3, then adds 3, then throws away the last chip.",
       "ex": [
         [
@@ -13845,6 +14235,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It counts the letters in every chip, then adds 6 to them, then keeps only the last 4 chips.",
       "ex": [
         [
@@ -13880,6 +14271,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It keeps only the odd chips, then finds the gaps between neighbouring chips, then multiplies them by 2, then adds 2.",
       "ex": [
         [
@@ -13917,6 +14309,7 @@
   ],
   "2026-09-14": [
     {
+      "difficulty": "easy",
       "rule": "It adds 7 to every chip, then keeps only the first 3 chips.",
       "ex": [
         [
@@ -13952,6 +14345,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It adds 2 to every chip, then sorts them smallest to biggest, then throws away duplicates.",
       "ex": [
         [
@@ -13987,6 +14381,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It counts the letters in every chip, then adds 1 to them, then keeps the chip that appears most often.",
       "ex": [
         [
@@ -14022,6 +14417,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It keeps only chips bigger than 3, then adds together the digits of them, then multiplies them by 3, then adds 2.",
       "ex": [
         [
@@ -14059,6 +14455,7 @@
   ],
   "2026-09-15": [
     {
+      "difficulty": "easy",
       "rule": "It adds 3 to every chip, then reverses the order.",
       "ex": [
         [
@@ -14094,6 +14491,7 @@
       ]
     },
     {
+      "difficulty": "medium",
       "rule": "It squares the number of letters in every chip, then swaps the first and last chips.",
       "ex": [
         [
@@ -14129,6 +14527,7 @@
       ]
     },
     {
+      "difficulty": "hard",
       "rule": "It adds 2 to every chip, then multiplies them by 4, then keeps only chips that appear more than once.",
       "ex": [
         [
@@ -14164,6 +14563,7 @@
       ]
     },
     {
+      "difficulty": "mystery",
       "rule": "It flips the digits of every chip, then multiplies them by 2, then flips the digits of them.",
       "ex": [
         [

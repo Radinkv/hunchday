@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { feed, nextMachine, restart, startGame } from "../game/reducer";
 import { todayDate } from "../game/calendar";
-import type { GameState, Machine } from "../game/types";
+import { DIFFICULTY_EASY, type GameState, type Machine } from "../game/types";
 import { Dots } from "./Dots";
 import { Bot, MachineCard } from "./MachineCard";
 import { loadGame, saveGame } from "./storage";
@@ -13,10 +13,10 @@ import {
   CLASS_HEADER_LEFT,
   CLASS_INTRO,
   CLASS_INTRO_LEAD,
-  COPY_DIFFICULTY,
   COPY_INTRO_LEAD,
   COPY_PLAY,
   COPY_WORDMARK,
+  DIFFICULTY_LABELS,
   LIGHT_COLOR_IDLE,
 } from "./constants";
 
@@ -40,6 +40,8 @@ export function App({ machines }: { readonly machines: readonly Machine[] }) {
   }, [state, today]);
 
   const idleResults = machines.map(() => null);
+  const machineIndex = state?.machineIndex ?? FIRST_MACHINE_INDEX;
+  const difficulty = machines.at(machineIndex)?.difficulty ?? DIFFICULTY_EASY;
 
   return (
     <div className={CLASS_APP}>
@@ -47,7 +49,7 @@ export function App({ machines }: { readonly machines: readonly Machine[] }) {
         <div className={CLASS_HEADER_LEFT}>
           <Bot lightColor={LIGHT_COLOR_IDLE} chomping={false} />
           <h1>{COPY_WORDMARK}</h1>
-          <span className={CLASS_DIFFICULTY}>{COPY_DIFFICULTY}</span>
+          <span className={CLASS_DIFFICULTY}>{DIFFICULTY_LABELS[difficulty]}</span>
         </div>
         <Dots machineIndex={state?.machineIndex ?? FIRST_MACHINE_INDEX} results={state?.results ?? idleResults} />
       </header>

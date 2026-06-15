@@ -50,11 +50,28 @@ export type FeedbackKind =
   | typeof FEEDBACK_CORRECT_MORE
   | typeof FEEDBACK_WRONG;
 
+/**
+ * Difficulty slots. A day fills one machine per slot in rising order. The tokens mirror
+ * the generator's own difficulty vocabulary as the same string literals, so a generated
+ * machine's difficulty carries through the adapter unchanged while the view layer keeps
+ * its independence from the engine. The mystery slot is shown to the player as "???".
+ */
+export const DIFFICULTY_EASY = "easy";
+export const DIFFICULTY_MEDIUM = "medium";
+export const DIFFICULTY_HARD = "hard";
+export const DIFFICULTY_MYSTERY = "mystery";
+export type Difficulty =
+  | typeof DIFFICULTY_EASY
+  | typeof DIFFICULTY_MEDIUM
+  | typeof DIFFICULTY_HARD
+  | typeof DIFFICULTY_MYSTERY;
+
 /** A single input and output pairing, both expressed as space separated chip text. */
 export type ChipPair = readonly [input: string, output: string];
 
-/** One mystery machine: its rule, its seeded examples, and its challenge prompts. */
+/** One mystery machine: its difficulty, its rule, its seeded examples, and its challenges. */
 export interface Machine {
+  readonly difficulty: Difficulty;
   readonly rule: string;
   readonly ex: ReadonlyArray<ChipPair>;
   readonly ch: ReadonlyArray<ChipPair>;

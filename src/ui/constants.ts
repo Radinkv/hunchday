@@ -6,6 +6,14 @@
  * with the game logic instead.
  */
 
+import {
+  DIFFICULTY_EASY,
+  DIFFICULTY_HARD,
+  DIFFICULTY_MEDIUM,
+  DIFFICULTY_MYSTERY,
+  type Difficulty,
+} from "../game/types";
+
 export const CLASS_DOTS = "dots";
 export const CLASS_DOT = "dot";
 export const CLASS_DOT_CURRENT = "now";
@@ -71,7 +79,14 @@ export const COPY_SUBTITLE_PLAYING = "What does it do?";
 export const COPY_SUBTITLE_CRACKED = "Cracked";
 export const COPY_SUBTITLE_REVEALED = "Revealed";
 export const COPY_WAITING = "The machine is waiting for your guess";
-export const COPY_DIFFICULTY = "Easy";
+
+/** The header label shown for each difficulty; the mystery slot reads as "???". */
+export const DIFFICULTY_LABELS: Readonly<Record<Difficulty, string>> = {
+  [DIFFICULTY_EASY]: "Easy",
+  [DIFFICULTY_MEDIUM]: "Medium",
+  [DIFFICULTY_HARD]: "Hard",
+  [DIFFICULTY_MYSTERY]: "???",
+};
 export const COPY_RULE_CRACKED_LABEL = "Cracked it: ";
 export const COPY_RULE_REVEALED_LABEL = "It reveals itself: ";
 export const COPY_NEXT_MACHINE = "Next machine";
