@@ -1027,10 +1027,10 @@
         ]
       ],
       "panelOps": [
-        "sort_asc",
+        "sort_desc",
+        "count",
         "sum",
-        "drop_last",
-        "max",
+        "keep_last_k",
         "mul_k",
         "keep_first_k"
       ]
@@ -1594,12 +1594,12 @@
         ]
       ],
       "panelOps": [
-        "sub_k",
+        "min",
         "add_k",
         "reverse",
-        "mul_k",
-        "last",
-        "first"
+        "sort_desc",
+        "drop_first",
+        "keep_first_k"
       ]
     },
     {
@@ -1974,9 +1974,9 @@
         "add_k",
         "keep_last_k",
         "keep_first_k",
-        "sort_asc",
+        "sum",
         "min",
-        "max"
+        "dedup"
       ]
     },
     {
@@ -2161,11 +2161,11 @@
         ]
       ],
       "panelOps": [
-        "drop_first",
-        "sort_desc",
-        "keep_first_k",
+        "count",
+        "sort_asc",
+        "last",
         "drop_last",
-        "sum",
+        "rotate_left",
         "keep_last_k"
       ]
     },
@@ -2728,10 +2728,10 @@
         ]
       ],
       "panelOps": [
-        "sum",
-        "count",
+        "sort_asc",
+        "drop_last",
         "add_k",
-        "keep_first_k",
+        "first",
         "min",
         "keep_last_k"
       ]
@@ -3289,12 +3289,12 @@
         ]
       ],
       "panelOps": [
-        "keep_first_k",
         "drop_first",
+        "dedup",
         "sort_desc",
         "sub_k",
         "min",
-        "count"
+        "sort_asc"
       ]
     },
     {
@@ -4791,10 +4791,10 @@
         ]
       ],
       "panelOps": [
-        "count",
-        "min",
-        "drop_last",
+        "max",
         "sum",
+        "drop_last",
+        "keep_first_k",
         "sort_desc",
         "keep_last_k"
       ]
@@ -4983,10 +4983,10 @@
       "panelOps": [
         "keep_last_k",
         "sub_k",
-        "keep_first_k",
-        "max",
-        "sort_desc",
-        "min"
+        "count",
+        "drop_first",
+        "first",
+        "max"
       ]
     },
     {
@@ -5356,11 +5356,11 @@
       ],
       "panelOps": [
         "reverse",
-        "last",
-        "mul_k",
+        "count",
+        "min",
         "add_k",
-        "first",
-        "sub_k"
+        "drop_first",
+        "sum"
       ]
     },
     {
@@ -5543,11 +5543,11 @@
       ],
       "panelOps": [
         "sub_k",
-        "last",
-        "mul_k",
+        "max",
+        "sort_asc",
         "reverse",
-        "add_k",
-        "first"
+        "min",
+        "keep_last_k"
       ]
     },
     {
@@ -5733,11 +5733,11 @@
       ],
       "panelOps": [
         "add_k",
+        "max",
         "min",
-        "drop_first",
-        "sum",
+        "count",
         "sort_asc",
-        "drop_last"
+        "drop_first"
       ]
     },
     {
@@ -6113,11 +6113,11 @@
       ],
       "panelOps": [
         "drop_last",
-        "count",
-        "sort_desc",
+        "min",
+        "keep_first_k",
         "sub_k",
-        "keep_last_k",
-        "min"
+        "sort_asc",
+        "sum"
       ]
     },
     {
@@ -6866,11 +6866,11 @@
         ]
       ],
       "panelOps": [
-        "sub_k",
-        "first",
+        "count",
+        "min",
         "add_k",
-        "mul_k",
-        "last",
+        "sort_asc",
+        "keep_first_k",
         "reverse"
       ]
     },
@@ -7810,11 +7810,11 @@
       ],
       "panelOps": [
         "reverse",
-        "last",
+        "keep_first_k",
         "add_k",
-        "first",
-        "mul_k",
-        "sub_k"
+        "sort_asc",
+        "max",
+        "sum"
       ]
     },
     {
@@ -8560,11 +8560,11 @@
         ]
       ],
       "panelOps": [
-        "keep_last_k",
-        "count",
-        "min",
-        "keep_first_k",
         "drop_last",
+        "sub_k",
+        "drop_first",
+        "keep_first_k",
+        "max",
         "add_k"
       ]
     },
@@ -8747,12 +8747,12 @@
         ]
       ],
       "panelOps": [
-        "drop_last",
-        "drop_first",
+        "keep_first_k",
+        "sort_asc",
         "sort_desc",
         "sub_k",
-        "max",
-        "min"
+        "keep_last_k",
+        "count_even"
       ]
     },
     {
@@ -9495,11 +9495,11 @@
         ]
       ],
       "panelOps": [
-        "sort_asc",
-        "drop_last",
-        "add_k",
+        "keep_first_k",
         "sum",
-        "min",
+        "add_k",
+        "drop_first",
+        "drop_last",
         "sort_desc"
       ]
     },
@@ -11374,10 +11374,10 @@
         ]
       ],
       "panelOps": [
+        "drop_first",
+        "sort_asc",
         "drop_last",
-        "max",
-        "sort_desc",
-        "keep_last_k",
+        "count_even",
         "sum",
         "keep_first_k"
       ]
@@ -11748,11 +11748,11 @@
         ]
       ],
       "panelOps": [
-        "drop_first",
-        "min",
-        "add_k",
         "sort_desc",
-        "sort_asc",
+        "keep_odd",
+        "add_k",
+        "keep_last_k",
+        "count",
         "keep_first_k"
       ]
     },
@@ -11935,12 +11935,12 @@
         ]
       ],
       "panelOps": [
-        "drop_last",
+        "drop_first",
         "keep_last_k",
-        "min",
+        "drop_last",
         "keep_first_k",
         "sort_desc",
-        "drop_first"
+        "sort_asc"
       ]
     },
     {
@@ -13446,11 +13446,11 @@
         ]
       ],
       "panelOps": [
-        "max",
-        "drop_first",
+        "drop_last",
+        "sort_asc",
         "add_k",
-        "sort_desc",
-        "keep_last_k",
+        "sum",
+        "count",
         "keep_first_k"
       ]
     },
@@ -13636,12 +13636,12 @@
         ]
       ],
       "panelOps": [
-        "max",
+        "sum",
         "sub_k",
-        "sort_desc",
+        "count",
         "keep_last_k",
-        "drop_last",
-        "keep_first_k"
+        "sort_desc",
+        "min"
       ]
     },
     {
@@ -14199,12 +14199,12 @@
         ]
       ],
       "panelOps": [
-        "sum",
+        "sort_desc",
         "keep_first_k",
-        "keep_last_k",
-        "min",
+        "max",
+        "swap_ends",
         "add_k",
-        "sort_desc"
+        "keep_last_k"
       ]
     },
     {
@@ -17402,10 +17402,10 @@
       "panelOps": [
         "reverse",
         "sub_k",
-        "mul_k",
-        "last",
-        "add_k",
-        "first"
+        "sort_desc",
+        "max",
+        "min",
+        "count"
       ]
     },
     {
@@ -17587,12 +17587,12 @@
         ]
       ],
       "panelOps": [
-        "drop_last",
+        "product",
         "add_k",
-        "keep_last_k",
+        "min",
         "keep_first_k",
-        "sort_desc",
-        "sort_asc"
+        "max",
+        "sort_desc"
       ]
     },
     {
@@ -18713,11 +18713,11 @@
       ],
       "panelOps": [
         "reverse",
-        "last",
-        "first",
-        "mul_k",
+        "drop_first",
+        "max",
+        "sort_desc",
         "add_k",
-        "sub_k"
+        "count"
       ]
     },
     {

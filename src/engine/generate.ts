@@ -115,6 +115,9 @@ const DIFFICULTY_ORDER: readonly Difficulty[] = [
 /** The slot index of the super easy opener, prepended at the front of the day. */
 const SUPER_EASY_SLOT_INDEX = 0;
 
+/** The slot index of the easy machine, which follows the opener. */
+const EASY_SLOT_INDEX = 1;
+
 /**
  * The operations the super easy opener may draw, as a single step rule: the visually
  * obvious one operation rules that read at a glance. This is the curated roster; nothing
@@ -791,7 +794,24 @@ function composeDay(date: string): DaySpec {
   const machines = DIFFICULTY_ORDER.map((difficulty) =>
     generateSlot(difficulty, date, difficulty === DIFFICULTY_SUPER_EASY ? superEasy : standard),
   );
-  return { date, machines };
+  return { date, machines: decollideEasyPanel(machines, date) };
+}
+
+/**
+ * Re-pads the easy slot's panel so it never shares the opener's option set. The opener is
+ * a single operation and easy is two, so the rules already differ; this keeps their panels
+ * from colliding by padding easy with operations the opener's panel does not use.
+ * @param machines The day's machines in slot order.
+ * @param date The date being generated, which seeds the panel.
+ * @returns The machines with the easy panel de-collided from the opener.
+ */
+function decollideEasyPanel(machines: readonly DayMachine[], date: string): DayMachine[] {
+  const opener = machines.at(SUPER_EASY_SLOT_INDEX);
+  const easy = machines.at(EASY_SLOT_INDEX);
+  if (!opener || !easy) return [...machines];
+  const exampleInputs = easy.examples.map((pair) => pair.input);
+  const panelOps = computePanelOps(easy.steps, easy.difficulty, exampleInputs, date, new Set(opener.panelOps));
+  return machines.map((machine, slot) => (slot === EASY_SLOT_INDEX ? { ...machine, panelOps } : machine));
 }
 
 /**

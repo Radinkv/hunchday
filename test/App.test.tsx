@@ -52,6 +52,17 @@ const WORD_MACHINE: Machine = {
   panelOps: ["length_map", "sort_alpha", "longest", "reverse"],
 };
 
+const SUPER_EASY_MACHINE: Machine = {
+  difficulty: "super_easy",
+  rule: "It adds 1 to every chip.",
+  ex: [
+    ["1 2", "2 3"],
+    ["4 5", "5 6"],
+  ],
+  ch: [["3 4", "4 5"]],
+  panelOps: ["add_k", "sub_k", "mul_k", "reverse", "max", "min"],
+};
+
 const POSITION_FIRST = "1st";
 const POSITION_SECOND = "2nd";
 const RETIRED_WORDS = ["Easy", "Medium", "Hard", "Warm-up"];
@@ -128,14 +139,14 @@ describe("App", () => {
     for (const word of RETIRED_WORDS) expect(container.textContent).not.toContain(word);
   });
 
-  it("gives medium a search box but leaves easy a bare list", () => {
-    const easy = render(<App machines={[NUMBER_MACHINE]} />);
+  it("leaves the opener bare but gives later tiers a search box", () => {
+    const opener = render(<App machines={[SUPER_EASY_MACHINE]} />);
     play();
     expect(screen.queryByRole("searchbox")).toBeNull();
-    easy.unmount();
+    opener.unmount();
     localStorage.clear();
 
-    render(<App machines={[WORD_MACHINE]} />);
+    render(<App machines={[NUMBER_MACHINE]} />);
     play();
     expect(screen.getByRole("searchbox")).toBeTruthy();
   });

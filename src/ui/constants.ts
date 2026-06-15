@@ -110,8 +110,9 @@ export const POSITION_LABELS: readonly string[] = ["1st", "2nd", "3rd", "4th"];
 /**
  * The tier's presentation rank, opener lowest, used only for panel affordance thresholds.
  * The panel grows in two steps: a search box at or above the search rank, the tabbed
- * folder at or above the tabs rank. So the opener and easy are bare lists, medium adds
- * search, and hard adds the tabbed folder.
+ * folder at or above the tabs rank. So only the opener is a bare list, easy and medium add
+ * a search box, and hard adds the tabbed folder, so every tier but the instant opener has
+ * a way to find any operation.
  */
 const DIFFICULTY_RANK: Partial<Record<Difficulty, number>> = {
   [DIFFICULTY_SUPER_EASY]: 0,
@@ -120,7 +121,7 @@ const DIFFICULTY_RANK: Partial<Record<Difficulty, number>> = {
   [DIFFICULTY_HARD]: 3,
 };
 const DIFFICULTY_RANK_FALLBACK = 0;
-export const PANEL_SEARCH_MIN_RANK = 2;
+export const PANEL_SEARCH_MIN_RANK = 1;
 export const PANEL_TABS_MIN_RANK = 3;
 
 /**

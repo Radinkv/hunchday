@@ -60,6 +60,9 @@ const SEED_SEPARATOR = "|";
 const PADDING_SALT = "panel-pad";
 const ORDERING_SALT = "panel-order";
 
+/** The default empty avoid set, used when a panel has no neighbouring panel to differ from. */
+const NO_AVOID: ReadonlySet<string> = new Set();
+
 /** The operations a player can pick as tiles: every operation except the affine map. */
 const TILE_OP_IDS: readonly string[] = REGISTRY.filter((op) => op.id !== OP_AFFINE.id).map((op) => op.id);
 
@@ -170,9 +173,10 @@ function paddingOpIds(
   section: string,
   need: number,
   seed: number,
+  avoid: ReadonlySet<string>,
 ): string[] {
   const taken = new Set(core);
-  return TILE_OP_IDS.filter((opId) => !taken.has(opId) && sectionOfOp(opId) === section)
+  return TILE_OP_IDS.filter((opId) => !taken.has(opId) && !avoid.has(opId) && sectionOfOp(opId) === section)
     .map((opId) => ({ opId, distance: Math.abs(getOp(opId).rung - topRung), key: hash32(opId, seed) }))
     .sort((a, b) => a.distance - b.distance || a.key - b.key)
     .slice(0, need)
@@ -213,6 +217,7 @@ export function computePanelOps(
   difficulty: Difficulty,
   exampleInputs: readonly Value[],
   date: string,
+  avoid: ReadonlySet<string> = NO_AVOID,
 ): string[] {
   const orderingSeed = hash32([date, difficulty, ORDERING_SALT].join(SEED_SEPARATOR));
   const target = PANEL_TARGETS[difficulty];
@@ -226,6 +231,6 @@ export function computePanelOps(
   const section = compose(steps).inputType === TYPE_NUM_LIST ? SECTION_NUMBERS : SECTION_VOCAB;
   const topRung = Math.max(...steps.map((aStep) => getOp(aStep.opId).rung));
   const paddingSeed = hash32([date, difficulty, PADDING_SALT].join(SEED_SEPARATOR));
-  const padding = paddingOpIds(core, topRung, section, target - core.length, paddingSeed);
+  const padding = paddingOpIds(core, topRung, section, target - core.length, paddingSeed, avoid);
   return seededShuffle([...core, ...padding], createRng(orderingSeed));
 }

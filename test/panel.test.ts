@@ -14,7 +14,8 @@ import { OP_ADD_K, OP_AFFINE, OP_MUL_K } from "../src/engine/ops";
 
 const EPOCH = "2026-06-16";
 const SAMPLE_DAYS = 16;
-const EASY_SLOT = 0;
+const SUPER_EASY_SLOT = 0;
+const EASY_SLOT = 1;
 const MS_PER_DAY = 86400000;
 const FRONT_POSITION_BOUND = 3;
 const MIN_DISTINCT_POSITIONS = 3;
@@ -48,13 +49,16 @@ function tileOpIdsOf(opId: string): readonly string[] {
 describe("operation panel", () => {
   it("produces an identical panel, in identical order, for the same date", () => {
     for (const date of SAMPLE_DATES) {
-      for (const machine of generateDay(date).machines) {
+      const spec = generateDay(date);
+      const openerPanel = new Set(spec.machines[SUPER_EASY_SLOT].panelOps);
+      spec.machines.forEach((machine, slot) => {
         const inputs = machine.examples.map((pair) => pair.input);
-        const first = computePanelOps(machine.steps, machine.difficulty, inputs, date);
-        const second = computePanelOps(machine.steps, machine.difficulty, inputs, date);
+        const avoid = slot === EASY_SLOT ? openerPanel : undefined;
+        const first = computePanelOps(machine.steps, machine.difficulty, inputs, date, avoid);
+        const second = computePanelOps(machine.steps, machine.difficulty, inputs, date, avoid);
         expect(first).toEqual(second);
         expect(machine.panelOps).toEqual(first);
-      }
+      });
     }
   });
 

@@ -149,15 +149,18 @@ export function ChipBuilder({
   const [query, setQuery] = useState("");
 
   const panelSet = new Set(panelOps);
+  const panelRank = new Map(panelOps.map((opId, index) => [opId, index]));
   const showSearch = panelShowsSearch(difficulty);
   const showTabs = panelShowsTabs(difficulty);
   const inPanel = (tile: OpTile): boolean => panelSet.has(tile.opId);
+  const byPanelOrder = (a: OpTile, b: OpTile): number =>
+    (panelRank.get(a.opId) ?? 0) - (panelRank.get(b.opId) ?? 0);
 
   const seedType = seedTypeOf(parseChips(challengeInput));
   const pickerType = listTypeOf(typeAfter(seedType, steps));
-  const flatTiles = tilesForType(pickerType).filter(inPanel);
+  const flatTiles = tilesForType(pickerType).filter(inPanel).sort(byPanelOrder);
   const tabs = groupedTilesForType(pickerType)
-    .map((tab) => ({ ...tab, tiles: tab.tiles.filter(inPanel) }))
+    .map((tab) => ({ ...tab, tiles: tab.tiles.filter(inPanel).sort(byPanelOrder) }))
     .filter((tab) => tab.tiles.length > 0);
   const activeFolder = tabs.find((tab) => tab.group === activeTab);
   const trimmedQuery = query.trim();
