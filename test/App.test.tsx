@@ -145,6 +145,18 @@ describe("App", () => {
     expect(screen.getByText(LABEL_MYSTERY)).toBeTruthy();
   });
 
+  it("gives medium a search box but leaves easy a bare list", () => {
+    const easy = render(<App machines={[NUMBER_MACHINE]} />);
+    play();
+    expect(screen.queryByRole("searchbox")).toBeNull();
+    easy.unmount();
+    localStorage.clear();
+
+    render(<App machines={[WORD_MACHINE]} />);
+    play();
+    expect(screen.getByRole("searchbox")).toBeTruthy();
+  });
+
   it("resumes the saved game on reload instead of showing the intro", () => {
     const first = render(<App machines={[NUMBER_MACHINE]} />);
     play();

@@ -16,7 +16,8 @@ import {
   type Step,
 } from "./palette";
 import {
-  panelIsFlat,
+  panelShowsSearch,
+  panelShowsTabs,
   CLASS_BOTTOM,
   CLASS_BUILDER,
   CLASS_CLEAR,
@@ -148,7 +149,8 @@ export function ChipBuilder({
   const [query, setQuery] = useState("");
 
   const panelSet = new Set(panelOps);
-  const flat = panelIsFlat(difficulty);
+  const showSearch = panelShowsSearch(difficulty);
+  const showTabs = panelShowsTabs(difficulty);
   const inPanel = (tile: OpTile): boolean => panelSet.has(tile.opId);
 
   const seedType = seedTypeOf(parseChips(challengeInput));
@@ -263,21 +265,20 @@ export function ChipBuilder({
       </ol>
 
       <div className={CLASS_PICKER} aria-label={COPY_PICKER_LABEL}>
-        {flat ? (
-          <ul className={CLASS_PAGE}>{flatTiles.map(renderOp)}</ul>
-        ) : (
-          <>
-            <input
-              type="search"
-              className={CLASS_SEARCH}
-              value={query}
-              aria-label={COPY_SEARCH_LABEL}
-              placeholder={COPY_SEARCH_PLACEHOLDER}
-              onChange={(event) => setQuery(event.target.value)}
-            />
-            {searching ? (
-              searchContent
-            ) : (
+        {showSearch ? (
+          <input
+            type="search"
+            className={CLASS_SEARCH}
+            value={query}
+            aria-label={COPY_SEARCH_LABEL}
+            placeholder={COPY_SEARCH_PLACEHOLDER}
+            onChange={(event) => setQuery(event.target.value)}
+          />
+        ) : null}
+        {(() => {
+          if (showSearch && searching) return searchContent;
+          if (showTabs) {
+            return (
               <>
                 <div className={CLASS_TABS} role="tablist">
                   <FolderIcon />
@@ -296,9 +297,10 @@ export function ChipBuilder({
                 </div>
                 {hasActiveFolder ? <ul className={CLASS_PAGE} role="tabpanel">{activeFolderTiles.map(renderOp)}</ul> : null}
               </>
-            )}
-          </>
-        )}
+            );
+          }
+          return <ul className={CLASS_PAGE}>{flatTiles.map(renderOp)}</ul>;
+        })()}
       </div>
 
       <button type="button" className={CLASS_FEED} onClick={feed}>

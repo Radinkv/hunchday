@@ -89,9 +89,11 @@ export const DIFFICULTY_LABELS: Readonly<Record<Difficulty, string>> = {
 };
 
 /**
- * Difficulty ordering for presentation thresholds, easy lowest. The panel renders as a
- * flat list of operations at or below the flat rank, and as the searchable tabbed palette
- * above it. This is the single knob for where the panel switches from list to palette.
+ * Difficulty ordering for presentation thresholds, easy lowest. The panel grows its
+ * affordances with difficulty in two steps: a search box appears at or above the search
+ * rank, and the tabbed folder appears at or above the tabs rank. So easy is a bare list,
+ * medium adds search over its short list, and hard adds the tabbed folder. These two
+ * ranks are the only knobs for where each affordance switches on.
  */
 const DIFFICULTY_RANK: Readonly<Record<Difficulty, number>> = {
   [DIFFICULTY_EASY]: 0,
@@ -99,16 +101,25 @@ const DIFFICULTY_RANK: Readonly<Record<Difficulty, number>> = {
   [DIFFICULTY_HARD]: 2,
   [DIFFICULTY_MYSTERY]: 3,
 };
-export const PANEL_FLAT_MAX_RANK = 1;
+export const PANEL_SEARCH_MIN_RANK = 1;
+export const PANEL_TABS_MIN_RANK = 2;
 
 /**
- * Reports whether a difficulty shows the flat operation list rather than the tabbed,
- * searchable palette.
+ * Reports whether a difficulty shows the search box over its operation list.
  * @param difficulty The machine difficulty.
- * @returns True for a flat list, false for the tabbed palette.
+ * @returns True when the search box is shown.
  */
-export function panelIsFlat(difficulty: Difficulty): boolean {
-  return DIFFICULTY_RANK[difficulty] <= PANEL_FLAT_MAX_RANK;
+export function panelShowsSearch(difficulty: Difficulty): boolean {
+  return DIFFICULTY_RANK[difficulty] >= PANEL_SEARCH_MIN_RANK;
+}
+
+/**
+ * Reports whether a difficulty shows the tabbed folder rather than a flat list.
+ * @param difficulty The machine difficulty.
+ * @returns True when the tabbed folder is shown.
+ */
+export function panelShowsTabs(difficulty: Difficulty): boolean {
+  return DIFFICULTY_RANK[difficulty] >= PANEL_TABS_MIN_RANK;
 }
 export const COPY_RULE_CRACKED_LABEL = "Cracked it: ";
 export const COPY_RULE_REVEALED_LABEL = "It reveals itself: ";
