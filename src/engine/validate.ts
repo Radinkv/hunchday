@@ -30,6 +30,20 @@ import {
   isStrictlySimpler,
   wordBehaviorClasses,
 } from "./universe";
+import {
+  ALL_PATTERNS,
+  matchPatterns,
+  PATTERN_C1,
+  PATTERN_C2,
+  PATTERN_C3,
+  PATTERN_C4,
+  PATTERN_L1,
+  PATTERN_L2,
+  PATTERN_L3,
+  PATTERN_L4,
+  PATTERN_L5,
+  PATTERN_L6,
+} from "./fairness";
 
 export const DIFFICULTY_EASY = "easy";
 export const DIFFICULTY_MEDIUM = "medium";
@@ -72,6 +86,32 @@ export const REASON_EASY_NOT_UNIQUE = "easy_not_unique";
 export const REASON_NO_DECOY = "no_decoy";
 export const REASON_NOT_AMBIGUOUS_ENOUGH = "not_ambiguous_enough";
 export const REASON_NOT_DISCRIMINATING = "not_discriminating";
+
+/** The structural fairness rejection reasons, one per catalog pattern. */
+export const REASON_L1 = "unfair_l1";
+export const REASON_L2 = "unfair_l2";
+export const REASON_L3 = "unfair_l3";
+export const REASON_L4 = "unfair_l4";
+export const REASON_C1 = "unfair_c1";
+export const REASON_C2 = "unfair_c2";
+export const REASON_C3 = "unfair_c3";
+export const REASON_C4 = "unfair_c4";
+export const REASON_L5 = "unfair_l5";
+export const REASON_L6 = "unfair_l6";
+
+/** Maps each catalog pattern identifier to its rejection reason. */
+const FAIRNESS_REASONS: Readonly<Record<string, string>> = {
+  [PATTERN_L1]: REASON_L1,
+  [PATTERN_L2]: REASON_L2,
+  [PATTERN_L3]: REASON_L3,
+  [PATTERN_L4]: REASON_L4,
+  [PATTERN_C1]: REASON_C1,
+  [PATTERN_C2]: REASON_C2,
+  [PATTERN_C3]: REASON_C3,
+  [PATTERN_C4]: REASON_C4,
+  [PATTERN_L5]: REASON_L5,
+  [PATTERN_L6]: REASON_L6,
+};
 
 /** The number of example pairs a candidate must carry. */
 const EXAMPLE_COUNT = 2;
@@ -285,6 +325,23 @@ function checkCollapse(candidate: Candidate, universe: UniverseView): Validation
   const behaviorClass = universe.classes.get(universe.fingerprintSteps(candidate.steps));
   if (behaviorClass && isStrictlySimpler(behaviorClass, complexityOf(candidate.steps))) {
     return fail(REASON_COLLAPSE);
+  }
+  return PASS;
+}
+
+/**
+ * Checks the structural fairness gate: the candidate's operation sequence must not match
+ * any catalogued invertibility failure. Reasoned over shape alone, so it runs before any
+ * behavioral reasoning. When several patterns match, the first in catalog order names the
+ * reason.
+ * @param candidate The candidate to check.
+ * @returns A passing result or the first fairness failure.
+ */
+function checkFairness(candidate: Candidate): ValidationResult {
+  const matched = matchPatterns(candidate.steps);
+  for (const pattern of ALL_PATTERNS) {
+    const reason = FAIRNESS_REASONS[pattern];
+    if (reason && matched.has(pattern)) return fail(reason);
   }
   return PASS;
 }
@@ -520,6 +577,9 @@ export function validate(candidate: Candidate): ValidationResult {
 
   const collapse = checkCollapse(candidate, universe);
   if (!collapse.ok) return collapse;
+
+  const fairness = checkFairness(candidate);
+  if (!fairness.ok) return fairness;
 
   return checkAmbiguity(candidate, universe);
 }

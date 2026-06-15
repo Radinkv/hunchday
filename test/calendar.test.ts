@@ -15,7 +15,7 @@ const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
 const IN_WINDOW_DATE = "2026-06-20";
 const BEFORE_WINDOW_DATE = "2020-01-01";
 const AFTER_WINDOW_DATE = "2030-01-01";
-const EXPECTED_MACHINE_COUNT = 4;
+const EXPECTED_MACHINE_COUNT = 3;
 
 /** The permanent ceiling on how many chips an input may show, the five chip rule. */
 const MAX_INPUT_CHIPS = 5;

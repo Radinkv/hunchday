@@ -4,7 +4,6 @@ import {
   DIFFICULTY_EASY,
   DIFFICULTY_HARD,
   DIFFICULTY_MEDIUM,
-  DIFFICULTY_MYSTERY,
   validate,
   type Difficulty,
 } from "../src/engine/validate";
@@ -18,14 +17,13 @@ import {
  * deadlocks.
  */
 
-const EXPECTED_MACHINE_COUNT = 4;
+const EXPECTED_MACHINE_COUNT = 3;
 const EXAMPLE_COUNT = 2;
 const CHALLENGE_COUNT = 5;
 const SLOT_ORDER: readonly Difficulty[] = [
   DIFFICULTY_EASY,
   DIFFICULTY_MEDIUM,
   DIFFICULTY_HARD,
-  DIFFICULTY_MYSTERY,
 ];
 
 const SOAK_START = "2026-06-20";
@@ -34,8 +32,8 @@ const NO_REPEAT_WINDOW = 89;
 const MS_PER_DAY = 86400000;
 
 const PINNED_SIGNATURES: Readonly<Record<string, string>> = {
-  "2026-06-20": 'sub_k{"k":5}>keep_first_k{"k":2} ## sub_k{"k":4}>sub_k{"k":5}>affine{"a":3,"b":2} ## mul_k{"k":3}>min_normalize{}>keep_dups{} ## keep_gt_k{"k":3}>digit_sum_map{}>keep_first_k{"k":2}',
-  "2026-07-01": 'add_k{"k":1}>keep_first_k{"k":2} ## letter_count_squared{}>mul_k{"k":2} ## drop_last{}>keep_odd{}>min_normalize{} ## digit_sum_map{}>add_k{"k":6}>keep_first_k{"k":4}',
+  "2026-06-20": 'sub_k{"k":5}>keep_first_k{"k":2} ## mul_k{"k":2}>keep_first_k{"k":2}>keep_lt_k{"k":9} ## length_map{}>dedup{}>rotate_left{}',
+  "2026-07-01": 'add_k{"k":1}>keep_first_k{"k":2} ## add_k{"k":3}>sort_asc{}>keep_lt_k{"k":9} ## length_map{}>drop_first{}>min_normalize{}',
 };
 
 /**

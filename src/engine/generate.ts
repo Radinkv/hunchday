@@ -83,12 +83,17 @@ export interface DaySpec {
 /** The salt that fixes this generator version. Changing it changes every puzzle. */
 const GENERATOR_SALT = "hunchday-v1";
 
-/** The slots of a day, in the order they are shown. */
+/**
+ * The slots of a day, in the order they are shown. The mystery slot was retired: its
+ * structural definition (three operations at the top rung) selects for exactly the
+ * computation and reshape operations the fairness catalog rejects, so a fair mystery
+ * pool could not be sustained. A behavioral fourth tier remains a possible future
+ * feature. The mystery difficulty value is kept for the type and label only.
+ */
 const DIFFICULTY_ORDER: readonly Difficulty[] = [
   DIFFICULTY_EASY,
   DIFFICULTY_MEDIUM,
   DIFFICULTY_HARD,
-  DIFFICULTY_MYSTERY,
 ];
 
 const EXAMPLE_COUNT = 2;

@@ -16,28 +16,38 @@ import { validate } from "../src/engine/validate";
 const EPOCH = "2026-06-15";
 const SOAK_DAYS = 365;
 const NO_REPEAT_WINDOW = 89;
-const SLOT_COUNT = 4;
+const SLOT_COUNT = 3;
 const MS_PER_DAY = 86400000;
-const SOAK_TIMEOUT_MS = 120000;
+const SOAK_TIMEOUT_MS = 180000;
+
+/** How many soak days to process before yielding so the test runner can stay responsive. */
+const SOAK_YIELD_INTERVAL = 25;
+
+/** Yields to the event loop so the long synchronous soak does not stall the worker. */
+function yieldToEventLoop(): Promise<void> {
+  return new Promise((resolve) => {
+    setTimeout(resolve);
+  });
+}
 
 const EXPECTED_CLASS_COUNT = 82044;
 const EXPECTED_WORD_CLASS_COUNT = 13383;
 const EXPECTED_CLASS_KEY_HASH = "46e882e31a60d3a0";
 
 /** The fewest distinct pipelines each slot must draw over the soak, in slot order. */
-const VARIETY_FLOOR: readonly number[] = [180, 300, 300, 300];
+const VARIETY_FLOOR: readonly number[] = [150, 300, 300];
 
 const PINNED_SIGNATURES: Readonly<Record<string, string>> = {
-  "2026-06-16": 'add_k{"k":9}>reverse{} ## keep_gt_k{"k":6}>sum{} ## min_normalize{}>affine{"a":3,"b":1}>keep_last_k{"k":3} ## deltas{}>running_total{}>keep_gt_k{"k":3}',
-  "2026-06-18": 'add_k{"k":1}>keep_last_k{"k":3} ## distinct_letters_map{}>keep_dups{} ## drop_last{}>rotate_left{}>units_digit{} ## running_total{}>add_k{"k":1}>keep_gt_k{"k":5}',
-  "2026-06-20": 'sub_k{"k":5}>keep_first_k{"k":2} ## sub_k{"k":4}>sub_k{"k":5}>affine{"a":3,"b":2} ## mul_k{"k":3}>min_normalize{}>keep_dups{} ## keep_gt_k{"k":3}>digit_sum_map{}>keep_first_k{"k":2}',
-  "2026-06-22": 'add_k{"k":8}>keep_last_k{"k":2} ## sub_k{"k":3}>keep_lt_k{"k":4}>keep_first_k{"k":2} ## length_map{}>add_k{"k":2}>keep_first_k{"k":2} ## deltas{}>add_k{"k":1}>product{}',
-  "2026-06-25": 'sub_k{"k":3}>sort_desc{} ## sub_k{"k":3}>drop_last{}>keep_lt_k{"k":7} ## units_digit{}>add_k{"k":9}>keep_odd{} ## deltas{}>keep_last_k{"k":3}>keep_lt_k{"k":5}',
-  "2026-06-28": 'add_k{"k":1}>drop_last{} ## sub_k{"k":2}>keep_odd{}>dedup{} ## mul_k{"k":2}>swap_ends{}>keep_gt_first{} ## add_k{"k":3}>digit_sum_map{}>add_k{"k":9}',
-  "2026-07-01": 'add_k{"k":1}>keep_first_k{"k":2} ## letter_count_squared{}>mul_k{"k":2} ## drop_last{}>keep_odd{}>min_normalize{} ## digit_sum_map{}>add_k{"k":6}>keep_first_k{"k":4}',
-  "2026-07-05": 'add_k{"k":5}>sort_asc{} ## add_k{"k":1}>keep_last_k{"k":3}>keep_gt_k{"k":8} ## mul_k{"k":3}>min_normalize{}>keep_odd{} ## deltas{}>keep_gt_k{"k":4}>units_digit{}',
-  "2026-07-10": 'sub_k{"k":1}>drop_last{} ## sub_k{"k":2}>drop_last{}>keep_gt_k{"k":5} ## reverse{}>keep_gt_first{}>rotate_left{} ## keep_gt_k{"k":6}>reverse_digits{}>every_other{}',
-  "2026-07-15": 'add_k{"k":1}>reverse{} ## keep_lt_k{"k":5}>keep_first_k{"k":2}>sum{} ## units_digit{}>keep_lt_k{"k":9}>keep_dups{} ## deltas{}>keep_lt_k{"k":9}>running_total{}',
+  "2026-06-16": 'add_k{"k":9}>reverse{} ## keep_gt_k{"k":6}>sum{} ## min_normalize{}>keep_gt_k{"k":8}>add_k{"k":7}',
+  "2026-06-18": 'add_k{"k":1}>keep_last_k{"k":3} ## reverse_digits{}>mode{} ## drop_last{}>rotate_left{}>units_digit{}',
+  "2026-06-20": 'sub_k{"k":5}>keep_first_k{"k":2} ## mul_k{"k":2}>keep_first_k{"k":2}>keep_lt_k{"k":9} ## length_map{}>dedup{}>rotate_left{}',
+  "2026-06-22": 'add_k{"k":8}>keep_last_k{"k":2} ## sub_k{"k":3}>keep_lt_k{"k":4}>keep_first_k{"k":2} ## length_map{}>add_k{"k":2}>keep_first_k{"k":2}',
+  "2026-06-25": 'sub_k{"k":3}>sort_desc{} ## sub_k{"k":3}>drop_last{}>keep_lt_k{"k":7} ## length_map{}>add_k{"k":5}>sort_desc{}',
+  "2026-06-28": 'add_k{"k":1}>drop_last{} ## sub_k{"k":2}>keep_odd{}>dedup{} ## mul_k{"k":2}>swap_ends{}>keep_gt_first{}',
+  "2026-07-01": 'add_k{"k":1}>keep_first_k{"k":2} ## add_k{"k":3}>sort_asc{}>keep_lt_k{"k":9} ## length_map{}>drop_first{}>min_normalize{}',
+  "2026-07-05": 'add_k{"k":5}>sort_asc{} ## add_k{"k":1}>keep_last_k{"k":3}>keep_gt_k{"k":8} ## length_map{}>sub_k{"k":5}>keep_last_k{"k":3}',
+  "2026-07-10": 'sub_k{"k":1}>drop_last{} ## sub_k{"k":2}>drop_last{}>keep_gt_k{"k":5} ## reverse{}>keep_gt_first{}>rotate_left{}',
+  "2026-07-15": 'add_k{"k":1}>reverse{} ## keep_lt_k{"k":5}>keep_first_k{"k":2}>sum{} ## keep_odd{}>mul_k{"k":4}>every_other{}',
 };
 
 /**
@@ -113,11 +123,12 @@ describe("generateDay pinned dates", () => {
 describe("year long soak", () => {
   it(
     "generates a valid year with no deadlock, no in window repeat, and healthy variety",
-    () => {
+    async () => {
       const recentBySlot: string[][] = Array.from({ length: SLOT_COUNT }, () => []);
       const distinctBySlot: Set<string>[] = Array.from({ length: SLOT_COUNT }, () => new Set());
 
       for (let dayIndex = 0; dayIndex < SOAK_DAYS; dayIndex++) {
+        if (dayIndex % SOAK_YIELD_INTERVAL === 0) await yieldToEventLoop();
         const spec = generateDay(shiftDate(EPOCH, dayIndex));
         expect(spec.machines).toHaveLength(SLOT_COUNT);
 

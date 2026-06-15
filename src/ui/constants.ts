@@ -178,4 +178,4 @@ export const CHOMP_DURATION_MS = 180;
 export const COPY_WORDMARK = "Hunchday";
 export const COPY_TAGLINE = "Daily machine puzzles";
 export const COPY_PLAY = "Play";
-export const COPY_INTRO_LEAD = "Four machines today. Work out what each one does, then prove it twice.";
+export const COPY_INTRO_LEAD = "Three machines today. Work out what each one does, then prove it twice.";
