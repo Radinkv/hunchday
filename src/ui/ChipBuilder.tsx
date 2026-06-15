@@ -1,6 +1,7 @@
 import { useState, type ReactNode } from "react";
 import { getOp } from "../engine/ops";
 import type { OpDef, Params, ParamSpec } from "../engine/ops-types";
+import type { Difficulty } from "../game/types";
 import {
   applyTrail,
   groupedTilesForType,
@@ -8,12 +9,15 @@ import {
   parseChips,
   searchTiles,
   seedTypeOf,
+  tilesForType,
   typeAfter,
   valueToChips,
   type OpTile,
   type Step,
 } from "./palette";
 import {
+  panelShowsSearch,
+  panelShowsTabs,
   CLASS_BOTTOM,
   CLASS_BUILDER,
   CLASS_CLEAR,
@@ -131,36 +135,60 @@ function FolderIcon() {
  */
 export function ChipBuilder({
   challengeInput,
+  difficulty,
+  panelOps,
   onFeed,
 }: {
   readonly challengeInput: string;
+  readonly difficulty: Difficulty;
+  readonly panelOps: readonly string[];
   readonly onFeed: (guess: string) => void;
 }) {
   const [steps, setSteps] = useState<readonly Step[]>(NO_STEPS);
   const [activeTab, setActiveTab] = useState(NO_TAB);
   const [query, setQuery] = useState("");
 
+  const panelSet = new Set(panelOps);
+  const showSearch = panelShowsSearch(difficulty);
+  const showTabs = panelShowsTabs(difficulty);
+  const inPanel = (tile: OpTile): boolean => panelSet.has(tile.opId);
+
   const seedType = seedTypeOf(parseChips(challengeInput));
   const pickerType = listTypeOf(typeAfter(seedType, steps));
-  const tabs = groupedTilesForType(pickerType);
+  const flatTiles = tilesForType(pickerType).filter(inPanel);
+  const tabs = groupedTilesForType(pickerType)
+    .map((tab) => ({ ...tab, tiles: tab.tiles.filter(inPanel) }))
+    .filter((tab) => tab.tiles.length > 0);
   const activeFolder = tabs.find((tab) => tab.group === activeTab);
-  const searching = query.trim().length > 0;
-  const results = searching ? searchTiles(pickerType, query) : NO_TILES;
+  const trimmedQuery = query.trim();
+  const searching = trimmedQuery.length > 0;
+  const results = searching ? searchTiles(pickerType, trimmedQuery).filter(inPanel) : NO_TILES;
+  const hasSteps = steps.length > 0;
+  const hasResults = results.length > 0;
+  const activeFolderTiles = activeFolder?.tiles ?? NO_TILES;
+  const hasActiveFolder = activeFolderTiles.length > 0;
 
   const addStep = (tile: OpTile): void => {
-    setSteps([...steps, { opId: tile.opId, params: defaultParams(tile) }]);
+    setSteps((previous) => [...previous, { opId: tile.opId, params: defaultParams(tile) }]);
     setQuery("");
   };
-  const removeFrom = (index: number): void => setSteps(steps.slice(0, index));
+  const removeStep = (index: number): void => setSteps((previous) => previous.filter((_, at) => at !== index));
   const cycleParam = (index: number): void => {
-    const spec = getOp(steps[index].opId).params.at(0);
+    const step = steps[index];
+    if (!step) return;
+    const spec = getOp(step.opId).params.at(0);
     if (!spec) return;
-    const current = steps[index].params[spec.name] ?? spec.min;
+    const current = step.params[spec.name] ?? spec.min;
     const next = current >= spec.max ? spec.min : current + 1;
-    setSteps(steps.map((step, at) => (at === index ? { opId: step.opId, params: { [spec.name]: next } } : step)));
+    setSteps((previous) =>
+      previous.map((element, at) =>
+        at === index ? { opId: element.opId, params: { [spec.name]: next } } : element,
+      ),
+    );
   };
   const clear = (): void => setSteps(NO_STEPS);
   const feed = (): void => onFeed(valueToChips(applyTrail(parseChips(challengeInput), steps)).join(" "));
+  const toggleTab = (group: string): void => setActiveTab((previous) => (previous === group ? NO_TAB : group));
 
   const stepContent = (op: OpDef, step: Step, index: number, spec: ParamSpec): ReactNode => {
     const value = step.params[spec.name] ?? spec.min;
@@ -208,7 +236,7 @@ export function ChipBuilder({
           type="button"
           className={CLASS_STEP_REMOVE}
           aria-label={COPY_REMOVE_FROM_PREFIX + stepNumber}
-          onClick={() => removeFrom(index)}
+          onClick={() => removeStep(index)}
         >
           {COPY_STEP_REMOVE_GLYPH}
         </button>
@@ -216,9 +244,15 @@ export function ChipBuilder({
     );
   };
 
+  const searchContent = hasResults ? (
+    <ul className={CLASS_PAGE}>{results.map(renderOp)}</ul>
+  ) : (
+    <p className={CLASS_NO_MATCHES}>{COPY_NO_MATCHES}</p>
+  );
+
   return (
     <div className={CLASS_BUILDER + " " + CLASS_BOTTOM}>
-      {steps.length > 0 ? (
+      {hasSteps ? (
         <div className={CLASS_RECIPE_HEAD}>
           <span className={CLASS_RECIPE_HEAD_LABEL}>{COPY_RECIPE_LABEL}</span>
           <button type="button" className={CLASS_CLEAR} onClick={clear}>
@@ -227,54 +261,46 @@ export function ChipBuilder({
         </div>
       ) : null}
       <ol className={CLASS_RECIPE} aria-label={COPY_RECIPE_LABEL} aria-live="polite">
-        {steps.length === 0 ? <li className={CLASS_RECIPE_EMPTY}>{COPY_RECIPE_EMPTY}</li> : steps.map((element, index) => renderStep(element, index))}
+        {hasSteps ? steps.map((element, index) => renderStep(element, index)) : <li className={CLASS_RECIPE_EMPTY}>{COPY_RECIPE_EMPTY}</li>}
       </ol>
 
       <div className={CLASS_PICKER} aria-label={COPY_PICKER_LABEL}>
-        <input
-          type="search"
-          className={CLASS_SEARCH}
-          value={query}
-          aria-label={COPY_SEARCH_LABEL}
-          placeholder={COPY_SEARCH_PLACEHOLDER}
-          onChange={(event) => setQuery(event.target.value)}
-        />
-        {searching ? (
-          (() => {
-            if (results.length > 0) {
-              return <ul className={CLASS_PAGE}>{results.map(renderOp)}</ul>;
-            }
-            return <p className={CLASS_NO_MATCHES}>{COPY_NO_MATCHES}</p>;
-          })()
-        ) : (
-          <>
-            <div className={CLASS_TABS} role="tablist">
-              <FolderIcon />
-              {tabs.map((tab) => (
-                <button
-                  key={tab.group}
-                  type="button"
-                  role="tab"
-                  aria-selected={tab.group === activeTab}
-                  className={CLASS_TAB + (tab.group === activeTab ? " " + CLASS_TAB_ACTIVE : "")}
-                  onClick={() => setActiveTab(activeTab === tab.group ? NO_TAB : tab.group)}
-                >
-                  {tab.label}
-                </button>
-              ))}
-            </div>
-            {(() => {
-              if (activeFolder) {
-                return (
-                  <ul className={CLASS_PAGE} role="tabpanel">
-                    {activeFolder.tiles.map(renderOp)}
-                  </ul>
-                );
-              }
-              return null;
-            })()}
-          </>
-        )}
+        {showSearch ? (
+          <input
+            type="search"
+            className={CLASS_SEARCH}
+            value={query}
+            aria-label={COPY_SEARCH_LABEL}
+            placeholder={COPY_SEARCH_PLACEHOLDER}
+            onChange={(event) => setQuery(event.target.value)}
+          />
+        ) : null}
+        {(() => {
+          if (showSearch && searching) return searchContent;
+          if (showTabs) {
+            return (
+              <>
+                <div className={CLASS_TABS} role="tablist">
+                  <FolderIcon />
+                  {tabs.map((tab) => (
+                    <button
+                      key={tab.group}
+                      type="button"
+                      role="tab"
+                      aria-selected={tab.group === activeTab}
+                      className={CLASS_TAB + (tab.group === activeTab ? " " + CLASS_TAB_ACTIVE : "")}
+                      onClick={() => toggleTab(tab.group)}
+                    >
+                      {tab.label}
+                    </button>
+                  ))}
+                </div>
+                {hasActiveFolder ? <ul className={CLASS_PAGE} role="tabpanel">{activeFolderTiles.map(renderOp)}</ul> : null}
+              </>
+            );
+          }
+          return <ul className={CLASS_PAGE}>{flatTiles.map(renderOp)}</ul>;
+        })()}
       </div>
 
       <button type="button" className={CLASS_FEED} onClick={feed}>

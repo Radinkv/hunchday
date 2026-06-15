@@ -30,7 +30,22 @@ import {
   isStrictlySimpler,
   wordBehaviorClasses,
 } from "./universe";
+import {
+  ALL_PATTERNS,
+  matchPatterns,
+  PATTERN_C1,
+  PATTERN_C2,
+  PATTERN_C3,
+  PATTERN_C4,
+  PATTERN_L1,
+  PATTERN_L2,
+  PATTERN_L3,
+  PATTERN_L4,
+  PATTERN_L5,
+  PATTERN_L6,
+} from "./fairness";
 
+export const DIFFICULTY_SUPER_EASY = "super_easy";
 export const DIFFICULTY_EASY = "easy";
 export const DIFFICULTY_MEDIUM = "medium";
 export const DIFFICULTY_HARD = "hard";
@@ -38,6 +53,7 @@ export const DIFFICULTY_MYSTERY = "mystery";
 
 /** The difficulty slot a candidate is generated for. */
 export type Difficulty =
+  | typeof DIFFICULTY_SUPER_EASY
   | typeof DIFFICULTY_EASY
   | typeof DIFFICULTY_MEDIUM
   | typeof DIFFICULTY_HARD
@@ -72,6 +88,32 @@ export const REASON_EASY_NOT_UNIQUE = "easy_not_unique";
 export const REASON_NO_DECOY = "no_decoy";
 export const REASON_NOT_AMBIGUOUS_ENOUGH = "not_ambiguous_enough";
 export const REASON_NOT_DISCRIMINATING = "not_discriminating";
+
+/** The structural fairness rejection reasons, one per catalog pattern. */
+export const REASON_L1 = "unfair_l1";
+export const REASON_L2 = "unfair_l2";
+export const REASON_L3 = "unfair_l3";
+export const REASON_L4 = "unfair_l4";
+export const REASON_C1 = "unfair_c1";
+export const REASON_C2 = "unfair_c2";
+export const REASON_C3 = "unfair_c3";
+export const REASON_C4 = "unfair_c4";
+export const REASON_L5 = "unfair_l5";
+export const REASON_L6 = "unfair_l6";
+
+/** Maps each catalog pattern identifier to its rejection reason. */
+const FAIRNESS_REASONS: Readonly<Record<string, string>> = {
+  [PATTERN_L1]: REASON_L1,
+  [PATTERN_L2]: REASON_L2,
+  [PATTERN_L3]: REASON_L3,
+  [PATTERN_L4]: REASON_L4,
+  [PATTERN_C1]: REASON_C1,
+  [PATTERN_C2]: REASON_C2,
+  [PATTERN_C3]: REASON_C3,
+  [PATTERN_C4]: REASON_C4,
+  [PATTERN_L5]: REASON_L5,
+  [PATTERN_L6]: REASON_L6,
+};
 
 /** The number of example pairs a candidate must carry. */
 const EXAMPLE_COUNT = 2;
@@ -120,6 +162,7 @@ export interface SlotPolicy {
  * near misses a player would really consider rather than against the whole universe.
  */
 export const SLOT_POLICIES: Readonly<Record<Difficulty, SlotPolicy>> = {
+  [DIFFICULTY_SUPER_EASY]: { maxLength: 1, ceiling: 5, requireDecoy: false },
   [DIFFICULTY_EASY]: { maxLength: 2, ceiling: 2, requireDecoy: false },
   [DIFFICULTY_MEDIUM]: { maxLength: 2, ceiling: 3, requireDecoy: false },
   [DIFFICULTY_HARD]: { maxLength: 2, ceiling: 4, requireDecoy: false },
@@ -289,6 +332,23 @@ function checkCollapse(candidate: Candidate, universe: UniverseView): Validation
   return PASS;
 }
 
+/**
+ * Checks the structural fairness gate: the candidate's operation sequence must not match
+ * any catalogued invertibility failure. Reasoned over shape alone, so it runs before any
+ * behavioral reasoning. When several patterns match, the first in catalog order names the
+ * reason.
+ * @param candidate The candidate to check.
+ * @returns A passing result or the first fairness failure.
+ */
+function checkFairness(candidate: Candidate): ValidationResult {
+  const matched = matchPatterns(candidate.steps);
+  for (const pattern of ALL_PATTERNS) {
+    const reason = FAIRNESS_REASONS[pattern];
+    if (reason && matched.has(pattern)) return fail(reason);
+  }
+  return PASS;
+}
+
 /** A behavior class evaluated on a candidate's inputs. */
 interface Evaluation {
   readonly fingerprint: string;
@@ -436,7 +496,7 @@ function checkSolvableAmbiguity(snapshot: AmbiguitySnapshot, candidate: Candidat
 
   if (survivorsAfterBoth.length > MAX_SURVIVORS_SOLVABLE) return fail(REASON_TOO_AMBIGUOUS);
 
-  if (candidate.difficulty === DIFFICULTY_EASY) {
+  if (candidate.difficulty === DIFFICULTY_EASY || candidate.difficulty === DIFFICULTY_SUPER_EASY) {
     const uniqueAndTrue =
       survivorsAfterFirst.length === UNIQUE_SURVIVOR_COUNT && survivorsAfterFirst[0].fingerprint === snapshot.trueFingerprint;
     if (!uniqueAndTrue) return fail(REASON_EASY_NOT_UNIQUE);
@@ -520,6 +580,9 @@ export function validate(candidate: Candidate): ValidationResult {
 
   const collapse = checkCollapse(candidate, universe);
   if (!collapse.ok) return collapse;
+
+  const fairness = checkFairness(candidate);
+  if (!fairness.ok) return fairness;
 
   return checkAmbiguity(candidate, universe);
 }

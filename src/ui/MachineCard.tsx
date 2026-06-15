@@ -13,35 +13,30 @@ import {
 } from "../game/types";
 import {
   ARROW_GLYPH,
-  VERSUS_GLYPH,
-  CHOMP_DURATION_MS,
   CLASS_ARROW,
   CLASS_BOT,
   CLASS_BOTTOM,
+  CLASS_CELL_LEFT,
+  CLASS_CELL_RIGHT,
   CLASS_CHIP,
-  CLASS_CHIP_GUESS,
   CLASS_CHIP_INPUT,
   CLASS_CHIP_OUTPUT,
   CLASS_CHOMP,
-  CLASS_VERSUS,
   CLASS_END_STATS,
   CLASS_EVIDENCE,
   CLASS_FEEDBACK,
   CLASS_FEEDBACK_NOPE,
   CLASS_FEEDBACK_OK,
   CLASS_LIGHT,
-  CLASS_MACHINE_CAPTION,
-  CLASS_MACHINE_NAME,
-  CLASS_MACHINE_ZONE,
-  CLASS_MACHINE_SUBTITLE,
-  CLASS_QUESTION,
   CLASS_QUIET_BUTTON,
   CLASS_ROW,
+  CLASS_ROW_ACTIVE,
   CLASS_RULE,
   CLASS_RULE_BOX,
   CLASS_RULE_CRACKED,
   CLASS_RULE_REVEALED,
   CLASS_SHARE,
+  CLASS_WAIT_DOT,
   COPY_COPIED,
   COPY_COPY_RESULT,
   COPY_END_STATS_MIDDLE,
@@ -53,24 +48,15 @@ import {
   COPY_FEEDBACK_MORE,
   COPY_FEEDBACK_NOT_QUITE,
   COPY_FEEDBACK_TWICE,
-  COPY_MACHINE_NAME_PREFIX,
   COPY_NEXT_MACHINE,
   COPY_PLAY_AGAIN,
-  COPY_QUESTION_PREFIX,
-  COPY_QUESTION_SUFFIX,
   COPY_RULE_CRACKED_LABEL,
   COPY_RULE_REVEALED_LABEL,
-  COPY_SUBTITLE_CRACKED,
-  COPY_SUBTITLE_PLAYING,
-  COPY_SUBTITLE_REVEALED,
-  LIGHT_COLOR_CRACKED,
-  LIGHT_COLOR_IDLE,
-  LIGHT_COLOR_REVEALED,
-  MACHINE_NUMBER_PAD_CHAR,
-  MACHINE_NUMBER_PAD_LENGTH,
+  COPY_WAITING,
+  WAIT_DOT_SRC,
 } from "./constants";
 
-type ChipRole = typeof CLASS_CHIP_INPUT | typeof CLASS_CHIP_OUTPUT | typeof CLASS_CHIP_GUESS;
+type ChipRole = typeof CLASS_CHIP_INPUT | typeof CLASS_CHIP_OUTPUT;
 
 const KEY_SEPARATOR_COLON = ":";
 const KEY_SEPARATOR_ARROW = "->";
@@ -109,29 +95,23 @@ function Chips({ value, role }: { readonly value: string; readonly role: ChipRol
 }
 
 /**
- * Renders one evidence row: the input chips, an arrow, and the output chips. A miss row
- * also carries the player's guess, shown as muted chips before the true output so they
- * can see what their recipe produced against what the machine actually gave.
+ * Renders one evidence row on the two column grid: input chips right aligned in the left
+ * cell, a fixed arrow spine, and the machine's output left aligned in the right cell, so
+ * the arrow lands in the same place no matter how many chips a row has.
  * @param props The evidence row to render.
  */
 function Row({ row }: { readonly row: EvidenceRow }) {
   return (
     <div className={CLASS_ROW + (row.mark ? " " + row.mark : "")}>
-      <Chips value={row.input} role={CLASS_CHIP_INPUT} />
+      <div className={CLASS_CELL_LEFT}>
+        <Chips value={row.input} role={CLASS_CHIP_INPUT} />
+      </div>
       <span className={CLASS_ARROW} aria-hidden="true">
         {ARROW_GLYPH}
       </span>
-      {row.guess === undefined ? (
+      <div className={CLASS_CELL_RIGHT}>
         <Chips value={row.output} role={CLASS_CHIP_OUTPUT} />
-      ) : (
-        <>
-          <Chips value={row.guess} role={CLASS_CHIP_GUESS} />
-          <span className={CLASS_VERSUS} aria-hidden="true">
-            {VERSUS_GLYPH}
-          </span>
-          <Chips value={row.output} role={CLASS_CHIP_OUTPUT} />
-        </>
-      )}
+      </div>
     </div>
   );
 }
@@ -252,40 +232,21 @@ export function MachineCard({
   readonly machines: readonly Machine[];
   readonly state: GameState;
 } & MachineHandlers) {
-  const [chomping, setChomping] = useState(false);
   const logRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const log = logRef.current;
     if (log) log.scrollTop = log.scrollHeight;
-  }, [state.evidence.length]);
+  }, [state.evidence.length, state.challengeIndex]);
 
   const machine = machines.at(state.machineIndex);
   if (!machine) return null;
 
   const playing = state.phase === PHASE_PLAYING;
   const won = state.won === true;
-  const machineName =
-    COPY_MACHINE_NAME_PREFIX +
-    String(state.machineIndex + 1).padStart(MACHINE_NUMBER_PAD_LENGTH, MACHINE_NUMBER_PAD_CHAR);
-  let subtitle = COPY_SUBTITLE_REVEALED;
-  if (playing) {
-    subtitle = COPY_SUBTITLE_PLAYING;
-  } else if (won) {
-    subtitle = COPY_SUBTITLE_CRACKED;
-  }
-
-  let lightColor = LIGHT_COLOR_REVEALED;
-  if (playing) {
-    lightColor = LIGHT_COLOR_IDLE;
-  } else if (won) {
-    lightColor = LIGHT_COLOR_CRACKED;
-  }
   const challengeInput = machine.ch.at(state.challengeIndex)?.[0] ?? "";
 
   const handleFeed = (guess: string): void => {
     if (tokenize(guess).length === 0) return;
-    setChomping(true);
-    setTimeout(() => setChomping(false), CHOMP_DURATION_MS);
     onFeed(guess);
   };
 
@@ -293,22 +254,6 @@ export function MachineCard({
 
   return (
     <>
-      <section className={CLASS_MACHINE_ZONE}>
-        <Bot lightColor={lightColor} chomping={chomping} />
-        <div className={CLASS_MACHINE_CAPTION}>
-          <span className={CLASS_MACHINE_NAME}>{machineName}</span>
-          <span className={CLASS_MACHINE_SUBTITLE}>{subtitle}</span>
-        </div>
-      </section>
-
-      {playing && (
-        <p className={CLASS_QUESTION}>
-          {COPY_QUESTION_PREFIX}
-          <Chips value={challengeInput} role={CLASS_CHIP_INPUT} />
-          {COPY_QUESTION_SUFFIX}
-        </p>
-      )}
-
       <div ref={logRef} className={CLASS_EVIDENCE} aria-live="polite" aria-label="Evidence so far">
         {state.evidence.map((row) => {
           const baseKey = row.input + KEY_SEPARATOR_ARROW + row.output + KEY_SEPARATOR_PIPE + (row.mark ?? "");
@@ -318,14 +263,32 @@ export function MachineCard({
 
           return <Row key={key} row={row} />;
         })}
+        {playing && (
+          <div className={CLASS_ROW + " " + CLASS_ROW_ACTIVE}>
+            <div className={CLASS_CELL_LEFT}>
+              <Chips value={challengeInput} role={CLASS_CHIP_INPUT} />
+            </div>
+            <span className={CLASS_ARROW} aria-hidden="true">
+              {ARROW_GLYPH}
+            </span>
+            <div className={CLASS_CELL_RIGHT}>
+              <img className={CLASS_WAIT_DOT} src={WAIT_DOT_SRC} alt={COPY_WAITING} width={10} height={10} />
+            </div>
+          </div>
+        )}
+        <p className={CLASS_FEEDBACK} aria-live="polite">
+          {feedbackContent(state.feedback)}
+        </p>
       </div>
 
-      <p className={CLASS_FEEDBACK} aria-live="polite">
-        {feedbackContent(state.feedback)}
-      </p>
-
       {playing ? (
-        <ChipBuilder key={state.machineIndex} challengeInput={challengeInput} onFeed={handleFeed} />
+        <ChipBuilder
+          key={state.machineIndex}
+          challengeInput={challengeInput}
+          difficulty={machine.difficulty}
+          panelOps={machine.panelOps}
+          onFeed={handleFeed}
+        />
       ) : (
         <div className={CLASS_BOTTOM + " " + CLASS_RULE_BOX}>
           <RuleBanner won={won} rule={machine.rule} />

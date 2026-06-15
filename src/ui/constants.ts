@@ -6,6 +6,15 @@
  * with the game logic instead.
  */
 
+import {
+  DIFFICULTY_EASY,
+  DIFFICULTY_HARD,
+  DIFFICULTY_MEDIUM,
+  DIFFICULTY_MYSTERY,
+  DIFFICULTY_SUPER_EASY,
+  type Difficulty,
+} from "../game/types";
+
 export const CLASS_DOTS = "dots";
 export const CLASS_DOT = "dot";
 export const CLASS_DOT_CURRENT = "now";
@@ -15,6 +24,8 @@ export const CLASS_DOT_REVEALED = "open";
 /** The full screen layout regions, stacked top to bottom in one flex column. */
 export const CLASS_APP = "app";
 export const CLASS_HEADER = "hdr";
+export const CLASS_HEADER_LEFT = "hleft";
+export const CLASS_DIFFICULTY = "diff";
 export const CLASS_WORDMARK_BLOCK = "wblock";
 export const CLASS_TAGLINE = "tagline";
 export const CLASS_MACHINE_ZONE = "mzone";
@@ -32,6 +43,8 @@ export const CLASS_LIGHT = "light";
 
 export const CLASS_EVIDENCE = "evidence";
 export const CLASS_ROW = "row";
+export const CLASS_CELL_LEFT = "cleft";
+export const CLASS_CELL_RIGHT = "cright";
 export const CLASS_ROW_HIT = "hit";
 export const CLASS_ROW_MISS = "miss";
 export const CLASS_CHIP = "chip";
@@ -41,7 +54,9 @@ export const CLASS_CHIP_GUESS = "guess";
 export const CLASS_ARROW = "arrow";
 export const CLASS_VERSUS = "vs";
 
-export const CLASS_QUESTION = "question";
+export const CLASS_ROW_ACTIVE = "active";
+export const CLASS_WAIT_DOT = "waitdot";
+export const WAIT_DOT_SRC = "/wait-dot.svg";
 export const CLASS_FEEDBACK = "feedback";
 export const CLASS_FEEDBACK_OK = "ok";
 export const CLASS_FEEDBACK_NOPE = "nope";
@@ -64,8 +79,51 @@ export const MACHINE_NUMBER_PAD_CHAR = "0";
 export const COPY_SUBTITLE_PLAYING = "What does it do?";
 export const COPY_SUBTITLE_CRACKED = "Cracked";
 export const COPY_SUBTITLE_REVEALED = "Revealed";
-export const COPY_QUESTION_PREFIX = "What comes out for ";
-export const COPY_QUESTION_SUFFIX = " ?";
+export const COPY_WAITING = "The machine is waiting for your guess";
+
+/** The header label shown for each difficulty; the mystery slot reads as "???". */
+export const DIFFICULTY_LABELS: Readonly<Record<Difficulty, string>> = {
+  [DIFFICULTY_SUPER_EASY]: "Warm-up",
+  [DIFFICULTY_EASY]: "Easy",
+  [DIFFICULTY_MEDIUM]: "Medium",
+  [DIFFICULTY_HARD]: "Hard",
+  [DIFFICULTY_MYSTERY]: "???",
+};
+
+/**
+ * Difficulty ordering for presentation thresholds, easy lowest. The panel grows its
+ * affordances with difficulty in two steps: a search box appears at or above the search
+ * rank, and the tabbed folder appears at or above the tabs rank. So easy is a bare list,
+ * medium adds search over its short list, and hard adds the tabbed folder. These two
+ * ranks are the only knobs for where each affordance switches on.
+ */
+const DIFFICULTY_RANK: Readonly<Record<Difficulty, number>> = {
+  [DIFFICULTY_SUPER_EASY]: 0,
+  [DIFFICULTY_EASY]: 1,
+  [DIFFICULTY_MEDIUM]: 2,
+  [DIFFICULTY_HARD]: 3,
+  [DIFFICULTY_MYSTERY]: 4,
+};
+export const PANEL_SEARCH_MIN_RANK = 2;
+export const PANEL_TABS_MIN_RANK = 3;
+
+/**
+ * Reports whether a difficulty shows the search box over its operation list.
+ * @param difficulty The machine difficulty.
+ * @returns True when the search box is shown.
+ */
+export function panelShowsSearch(difficulty: Difficulty): boolean {
+  return DIFFICULTY_RANK[difficulty] >= PANEL_SEARCH_MIN_RANK;
+}
+
+/**
+ * Reports whether a difficulty shows the tabbed folder rather than a flat list.
+ * @param difficulty The machine difficulty.
+ * @returns True when the tabbed folder is shown.
+ */
+export function panelShowsTabs(difficulty: Difficulty): boolean {
+  return DIFFICULTY_RANK[difficulty] >= PANEL_TABS_MIN_RANK;
+}
 export const COPY_RULE_CRACKED_LABEL = "Cracked it: ";
 export const COPY_RULE_REVEALED_LABEL = "It reveals itself: ";
 export const COPY_NEXT_MACHINE = "Next machine";
@@ -118,13 +176,13 @@ export const CLASS_CLEAR = "clearbtn";
 /** Copy for the recipe builder: the labels, the hints, and the step controls. */
 export const COPY_RECIPE_LABEL = "Your recipe";
 export const COPY_RECIPE_EMPTY = "Write a recipe you think the machine follows.";
-export const COPY_PICKER_LABEL = "Operations to add";
+export const COPY_PICKER_LABEL = "Add to your recipe";
 export const COPY_SEARCH_LABEL = "Search your hunch in words";
-export const COPY_SEARCH_PLACEHOLDER = COPY_SEARCH_LABEL + "…";
+export const COPY_SEARCH_PLACEHOLDER = "search your hunch";
 export const COPY_NO_MATCHES = "Nothing matches that. Try a tab, or different words.";
 export const COPY_CLEAR = "Clear";
 export const COPY_NUMBER_TAG_PREFIX = "Change the number in step ";
-export const COPY_REMOVE_FROM_PREFIX = "Remove from step ";
+export const COPY_REMOVE_FROM_PREFIX = "Remove step ";
 export const COPY_STEP_REMOVE_GLYPH = "✕";
 
 /** Duration in milliseconds that the bot holds its chomp animation after a feed. */

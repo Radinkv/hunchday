@@ -13,7 +13,7 @@ const SAMPLE_DATE = "2026-06-20";
 const EXPECTED_MACHINE_COUNT = 4;
 const EXAMPLE_COUNT = 2;
 const CHALLENGE_COUNT = 5;
-const MYSTERY_SLOT = 3;
+const WORD_SLOT = 3;
 
 describe("generateMachinesForDate", () => {
   const machines = generateMachinesForDate(SAMPLE_DATE);
@@ -41,8 +41,8 @@ describe("generateMachinesForDate", () => {
   });
 
   it("renders a word machine that round trips through the reducer", () => {
-    const mystery = machines[MYSTERY_SLOT];
-    const state = feed(startGame([mystery]), [mystery], mystery.ch[0][1]);
+    const word = machines[WORD_SLOT];
+    const state = feed(startGame([word]), [word], word.ch[0][1]);
     expect(state.streak).toBe(1);
   });
 });
