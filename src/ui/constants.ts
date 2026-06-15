@@ -10,7 +10,6 @@ import {
   DIFFICULTY_EASY,
   DIFFICULTY_HARD,
   DIFFICULTY_MEDIUM,
-  DIFFICULTY_MYSTERY,
   DIFFICULTY_SUPER_EASY,
   type Difficulty,
 } from "../game/types";
@@ -26,6 +25,7 @@ export const CLASS_APP = "app";
 export const CLASS_HEADER = "hdr";
 export const CLASS_HEADER_LEFT = "hleft";
 export const CLASS_DIFFICULTY = "diff";
+export const CLASS_TIER_PIP = "tierpip";
 export const CLASS_WORDMARK_BLOCK = "wblock";
 export const CLASS_TAGLINE = "tagline";
 export const CLASS_MACHINE_ZONE = "mzone";
@@ -81,31 +81,56 @@ export const COPY_SUBTITLE_CRACKED = "Cracked";
 export const COPY_SUBTITLE_REVEALED = "Revealed";
 export const COPY_WAITING = "The machine is waiting for your guess";
 
-/** The header label shown for each difficulty; the mystery slot reads as "???". */
-export const DIFFICULTY_LABELS: Readonly<Record<Difficulty, string>> = {
-  [DIFFICULTY_SUPER_EASY]: "Warm-up",
-  [DIFFICULTY_EASY]: "Easy",
-  [DIFFICULTY_MEDIUM]: "Medium",
-  [DIFFICULTY_HARD]: "Hard",
-  [DIFFICULTY_MYSTERY]: "???",
+/**
+ * The tier's muted accent hue, by difficulty: teal, rose, green, slate. Difficulty is
+ * never named to the player; a tier is known by this colour plus its position. The hues
+ * deliberately avoid the purple machine and amber chips, and the retired mystery tier is
+ * absent, so no difficulty word or mystery reference reaches the view.
+ */
+const TIER_COLOR: Partial<Record<Difficulty, string>> = {
+  [DIFFICULTY_SUPER_EASY]: "#3F938A",
+  [DIFFICULTY_EASY]: "#B05E7C",
+  [DIFFICULTY_MEDIUM]: "#6F9A4E",
+  [DIFFICULTY_HARD]: "#5F708A",
 };
+const TIER_COLOR_FALLBACK = "#3F938A";
 
 /**
- * Difficulty ordering for presentation thresholds, easy lowest. The panel grows its
- * affordances with difficulty in two steps: a search box appears at or above the search
- * rank, and the tabbed folder appears at or above the tabs rank. So easy is a bare list,
- * medium adds search over its short list, and hard adds the tabbed folder. These two
- * ranks are the only knobs for where each affordance switches on.
+ * Returns the tier accent hue for a difficulty, falling back to the opener's hue.
+ * @param difficulty The machine difficulty.
+ * @returns The accent hue.
  */
-const DIFFICULTY_RANK: Readonly<Record<Difficulty, number>> = {
+export function tierColorOf(difficulty: Difficulty): string {
+  return TIER_COLOR[difficulty] ?? TIER_COLOR_FALLBACK;
+}
+
+/** The ordinal label shown for a machine's position in the day, by zero based index. */
+export const POSITION_LABELS: readonly string[] = ["1st", "2nd", "3rd", "4th"];
+
+/**
+ * The tier's presentation rank, opener lowest, used only for panel affordance thresholds.
+ * The panel grows in two steps: a search box at or above the search rank, the tabbed
+ * folder at or above the tabs rank. So the opener and easy are bare lists, medium adds
+ * search, and hard adds the tabbed folder.
+ */
+const DIFFICULTY_RANK: Partial<Record<Difficulty, number>> = {
   [DIFFICULTY_SUPER_EASY]: 0,
   [DIFFICULTY_EASY]: 1,
   [DIFFICULTY_MEDIUM]: 2,
   [DIFFICULTY_HARD]: 3,
-  [DIFFICULTY_MYSTERY]: 4,
 };
+const DIFFICULTY_RANK_FALLBACK = 0;
 export const PANEL_SEARCH_MIN_RANK = 2;
 export const PANEL_TABS_MIN_RANK = 3;
+
+/**
+ * Returns a difficulty's presentation rank, falling back to the lowest.
+ * @param difficulty The machine difficulty.
+ * @returns The rank.
+ */
+function rankOf(difficulty: Difficulty): number {
+  return DIFFICULTY_RANK[difficulty] ?? DIFFICULTY_RANK_FALLBACK;
+}
 
 /**
  * Reports whether a difficulty shows the search box over its operation list.
@@ -113,7 +138,7 @@ export const PANEL_TABS_MIN_RANK = 3;
  * @returns True when the search box is shown.
  */
 export function panelShowsSearch(difficulty: Difficulty): boolean {
-  return DIFFICULTY_RANK[difficulty] >= PANEL_SEARCH_MIN_RANK;
+  return rankOf(difficulty) >= PANEL_SEARCH_MIN_RANK;
 }
 
 /**
@@ -122,7 +147,7 @@ export function panelShowsSearch(difficulty: Difficulty): boolean {
  * @returns True when the tabbed folder is shown.
  */
 export function panelShowsTabs(difficulty: Difficulty): boolean {
-  return DIFFICULTY_RANK[difficulty] >= PANEL_TABS_MIN_RANK;
+  return rankOf(difficulty) >= PANEL_TABS_MIN_RANK;
 }
 export const COPY_RULE_CRACKED_LABEL = "Cracked it: ";
 export const COPY_RULE_REVEALED_LABEL = "It reveals itself: ";

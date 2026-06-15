@@ -52,23 +52,9 @@ const WORD_MACHINE: Machine = {
   panelOps: ["length_map", "sort_alpha", "longest", "reverse"],
 };
 
-const MYSTERY_MACHINE: Machine = {
-  difficulty: "mystery",
-  rule: MULTIPLY_RULE,
-  ex: [
-    ["1 2 3", "2 4 6"],
-    ["4 5 6", "8 10 12"],
-  ],
-  ch: [
-    ["3 4", "6 8"],
-    ["5 1", "10 2"],
-  ],
-  panelOps: ["mul_k"],
-};
-
-const LABEL_EASY = "Easy";
-const LABEL_MEDIUM = "Medium";
-const LABEL_MYSTERY = "???";
+const POSITION_FIRST = "1st";
+const POSITION_SECOND = "2nd";
+const RETIRED_WORDS = ["Easy", "Medium", "Hard", "Warm-up"];
 
 afterEach(() => {
   cleanup();
@@ -127,22 +113,19 @@ describe("App", () => {
     expect(container.textContent).toContain(COPY_RULE_CRACKED_LABEL + LETTERS_RULE);
   });
 
-  it("shows the live difficulty label and updates it when the machine advances", () => {
-    render(<App machines={[NUMBER_MACHINE, WORD_MACHINE]} />);
+  it("shows the position and never a difficulty word, updating as the machine advances", () => {
+    const { container } = render(<App machines={[NUMBER_MACHINE, WORD_MACHINE]} />);
     play();
-    expect(screen.getByText(LABEL_EASY)).toBeTruthy();
+    expect(screen.getByText(POSITION_FIRST)).toBeTruthy();
+    for (const word of RETIRED_WORDS) expect(container.textContent).not.toContain(word);
 
     pickAndFeed(MULTIPLY_OP);
     feedAgain();
     fireEvent.click(screen.getByRole("button", { name: COPY_NEXT_MACHINE }));
 
-    expect(screen.getByText(LABEL_MEDIUM)).toBeTruthy();
-    expect(screen.queryByText(LABEL_EASY)).toBeNull();
-  });
-
-  it("shows the mystery slot as ???", () => {
-    render(<App machines={[MYSTERY_MACHINE]} />);
-    expect(screen.getByText(LABEL_MYSTERY)).toBeTruthy();
+    expect(screen.getByText(POSITION_SECOND)).toBeTruthy();
+    expect(screen.queryByText(POSITION_FIRST)).toBeNull();
+    for (const word of RETIRED_WORDS) expect(container.textContent).not.toContain(word);
   });
 
   it("gives medium a search box but leaves easy a bare list", () => {

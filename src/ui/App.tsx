@@ -13,11 +13,13 @@ import {
   CLASS_HEADER_LEFT,
   CLASS_INTRO,
   CLASS_INTRO_LEAD,
+  CLASS_TIER_PIP,
   COPY_INTRO_LEAD,
   COPY_PLAY,
   COPY_WORDMARK,
-  DIFFICULTY_LABELS,
   LIGHT_COLOR_IDLE,
+  POSITION_LABELS,
+  tierColorOf,
 } from "./constants";
 
 /** The starting machine index shown by the progress dots before a game has begun. */
@@ -41,7 +43,9 @@ export function App({ machines }: { readonly machines: readonly Machine[] }) {
 
   const idleResults = machines.map(() => null);
   const machineIndex = state?.machineIndex ?? FIRST_MACHINE_INDEX;
-  const difficulty = machines.at(machineIndex)?.difficulty ?? DIFFICULTY_EASY;
+  const tierColors = machines.map((machine) => tierColorOf(machine.difficulty));
+  const tierColor = tierColors.at(machineIndex) ?? tierColorOf(DIFFICULTY_EASY);
+  const positionLabel = POSITION_LABELS.at(machineIndex) ?? "";
 
   return (
     <div className={CLASS_APP}>
@@ -49,9 +53,16 @@ export function App({ machines }: { readonly machines: readonly Machine[] }) {
         <div className={CLASS_HEADER_LEFT}>
           <Bot lightColor={LIGHT_COLOR_IDLE} chomping={false} />
           <h1>{COPY_WORDMARK}</h1>
-          <span className={CLASS_DIFFICULTY}>{DIFFICULTY_LABELS[difficulty]}</span>
+          <span className={CLASS_DIFFICULTY}>
+            <span className={CLASS_TIER_PIP} style={{ backgroundColor: tierColor }} aria-hidden="true" />
+            {positionLabel}
+          </span>
         </div>
-        <Dots machineIndex={state?.machineIndex ?? FIRST_MACHINE_INDEX} results={state?.results ?? idleResults} />
+        <Dots
+          machineIndex={machineIndex}
+          results={state?.results ?? idleResults}
+          tierColors={tierColors}
+        />
       </header>
       {state ? (
         <MachineCard

@@ -28,8 +28,8 @@ const SECOND_STEP_REMOVE = COPY_REMOVE_FROM_PREFIX + "2";
 /** Every panel operation, so the builder shows the full tabbed palette. */
 const ALL_OPS: readonly string[] = OP_TILES.map((tile) => tile.opId);
 
-/** The mystery difficulty renders the searchable tabbed palette these tests drive. */
-const MYSTERY = "mystery" as const;
+/** The hard difficulty renders the searchable tabbed palette these tests drive. */
+const HARD = "hard" as const;
 
 /**
  * Renders the builder with the full panel in tabbed mode.
@@ -37,7 +37,7 @@ const MYSTERY = "mystery" as const;
  * @param onFeed The feed handler.
  */
 function renderBuilder(challengeInput: string, onFeed: (guess: string) => void): void {
-  render(<ChipBuilder challengeInput={challengeInput} difficulty={MYSTERY} panelOps={ALL_OPS} onFeed={onFeed} />);
+  render(<ChipBuilder challengeInput={challengeInput} difficulty={HARD} panelOps={ALL_OPS} onFeed={onFeed} />);
 }
 
 afterEach(cleanup);
