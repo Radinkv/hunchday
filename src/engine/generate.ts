@@ -33,7 +33,21 @@
 import { compose, execute, type Pipeline, type PipelineStep } from "./compose";
 import { createRng, hash32, type Rng } from "./rng";
 import { ALL_LEXICON_NAMES, getLexicon, type LexiconName } from "./lexicon";
-import { getOp, OP_ADD_K, OP_AFFINE, OP_MUL_K, OP_SUB_K } from "./ops";
+import {
+  getOp,
+  OP_ADD_K,
+  OP_AFFINE,
+  OP_COUNT,
+  OP_LENGTH_MAP,
+  OP_MAX,
+  OP_MIN,
+  OP_MUL_K,
+  OP_REVERSE,
+  OP_SORT_ASC,
+  OP_SORT_DESC,
+  OP_SUB_K,
+  OP_SUM,
+} from "./ops";
 import { TYPE_NUM_LIST, type Value } from "./ops-types";
 import { phrasePipeline } from "./phrase";
 import { computePanelOps } from "./panel";
@@ -49,6 +63,7 @@ import {
   DIFFICULTY_HARD,
   DIFFICULTY_MEDIUM,
   DIFFICULTY_MYSTERY,
+  DIFFICULTY_SUPER_EASY,
   outputInRange,
   SLOT_POLICIES,
   validate,
@@ -91,10 +106,43 @@ const GENERATOR_SALT = "hunchday-v1";
  * feature. The mystery difficulty value is kept for the type and label only.
  */
 const DIFFICULTY_ORDER: readonly Difficulty[] = [
+  DIFFICULTY_SUPER_EASY,
   DIFFICULTY_EASY,
   DIFFICULTY_MEDIUM,
   DIFFICULTY_HARD,
 ];
+
+/** The slot index of the super easy opener, prepended at the front of the day. */
+const SUPER_EASY_SLOT_INDEX = 0;
+
+/**
+ * The operations the super easy opener may draw, as a single step rule: the visually
+ * obvious one operation rules that read at a glance. This is the curated roster; nothing
+ * outside it is an opener even if it is a fair one operation rule.
+ */
+const SUPER_EASY_OP_IDS: ReadonlySet<string> = new Set([
+  OP_MUL_K.id,
+  OP_ADD_K.id,
+  OP_SUB_K.id,
+  OP_REVERSE.id,
+  OP_COUNT.id,
+  OP_SUM.id,
+  OP_MAX.id,
+  OP_MIN.id,
+  OP_SORT_ASC.id,
+  OP_SORT_DESC.id,
+  OP_LENGTH_MAP.id,
+]);
+
+const SUPER_EASY_LENGTH = 1;
+
+/**
+ * The opener's own no recent repeat window, far shorter than the other slots because its
+ * roster is a small set of obvious operations meant to cycle. Inputs vary every
+ * appearance, so a recurring operation reads as a fresh puzzle. Kept below the roster
+ * size so the slot never deadlocks.
+ */
+const SUPER_EASY_REPEAT_WINDOW = 15;
 
 const EXAMPLE_COUNT = 2;
 const CHALLENGE_COUNT = 5;
@@ -293,6 +341,9 @@ function theoriesFor(difficulty: Difficulty, universe: Universe): CompiledTheory
  */
 function matchesGenerationShape(difficulty: Difficulty, behaviorClass: BehaviorClass): boolean {
   const { length, maxRung, representative } = behaviorClass;
+  if (difficulty === DIFFICULTY_SUPER_EASY) {
+    return length === SUPER_EASY_LENGTH && SUPER_EASY_OP_IDS.has(representative[0].opId);
+  }
   if (difficulty === DIFFICULTY_EASY) {
     if (length !== SHORT_LENGTH || maxRung > EASY_MAX_RUNG) return false;
     if (representative.some((pipelineStep) => pipelineStep.opId === OP_AFFINE.id)) return false;
@@ -572,7 +623,9 @@ function selectExamples(
 ): Selection | null {
   if (pool.length < EXAMPLE_COUNT + CHALLENGE_COUNT) return null;
   const evaluations = evaluatePool(pipeline, theories, pool);
-  if (difficulty === DIFFICULTY_EASY) return selectUniquePin(evaluations, trueFingerprint);
+  if (difficulty === DIFFICULTY_EASY || difficulty === DIFFICULTY_SUPER_EASY) {
+    return selectUniquePin(evaluations, trueFingerprint);
+  }
   if (difficulty === DIFFICULTY_MYSTERY) return selectWithTrap(evaluations);
   return selectFewestSurvivors(evaluations);
 }
@@ -705,13 +758,40 @@ function generateSlot(difficulty: Difficulty, date: string, forbidden: ReadonlyS
 }
 
 /**
- * Generates the four machines of a day under a set of forbidden signatures.
+ * Collects the signatures of one slot's machine over its own no recent repeat window,
+ * looking back no earlier than the launch date. Used for the super easy opener, whose
+ * small roster needs a short window of its own; the other slots use the shared window.
  * @param date The date being generated.
- * @param forbidden The signatures forbidden by repeat suppression.
+ * @param slotIndex The slot to look back over.
+ * @param window The number of days to look back.
+ * @returns The forbidden signatures for that slot.
+ */
+function forbiddenForSlot(date: string, slotIndex: number, window: number): Set<string> {
+  const forbidden = new Set<string>();
+  for (let back = 1; back < window; back++) {
+    const prior = shiftDate(date, -back);
+    if (prior < GENERATOR_EPOCH) break;
+    const machine = generateDay(prior).machines.at(slotIndex);
+    if (machine) forbidden.add(signatureOf(machine.steps));
+  }
+  return forbidden;
+}
+
+/**
+ * Generates the machines of a day. The standard slots avoid any pipeline shipped across
+ * the previous window; the super easy opener avoids only its own short window, so its
+ * small roster cycles without deadlocking. Its one operation rules never collide with
+ * the longer rules of the other slots, so its presence leaves them unchanged.
+ * @param date The date being generated.
  * @returns The day specification.
  */
-function composeDay(date: string, forbidden: ReadonlySet<string>): DaySpec {
-  return { date, machines: DIFFICULTY_ORDER.map((difficulty) => generateSlot(difficulty, date, forbidden)) };
+function composeDay(date: string): DaySpec {
+  const standard = forbiddenSignatures(date);
+  const superEasy = forbiddenForSlot(date, SUPER_EASY_SLOT_INDEX, SUPER_EASY_REPEAT_WINDOW);
+  const machines = DIFFICULTY_ORDER.map((difficulty) =>
+    generateSlot(difficulty, date, difficulty === DIFFICULTY_SUPER_EASY ? superEasy : standard),
+  );
+  return { date, machines };
 }
 
 /**
@@ -781,7 +861,7 @@ export function generateDay(date: string): DaySpec {
   if (cached) return cached;
 
   const override = overrideFor(date);
-  const spec = override ?? composeDay(date, forbiddenSignatures(date));
+  const spec = override ?? composeDay(date);
   shippedDayCache.set(date, spec);
   return spec;
 }

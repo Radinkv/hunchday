@@ -1,6 +1,50 @@
 {
   "2026-06-08": [
     {
+      "difficulty": "super_easy",
+      "rule": "It adds 5 to every chip.",
+      "ex": [
+        [
+          "10 11 8 8 5",
+          "15 16 13 13 10"
+        ],
+        [
+          "10 3 7 5 10",
+          "15 8 12 10 15"
+        ]
+      ],
+      "ch": [
+        [
+          "9 7",
+          "14 12"
+        ],
+        [
+          "12 6 3",
+          "17 11 8"
+        ],
+        [
+          "1 5",
+          "6 10"
+        ],
+        [
+          "1 7",
+          "6 12"
+        ],
+        [
+          "11 1 6 12 8",
+          "16 6 11 17 13"
+        ]
+      ],
+      "panelOps": [
+        "sub_k",
+        "last",
+        "first",
+        "mul_k",
+        "add_k",
+        "reverse"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It multiplies every chip by 4, then adds them together.",
       "ex": [
@@ -146,6 +190,50 @@
     }
   ],
   "2026-06-09": [
+    {
+      "difficulty": "super_easy",
+      "rule": "It adds 2 to every chip.",
+      "ex": [
+        [
+          "2 12 11 8",
+          "4 14 13 10"
+        ],
+        [
+          "7 8",
+          "9 10"
+        ]
+      ],
+      "ch": [
+        [
+          "6 8 11 1",
+          "8 10 13 3"
+        ],
+        [
+          "9 9 7 3",
+          "11 11 9 5"
+        ],
+        [
+          "9 11 11",
+          "11 13 13"
+        ],
+        [
+          "3 7",
+          "5 9"
+        ],
+        [
+          "6 6 10 10 8",
+          "8 8 12 12 10"
+        ]
+      ],
+      "panelOps": [
+        "first",
+        "sub_k",
+        "mul_k",
+        "last",
+        "reverse",
+        "add_k"
+      ]
+    },
     {
       "difficulty": "easy",
       "rule": "It takes 3 away from every chip, then keeps only the last 2 chips.",
@@ -293,6 +381,50 @@
   ],
   "2026-06-10": [
     {
+      "difficulty": "super_easy",
+      "rule": "It adds 1 to every chip.",
+      "ex": [
+        [
+          "9 3 6",
+          "10 4 7"
+        ],
+        [
+          "10 3 7 8 11",
+          "11 4 8 9 12"
+        ]
+      ],
+      "ch": [
+        [
+          "3 12 12 6 1",
+          "4 13 13 7 2"
+        ],
+        [
+          "2 6 10 10 11",
+          "3 7 11 11 12"
+        ],
+        [
+          "8 11",
+          "9 12"
+        ],
+        [
+          "4 4 10 1 7",
+          "5 5 11 2 8"
+        ],
+        [
+          "4 8 3",
+          "5 9 4"
+        ]
+      ],
+      "panelOps": [
+        "first",
+        "reverse",
+        "sub_k",
+        "mul_k",
+        "last",
+        "add_k"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It adds 9 to every chip, then sorts them biggest to smallest.",
       "ex": [
@@ -435,6 +567,50 @@
     }
   ],
   "2026-06-11": [
+    {
+      "difficulty": "super_easy",
+      "rule": "It counts the letters in every chip.",
+      "ex": [
+        [
+          "pawpaw fig lime lychee mandarin",
+          "6 3 4 6 8"
+        ],
+        [
+          "orange durian kiwi",
+          "6 6 4"
+        ]
+      ],
+      "ch": [
+        [
+          "cherry pear satsuma",
+          "6 4 7"
+        ],
+        [
+          "apricot date guava durian coconut",
+          "7 4 5 6 7"
+        ],
+        [
+          "date grape mandarin",
+          "4 5 8"
+        ],
+        [
+          "mandarin currant lime",
+          "8 7 4"
+        ],
+        [
+          "prune berry orange",
+          "5 5 6"
+        ]
+      ],
+      "panelOps": [
+        "distinct_letters_map",
+        "letter_count_squared",
+        "keep_startswith_vowel",
+        "length_map",
+        "sort_by_length",
+        "shortest"
+      ]
+    },
     {
       "difficulty": "easy",
       "rule": "It adds 4 to every chip, then keeps only the last 2 chips.",
@@ -582,6 +758,50 @@
   ],
   "2026-06-12": [
     {
+      "difficulty": "super_easy",
+      "rule": "It adds 5 to every chip.",
+      "ex": [
+        [
+          "2 2 12 7",
+          "7 7 17 12"
+        ],
+        [
+          "9 11 7 6 6",
+          "14 16 12 11 11"
+        ]
+      ],
+      "ch": [
+        [
+          "11 10 8",
+          "16 15 13"
+        ],
+        [
+          "12 4",
+          "17 9"
+        ],
+        [
+          "2 5 6",
+          "7 10 11"
+        ],
+        [
+          "7 4 6 5 3",
+          "12 9 11 10 8"
+        ],
+        [
+          "3 2 5",
+          "8 7 10"
+        ]
+      ],
+      "panelOps": [
+        "sub_k",
+        "first",
+        "last",
+        "mul_k",
+        "reverse",
+        "add_k"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It multiplies every chip by 2, then sorts them smallest to biggest.",
       "ex": [
@@ -727,6 +947,50 @@
     }
   ],
   "2026-06-13": [
+    {
+      "difficulty": "super_easy",
+      "rule": "It finds the smallest chip.",
+      "ex": [
+        [
+          "9 6 11 11",
+          "6"
+        ],
+        [
+          "8 10 11 3",
+          "3"
+        ]
+      ],
+      "ch": [
+        [
+          "8 8 7",
+          "7"
+        ],
+        [
+          "7 1 4 3",
+          "1"
+        ],
+        [
+          "1 7 11 1",
+          "1"
+        ],
+        [
+          "12 5 10 8 2",
+          "2"
+        ],
+        [
+          "4 10 12 4",
+          "4"
+        ]
+      ],
+      "panelOps": [
+        "min",
+        "sort_asc",
+        "drop_last",
+        "keep_first_k",
+        "drop_first",
+        "max"
+      ]
+    },
     {
       "difficulty": "easy",
       "rule": "It multiplies every chip by 4, then keeps only the first 2 chips.",
@@ -874,6 +1138,50 @@
   ],
   "2026-06-14": [
     {
+      "difficulty": "super_easy",
+      "rule": "It adds 2 to every chip.",
+      "ex": [
+        [
+          "4 2 6 8",
+          "6 4 8 10"
+        ],
+        [
+          "4 10 9",
+          "6 12 11"
+        ]
+      ],
+      "ch": [
+        [
+          "7 8",
+          "9 10"
+        ],
+        [
+          "8 9 6",
+          "10 11 8"
+        ],
+        [
+          "9 11 5 8 6",
+          "11 13 7 10 8"
+        ],
+        [
+          "11 11",
+          "13 13"
+        ],
+        [
+          "11 11 1",
+          "13 13 3"
+        ]
+      ],
+      "panelOps": [
+        "mul_k",
+        "last",
+        "add_k",
+        "first",
+        "sub_k",
+        "reverse"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It keeps only the first 3 chips, then sorts them biggest to smallest.",
       "ex": [
@@ -1016,6 +1324,50 @@
     }
   ],
   "2026-06-15": [
+    {
+      "difficulty": "super_easy",
+      "rule": "It adds 2 to every chip.",
+      "ex": [
+        [
+          "5 5",
+          "7 7"
+        ],
+        [
+          "4 5 1 11 7",
+          "6 7 3 13 9"
+        ]
+      ],
+      "ch": [
+        [
+          "5 11",
+          "7 13"
+        ],
+        [
+          "8 12 2 10",
+          "10 14 4 12"
+        ],
+        [
+          "12 9 9 10 6",
+          "14 11 11 12 8"
+        ],
+        [
+          "10 4 1 6",
+          "12 6 3 8"
+        ],
+        [
+          "11 4",
+          "13 6"
+        ]
+      ],
+      "panelOps": [
+        "mul_k",
+        "last",
+        "reverse",
+        "sub_k",
+        "add_k",
+        "first"
+      ]
+    },
     {
       "difficulty": "easy",
       "rule": "It adds 5 to every chip, then adds them together.",
@@ -1163,6 +1515,50 @@
   ],
   "2026-06-16": [
     {
+      "difficulty": "super_easy",
+      "rule": "It adds 3 to every chip.",
+      "ex": [
+        [
+          "10 9",
+          "13 12"
+        ],
+        [
+          "8 3 3 7",
+          "11 6 6 10"
+        ]
+      ],
+      "ch": [
+        [
+          "8 3 11 7",
+          "11 6 14 10"
+        ],
+        [
+          "1 1",
+          "4 4"
+        ],
+        [
+          "9 4 7",
+          "12 7 10"
+        ],
+        [
+          "11 4 9",
+          "14 7 12"
+        ],
+        [
+          "10 1 10",
+          "13 4 13"
+        ]
+      ],
+      "panelOps": [
+        "mul_k",
+        "sub_k",
+        "last",
+        "add_k",
+        "reverse",
+        "first"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It adds 9 to every chip, then reverses the order.",
       "ex": [
@@ -1309,6 +1705,50 @@
   ],
   "2026-06-17": [
     {
+      "difficulty": "super_easy",
+      "rule": "It multiplies every chip by 4.",
+      "ex": [
+        [
+          "3 4",
+          "12 16"
+        ],
+        [
+          "1 3 12 5",
+          "4 12 48 20"
+        ]
+      ],
+      "ch": [
+        [
+          "6 2 11 2 10",
+          "24 8 44 8 40"
+        ],
+        [
+          "6 3 6 8 2",
+          "24 12 24 32 8"
+        ],
+        [
+          "11 5 10 10",
+          "44 20 40 40"
+        ],
+        [
+          "11 11",
+          "44 44"
+        ],
+        [
+          "2 7 10 1",
+          "8 28 40 4"
+        ]
+      ],
+      "panelOps": [
+        "sub_k",
+        "mul_k",
+        "last",
+        "first",
+        "reverse",
+        "add_k"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It takes 4 away from every chip, then sorts them biggest to smallest.",
       "ex": [
@@ -1451,6 +1891,50 @@
     }
   ],
   "2026-06-18": [
+    {
+      "difficulty": "super_easy",
+      "rule": "It sorts the chips smallest to biggest.",
+      "ex": [
+        [
+          "6 4 11 5 2",
+          "2 4 5 6 11"
+        ],
+        [
+          "12 4 1",
+          "1 4 12"
+        ]
+      ],
+      "ch": [
+        [
+          "7 1 9",
+          "1 7 9"
+        ],
+        [
+          "11 5",
+          "5 11"
+        ],
+        [
+          "4 4 9 8 2",
+          "2 4 4 8 9"
+        ],
+        [
+          "10 9 3 10 4",
+          "3 4 9 10 10"
+        ],
+        [
+          "1 12 5 2 8",
+          "1 2 5 8 12"
+        ]
+      ],
+      "panelOps": [
+        "drop_last",
+        "sort_asc",
+        "sort_desc",
+        "count",
+        "max",
+        "drop_first"
+      ]
+    },
     {
       "difficulty": "easy",
       "rule": "It adds 1 to every chip, then keeps only the last 3 chips.",
@@ -1598,6 +2082,50 @@
   ],
   "2026-06-19": [
     {
+      "difficulty": "super_easy",
+      "rule": "It adds all the chips together.",
+      "ex": [
+        [
+          "12 7 7",
+          "26"
+        ],
+        [
+          "2 2",
+          "4"
+        ]
+      ],
+      "ch": [
+        [
+          "8 1 4",
+          "13"
+        ],
+        [
+          "9 8",
+          "17"
+        ],
+        [
+          "1 8 3",
+          "12"
+        ],
+        [
+          "1 1 11 10",
+          "23"
+        ],
+        [
+          "8 7 3",
+          "18"
+        ]
+      ],
+      "panelOps": [
+        "max",
+        "keep_first_k",
+        "sum",
+        "drop_first",
+        "min",
+        "sort_desc"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It keeps only the last 2 chips, then throws away the last chip.",
       "ex": [
@@ -1744,6 +2272,50 @@
   ],
   "2026-06-20": [
     {
+      "difficulty": "super_easy",
+      "rule": "It counts the letters in every chip.",
+      "ex": [
+        [
+          "sara ella max kate gwen",
+          "4 4 3 4 4"
+        ],
+        [
+          "kate jane nora leo emma",
+          "4 4 4 3 4"
+        ]
+      ],
+      "ch": [
+        [
+          "sam vera jack anna",
+          "3 4 4 4"
+        ],
+        [
+          "tom jade mary otto leo",
+          "3 4 4 4 3"
+        ],
+        [
+          "cora max jude",
+          "4 3 4"
+        ],
+        [
+          "dean beth anna amy max",
+          "4 4 4 3 3"
+        ],
+        [
+          "max jade owen",
+          "3 4 4"
+        ]
+      ],
+      "panelOps": [
+        "last_letter_pos",
+        "longest",
+        "sort_by_length",
+        "length_map",
+        "keep_startswith_vowel",
+        "letter_count_squared"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It takes 5 away from every chip, then keeps only the first 2 chips.",
       "ex": [
@@ -1886,6 +2458,50 @@
     }
   ],
   "2026-06-21": [
+    {
+      "difficulty": "super_easy",
+      "rule": "It adds 1 to every chip.",
+      "ex": [
+        [
+          "9 3 9 5",
+          "10 4 10 6"
+        ],
+        [
+          "5 8",
+          "6 9"
+        ]
+      ],
+      "ch": [
+        [
+          "12 8 7 4",
+          "13 9 8 5"
+        ],
+        [
+          "1 11 11 9",
+          "2 12 12 10"
+        ],
+        [
+          "5 11",
+          "6 12"
+        ],
+        [
+          "7 3 8 10 3",
+          "8 4 9 11 4"
+        ],
+        [
+          "2 7 9",
+          "3 8 10"
+        ]
+      ],
+      "panelOps": [
+        "mul_k",
+        "last",
+        "first",
+        "sub_k",
+        "reverse",
+        "add_k"
+      ]
+    },
     {
       "difficulty": "easy",
       "rule": "It takes 4 away from every chip, then keeps only the first 2 chips.",
@@ -2033,6 +2649,50 @@
   ],
   "2026-06-22": [
     {
+      "difficulty": "super_easy",
+      "rule": "It finds the biggest chip.",
+      "ex": [
+        [
+          "6 9 8 10 8",
+          "10"
+        ],
+        [
+          "8 8",
+          "8"
+        ]
+      ],
+      "ch": [
+        [
+          "12 9",
+          "12"
+        ],
+        [
+          "7 4 5 1 10",
+          "10"
+        ],
+        [
+          "3 6 6 6",
+          "6"
+        ],
+        [
+          "10 1 10",
+          "10"
+        ],
+        [
+          "2 1",
+          "2"
+        ]
+      ],
+      "panelOps": [
+        "max",
+        "drop_first",
+        "sort_desc",
+        "sum",
+        "keep_first_k",
+        "count"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It adds 8 to every chip, then keeps only the last 2 chips.",
       "ex": [
@@ -2175,6 +2835,50 @@
     }
   ],
   "2026-06-23": [
+    {
+      "difficulty": "super_easy",
+      "rule": "It takes 3 away from every chip.",
+      "ex": [
+        [
+          "11 12 6 7",
+          "8 9 3 4"
+        ],
+        [
+          "3 5 5 12",
+          "0 2 2 9"
+        ]
+      ],
+      "ch": [
+        [
+          "6 3 4 10",
+          "3 0 1 7"
+        ],
+        [
+          "3 4 7 6",
+          "0 1 4 3"
+        ],
+        [
+          "4 12 3",
+          "1 9 0"
+        ],
+        [
+          "7 7",
+          "4 4"
+        ],
+        [
+          "11 11 5 4 10",
+          "8 8 2 1 7"
+        ]
+      ],
+      "panelOps": [
+        "last",
+        "add_k",
+        "first",
+        "reverse",
+        "mul_k",
+        "sub_k"
+      ]
+    },
     {
       "difficulty": "easy",
       "rule": "It takes 3 away from every chip, then sorts them smallest to biggest.",
@@ -2319,6 +3023,50 @@
   ],
   "2026-06-24": [
     {
+      "difficulty": "super_easy",
+      "rule": "It takes 4 away from every chip.",
+      "ex": [
+        [
+          "10 12",
+          "6 8"
+        ],
+        [
+          "4 12 5 7",
+          "0 8 1 3"
+        ]
+      ],
+      "ch": [
+        [
+          "8 10 10 8 10",
+          "4 6 6 4 6"
+        ],
+        [
+          "9 4 10 8 9",
+          "5 0 6 4 5"
+        ],
+        [
+          "8 7 11",
+          "4 3 7"
+        ],
+        [
+          "9 11 12",
+          "5 7 8"
+        ],
+        [
+          "12 11 4",
+          "8 7 0"
+        ]
+      ],
+      "panelOps": [
+        "mul_k",
+        "add_k",
+        "sub_k",
+        "last",
+        "reverse",
+        "first"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It adds 5 to every chip, then throws away the last chip.",
       "ex": [
@@ -2461,6 +3209,50 @@
     }
   ],
   "2026-06-25": [
+    {
+      "difficulty": "super_easy",
+      "rule": "It counts the chips.",
+      "ex": [
+        [
+          "9 1 1 9",
+          "4"
+        ],
+        [
+          "8 10",
+          "2"
+        ]
+      ],
+      "ch": [
+        [
+          "2 11 4 7",
+          "4"
+        ],
+        [
+          "9 8 5 6",
+          "4"
+        ],
+        [
+          "9 3 5 12",
+          "4"
+        ],
+        [
+          "4 3 6",
+          "3"
+        ],
+        [
+          "5 10 8 12 9",
+          "5"
+        ]
+      ],
+      "panelOps": [
+        "sum",
+        "count",
+        "keep_last_k",
+        "max",
+        "keep_first_k",
+        "drop_last"
+      ]
+    },
     {
       "difficulty": "easy",
       "rule": "It takes 3 away from every chip, then sorts them biggest to smallest.",
@@ -2605,6 +3397,50 @@
   ],
   "2026-06-26": [
     {
+      "difficulty": "super_easy",
+      "rule": "It multiplies every chip by 2.",
+      "ex": [
+        [
+          "10 3",
+          "20 6"
+        ],
+        [
+          "2 7 10 3 11",
+          "4 14 20 6 22"
+        ]
+      ],
+      "ch": [
+        [
+          "2 5",
+          "4 10"
+        ],
+        [
+          "10 12 4 8",
+          "20 24 8 16"
+        ],
+        [
+          "5 3 10 5",
+          "10 6 20 10"
+        ],
+        [
+          "1 11 1 3",
+          "2 22 2 6"
+        ],
+        [
+          "4 7 10",
+          "8 14 20"
+        ]
+      ],
+      "panelOps": [
+        "first",
+        "reverse",
+        "last",
+        "sub_k",
+        "add_k",
+        "mul_k"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It adds 9 to every chip, then sorts them biggest to smallest.",
       "ex": [
@@ -2748,6 +3584,50 @@
   ],
   "2026-06-27": [
     {
+      "difficulty": "super_easy",
+      "rule": "It multiplies every chip by 3.",
+      "ex": [
+        [
+          "7 10 2 2",
+          "21 30 6 6"
+        ],
+        [
+          "10 10 3",
+          "30 30 9"
+        ]
+      ],
+      "ch": [
+        [
+          "3 1 8 9",
+          "9 3 24 27"
+        ],
+        [
+          "12 8 1 4 11",
+          "36 24 3 12 33"
+        ],
+        [
+          "9 3 12 10",
+          "27 9 36 30"
+        ],
+        [
+          "12 3",
+          "36 9"
+        ],
+        [
+          "1 5 8 5 9",
+          "3 15 24 15 27"
+        ]
+      ],
+      "panelOps": [
+        "first",
+        "sub_k",
+        "last",
+        "mul_k",
+        "add_k",
+        "reverse"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It takes 3 away from every chip, then keeps only the first 3 chips.",
       "ex": [
@@ -2890,6 +3770,50 @@
     }
   ],
   "2026-06-28": [
+    {
+      "difficulty": "super_easy",
+      "rule": "It adds 4 to every chip.",
+      "ex": [
+        [
+          "8 10",
+          "12 14"
+        ],
+        [
+          "10 9 8 11",
+          "14 13 12 15"
+        ]
+      ],
+      "ch": [
+        [
+          "7 7 9 8",
+          "11 11 13 12"
+        ],
+        [
+          "5 6 6 11 12",
+          "9 10 10 15 16"
+        ],
+        [
+          "12 2 10 12 12",
+          "16 6 14 16 16"
+        ],
+        [
+          "11 12 4 5",
+          "15 16 8 9"
+        ],
+        [
+          "9 6 12 1",
+          "13 10 16 5"
+        ]
+      ],
+      "panelOps": [
+        "sub_k",
+        "add_k",
+        "reverse",
+        "last",
+        "mul_k",
+        "first"
+      ]
+    },
     {
       "difficulty": "easy",
       "rule": "It adds 1 to every chip, then throws away the last chip.",
@@ -3037,6 +3961,50 @@
   ],
   "2026-06-29": [
     {
+      "difficulty": "super_easy",
+      "rule": "It adds 8 to every chip.",
+      "ex": [
+        [
+          "6 7 4 10",
+          "14 15 12 18"
+        ],
+        [
+          "6 3 5 3 10",
+          "14 11 13 11 18"
+        ]
+      ],
+      "ch": [
+        [
+          "8 4 6",
+          "16 12 14"
+        ],
+        [
+          "3 5",
+          "11 13"
+        ],
+        [
+          "4 9 7",
+          "12 17 15"
+        ],
+        [
+          "8 11 3",
+          "16 19 11"
+        ],
+        [
+          "2 8 1 8 6",
+          "10 16 9 16 14"
+        ]
+      ],
+      "panelOps": [
+        "sub_k",
+        "first",
+        "last",
+        "mul_k",
+        "add_k",
+        "reverse"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It multiplies every chip by 4, then finds the smallest chip.",
       "ex": [
@@ -3179,6 +4147,50 @@
     }
   ],
   "2026-06-30": [
+    {
+      "difficulty": "super_easy",
+      "rule": "It takes 5 away from every chip.",
+      "ex": [
+        [
+          "7 10 9",
+          "2 5 4"
+        ],
+        [
+          "5 6",
+          "0 1"
+        ]
+      ],
+      "ch": [
+        [
+          "5 5",
+          "0 0"
+        ],
+        [
+          "11 12 5 12 9",
+          "6 7 0 7 4"
+        ],
+        [
+          "5 12",
+          "0 7"
+        ],
+        [
+          "11 12",
+          "6 7"
+        ],
+        [
+          "11 10",
+          "6 5"
+        ]
+      ],
+      "panelOps": [
+        "reverse",
+        "add_k",
+        "first",
+        "sub_k",
+        "mul_k",
+        "last"
+      ]
+    },
     {
       "difficulty": "easy",
       "rule": "It adds 3 to every chip, then keeps only the last 2 chips.",
@@ -3326,6 +4338,50 @@
   ],
   "2026-07-01": [
     {
+      "difficulty": "super_easy",
+      "rule": "It adds 6 to every chip.",
+      "ex": [
+        [
+          "1 2 8 4",
+          "7 8 14 10"
+        ],
+        [
+          "9 1 10 4 9",
+          "15 7 16 10 15"
+        ]
+      ],
+      "ch": [
+        [
+          "12 9 7 1 9",
+          "18 15 13 7 15"
+        ],
+        [
+          "11 12",
+          "17 18"
+        ],
+        [
+          "11 12 12 4",
+          "17 18 18 10"
+        ],
+        [
+          "7 11 10 2 10",
+          "13 17 16 8 16"
+        ],
+        [
+          "12 6 3",
+          "18 12 9"
+        ]
+      ],
+      "panelOps": [
+        "add_k",
+        "reverse",
+        "sub_k",
+        "mul_k",
+        "first",
+        "last"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It adds 1 to every chip, then keeps only the first 2 chips.",
       "ex": [
@@ -3469,6 +4525,50 @@
   ],
   "2026-07-02": [
     {
+      "difficulty": "super_easy",
+      "rule": "It adds 5 to every chip.",
+      "ex": [
+        [
+          "1 11",
+          "6 16"
+        ],
+        [
+          "1 5 9 5",
+          "6 10 14 10"
+        ]
+      ],
+      "ch": [
+        [
+          "4 2 11 11",
+          "9 7 16 16"
+        ],
+        [
+          "5 8 1 10 12",
+          "10 13 6 15 17"
+        ],
+        [
+          "9 9 8 2 10",
+          "14 14 13 7 15"
+        ],
+        [
+          "8 12",
+          "13 17"
+        ],
+        [
+          "3 4 1 6",
+          "8 9 6 11"
+        ]
+      ],
+      "panelOps": [
+        "sub_k",
+        "first",
+        "reverse",
+        "mul_k",
+        "add_k",
+        "last"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It adds 6 to every chip, then sorts them smallest to biggest.",
       "ex": [
@@ -3611,6 +4711,50 @@
     }
   ],
   "2026-07-03": [
+    {
+      "difficulty": "super_easy",
+      "rule": "It finds the smallest chip.",
+      "ex": [
+        [
+          "11 12 10 4 7",
+          "4"
+        ],
+        [
+          "9 2 8",
+          "2"
+        ]
+      ],
+      "ch": [
+        [
+          "8 10 3 7 3",
+          "3"
+        ],
+        [
+          "2 11",
+          "2"
+        ],
+        [
+          "5 1 5 8",
+          "1"
+        ],
+        [
+          "4 3",
+          "3"
+        ],
+        [
+          "4 5 7",
+          "4"
+        ]
+      ],
+      "panelOps": [
+        "sort_desc",
+        "keep_last_k",
+        "count",
+        "min",
+        "drop_first",
+        "sort_asc"
+      ]
+    },
     {
       "difficulty": "easy",
       "rule": "It sorts the chips biggest to smallest, then keeps only the last 3 chips.",
@@ -3758,6 +4902,50 @@
   ],
   "2026-07-04": [
     {
+      "difficulty": "super_easy",
+      "rule": "It sorts the chips smallest to biggest.",
+      "ex": [
+        [
+          "6 11 1 10",
+          "1 6 10 11"
+        ],
+        [
+          "10 3 4 9",
+          "3 4 9 10"
+        ]
+      ],
+      "ch": [
+        [
+          "10 9 3",
+          "3 9 10"
+        ],
+        [
+          "10 2 5 9",
+          "2 5 9 10"
+        ],
+        [
+          "4 4 1 8 11",
+          "1 4 4 8 11"
+        ],
+        [
+          "10 6",
+          "6 10"
+        ],
+        [
+          "7 6 1",
+          "1 6 7"
+        ]
+      ],
+      "panelOps": [
+        "sort_desc",
+        "sort_asc",
+        "sum",
+        "min",
+        "keep_first_k",
+        "drop_last"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It takes 2 away from every chip, then keeps only the last 2 chips.",
       "ex": [
@@ -3900,6 +5088,50 @@
     }
   ],
   "2026-07-05": [
+    {
+      "difficulty": "super_easy",
+      "rule": "It counts the letters in every chip.",
+      "ex": [
+        [
+          "hawk seal panda otter sheep",
+          "4 4 5 5 5"
+        ],
+        [
+          "rat sheep whale robin",
+          "3 5 5 5"
+        ]
+      ],
+      "ch": [
+        [
+          "sheep fish owl horse pig",
+          "5 4 3 5 3"
+        ],
+        [
+          "mouse owl donkey rat bat",
+          "5 3 6 3 3"
+        ],
+        [
+          "zebra panda eagle lion hawk",
+          "5 5 5 4 4"
+        ],
+        [
+          "donkey swan wolf deer",
+          "6 4 4 4"
+        ],
+        [
+          "llama rat mole",
+          "5 3 4"
+        ]
+      ],
+      "panelOps": [
+        "letter_count_squared",
+        "sort_by_length",
+        "last_letter_pos",
+        "length_map",
+        "shortest",
+        "keep_startswith_vowel"
+      ]
+    },
     {
       "difficulty": "easy",
       "rule": "It adds 5 to every chip, then sorts them smallest to biggest.",
@@ -4044,6 +5276,50 @@
   ],
   "2026-07-06": [
     {
+      "difficulty": "super_easy",
+      "rule": "It adds 2 to every chip.",
+      "ex": [
+        [
+          "7 3",
+          "9 5"
+        ],
+        [
+          "3 9",
+          "5 11"
+        ]
+      ],
+      "ch": [
+        [
+          "4 6 4 6 3",
+          "6 8 6 8 5"
+        ],
+        [
+          "4 1 9 5",
+          "6 3 11 7"
+        ],
+        [
+          "8 2 11",
+          "10 4 13"
+        ],
+        [
+          "10 7 7 8 3",
+          "12 9 9 10 5"
+        ],
+        [
+          "6 3 3 9 2",
+          "8 5 5 11 4"
+        ]
+      ],
+      "panelOps": [
+        "first",
+        "add_k",
+        "mul_k",
+        "reverse",
+        "last",
+        "sub_k"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It adds 6 to every chip, then reverses the order.",
       "ex": [
@@ -4186,6 +5462,50 @@
     }
   ],
   "2026-07-07": [
+    {
+      "difficulty": "super_easy",
+      "rule": "It adds 7 to every chip.",
+      "ex": [
+        [
+          "7 10 7",
+          "14 17 14"
+        ],
+        [
+          "6 7 9 1 2",
+          "13 14 16 8 9"
+        ]
+      ],
+      "ch": [
+        [
+          "1 2 6",
+          "8 9 13"
+        ],
+        [
+          "9 5",
+          "16 12"
+        ],
+        [
+          "10 11 10",
+          "17 18 17"
+        ],
+        [
+          "2 3 4",
+          "9 10 11"
+        ],
+        [
+          "1 9 6 8",
+          "8 16 13 15"
+        ]
+      ],
+      "panelOps": [
+        "add_k",
+        "sub_k",
+        "first",
+        "mul_k",
+        "reverse",
+        "last"
+      ]
+    },
     {
       "difficulty": "easy",
       "rule": "It takes 3 away from every chip, then reverses the order.",
@@ -4333,6 +5653,50 @@
   ],
   "2026-07-08": [
     {
+      "difficulty": "super_easy",
+      "rule": "It sorts the chips biggest to smallest.",
+      "ex": [
+        [
+          "6 9 12 11 6",
+          "12 11 9 6 6"
+        ],
+        [
+          "10 5 1 8",
+          "10 8 5 1"
+        ]
+      ],
+      "ch": [
+        [
+          "1 1 9 9 12",
+          "12 9 9 1 1"
+        ],
+        [
+          "1 12 9 5 2",
+          "12 9 5 2 1"
+        ],
+        [
+          "11 4 9",
+          "11 9 4"
+        ],
+        [
+          "1 6",
+          "6 1"
+        ],
+        [
+          "4 11 11 3",
+          "11 11 4 3"
+        ]
+      ],
+      "panelOps": [
+        "sort_asc",
+        "keep_last_k",
+        "sum",
+        "keep_first_k",
+        "drop_last",
+        "sort_desc"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It adds 4 to every chip, then sorts them smallest to biggest.",
       "ex": [
@@ -4478,6 +5842,50 @@
     }
   ],
   "2026-07-09": [
+    {
+      "difficulty": "super_easy",
+      "rule": "It adds 3 to every chip.",
+      "ex": [
+        [
+          "4 7 2",
+          "7 10 5"
+        ],
+        [
+          "2 7 6 4",
+          "5 10 9 7"
+        ]
+      ],
+      "ch": [
+        [
+          "10 9 11",
+          "13 12 14"
+        ],
+        [
+          "6 6 10",
+          "9 9 13"
+        ],
+        [
+          "10 4 1 6 4",
+          "13 7 4 9 7"
+        ],
+        [
+          "6 8",
+          "9 11"
+        ],
+        [
+          "9 5 4",
+          "12 8 7"
+        ]
+      ],
+      "panelOps": [
+        "last",
+        "first",
+        "add_k",
+        "mul_k",
+        "reverse",
+        "sub_k"
+      ]
+    },
     {
       "difficulty": "easy",
       "rule": "It adds 5 to every chip, then keeps only the last 2 chips.",
@@ -4625,6 +6033,50 @@
   ],
   "2026-07-10": [
     {
+      "difficulty": "super_easy",
+      "rule": "It finds the biggest chip.",
+      "ex": [
+        [
+          "3 6 1 11 9",
+          "11"
+        ],
+        [
+          "8 9 8",
+          "9"
+        ]
+      ],
+      "ch": [
+        [
+          "11 6 4 5",
+          "11"
+        ],
+        [
+          "9 10 12 6",
+          "12"
+        ],
+        [
+          "8 6 6 11",
+          "11"
+        ],
+        [
+          "1 11 11 10",
+          "11"
+        ],
+        [
+          "4 6 11 8",
+          "11"
+        ]
+      ],
+      "panelOps": [
+        "sort_desc",
+        "drop_first",
+        "drop_last",
+        "count",
+        "max",
+        "keep_last_k"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It takes 1 away from every chip, then throws away the last chip.",
       "ex": [
@@ -4771,6 +6223,50 @@
   ],
   "2026-07-11": [
     {
+      "difficulty": "super_easy",
+      "rule": "It reverses the order.",
+      "ex": [
+        [
+          "5 5 1 7",
+          "7 1 5 5"
+        ],
+        [
+          "3 5 1 7 6",
+          "6 7 1 5 3"
+        ]
+      ],
+      "ch": [
+        [
+          "4 11",
+          "11 4"
+        ],
+        [
+          "9 1 10 2",
+          "2 10 1 9"
+        ],
+        [
+          "8 9 4 3",
+          "3 4 9 8"
+        ],
+        [
+          "2 9 8 7",
+          "7 8 9 2"
+        ],
+        [
+          "9 7",
+          "7 9"
+        ]
+      ],
+      "panelOps": [
+        "reverse",
+        "mul_k",
+        "sub_k",
+        "first",
+        "add_k",
+        "last"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It multiplies every chip by 2, then keeps only the last 2 chips.",
       "ex": [
@@ -4914,6 +6410,50 @@
   ],
   "2026-07-12": [
     {
+      "difficulty": "super_easy",
+      "rule": "It multiplies every chip by 4.",
+      "ex": [
+        [
+          "12 12 12",
+          "48 48 48"
+        ],
+        [
+          "12 5 8 3 12",
+          "48 20 32 12 48"
+        ]
+      ],
+      "ch": [
+        [
+          "2 3 10 10 8",
+          "8 12 40 40 32"
+        ],
+        [
+          "12 1",
+          "48 4"
+        ],
+        [
+          "9 10 5 5",
+          "36 40 20 20"
+        ],
+        [
+          "9 6 2 3 9",
+          "36 24 8 12 36"
+        ],
+        [
+          "1 9 7",
+          "4 36 28"
+        ]
+      ],
+      "panelOps": [
+        "reverse",
+        "add_k",
+        "sub_k",
+        "last",
+        "mul_k",
+        "first"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It adds 1 to every chip, then adds them together.",
       "ex": [
@@ -5056,6 +6596,50 @@
     }
   ],
   "2026-07-13": [
+    {
+      "difficulty": "super_easy",
+      "rule": "It adds 9 to every chip.",
+      "ex": [
+        [
+          "8 4 12 10 10",
+          "17 13 21 19 19"
+        ],
+        [
+          "12 1 4 8",
+          "21 10 13 17"
+        ]
+      ],
+      "ch": [
+        [
+          "5 2 5",
+          "14 11 14"
+        ],
+        [
+          "12 2",
+          "21 11"
+        ],
+        [
+          "9 11 8",
+          "18 20 17"
+        ],
+        [
+          "7 3",
+          "16 12"
+        ],
+        [
+          "7 6 12 6 6",
+          "16 15 21 15 15"
+        ]
+      ],
+      "panelOps": [
+        "sub_k",
+        "add_k",
+        "mul_k",
+        "last",
+        "first",
+        "reverse"
+      ]
+    },
     {
       "difficulty": "easy",
       "rule": "It sorts the chips biggest to smallest, then keeps only the last 2 chips.",
@@ -5203,6 +6787,50 @@
   ],
   "2026-07-14": [
     {
+      "difficulty": "super_easy",
+      "rule": "It takes 3 away from every chip.",
+      "ex": [
+        [
+          "7 11",
+          "4 8"
+        ],
+        [
+          "11 10 3 7",
+          "8 7 0 4"
+        ]
+      ],
+      "ch": [
+        [
+          "11 12 9 12 8",
+          "8 9 6 9 5"
+        ],
+        [
+          "3 10 5",
+          "0 7 2"
+        ],
+        [
+          "12 7 10 9 6",
+          "9 4 7 6 3"
+        ],
+        [
+          "6 4 4 10 3",
+          "3 1 1 7 0"
+        ],
+        [
+          "4 4",
+          "1 1"
+        ]
+      ],
+      "panelOps": [
+        "first",
+        "reverse",
+        "sub_k",
+        "add_k",
+        "mul_k",
+        "last"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It adds 8 to every chip, then reverses the order.",
       "ex": [
@@ -5348,6 +6976,50 @@
     }
   ],
   "2026-07-15": [
+    {
+      "difficulty": "super_easy",
+      "rule": "It adds all the chips together.",
+      "ex": [
+        [
+          "3 3 9 3",
+          "18"
+        ],
+        [
+          "8 6 3 8",
+          "25"
+        ]
+      ],
+      "ch": [
+        [
+          "5 8 3",
+          "16"
+        ],
+        [
+          "10 12 11",
+          "33"
+        ],
+        [
+          "4 9 9 5 7",
+          "34"
+        ],
+        [
+          "2 7",
+          "9"
+        ],
+        [
+          "2 7 6",
+          "15"
+        ]
+      ],
+      "panelOps": [
+        "drop_first",
+        "min",
+        "sort_desc",
+        "keep_last_k",
+        "sum",
+        "count"
+      ]
+    },
     {
       "difficulty": "easy",
       "rule": "It adds 1 to every chip, then reverses the order.",
@@ -5495,6 +7167,50 @@
   ],
   "2026-07-16": [
     {
+      "difficulty": "super_easy",
+      "rule": "It adds 6 to every chip.",
+      "ex": [
+        [
+          "11 5 5",
+          "17 11 11"
+        ],
+        [
+          "4 2 9 2 3",
+          "10 8 15 8 9"
+        ]
+      ],
+      "ch": [
+        [
+          "1 2 9 2",
+          "7 8 15 8"
+        ],
+        [
+          "11 7 11",
+          "17 13 17"
+        ],
+        [
+          "11 10 11 9",
+          "17 16 17 15"
+        ],
+        [
+          "9 1 10 5 4",
+          "15 7 16 11 10"
+        ],
+        [
+          "1 10 2",
+          "7 16 8"
+        ]
+      ],
+      "panelOps": [
+        "last",
+        "first",
+        "sub_k",
+        "add_k",
+        "mul_k",
+        "reverse"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It multiplies every chip by 3, then finds the biggest chip.",
       "ex": [
@@ -5641,6 +7357,50 @@
   ],
   "2026-07-17": [
     {
+      "difficulty": "super_easy",
+      "rule": "It takes 2 away from every chip.",
+      "ex": [
+        [
+          "8 10 6 10 6",
+          "6 8 4 8 4"
+        ],
+        [
+          "9 10 12",
+          "7 8 10"
+        ]
+      ],
+      "ch": [
+        [
+          "2 2",
+          "0 0"
+        ],
+        [
+          "7 2 2 12 5",
+          "5 0 0 10 3"
+        ],
+        [
+          "11 2 4 10",
+          "9 0 2 8"
+        ],
+        [
+          "10 6 5 10",
+          "8 4 3 8"
+        ],
+        [
+          "3 6 11",
+          "1 4 9"
+        ]
+      ],
+      "panelOps": [
+        "reverse",
+        "mul_k",
+        "add_k",
+        "last",
+        "sub_k",
+        "first"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It takes 1 away from every chip, then keeps only the last 3 chips.",
       "ex": [
@@ -5784,6 +7544,50 @@
   ],
   "2026-07-18": [
     {
+      "difficulty": "super_easy",
+      "rule": "It multiplies every chip by 3.",
+      "ex": [
+        [
+          "7 4 6",
+          "21 12 18"
+        ],
+        [
+          "11 2 10 4",
+          "33 6 30 12"
+        ]
+      ],
+      "ch": [
+        [
+          "11 11 2 4 10",
+          "33 33 6 12 30"
+        ],
+        [
+          "11 7 12",
+          "33 21 36"
+        ],
+        [
+          "6 3 6 10 6",
+          "18 9 18 30 18"
+        ],
+        [
+          "9 10 1",
+          "27 30 3"
+        ],
+        [
+          "2 10 1 11 4",
+          "6 30 3 33 12"
+        ]
+      ],
+      "panelOps": [
+        "sub_k",
+        "first",
+        "last",
+        "reverse",
+        "add_k",
+        "mul_k"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It adds 1 to every chip, then keeps only the last 2 chips.",
       "ex": [
@@ -5925,6 +7729,50 @@
     }
   ],
   "2026-07-19": [
+    {
+      "difficulty": "super_easy",
+      "rule": "It adds 4 to every chip.",
+      "ex": [
+        [
+          "5 2 10 6",
+          "9 6 14 10"
+        ],
+        [
+          "5 4 2 10",
+          "9 8 6 14"
+        ]
+      ],
+      "ch": [
+        [
+          "11 1 9 2",
+          "15 5 13 6"
+        ],
+        [
+          "5 7 9 11 5",
+          "9 11 13 15 9"
+        ],
+        [
+          "1 9 10 12",
+          "5 13 14 16"
+        ],
+        [
+          "2 8 12 6 5",
+          "6 12 16 10 9"
+        ],
+        [
+          "9 12 11 3 2",
+          "13 16 15 7 6"
+        ]
+      ],
+      "panelOps": [
+        "last",
+        "mul_k",
+        "sub_k",
+        "add_k",
+        "first",
+        "reverse"
+      ]
+    },
     {
       "difficulty": "easy",
       "rule": "It adds 4 to every chip, then reverses the order.",
@@ -6069,6 +7917,50 @@
   ],
   "2026-07-20": [
     {
+      "difficulty": "super_easy",
+      "rule": "It counts the letters in every chip.",
+      "ex": [
+        [
+          "olive kiwi peach fig grape",
+          "5 4 5 3 5"
+        ],
+        [
+          "durian plum plantain",
+          "6 4 8"
+        ]
+      ],
+      "ch": [
+        [
+          "date fig mandarin plantain",
+          "4 3 8 8"
+        ],
+        [
+          "lime guava lychee",
+          "4 5 6"
+        ],
+        [
+          "lemon guava melon berry pear",
+          "5 5 5 5 4"
+        ],
+        [
+          "banana grape peach",
+          "6 5 5"
+        ],
+        [
+          "lemon lime mandarin pawpaw",
+          "5 4 8 6"
+        ]
+      ],
+      "panelOps": [
+        "last_letter_pos",
+        "length_map",
+        "keep_startswith_vowel",
+        "sort_by_length",
+        "letter_count_squared",
+        "distinct_letters_map"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It takes 3 away from every chip, then finds the smallest chip.",
       "ex": [
@@ -6212,6 +8104,50 @@
   ],
   "2026-07-21": [
     {
+      "difficulty": "super_easy",
+      "rule": "It takes 5 away from every chip.",
+      "ex": [
+        [
+          "11 11 11 10",
+          "6 6 6 5"
+        ],
+        [
+          "7 6 7 7",
+          "2 1 2 2"
+        ]
+      ],
+      "ch": [
+        [
+          "5 5",
+          "0 0"
+        ],
+        [
+          "6 9",
+          "1 4"
+        ],
+        [
+          "12 6 12",
+          "7 1 7"
+        ],
+        [
+          "8 12",
+          "3 7"
+        ],
+        [
+          "10 12 11 12 10",
+          "5 7 6 7 5"
+        ]
+      ],
+      "panelOps": [
+        "sub_k",
+        "mul_k",
+        "reverse",
+        "first",
+        "last",
+        "add_k"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It multiplies every chip by 4, then keeps only the last 2 chips.",
       "ex": [
@@ -6354,6 +8290,50 @@
     }
   ],
   "2026-07-22": [
+    {
+      "difficulty": "super_easy",
+      "rule": "It takes 1 away from every chip.",
+      "ex": [
+        [
+          "9 7 6 10",
+          "8 6 5 9"
+        ],
+        [
+          "11 7 11",
+          "10 6 10"
+        ]
+      ],
+      "ch": [
+        [
+          "10 5 6 6",
+          "9 4 5 5"
+        ],
+        [
+          "3 1 2",
+          "2 0 1"
+        ],
+        [
+          "9 2 8 6",
+          "8 1 7 5"
+        ],
+        [
+          "3 9 6",
+          "2 8 5"
+        ],
+        [
+          "8 10 9",
+          "7 9 8"
+        ]
+      ],
+      "panelOps": [
+        "reverse",
+        "mul_k",
+        "sub_k",
+        "last",
+        "first",
+        "add_k"
+      ]
+    },
     {
       "difficulty": "easy",
       "rule": "It takes 2 away from every chip, then keeps only the first 3 chips.",
@@ -6501,6 +8481,50 @@
   ],
   "2026-07-23": [
     {
+      "difficulty": "super_easy",
+      "rule": "It sorts the chips smallest to biggest.",
+      "ex": [
+        [
+          "7 6 1 6",
+          "1 6 6 7"
+        ],
+        [
+          "9 8",
+          "8 9"
+        ]
+      ],
+      "ch": [
+        [
+          "7 9 5 7 11",
+          "5 7 7 9 11"
+        ],
+        [
+          "2 10 9 3",
+          "2 3 9 10"
+        ],
+        [
+          "9 7",
+          "7 9"
+        ],
+        [
+          "12 9 7 10 10",
+          "7 9 10 10 12"
+        ],
+        [
+          "2 1 7 5 4",
+          "1 2 4 5 7"
+        ]
+      ],
+      "panelOps": [
+        "keep_last_k",
+        "min",
+        "count",
+        "sum",
+        "sort_asc",
+        "sort_desc"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It adds 8 to every chip, then keeps only the first 3 chips.",
       "ex": [
@@ -6643,6 +8667,50 @@
     }
   ],
   "2026-07-24": [
+    {
+      "difficulty": "super_easy",
+      "rule": "It counts the chips.",
+      "ex": [
+        [
+          "1 4 12 8 8",
+          "5"
+        ],
+        [
+          "11 4 4 2",
+          "4"
+        ]
+      ],
+      "ch": [
+        [
+          "7 6 3 3 10",
+          "5"
+        ],
+        [
+          "7 3 9 6 5",
+          "5"
+        ],
+        [
+          "6 5 7",
+          "3"
+        ],
+        [
+          "5 5 5 1",
+          "4"
+        ],
+        [
+          "6 10 7 3",
+          "4"
+        ]
+      ],
+      "panelOps": [
+        "max",
+        "sum",
+        "count",
+        "drop_last",
+        "drop_first",
+        "min"
+      ]
+    },
     {
       "difficulty": "easy",
       "rule": "It takes 1 away from every chip, then sorts them biggest to smallest.",
@@ -6787,6 +8855,50 @@
   ],
   "2026-07-25": [
     {
+      "difficulty": "super_easy",
+      "rule": "It adds 5 to every chip.",
+      "ex": [
+        [
+          "7 2 10 9 2",
+          "12 7 15 14 7"
+        ],
+        [
+          "6 6 1",
+          "11 11 6"
+        ]
+      ],
+      "ch": [
+        [
+          "7 2 9",
+          "12 7 14"
+        ],
+        [
+          "6 8 2 7",
+          "11 13 7 12"
+        ],
+        [
+          "5 4",
+          "10 9"
+        ],
+        [
+          "6 7 2 10",
+          "11 12 7 15"
+        ],
+        [
+          "2 6 12 6 12",
+          "7 11 17 11 17"
+        ]
+      ],
+      "panelOps": [
+        "sub_k",
+        "mul_k",
+        "last",
+        "first",
+        "add_k",
+        "reverse"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It adds 7 to every chip, then adds them together.",
       "ex": [
@@ -6929,6 +9041,50 @@
     }
   ],
   "2026-07-26": [
+    {
+      "difficulty": "super_easy",
+      "rule": "It multiplies every chip by 2.",
+      "ex": [
+        [
+          "4 6 9 4",
+          "8 12 18 8"
+        ],
+        [
+          "1 2 10",
+          "2 4 20"
+        ]
+      ],
+      "ch": [
+        [
+          "2 11 9 2",
+          "4 22 18 4"
+        ],
+        [
+          "9 4",
+          "18 8"
+        ],
+        [
+          "11 12 6 5",
+          "22 24 12 10"
+        ],
+        [
+          "10 11 8",
+          "20 22 16"
+        ],
+        [
+          "10 5 3",
+          "20 10 6"
+        ]
+      ],
+      "panelOps": [
+        "reverse",
+        "first",
+        "mul_k",
+        "sub_k",
+        "add_k",
+        "last"
+      ]
+    },
     {
       "difficulty": "easy",
       "rule": "It multiplies every chip by 4, then keeps only the first 2 chips.",
@@ -7073,6 +9229,50 @@
   ],
   "2026-07-27": [
     {
+      "difficulty": "super_easy",
+      "rule": "It reverses the order.",
+      "ex": [
+        [
+          "5 5 8 6",
+          "6 8 5 5"
+        ],
+        [
+          "9 4 12",
+          "12 4 9"
+        ]
+      ],
+      "ch": [
+        [
+          "3 1 4 6",
+          "6 4 1 3"
+        ],
+        [
+          "6 9 3 12",
+          "12 3 9 6"
+        ],
+        [
+          "8 7 10",
+          "10 7 8"
+        ],
+        [
+          "1 4 10 9",
+          "9 10 4 1"
+        ],
+        [
+          "7 9 9 6",
+          "6 9 9 7"
+        ]
+      ],
+      "panelOps": [
+        "first",
+        "add_k",
+        "sub_k",
+        "last",
+        "mul_k",
+        "reverse"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It takes 1 away from every chip, then adds them together.",
       "ex": [
@@ -7215,6 +9415,50 @@
     }
   ],
   "2026-07-28": [
+    {
+      "difficulty": "super_easy",
+      "rule": "It sorts the chips biggest to smallest.",
+      "ex": [
+        [
+          "1 9 2 5 11",
+          "11 9 5 2 1"
+        ],
+        [
+          "1 8 2",
+          "8 2 1"
+        ]
+      ],
+      "ch": [
+        [
+          "10 1 1 4",
+          "10 4 1 1"
+        ],
+        [
+          "11 6 4 9 1",
+          "11 9 6 4 1"
+        ],
+        [
+          "8 3 3 11",
+          "11 8 3 3"
+        ],
+        [
+          "9 11",
+          "11 9"
+        ],
+        [
+          "7 11",
+          "11 7"
+        ]
+      ],
+      "panelOps": [
+        "keep_last_k",
+        "count",
+        "min",
+        "max",
+        "sort_desc",
+        "sort_asc"
+      ]
+    },
     {
       "difficulty": "easy",
       "rule": "It adds 6 to every chip, then sorts them biggest to smallest.",
@@ -7359,6 +9603,50 @@
   ],
   "2026-07-29": [
     {
+      "difficulty": "super_easy",
+      "rule": "It adds 7 to every chip.",
+      "ex": [
+        [
+          "9 10 10 11 1",
+          "16 17 17 18 8"
+        ],
+        [
+          "11 2 12",
+          "18 9 19"
+        ]
+      ],
+      "ch": [
+        [
+          "3 5",
+          "10 12"
+        ],
+        [
+          "3 5 3 9 5",
+          "10 12 10 16 12"
+        ],
+        [
+          "4 3 2 10 6",
+          "11 10 9 17 13"
+        ],
+        [
+          "7 5 8 5 9",
+          "14 12 15 12 16"
+        ],
+        [
+          "9 8 12",
+          "16 15 19"
+        ]
+      ],
+      "panelOps": [
+        "mul_k",
+        "sub_k",
+        "last",
+        "reverse",
+        "add_k",
+        "first"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It adds 2 to every chip, then sorts them biggest to smallest.",
       "ex": [
@@ -7501,6 +9789,50 @@
     }
   ],
   "2026-07-30": [
+    {
+      "difficulty": "super_easy",
+      "rule": "It takes 3 away from every chip.",
+      "ex": [
+        [
+          "9 9 6",
+          "6 6 3"
+        ],
+        [
+          "5 8 10 7",
+          "2 5 7 4"
+        ]
+      ],
+      "ch": [
+        [
+          "6 6",
+          "3 3"
+        ],
+        [
+          "9 7 7",
+          "6 4 4"
+        ],
+        [
+          "5 9 12",
+          "2 6 9"
+        ],
+        [
+          "4 8 7",
+          "1 5 4"
+        ],
+        [
+          "3 11 9 11",
+          "0 8 6 8"
+        ]
+      ],
+      "panelOps": [
+        "sub_k",
+        "last",
+        "add_k",
+        "mul_k",
+        "reverse",
+        "first"
+      ]
+    },
     {
       "difficulty": "easy",
       "rule": "It adds 4 to every chip, then keeps only the first 3 chips.",
@@ -7648,6 +9980,50 @@
   ],
   "2026-07-31": [
     {
+      "difficulty": "super_easy",
+      "rule": "It takes 4 away from every chip.",
+      "ex": [
+        [
+          "5 11",
+          "1 7"
+        ],
+        [
+          "5 12 7 11 4",
+          "1 8 3 7 0"
+        ]
+      ],
+      "ch": [
+        [
+          "4 10 12 7",
+          "0 6 8 3"
+        ],
+        [
+          "4 10",
+          "0 6"
+        ],
+        [
+          "11 7 5 5 10",
+          "7 3 1 1 6"
+        ],
+        [
+          "9 6",
+          "5 2"
+        ],
+        [
+          "7 4 11",
+          "3 0 7"
+        ]
+      ],
+      "panelOps": [
+        "reverse",
+        "add_k",
+        "last",
+        "sub_k",
+        "first",
+        "mul_k"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It adds 6 to every chip, then keeps only the last 2 chips.",
       "ex": [
@@ -7790,6 +10166,50 @@
     }
   ],
   "2026-08-01": [
+    {
+      "difficulty": "super_easy",
+      "rule": "It adds 1 to every chip.",
+      "ex": [
+        [
+          "4 5",
+          "5 6"
+        ],
+        [
+          "3 11 12 3 9",
+          "4 12 13 4 10"
+        ]
+      ],
+      "ch": [
+        [
+          "8 4 5 12",
+          "9 5 6 13"
+        ],
+        [
+          "3 7 5 6",
+          "4 8 6 7"
+        ],
+        [
+          "10 11",
+          "11 12"
+        ],
+        [
+          "6 6 12",
+          "7 7 13"
+        ],
+        [
+          "1 9 8 2 4",
+          "2 10 9 3 5"
+        ]
+      ],
+      "panelOps": [
+        "add_k",
+        "first",
+        "last",
+        "sub_k",
+        "reverse",
+        "mul_k"
+      ]
+    },
     {
       "difficulty": "easy",
       "rule": "It takes 2 away from every chip, then sorts them smallest to biggest.",
@@ -7934,6 +10354,50 @@
   ],
   "2026-08-02": [
     {
+      "difficulty": "super_easy",
+      "rule": "It adds 9 to every chip.",
+      "ex": [
+        [
+          "1 6 7 9 8",
+          "10 15 16 18 17"
+        ],
+        [
+          "8 9 5",
+          "17 18 14"
+        ]
+      ],
+      "ch": [
+        [
+          "1 6 7",
+          "10 15 16"
+        ],
+        [
+          "4 6 10",
+          "13 15 19"
+        ],
+        [
+          "12 6 5 1",
+          "21 15 14 10"
+        ],
+        [
+          "10 2 2 1",
+          "19 11 11 10"
+        ],
+        [
+          "6 9 10 5 3",
+          "15 18 19 14 12"
+        ]
+      ],
+      "panelOps": [
+        "last",
+        "sub_k",
+        "mul_k",
+        "first",
+        "add_k",
+        "reverse"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It keeps only the first 3 chips, then sorts them smallest to biggest.",
       "ex": [
@@ -8076,6 +10540,50 @@
     }
   ],
   "2026-08-03": [
+    {
+      "difficulty": "super_easy",
+      "rule": "It adds 4 to every chip.",
+      "ex": [
+        [
+          "2 7 4",
+          "6 11 8"
+        ],
+        [
+          "10 10",
+          "14 14"
+        ]
+      ],
+      "ch": [
+        [
+          "11 10",
+          "15 14"
+        ],
+        [
+          "7 10 1",
+          "11 14 5"
+        ],
+        [
+          "4 7 6 3",
+          "8 11 10 7"
+        ],
+        [
+          "9 11 7",
+          "13 15 11"
+        ],
+        [
+          "6 1 7 5 2",
+          "10 5 11 9 6"
+        ]
+      ],
+      "panelOps": [
+        "mul_k",
+        "reverse",
+        "sub_k",
+        "first",
+        "last",
+        "add_k"
+      ]
+    },
     {
       "difficulty": "easy",
       "rule": "It adds 8 to every chip, then sorts them smallest to biggest.",
@@ -8223,6 +10731,50 @@
   ],
   "2026-08-04": [
     {
+      "difficulty": "super_easy",
+      "rule": "It adds 6 to every chip.",
+      "ex": [
+        [
+          "4 10 7 8 12",
+          "10 16 13 14 18"
+        ],
+        [
+          "6 9 7",
+          "12 15 13"
+        ]
+      ],
+      "ch": [
+        [
+          "5 3 7 6",
+          "11 9 13 12"
+        ],
+        [
+          "1 4 8 4 4",
+          "7 10 14 10 10"
+        ],
+        [
+          "10 8",
+          "16 14"
+        ],
+        [
+          "3 9 1 12",
+          "9 15 7 18"
+        ],
+        [
+          "2 12 12 11 8",
+          "8 18 18 17 14"
+        ]
+      ],
+      "panelOps": [
+        "sub_k",
+        "first",
+        "mul_k",
+        "add_k",
+        "reverse",
+        "last"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It adds 9 to every chip, then keeps only the first 2 chips.",
       "ex": [
@@ -8366,6 +10918,50 @@
   ],
   "2026-08-05": [
     {
+      "difficulty": "super_easy",
+      "rule": "It counts the letters in every chip.",
+      "ex": [
+        [
+          "sara ian ben nina",
+          "4 3 3 4"
+        ],
+        [
+          "leo mark cole otto",
+          "3 4 4 4"
+        ]
+      ],
+      "ch": [
+        [
+          "hugo kyle max vera ryan",
+          "4 4 3 4 4"
+        ],
+        [
+          "lena ben lily vera",
+          "4 3 4 4"
+        ],
+        [
+          "amy lena ben theo lily",
+          "3 4 3 4 4"
+        ],
+        [
+          "leo beth ivan sara",
+          "3 4 4 4"
+        ],
+        [
+          "otto beth cora tom gwen",
+          "4 4 4 3 4"
+        ]
+      ],
+      "panelOps": [
+        "first_letter_pos",
+        "sort_by_length",
+        "length_map",
+        "keep_startswith_vowel",
+        "last_letter_pos",
+        "letter_count_squared"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It sorts the chips smallest to biggest, then keeps only the last 2 chips.",
       "ex": [
@@ -8508,6 +11104,50 @@
     }
   ],
   "2026-08-06": [
+    {
+      "difficulty": "super_easy",
+      "rule": "It takes 5 away from every chip.",
+      "ex": [
+        [
+          "8 7",
+          "3 2"
+        ],
+        [
+          "9 12 8 9",
+          "4 7 3 4"
+        ]
+      ],
+      "ch": [
+        [
+          "8 9 8 6",
+          "3 4 3 1"
+        ],
+        [
+          "12 11 7",
+          "7 6 2"
+        ],
+        [
+          "12 5",
+          "7 0"
+        ],
+        [
+          "8 5 11 11 9",
+          "3 0 6 6 4"
+        ],
+        [
+          "11 7",
+          "6 2"
+        ]
+      ],
+      "panelOps": [
+        "sub_k",
+        "mul_k",
+        "last",
+        "add_k",
+        "reverse",
+        "first"
+      ]
+    },
     {
       "difficulty": "easy",
       "rule": "It adds 7 to every chip, then sorts them smallest to biggest.",
@@ -8655,6 +11295,50 @@
   ],
   "2026-08-07": [
     {
+      "difficulty": "super_easy",
+      "rule": "It finds the smallest chip.",
+      "ex": [
+        [
+          "6 3 7 12 5",
+          "3"
+        ],
+        [
+          "7 8 7 8",
+          "7"
+        ]
+      ],
+      "ch": [
+        [
+          "11 11",
+          "11"
+        ],
+        [
+          "7 8 10 7",
+          "7"
+        ],
+        [
+          "4 1 3 1 11",
+          "1"
+        ],
+        [
+          "12 5 4 4 10",
+          "4"
+        ],
+        [
+          "12 12 4 9 7",
+          "4"
+        ]
+      ],
+      "panelOps": [
+        "min",
+        "keep_last_k",
+        "sort_desc",
+        "max",
+        "count",
+        "keep_first_k"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It keeps only the first 3 chips, then adds them together.",
       "ex": [
@@ -8797,6 +11481,50 @@
     }
   ],
   "2026-08-08": [
+    {
+      "difficulty": "super_easy",
+      "rule": "It multiplies every chip by 4.",
+      "ex": [
+        [
+          "5 12 2 6 12",
+          "20 48 8 24 48"
+        ],
+        [
+          "4 10 2",
+          "16 40 8"
+        ]
+      ],
+      "ch": [
+        [
+          "4 10 6 3",
+          "16 40 24 12"
+        ],
+        [
+          "1 7 3",
+          "4 28 12"
+        ],
+        [
+          "3 2",
+          "12 8"
+        ],
+        [
+          "6 1 2 9 2",
+          "24 4 8 36 8"
+        ],
+        [
+          "2 3",
+          "8 12"
+        ]
+      ],
+      "panelOps": [
+        "first",
+        "mul_k",
+        "reverse",
+        "add_k",
+        "last",
+        "sub_k"
+      ]
+    },
     {
       "difficulty": "easy",
       "rule": "It takes 5 away from every chip, then finds the smallest chip.",
@@ -8941,6 +11669,50 @@
   ],
   "2026-08-09": [
     {
+      "difficulty": "super_easy",
+      "rule": "It finds the biggest chip.",
+      "ex": [
+        [
+          "5 11 9 6 3",
+          "11"
+        ],
+        [
+          "4 7",
+          "7"
+        ]
+      ],
+      "ch": [
+        [
+          "12 8",
+          "12"
+        ],
+        [
+          "2 9",
+          "9"
+        ],
+        [
+          "3 4",
+          "4"
+        ],
+        [
+          "5 3 7",
+          "7"
+        ],
+        [
+          "9 7 1 5",
+          "9"
+        ]
+      ],
+      "panelOps": [
+        "drop_last",
+        "max",
+        "sum",
+        "min",
+        "drop_first",
+        "sort_asc"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It adds 1 to every chip, then keeps only the first 3 chips.",
       "ex": [
@@ -9084,6 +11856,50 @@
   ],
   "2026-08-10": [
     {
+      "difficulty": "super_easy",
+      "rule": "It adds all the chips together.",
+      "ex": [
+        [
+          "9 12 5 2 3",
+          "31"
+        ],
+        [
+          "11 4",
+          "15"
+        ]
+      ],
+      "ch": [
+        [
+          "5 3",
+          "8"
+        ],
+        [
+          "8 5 5 4 2",
+          "24"
+        ],
+        [
+          "3 4 3",
+          "10"
+        ],
+        [
+          "6 6",
+          "12"
+        ],
+        [
+          "3 10",
+          "13"
+        ]
+      ],
+      "panelOps": [
+        "count",
+        "max",
+        "sort_desc",
+        "keep_last_k",
+        "sum",
+        "min"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It keeps only the last 3 chips, then sorts them biggest to smallest.",
       "ex": [
@@ -9226,6 +12042,50 @@
     }
   ],
   "2026-08-11": [
+    {
+      "difficulty": "super_easy",
+      "rule": "It multiplies every chip by 2.",
+      "ex": [
+        [
+          "11 3 10 6 10",
+          "22 6 20 12 20"
+        ],
+        [
+          "7 9 7 1 3",
+          "14 18 14 2 6"
+        ]
+      ],
+      "ch": [
+        [
+          "1 11 9 2 10",
+          "2 22 18 4 20"
+        ],
+        [
+          "9 12",
+          "18 24"
+        ],
+        [
+          "3 8 11 9 4",
+          "6 16 22 18 8"
+        ],
+        [
+          "2 2 10",
+          "4 4 20"
+        ],
+        [
+          "2 5 2",
+          "4 10 4"
+        ]
+      ],
+      "panelOps": [
+        "reverse",
+        "first",
+        "sub_k",
+        "last",
+        "mul_k",
+        "add_k"
+      ]
+    },
     {
       "difficulty": "easy",
       "rule": "It adds 4 to every chip, then finds the biggest chip.",
@@ -9373,6 +12233,50 @@
   ],
   "2026-08-12": [
     {
+      "difficulty": "super_easy",
+      "rule": "It adds 8 to every chip.",
+      "ex": [
+        [
+          "12 7",
+          "20 15"
+        ],
+        [
+          "1 6 4",
+          "9 14 12"
+        ]
+      ],
+      "ch": [
+        [
+          "12 2",
+          "20 10"
+        ],
+        [
+          "5 12",
+          "13 20"
+        ],
+        [
+          "6 11 12 11",
+          "14 19 20 19"
+        ],
+        [
+          "9 2 6",
+          "17 10 14"
+        ],
+        [
+          "6 7",
+          "14 15"
+        ]
+      ],
+      "panelOps": [
+        "mul_k",
+        "first",
+        "reverse",
+        "sub_k",
+        "last",
+        "add_k"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It takes 4 away from every chip, then keeps only the last 3 chips.",
       "ex": [
@@ -9516,6 +12420,50 @@
   ],
   "2026-08-13": [
     {
+      "difficulty": "super_easy",
+      "rule": "It takes 1 away from every chip.",
+      "ex": [
+        [
+          "5 11 11 6",
+          "4 10 10 5"
+        ],
+        [
+          "1 3 10",
+          "0 2 9"
+        ]
+      ],
+      "ch": [
+        [
+          "1 7 2 4 3",
+          "0 6 1 3 2"
+        ],
+        [
+          "7 10 1",
+          "6 9 0"
+        ],
+        [
+          "10 1 11",
+          "9 0 10"
+        ],
+        [
+          "1 11 10",
+          "0 10 9"
+        ],
+        [
+          "5 8 1",
+          "4 7 0"
+        ]
+      ],
+      "panelOps": [
+        "last",
+        "reverse",
+        "sub_k",
+        "first",
+        "add_k",
+        "mul_k"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It adds 6 to every chip, then throws away the last chip.",
       "ex": [
@@ -9658,6 +12606,50 @@
     }
   ],
   "2026-08-14": [
+    {
+      "difficulty": "super_easy",
+      "rule": "It takes 3 away from every chip.",
+      "ex": [
+        [
+          "9 11",
+          "6 8"
+        ],
+        [
+          "10 8",
+          "7 5"
+        ]
+      ],
+      "ch": [
+        [
+          "10 7",
+          "7 4"
+        ],
+        [
+          "9 8",
+          "6 5"
+        ],
+        [
+          "7 7 6",
+          "4 4 3"
+        ],
+        [
+          "8 4 9",
+          "5 1 6"
+        ],
+        [
+          "7 6",
+          "4 3"
+        ]
+      ],
+      "panelOps": [
+        "last",
+        "mul_k",
+        "first",
+        "reverse",
+        "add_k",
+        "sub_k"
+      ]
+    },
     {
       "difficulty": "easy",
       "rule": "It adds 2 to every chip, then keeps only the first 2 chips.",
@@ -9805,6 +12797,50 @@
   ],
   "2026-08-15": [
     {
+      "difficulty": "super_easy",
+      "rule": "It takes 4 away from every chip.",
+      "ex": [
+        [
+          "12 5 8 11 5",
+          "8 1 4 7 1"
+        ],
+        [
+          "9 10 8",
+          "5 6 4"
+        ]
+      ],
+      "ch": [
+        [
+          "12 10",
+          "8 6"
+        ],
+        [
+          "4 6 11 7 9",
+          "0 2 7 3 5"
+        ],
+        [
+          "8 9",
+          "4 5"
+        ],
+        [
+          "12 4",
+          "8 0"
+        ],
+        [
+          "5 11",
+          "1 7"
+        ]
+      ],
+      "panelOps": [
+        "reverse",
+        "mul_k",
+        "last",
+        "first",
+        "add_k",
+        "sub_k"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It takes 2 away from every chip, then finds the smallest chip.",
       "ex": [
@@ -9950,6 +12986,50 @@
     }
   ],
   "2026-08-16": [
+    {
+      "difficulty": "super_easy",
+      "rule": "It adds 1 to every chip.",
+      "ex": [
+        [
+          "1 3",
+          "2 4"
+        ],
+        [
+          "2 4 7 6",
+          "3 5 8 7"
+        ]
+      ],
+      "ch": [
+        [
+          "10 2 11 6 11",
+          "11 3 12 7 12"
+        ],
+        [
+          "12 11 6 10",
+          "13 12 7 11"
+        ],
+        [
+          "7 9",
+          "8 10"
+        ],
+        [
+          "9 1 2",
+          "10 2 3"
+        ],
+        [
+          "6 12",
+          "7 13"
+        ]
+      ],
+      "panelOps": [
+        "first",
+        "last",
+        "reverse",
+        "mul_k",
+        "sub_k",
+        "add_k"
+      ]
+    },
     {
       "difficulty": "easy",
       "rule": "It takes 1 away from every chip, then keeps only the first 2 chips.",
@@ -10097,6 +13177,50 @@
   ],
   "2026-08-17": [
     {
+      "difficulty": "super_easy",
+      "rule": "It takes 2 away from every chip.",
+      "ex": [
+        [
+          "5 12 3 12",
+          "3 10 1 10"
+        ],
+        [
+          "4 5 12",
+          "2 3 10"
+        ]
+      ],
+      "ch": [
+        [
+          "6 4 10 9",
+          "4 2 8 7"
+        ],
+        [
+          "7 10 8",
+          "5 8 6"
+        ],
+        [
+          "11 9 9",
+          "9 7 7"
+        ],
+        [
+          "2 10 2 10 8",
+          "0 8 0 8 6"
+        ],
+        [
+          "12 8 2 10 6",
+          "10 6 0 8 4"
+        ]
+      ],
+      "panelOps": [
+        "first",
+        "reverse",
+        "add_k",
+        "sub_k",
+        "mul_k",
+        "last"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It adds 4 to every chip, then keeps only the last 3 chips.",
       "ex": [
@@ -10242,6 +13366,50 @@
     }
   ],
   "2026-08-18": [
+    {
+      "difficulty": "super_easy",
+      "rule": "It sorts the chips biggest to smallest.",
+      "ex": [
+        [
+          "6 1 11 6 2",
+          "11 6 6 2 1"
+        ],
+        [
+          "1 12 3",
+          "12 3 1"
+        ]
+      ],
+      "ch": [
+        [
+          "9 9 2 9",
+          "9 9 9 2"
+        ],
+        [
+          "4 6 12 9",
+          "12 9 6 4"
+        ],
+        [
+          "10 7 11 4",
+          "11 10 7 4"
+        ],
+        [
+          "10 3 1 5",
+          "10 5 3 1"
+        ],
+        [
+          "11 10 6 8 11",
+          "11 11 10 8 6"
+        ]
+      ],
+      "panelOps": [
+        "keep_last_k",
+        "max",
+        "min",
+        "drop_first",
+        "sort_desc",
+        "keep_first_k"
+      ]
+    },
     {
       "difficulty": "easy",
       "rule": "It adds 6 to every chip, then keeps only the first 3 chips.",
@@ -10389,6 +13557,50 @@
   ],
   "2026-08-19": [
     {
+      "difficulty": "super_easy",
+      "rule": "It sorts the chips smallest to biggest.",
+      "ex": [
+        [
+          "9 6 5 6 7",
+          "5 6 6 7 9"
+        ],
+        [
+          "2 7 4 4 2",
+          "2 2 4 4 7"
+        ]
+      ],
+      "ch": [
+        [
+          "1 12 6 11 12",
+          "1 6 11 12 12"
+        ],
+        [
+          "7 4 11 6 7",
+          "4 6 7 7 11"
+        ],
+        [
+          "3 12 4",
+          "3 4 12"
+        ],
+        [
+          "7 4 2",
+          "2 4 7"
+        ],
+        [
+          "12 6",
+          "6 12"
+        ]
+      ],
+      "panelOps": [
+        "drop_first",
+        "sort_asc",
+        "keep_last_k",
+        "keep_first_k",
+        "max",
+        "drop_last"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It takes 3 away from every chip, then keeps only the last 3 chips.",
       "ex": [
@@ -10532,6 +13744,50 @@
   ],
   "2026-08-20": [
     {
+      "difficulty": "super_easy",
+      "rule": "It counts the letters in every chip.",
+      "ex": [
+        [
+          "emma ben lily evan otto",
+          "4 3 4 4 4"
+        ],
+        [
+          "ian zoe emma jack",
+          "3 3 4 4"
+        ]
+      ],
+      "ch": [
+        [
+          "emma tom cole lucy mary",
+          "4 3 4 4 4"
+        ],
+        [
+          "gwen ella max cole",
+          "4 4 3 4"
+        ],
+        [
+          "gwen adam oscar otto",
+          "4 4 5 4"
+        ],
+        [
+          "ada dean eve",
+          "3 4 3"
+        ],
+        [
+          "noah nora ada beth",
+          "4 4 3 4"
+        ]
+      ],
+      "panelOps": [
+        "sort_by_length",
+        "distinct_letters_map",
+        "length_map",
+        "first_letter_pos",
+        "longest",
+        "keep_startswith_vowel"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It adds 7 to every chip, then keeps only the last 3 chips.",
       "ex": [
@@ -10673,6 +13929,50 @@
     }
   ],
   "2026-08-21": [
+    {
+      "difficulty": "super_easy",
+      "rule": "It reverses the order.",
+      "ex": [
+        [
+          "7 3 3 4 5",
+          "5 4 3 3 7"
+        ],
+        [
+          "6 10",
+          "10 6"
+        ]
+      ],
+      "ch": [
+        [
+          "10 11",
+          "11 10"
+        ],
+        [
+          "5 3 8 2",
+          "2 8 3 5"
+        ],
+        [
+          "4 1",
+          "1 4"
+        ],
+        [
+          "10 12 12 8",
+          "8 12 12 10"
+        ],
+        [
+          "2 12 10",
+          "10 12 2"
+        ]
+      ],
+      "panelOps": [
+        "first",
+        "add_k",
+        "reverse",
+        "sub_k",
+        "mul_k",
+        "last"
+      ]
+    },
     {
       "difficulty": "easy",
       "rule": "It adds 3 to every chip, then throws away the last chip.",
@@ -10820,6 +14120,50 @@
   ],
   "2026-08-22": [
     {
+      "difficulty": "super_easy",
+      "rule": "It counts the chips.",
+      "ex": [
+        [
+          "6 11 6",
+          "3"
+        ],
+        [
+          "5 3",
+          "2"
+        ]
+      ],
+      "ch": [
+        [
+          "3 8 9 5 5",
+          "5"
+        ],
+        [
+          "12 1",
+          "2"
+        ],
+        [
+          "9 11 11",
+          "3"
+        ],
+        [
+          "4 1 12 3",
+          "4"
+        ],
+        [
+          "10 3 7 1",
+          "4"
+        ]
+      ],
+      "panelOps": [
+        "sum",
+        "count",
+        "min",
+        "drop_last",
+        "drop_first",
+        "sort_asc"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It adds 4 to every chip, then keeps only the first 2 chips.",
       "ex": [
@@ -10961,6 +14305,50 @@
     }
   ],
   "2026-08-23": [
+    {
+      "difficulty": "super_easy",
+      "rule": "It adds 9 to every chip.",
+      "ex": [
+        [
+          "12 7 10 4",
+          "21 16 19 13"
+        ],
+        [
+          "3 11 9",
+          "12 20 18"
+        ]
+      ],
+      "ch": [
+        [
+          "11 6 9",
+          "20 15 18"
+        ],
+        [
+          "1 6",
+          "10 15"
+        ],
+        [
+          "12 1 7",
+          "21 10 16"
+        ],
+        [
+          "12 9 8 3 10",
+          "21 18 17 12 19"
+        ],
+        [
+          "2 10 1 8 5",
+          "11 19 10 17 14"
+        ]
+      ],
+      "panelOps": [
+        "add_k",
+        "sub_k",
+        "reverse",
+        "mul_k",
+        "first",
+        "last"
+      ]
+    },
     {
       "difficulty": "easy",
       "rule": "It adds 6 to every chip, then finds the biggest chip.",
@@ -11108,6 +14496,50 @@
   ],
   "2026-08-24": [
     {
+      "difficulty": "super_easy",
+      "rule": "It takes 5 away from every chip.",
+      "ex": [
+        [
+          "7 6 7",
+          "2 1 2"
+        ],
+        [
+          "9 10 5",
+          "4 5 0"
+        ]
+      ],
+      "ch": [
+        [
+          "7 10 7 5 10",
+          "2 5 2 0 5"
+        ],
+        [
+          "7 7",
+          "2 2"
+        ],
+        [
+          "10 9 8 7 10",
+          "5 4 3 2 5"
+        ],
+        [
+          "9 9",
+          "4 4"
+        ],
+        [
+          "8 8",
+          "3 3"
+        ]
+      ],
+      "panelOps": [
+        "reverse",
+        "sub_k",
+        "mul_k",
+        "first",
+        "add_k",
+        "last"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It takes 5 away from every chip, then sorts them biggest to smallest.",
       "ex": [
@@ -11249,6 +14681,50 @@
     }
   ],
   "2026-08-25": [
+    {
+      "difficulty": "super_easy",
+      "rule": "It adds 4 to every chip.",
+      "ex": [
+        [
+          "8 4 3 5",
+          "12 8 7 9"
+        ],
+        [
+          "1 12 9 1",
+          "5 16 13 5"
+        ]
+      ],
+      "ch": [
+        [
+          "10 10",
+          "14 14"
+        ],
+        [
+          "6 5 10",
+          "10 9 14"
+        ],
+        [
+          "6 6 1 5",
+          "10 10 5 9"
+        ],
+        [
+          "4 6 6 8",
+          "8 10 10 12"
+        ],
+        [
+          "4 5 5",
+          "8 9 9"
+        ]
+      ],
+      "panelOps": [
+        "first",
+        "mul_k",
+        "last",
+        "sub_k",
+        "reverse",
+        "add_k"
+      ]
+    },
     {
       "difficulty": "easy",
       "rule": "It takes 5 away from every chip, then sorts them smallest to biggest.",
@@ -11392,6 +14868,50 @@
     }
   ],
   "2026-08-26": [
+    {
+      "difficulty": "super_easy",
+      "rule": "It adds 3 to every chip.",
+      "ex": [
+        [
+          "3 11",
+          "6 14"
+        ],
+        [
+          "11 5 7 6 8",
+          "14 8 10 9 11"
+        ]
+      ],
+      "ch": [
+        [
+          "10 11 8 8",
+          "13 14 11 11"
+        ],
+        [
+          "1 2 10 5",
+          "4 5 13 8"
+        ],
+        [
+          "9 9 6",
+          "12 12 9"
+        ],
+        [
+          "1 2 5",
+          "4 5 8"
+        ],
+        [
+          "4 12 4",
+          "7 15 7"
+        ]
+      ],
+      "panelOps": [
+        "reverse",
+        "add_k",
+        "mul_k",
+        "sub_k",
+        "last",
+        "first"
+      ]
+    },
     {
       "difficulty": "easy",
       "rule": "It takes 4 away from every chip, then keeps only the first 3 chips.",
@@ -11539,6 +15059,50 @@
   ],
   "2026-08-27": [
     {
+      "difficulty": "super_easy",
+      "rule": "It adds 7 to every chip.",
+      "ex": [
+        [
+          "3 9 9",
+          "10 16 16"
+        ],
+        [
+          "4 3",
+          "11 10"
+        ]
+      ],
+      "ch": [
+        [
+          "12 6 1 11",
+          "19 13 8 18"
+        ],
+        [
+          "11 8 9 7 12",
+          "18 15 16 14 19"
+        ],
+        [
+          "1 4",
+          "8 11"
+        ],
+        [
+          "1 2 11 1 9",
+          "8 9 18 8 16"
+        ],
+        [
+          "2 1",
+          "9 8"
+        ]
+      ],
+      "panelOps": [
+        "last",
+        "first",
+        "reverse",
+        "add_k",
+        "sub_k",
+        "mul_k"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It takes 2 away from every chip, then adds them together.",
       "ex": [
@@ -11684,6 +15248,50 @@
     }
   ],
   "2026-08-28": [
+    {
+      "difficulty": "super_easy",
+      "rule": "It adds 5 to every chip.",
+      "ex": [
+        [
+          "4 11",
+          "9 16"
+        ],
+        [
+          "11 1 1 3 12",
+          "16 6 6 8 17"
+        ]
+      ],
+      "ch": [
+        [
+          "1 1 6",
+          "6 6 11"
+        ],
+        [
+          "2 9 3 3 6",
+          "7 14 8 8 11"
+        ],
+        [
+          "12 3 3 5",
+          "17 8 8 10"
+        ],
+        [
+          "5 8 6 1 12",
+          "10 13 11 6 17"
+        ],
+        [
+          "11 4",
+          "16 9"
+        ]
+      ],
+      "panelOps": [
+        "first",
+        "last",
+        "add_k",
+        "reverse",
+        "sub_k",
+        "mul_k"
+      ]
+    },
     {
       "difficulty": "easy",
       "rule": "It adds 8 to every chip, then sorts them biggest to smallest.",
@@ -11831,6 +15439,50 @@
   ],
   "2026-08-29": [
     {
+      "difficulty": "super_easy",
+      "rule": "It takes 1 away from every chip.",
+      "ex": [
+        [
+          "4 2 5",
+          "3 1 4"
+        ],
+        [
+          "9 12 9 9",
+          "8 11 8 8"
+        ]
+      ],
+      "ch": [
+        [
+          "7 2 8 12 3",
+          "6 1 7 11 2"
+        ],
+        [
+          "11 10 2",
+          "10 9 1"
+        ],
+        [
+          "5 11 1 11 7",
+          "4 10 0 10 6"
+        ],
+        [
+          "6 3",
+          "5 2"
+        ],
+        [
+          "10 6 1 8 8",
+          "9 5 0 7 7"
+        ]
+      ],
+      "panelOps": [
+        "reverse",
+        "add_k",
+        "last",
+        "first",
+        "sub_k",
+        "mul_k"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It keeps only the last 3 chips, then adds them together.",
       "ex": [
@@ -11973,6 +15625,50 @@
     }
   ],
   "2026-08-30": [
+    {
+      "difficulty": "super_easy",
+      "rule": "It adds 8 to every chip.",
+      "ex": [
+        [
+          "5 10 4 2",
+          "13 18 12 10"
+        ],
+        [
+          "10 6 10",
+          "18 14 18"
+        ]
+      ],
+      "ch": [
+        [
+          "11 4 6 1",
+          "19 12 14 9"
+        ],
+        [
+          "9 8 8",
+          "17 16 16"
+        ],
+        [
+          "7 12 3",
+          "15 20 11"
+        ],
+        [
+          "4 1",
+          "12 9"
+        ],
+        [
+          "10 8",
+          "18 16"
+        ]
+      ],
+      "panelOps": [
+        "last",
+        "first",
+        "add_k",
+        "mul_k",
+        "sub_k",
+        "reverse"
+      ]
+    },
     {
       "difficulty": "easy",
       "rule": "It sorts the chips smallest to biggest, then keeps only the last 3 chips.",
@@ -12120,6 +15816,50 @@
   ],
   "2026-08-31": [
     {
+      "difficulty": "super_easy",
+      "rule": "It takes 3 away from every chip.",
+      "ex": [
+        [
+          "7 11 7 11",
+          "4 8 4 8"
+        ],
+        [
+          "12 7 7 10",
+          "9 4 4 7"
+        ]
+      ],
+      "ch": [
+        [
+          "4 8 11 10",
+          "1 5 8 7"
+        ],
+        [
+          "11 8 4 7 5",
+          "8 5 1 4 2"
+        ],
+        [
+          "8 7 7",
+          "5 4 4"
+        ],
+        [
+          "3 11 7",
+          "0 8 4"
+        ],
+        [
+          "7 11",
+          "4 8"
+        ]
+      ],
+      "panelOps": [
+        "sub_k",
+        "add_k",
+        "reverse",
+        "mul_k",
+        "first",
+        "last"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It sorts the chips biggest to smallest, then keeps only the first 3 chips.",
       "ex": [
@@ -12263,6 +16003,50 @@
   ],
   "2026-09-01": [
     {
+      "difficulty": "super_easy",
+      "rule": "It takes 4 away from every chip.",
+      "ex": [
+        [
+          "7 6 7",
+          "3 2 3"
+        ],
+        [
+          "6 8",
+          "2 4"
+        ]
+      ],
+      "ch": [
+        [
+          "8 8",
+          "4 4"
+        ],
+        [
+          "7 7 12",
+          "3 3 8"
+        ],
+        [
+          "9 12",
+          "5 8"
+        ],
+        [
+          "10 4 10 5 4",
+          "6 0 6 1 0"
+        ],
+        [
+          "4 10",
+          "0 6"
+        ]
+      ],
+      "panelOps": [
+        "first",
+        "last",
+        "mul_k",
+        "sub_k",
+        "add_k",
+        "reverse"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It takes 4 away from every chip, then adds them together.",
       "ex": [
@@ -12405,6 +16189,50 @@
     }
   ],
   "2026-09-02": [
+    {
+      "difficulty": "super_easy",
+      "rule": "It adds 2 to every chip.",
+      "ex": [
+        [
+          "6 1 3 10",
+          "8 3 5 12"
+        ],
+        [
+          "1 9",
+          "3 11"
+        ]
+      ],
+      "ch": [
+        [
+          "2 8 6",
+          "4 10 8"
+        ],
+        [
+          "4 8 9",
+          "6 10 11"
+        ],
+        [
+          "12 7 11 8",
+          "14 9 13 10"
+        ],
+        [
+          "11 1 11",
+          "13 3 13"
+        ],
+        [
+          "8 12 7 2",
+          "10 14 9 4"
+        ]
+      ],
+      "panelOps": [
+        "reverse",
+        "mul_k",
+        "first",
+        "last",
+        "add_k",
+        "sub_k"
+      ]
+    },
     {
       "difficulty": "easy",
       "rule": "It adds 3 to every chip, then keeps only the first 2 chips.",
@@ -12552,6 +16380,50 @@
   ],
   "2026-09-03": [
     {
+      "difficulty": "super_easy",
+      "rule": "It finds the biggest chip.",
+      "ex": [
+        [
+          "5 3 8 10 7",
+          "10"
+        ],
+        [
+          "12 4 4",
+          "12"
+        ]
+      ],
+      "ch": [
+        [
+          "8 7 1 10",
+          "10"
+        ],
+        [
+          "12 6 2",
+          "12"
+        ],
+        [
+          "12 11 11 2 8",
+          "12"
+        ],
+        [
+          "4 4 4 10",
+          "10"
+        ],
+        [
+          "10 3 9 7 6",
+          "10"
+        ]
+      ],
+      "panelOps": [
+        "count",
+        "min",
+        "drop_first",
+        "max",
+        "drop_last",
+        "sum"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It multiplies every chip by 4, then keeps only the first chip.",
       "ex": [
@@ -12695,6 +16567,50 @@
   ],
   "2026-09-04": [
     {
+      "difficulty": "super_easy",
+      "rule": "It counts the letters in every chip.",
+      "ex": [
+        [
+          "amy lily lena gwen",
+          "3 4 4 4"
+        ],
+        [
+          "lena amy evan kyle ben",
+          "4 3 4 4 3"
+        ]
+      ],
+      "ch": [
+        [
+          "tom kate ruby ian emma",
+          "3 4 4 3 4"
+        ],
+        [
+          "ada kyle gwen beth",
+          "3 4 4 4"
+        ],
+        [
+          "cole kate ian ada",
+          "4 4 3 3"
+        ],
+        [
+          "zoe mark nora ruby",
+          "3 4 4 4"
+        ],
+        [
+          "ada paul nora jane sam",
+          "3 4 4 4 3"
+        ]
+      ],
+      "panelOps": [
+        "length_map",
+        "sort_by_length",
+        "distinct_letters_map",
+        "shortest",
+        "letter_count_squared",
+        "keep_startswith_vowel"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It adds 9 to every chip, then keeps only the last 3 chips.",
       "ex": [
@@ -12837,6 +16753,50 @@
     }
   ],
   "2026-09-05": [
+    {
+      "difficulty": "super_easy",
+      "rule": "It adds 6 to every chip.",
+      "ex": [
+        [
+          "4 3 7 6 11",
+          "10 9 13 12 17"
+        ],
+        [
+          "3 3 12 4",
+          "9 9 18 10"
+        ]
+      ],
+      "ch": [
+        [
+          "9 5",
+          "15 11"
+        ],
+        [
+          "5 4 10",
+          "11 10 16"
+        ],
+        [
+          "7 3 11 10 7",
+          "13 9 17 16 13"
+        ],
+        [
+          "6 3 12 7 3",
+          "12 9 18 13 9"
+        ],
+        [
+          "11 3 12 9 9",
+          "17 9 18 15 15"
+        ]
+      ],
+      "panelOps": [
+        "first",
+        "sub_k",
+        "add_k",
+        "mul_k",
+        "reverse",
+        "last"
+      ]
+    },
     {
       "difficulty": "easy",
       "rule": "It multiplies every chip by 3, then keeps only the first 2 chips.",
@@ -12984,6 +16944,50 @@
   ],
   "2026-09-06": [
     {
+      "difficulty": "super_easy",
+      "rule": "It multiplies every chip by 3.",
+      "ex": [
+        [
+          "7 5",
+          "21 15"
+        ],
+        [
+          "1 8",
+          "3 24"
+        ]
+      ],
+      "ch": [
+        [
+          "7 7",
+          "21 21"
+        ],
+        [
+          "2 7",
+          "6 21"
+        ],
+        [
+          "7 1 10 7 2",
+          "21 3 30 21 6"
+        ],
+        [
+          "2 11 3 2 11",
+          "6 33 9 6 33"
+        ],
+        [
+          "7 11 6 12 12",
+          "21 33 18 36 36"
+        ]
+      ],
+      "panelOps": [
+        "sub_k",
+        "mul_k",
+        "first",
+        "last",
+        "add_k",
+        "reverse"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It adds 7 to every chip, then keeps only the first 2 chips.",
       "ex": [
@@ -13130,6 +17134,50 @@
   ],
   "2026-09-07": [
     {
+      "difficulty": "super_easy",
+      "rule": "It adds 9 to every chip.",
+      "ex": [
+        [
+          "10 10 10 10",
+          "19 19 19 19"
+        ],
+        [
+          "5 7",
+          "14 16"
+        ]
+      ],
+      "ch": [
+        [
+          "1 6 10",
+          "10 15 19"
+        ],
+        [
+          "2 8 9 10 10",
+          "11 17 18 19 19"
+        ],
+        [
+          "4 3",
+          "13 12"
+        ],
+        [
+          "6 1 5 2 12",
+          "15 10 14 11 21"
+        ],
+        [
+          "8 5",
+          "17 14"
+        ]
+      ],
+      "panelOps": [
+        "sub_k",
+        "first",
+        "mul_k",
+        "last",
+        "add_k",
+        "reverse"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It adds 4 to every chip, then throws away the last chip.",
       "ex": [
@@ -13272,6 +17320,50 @@
     }
   ],
   "2026-09-08": [
+    {
+      "difficulty": "super_easy",
+      "rule": "It reverses the order.",
+      "ex": [
+        [
+          "7 2 12 11",
+          "11 12 2 7"
+        ],
+        [
+          "10 5 10 12",
+          "12 10 5 10"
+        ]
+      ],
+      "ch": [
+        [
+          "3 8 5 4 3",
+          "3 4 5 8 3"
+        ],
+        [
+          "11 12 10 6",
+          "6 10 12 11"
+        ],
+        [
+          "9 3 3 12 8",
+          "8 12 3 3 9"
+        ],
+        [
+          "8 11 11",
+          "11 11 8"
+        ],
+        [
+          "11 2",
+          "2 11"
+        ]
+      ],
+      "panelOps": [
+        "first",
+        "reverse",
+        "add_k",
+        "mul_k",
+        "last",
+        "sub_k"
+      ]
+    },
     {
       "difficulty": "easy",
       "rule": "It takes 5 away from every chip, then reverses the order.",
@@ -13416,6 +17508,50 @@
   ],
   "2026-09-09": [
     {
+      "difficulty": "super_easy",
+      "rule": "It sorts the chips smallest to biggest.",
+      "ex": [
+        [
+          "3 12 7 9 9",
+          "3 7 9 9 12"
+        ],
+        [
+          "7 7 1 2",
+          "1 2 7 7"
+        ]
+      ],
+      "ch": [
+        [
+          "5 6 4",
+          "4 5 6"
+        ],
+        [
+          "11 10 10 5",
+          "5 10 10 11"
+        ],
+        [
+          "8 10 8",
+          "8 8 10"
+        ],
+        [
+          "1 5 2 2",
+          "1 2 2 5"
+        ],
+        [
+          "1 12 10",
+          "1 10 12"
+        ]
+      ],
+      "panelOps": [
+        "count",
+        "drop_first",
+        "drop_last",
+        "sum",
+        "sort_asc",
+        "keep_last_k"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It adds 2 to every chip, then keeps only the first 3 chips.",
       "ex": [
@@ -13558,6 +17694,50 @@
     }
   ],
   "2026-09-10": [
+    {
+      "difficulty": "super_easy",
+      "rule": "It adds 1 to every chip.",
+      "ex": [
+        [
+          "1 9 6 2",
+          "2 10 7 3"
+        ],
+        [
+          "10 2 5 2",
+          "11 3 6 3"
+        ]
+      ],
+      "ch": [
+        [
+          "10 3 12",
+          "11 4 13"
+        ],
+        [
+          "9 11 9 12 10",
+          "10 12 10 13 11"
+        ],
+        [
+          "10 11 3 3 1",
+          "11 12 4 4 2"
+        ],
+        [
+          "1 2 12 1 6",
+          "2 3 13 2 7"
+        ],
+        [
+          "6 11 1 9",
+          "7 12 2 10"
+        ]
+      ],
+      "panelOps": [
+        "sub_k",
+        "last",
+        "mul_k",
+        "reverse",
+        "first",
+        "add_k"
+      ]
+    },
     {
       "difficulty": "easy",
       "rule": "It takes 5 away from every chip, then keeps only the last 3 chips.",
@@ -13702,6 +17882,50 @@
   ],
   "2026-09-11": [
     {
+      "difficulty": "super_easy",
+      "rule": "It adds 4 to every chip.",
+      "ex": [
+        [
+          "4 4 9",
+          "8 8 13"
+        ],
+        [
+          "8 2 5 8 10",
+          "12 6 9 12 14"
+        ]
+      ],
+      "ch": [
+        [
+          "3 2",
+          "7 6"
+        ],
+        [
+          "6 3",
+          "10 7"
+        ],
+        [
+          "3 2 4 6 4",
+          "7 6 8 10 8"
+        ],
+        [
+          "6 3 12 7 2",
+          "10 7 16 11 6"
+        ],
+        [
+          "11 4 9 3",
+          "15 8 13 7"
+        ]
+      ],
+      "panelOps": [
+        "first",
+        "add_k",
+        "sub_k",
+        "last",
+        "reverse",
+        "mul_k"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It takes 1 away from every chip, then sorts them smallest to biggest.",
       "ex": [
@@ -13844,6 +18068,50 @@
     }
   ],
   "2026-09-12": [
+    {
+      "difficulty": "super_easy",
+      "rule": "It adds 5 to every chip.",
+      "ex": [
+        [
+          "3 5 7 8",
+          "8 10 12 13"
+        ],
+        [
+          "5 5",
+          "10 10"
+        ]
+      ],
+      "ch": [
+        [
+          "9 1 3",
+          "14 6 8"
+        ],
+        [
+          "9 11 3 9 9",
+          "14 16 8 14 14"
+        ],
+        [
+          "8 8 6 11",
+          "13 13 11 16"
+        ],
+        [
+          "11 7 8",
+          "16 12 13"
+        ],
+        [
+          "5 11",
+          "10 16"
+        ]
+      ],
+      "panelOps": [
+        "add_k",
+        "sub_k",
+        "mul_k",
+        "first",
+        "last",
+        "reverse"
+      ]
+    },
     {
       "difficulty": "easy",
       "rule": "It multiplies every chip by 2, then keeps only the last 3 chips.",
@@ -13991,6 +18259,50 @@
   ],
   "2026-09-13": [
     {
+      "difficulty": "super_easy",
+      "rule": "It multiplies every chip by 2.",
+      "ex": [
+        [
+          "9 12 11 8 5",
+          "18 24 22 16 10"
+        ],
+        [
+          "1 11 6 1 12",
+          "2 22 12 2 24"
+        ]
+      ],
+      "ch": [
+        [
+          "2 2",
+          "4 4"
+        ],
+        [
+          "7 11 4 5",
+          "14 22 8 10"
+        ],
+        [
+          "12 11 4",
+          "24 22 8"
+        ],
+        [
+          "10 12 11 8",
+          "20 24 22 16"
+        ],
+        [
+          "1 1 5 6",
+          "2 2 10 12"
+        ]
+      ],
+      "panelOps": [
+        "add_k",
+        "last",
+        "sub_k",
+        "mul_k",
+        "reverse",
+        "first"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It adds 3 to every chip, then sorts them smallest to biggest.",
       "ex": [
@@ -14134,6 +18446,50 @@
   ],
   "2026-09-14": [
     {
+      "difficulty": "super_easy",
+      "rule": "It takes 5 away from every chip.",
+      "ex": [
+        [
+          "7 8 12 6",
+          "2 3 7 1"
+        ],
+        [
+          "6 11 9 12 10",
+          "1 6 4 7 5"
+        ]
+      ],
+      "ch": [
+        [
+          "10 9",
+          "5 4"
+        ],
+        [
+          "5 9",
+          "0 4"
+        ],
+        [
+          "8 5 9",
+          "3 0 4"
+        ],
+        [
+          "11 9 10",
+          "6 4 5"
+        ],
+        [
+          "8 8",
+          "3 3"
+        ]
+      ],
+      "panelOps": [
+        "mul_k",
+        "first",
+        "last",
+        "add_k",
+        "reverse",
+        "sub_k"
+      ]
+    },
+    {
       "difficulty": "easy",
       "rule": "It adds 7 to every chip, then keeps only the first 3 chips.",
       "ex": [
@@ -14276,6 +18632,50 @@
     }
   ],
   "2026-09-15": [
+    {
+      "difficulty": "super_easy",
+      "rule": "It adds 7 to every chip.",
+      "ex": [
+        [
+          "2 5 12 7",
+          "9 12 19 14"
+        ],
+        [
+          "8 9 7 2",
+          "15 16 14 9"
+        ]
+      ],
+      "ch": [
+        [
+          "12 7 9 6",
+          "19 14 16 13"
+        ],
+        [
+          "7 10",
+          "14 17"
+        ],
+        [
+          "9 9 3 9",
+          "16 16 10 16"
+        ],
+        [
+          "5 4",
+          "12 11"
+        ],
+        [
+          "1 11 4 2 5",
+          "8 18 11 9 12"
+        ]
+      ],
+      "panelOps": [
+        "add_k",
+        "mul_k",
+        "sub_k",
+        "first",
+        "last",
+        "reverse"
+      ]
+    },
     {
       "difficulty": "easy",
       "rule": "It adds 3 to every chip, then reverses the order.",

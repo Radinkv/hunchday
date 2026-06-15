@@ -11,6 +11,7 @@ import {
   DIFFICULTY_HARD,
   DIFFICULTY_MEDIUM,
   DIFFICULTY_MYSTERY,
+  DIFFICULTY_SUPER_EASY,
   type Difficulty,
 } from "../game/types";
 
@@ -82,6 +83,7 @@ export const COPY_WAITING = "The machine is waiting for your guess";
 
 /** The header label shown for each difficulty; the mystery slot reads as "???". */
 export const DIFFICULTY_LABELS: Readonly<Record<Difficulty, string>> = {
+  [DIFFICULTY_SUPER_EASY]: "Warm-up",
   [DIFFICULTY_EASY]: "Easy",
   [DIFFICULTY_MEDIUM]: "Medium",
   [DIFFICULTY_HARD]: "Hard",
@@ -96,13 +98,14 @@ export const DIFFICULTY_LABELS: Readonly<Record<Difficulty, string>> = {
  * ranks are the only knobs for where each affordance switches on.
  */
 const DIFFICULTY_RANK: Readonly<Record<Difficulty, number>> = {
-  [DIFFICULTY_EASY]: 0,
-  [DIFFICULTY_MEDIUM]: 1,
-  [DIFFICULTY_HARD]: 2,
-  [DIFFICULTY_MYSTERY]: 3,
+  [DIFFICULTY_SUPER_EASY]: 0,
+  [DIFFICULTY_EASY]: 1,
+  [DIFFICULTY_MEDIUM]: 2,
+  [DIFFICULTY_HARD]: 3,
+  [DIFFICULTY_MYSTERY]: 4,
 };
-export const PANEL_SEARCH_MIN_RANK = 1;
-export const PANEL_TABS_MIN_RANK = 2;
+export const PANEL_SEARCH_MIN_RANK = 2;
+export const PANEL_TABS_MIN_RANK = 3;
 
 /**
  * Reports whether a difficulty shows the search box over its operation list.
@@ -189,4 +192,4 @@ export const CHOMP_DURATION_MS = 180;
 export const COPY_WORDMARK = "Hunchday";
 export const COPY_TAGLINE = "Daily machine puzzles";
 export const COPY_PLAY = "Play";
-export const COPY_INTRO_LEAD = "Three machines today. Work out what each one does, then prove it twice.";
+export const COPY_INTRO_LEAD = "Four machines today. Work out what each one does, then prove it twice.";

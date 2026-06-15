@@ -56,11 +56,13 @@ export type FeedbackKind =
  * machine's difficulty carries through the adapter unchanged while the view layer keeps
  * its independence from the engine. The mystery slot is shown to the player as "???".
  */
+export const DIFFICULTY_SUPER_EASY = "super_easy";
 export const DIFFICULTY_EASY = "easy";
 export const DIFFICULTY_MEDIUM = "medium";
 export const DIFFICULTY_HARD = "hard";
 export const DIFFICULTY_MYSTERY = "mystery";
 export type Difficulty =
+  | typeof DIFFICULTY_SUPER_EASY
   | typeof DIFFICULTY_EASY
   | typeof DIFFICULTY_MEDIUM
   | typeof DIFFICULTY_HARD

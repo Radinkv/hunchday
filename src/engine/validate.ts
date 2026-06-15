@@ -45,6 +45,7 @@ import {
   PATTERN_L6,
 } from "./fairness";
 
+export const DIFFICULTY_SUPER_EASY = "super_easy";
 export const DIFFICULTY_EASY = "easy";
 export const DIFFICULTY_MEDIUM = "medium";
 export const DIFFICULTY_HARD = "hard";
@@ -52,6 +53,7 @@ export const DIFFICULTY_MYSTERY = "mystery";
 
 /** The difficulty slot a candidate is generated for. */
 export type Difficulty =
+  | typeof DIFFICULTY_SUPER_EASY
   | typeof DIFFICULTY_EASY
   | typeof DIFFICULTY_MEDIUM
   | typeof DIFFICULTY_HARD
@@ -160,6 +162,7 @@ export interface SlotPolicy {
  * near misses a player would really consider rather than against the whole universe.
  */
 export const SLOT_POLICIES: Readonly<Record<Difficulty, SlotPolicy>> = {
+  [DIFFICULTY_SUPER_EASY]: { maxLength: 1, ceiling: 5, requireDecoy: false },
   [DIFFICULTY_EASY]: { maxLength: 2, ceiling: 2, requireDecoy: false },
   [DIFFICULTY_MEDIUM]: { maxLength: 2, ceiling: 3, requireDecoy: false },
   [DIFFICULTY_HARD]: { maxLength: 2, ceiling: 4, requireDecoy: false },
@@ -493,7 +496,7 @@ function checkSolvableAmbiguity(snapshot: AmbiguitySnapshot, candidate: Candidat
 
   if (survivorsAfterBoth.length > MAX_SURVIVORS_SOLVABLE) return fail(REASON_TOO_AMBIGUOUS);
 
-  if (candidate.difficulty === DIFFICULTY_EASY) {
+  if (candidate.difficulty === DIFFICULTY_EASY || candidate.difficulty === DIFFICULTY_SUPER_EASY) {
     const uniqueAndTrue =
       survivorsAfterFirst.length === UNIQUE_SURVIVOR_COUNT && survivorsAfterFirst[0].fingerprint === snapshot.trueFingerprint;
     if (!uniqueAndTrue) return fail(REASON_EASY_NOT_UNIQUE);

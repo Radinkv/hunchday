@@ -25,6 +25,7 @@ import {
   DIFFICULTY_HARD,
   DIFFICULTY_MEDIUM,
   DIFFICULTY_MYSTERY,
+  DIFFICULTY_SUPER_EASY,
   SLOT_POLICIES,
   valuesEqual,
   type Difficulty,
@@ -37,12 +38,14 @@ import { createRng, hash32, type Rng } from "./rng";
  * mystery target is the whole catalogue rather than a count, so its panel is the full
  * set of tiles. These are the difficulty knobs; adjust them here and nowhere else.
  */
+export const PANEL_TARGET_SUPER_EASY = 6;
 export const PANEL_TARGET_EASY = 6;
 export const PANEL_TARGET_MEDIUM = 8;
 export const PANEL_TARGET_HARD = 16;
 export const PANEL_TARGET_FULL = Number.POSITIVE_INFINITY;
 
 const PANEL_TARGETS: Readonly<Record<Difficulty, number>> = {
+  [DIFFICULTY_SUPER_EASY]: PANEL_TARGET_SUPER_EASY,
   [DIFFICULTY_EASY]: PANEL_TARGET_EASY,
   [DIFFICULTY_MEDIUM]: PANEL_TARGET_MEDIUM,
   [DIFFICULTY_HARD]: PANEL_TARGET_HARD,

@@ -4,6 +4,7 @@ import {
   DIFFICULTY_EASY,
   DIFFICULTY_HARD,
   DIFFICULTY_MEDIUM,
+  DIFFICULTY_SUPER_EASY,
   validate,
   type Difficulty,
 } from "../src/engine/validate";
@@ -17,10 +18,11 @@ import {
  * deadlocks.
  */
 
-const EXPECTED_MACHINE_COUNT = 3;
+const EXPECTED_MACHINE_COUNT = 4;
 const EXAMPLE_COUNT = 2;
 const CHALLENGE_COUNT = 5;
 const SLOT_ORDER: readonly Difficulty[] = [
+  DIFFICULTY_SUPER_EASY,
   DIFFICULTY_EASY,
   DIFFICULTY_MEDIUM,
   DIFFICULTY_HARD,
@@ -29,11 +31,13 @@ const SLOT_ORDER: readonly Difficulty[] = [
 const SOAK_START = "2026-06-20";
 const SOAK_DAYS = 30;
 const NO_REPEAT_WINDOW = 89;
+const SUPER_EASY_NO_REPEAT = 14;
+const WINDOW_BY_SLOT: readonly number[] = [SUPER_EASY_NO_REPEAT, NO_REPEAT_WINDOW, NO_REPEAT_WINDOW, NO_REPEAT_WINDOW];
 const MS_PER_DAY = 86400000;
 
 const PINNED_SIGNATURES: Readonly<Record<string, string>> = {
-  "2026-06-20": 'sub_k{"k":5}>keep_first_k{"k":2} ## mul_k{"k":2}>keep_first_k{"k":2}>keep_lt_k{"k":9} ## length_map{}>dedup{}>rotate_left{}',
-  "2026-07-01": 'add_k{"k":1}>keep_first_k{"k":2} ## add_k{"k":3}>sort_asc{}>keep_lt_k{"k":9} ## length_map{}>drop_first{}>min_normalize{}',
+  "2026-06-20": 'length_map{} ## sub_k{"k":5}>keep_first_k{"k":2} ## mul_k{"k":2}>keep_first_k{"k":2}>keep_lt_k{"k":9} ## length_map{}>dedup{}>rotate_left{}',
+  "2026-07-01": 'add_k{"k":6} ## add_k{"k":1}>keep_first_k{"k":2} ## add_k{"k":3}>sort_asc{}>keep_lt_k{"k":9} ## length_map{}>drop_first{}>min_normalize{}',
 };
 
 /**
@@ -139,9 +143,10 @@ describe("generateDay soak", () => {
         expect(result.ok).toBe(true);
 
         const signature = machineSignature(machine);
+        const window = WINDOW_BY_SLOT[slot] ?? NO_REPEAT_WINDOW;
         expect(recentBySlot[slot]).not.toContain(signature);
         recentBySlot[slot].push(signature);
-        if (recentBySlot[slot].length > NO_REPEAT_WINDOW) recentBySlot[slot].shift();
+        if (recentBySlot[slot].length > window) recentBySlot[slot].shift();
       });
     }
   });

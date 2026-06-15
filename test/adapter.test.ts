@@ -10,15 +10,15 @@ import { feed, startGame } from "../src/game/reducer";
  */
 
 const SAMPLE_DATE = "2026-06-20";
-const EXPECTED_MACHINE_COUNT = 3;
+const EXPECTED_MACHINE_COUNT = 4;
 const EXAMPLE_COUNT = 2;
 const CHALLENGE_COUNT = 5;
-const WORD_SLOT = 2;
+const WORD_SLOT = 3;
 
 describe("generateMachinesForDate", () => {
   const machines = generateMachinesForDate(SAMPLE_DATE);
 
-  it("produces three machines with the expected shape", () => {
+  it("produces four machines with the expected shape", () => {
     expect(machines).toHaveLength(EXPECTED_MACHINE_COUNT);
     for (const machine of machines) {
       expect(machine.rule.length).toBeGreaterThan(0);
