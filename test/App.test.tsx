@@ -75,14 +75,14 @@ function feedAgain(): void {
 }
 
 describe("App", () => {
-  it("shows the intro, then the first machine after pressing Play", () => {
+  it("shows the intro, then the play screen after pressing Play", () => {
     render(<App machines={[NUMBER_MACHINE]} />);
     expect(screen.getByText(COPY_WORDMARK)).toBeTruthy();
-    expect(screen.queryByText(/What comes out for/)).toBeNull();
+    expect(screen.queryByRole("button", { name: COPY_FEED_BUTTON })).toBeNull();
 
     play();
-    expect(screen.getByText("Machine 01")).toBeTruthy();
-    expect(screen.getByText(/What comes out for/)).toBeTruthy();
+    expect(screen.queryByRole("button", { name: COPY_PLAY })).toBeNull();
+    expect(screen.getByRole("button", { name: COPY_FEED_BUTTON })).toBeTruthy();
     expect(screen.getAllByText("1").length).toBeGreaterThan(0);
   });
 
@@ -110,6 +110,6 @@ describe("App", () => {
 
     render(<App machines={[NUMBER_MACHINE]} />);
     expect(screen.queryByRole("button", { name: COPY_PLAY })).toBeNull();
-    expect(screen.getByText(/What comes out for/)).toBeTruthy();
+    expect(screen.getByRole("button", { name: COPY_FEED_BUTTON })).toBeTruthy();
   });
 });

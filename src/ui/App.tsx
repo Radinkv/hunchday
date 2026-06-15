@@ -7,15 +7,15 @@ import { Bot, MachineCard } from "./MachineCard";
 import { loadGame, saveGame } from "./storage";
 import {
   CLASS_APP,
+  CLASS_DIFFICULTY,
   CLASS_FEED,
   CLASS_HEADER,
+  CLASS_HEADER_LEFT,
   CLASS_INTRO,
   CLASS_INTRO_LEAD,
-  CLASS_TAGLINE,
-  CLASS_WORDMARK_BLOCK,
+  COPY_DIFFICULTY,
   COPY_INTRO_LEAD,
   COPY_PLAY,
-  COPY_TAGLINE,
   COPY_WORDMARK,
   LIGHT_COLOR_IDLE,
 } from "./constants";
@@ -44,9 +44,10 @@ export function App({ machines }: { readonly machines: readonly Machine[] }) {
   return (
     <div className={CLASS_APP}>
       <header className={CLASS_HEADER}>
-        <div className={CLASS_WORDMARK_BLOCK}>
+        <div className={CLASS_HEADER_LEFT}>
+          <Bot lightColor={LIGHT_COLOR_IDLE} chomping={false} />
           <h1>{COPY_WORDMARK}</h1>
-          <span className={CLASS_TAGLINE}>{COPY_TAGLINE}</span>
+          <span className={CLASS_DIFFICULTY}>{COPY_DIFFICULTY}</span>
         </div>
         <Dots machineIndex={state?.machineIndex ?? FIRST_MACHINE_INDEX} results={state?.results ?? idleResults} />
       </header>
