@@ -33,11 +33,11 @@ const FIRST_MACHINE_INDEX = 0;
  */
 export function App({ machines }: { readonly machines: readonly Machine[] }) {
   const today = todayDate();
-  const [state, setState] = useState<GameState | null>(() => loadGame(today, machines.length));
+  const [state, setState] = useState<GameState | null>(() => loadGame(today, machines));
 
   useEffect(() => {
-    if (state) saveGame(today, state);
-  }, [state, today]);
+    if (state) saveGame(today, state, machines);
+  }, [state, today, machines]);
 
   const idleResults = machines.map(() => null);
   const machineIndex = state?.machineIndex ?? FIRST_MACHINE_INDEX;
