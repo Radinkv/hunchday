@@ -1,6 +1,7 @@
 import { useState, type ReactNode } from "react";
 import { getOp } from "../engine/ops";
 import type { OpDef, Params, ParamSpec } from "../engine/ops-types";
+import type { Difficulty } from "../game/types";
 import {
   applyTrail,
   groupedTilesForType,
@@ -8,12 +9,14 @@ import {
   parseChips,
   searchTiles,
   seedTypeOf,
+  tilesForType,
   typeAfter,
   valueToChips,
   type OpTile,
   type Step,
 } from "./palette";
 import {
+  panelIsFlat,
   CLASS_BOTTOM,
   CLASS_BUILDER,
   CLASS_CLEAR,
@@ -131,21 +134,32 @@ function FolderIcon() {
  */
 export function ChipBuilder({
   challengeInput,
+  difficulty,
+  panelOps,
   onFeed,
 }: {
   readonly challengeInput: string;
+  readonly difficulty: Difficulty;
+  readonly panelOps: readonly string[];
   readonly onFeed: (guess: string) => void;
 }) {
   const [steps, setSteps] = useState<readonly Step[]>(NO_STEPS);
   const [activeTab, setActiveTab] = useState(NO_TAB);
   const [query, setQuery] = useState("");
 
+  const panelSet = new Set(panelOps);
+  const flat = panelIsFlat(difficulty);
+  const inPanel = (tile: OpTile): boolean => panelSet.has(tile.opId);
+
   const seedType = seedTypeOf(parseChips(challengeInput));
   const pickerType = listTypeOf(typeAfter(seedType, steps));
-  const tabs = groupedTilesForType(pickerType);
+  const flatTiles = tilesForType(pickerType).filter(inPanel);
+  const tabs = groupedTilesForType(pickerType)
+    .map((tab) => ({ ...tab, tiles: tab.tiles.filter(inPanel) }))
+    .filter((tab) => tab.tiles.length > 0);
   const activeFolder = tabs.find((tab) => tab.group === activeTab);
   const searching = query.trim().length > 0;
-  const results = searching ? searchTiles(pickerType, query) : NO_TILES;
+  const results = searching ? searchTiles(pickerType, query).filter(inPanel) : NO_TILES;
 
   const addStep = (tile: OpTile): void => {
     setSteps([...steps, { opId: tile.opId, params: defaultParams(tile) }]);
@@ -231,48 +245,54 @@ export function ChipBuilder({
       </ol>
 
       <div className={CLASS_PICKER} aria-label={COPY_PICKER_LABEL}>
-        <input
-          type="search"
-          className={CLASS_SEARCH}
-          value={query}
-          aria-label={COPY_SEARCH_LABEL}
-          placeholder={COPY_SEARCH_PLACEHOLDER}
-          onChange={(event) => setQuery(event.target.value)}
-        />
-        {searching ? (
-          (() => {
-            if (results.length > 0) {
-              return <ul className={CLASS_PAGE}>{results.map(renderOp)}</ul>;
-            }
-            return <p className={CLASS_NO_MATCHES}>{COPY_NO_MATCHES}</p>;
-          })()
+        {flat ? (
+          <ul className={CLASS_PAGE}>{flatTiles.map(renderOp)}</ul>
         ) : (
           <>
-            <div className={CLASS_TABS} role="tablist">
-              <FolderIcon />
-              {tabs.map((tab) => (
-                <button
-                  key={tab.group}
-                  type="button"
-                  role="tab"
-                  aria-selected={tab.group === activeTab}
-                  className={CLASS_TAB + (tab.group === activeTab ? " " + CLASS_TAB_ACTIVE : "")}
-                  onClick={() => setActiveTab(activeTab === tab.group ? NO_TAB : tab.group)}
-                >
-                  {tab.label}
-                </button>
-              ))}
-            </div>
-            {(() => {
-              if (activeFolder) {
-                return (
-                  <ul className={CLASS_PAGE} role="tabpanel">
-                    {activeFolder.tiles.map(renderOp)}
-                  </ul>
-                );
-              }
-              return null;
-            })()}
+            <input
+              type="search"
+              className={CLASS_SEARCH}
+              value={query}
+              aria-label={COPY_SEARCH_LABEL}
+              placeholder={COPY_SEARCH_PLACEHOLDER}
+              onChange={(event) => setQuery(event.target.value)}
+            />
+            {searching ? (
+              (() => {
+                if (results.length > 0) {
+                  return <ul className={CLASS_PAGE}>{results.map(renderOp)}</ul>;
+                }
+                return <p className={CLASS_NO_MATCHES}>{COPY_NO_MATCHES}</p>;
+              })()
+            ) : (
+              <>
+                <div className={CLASS_TABS} role="tablist">
+                  <FolderIcon />
+                  {tabs.map((tab) => (
+                    <button
+                      key={tab.group}
+                      type="button"
+                      role="tab"
+                      aria-selected={tab.group === activeTab}
+                      className={CLASS_TAB + (tab.group === activeTab ? " " + CLASS_TAB_ACTIVE : "")}
+                      onClick={() => setActiveTab(activeTab === tab.group ? NO_TAB : tab.group)}
+                    >
+                      {tab.label}
+                    </button>
+                  ))}
+                </div>
+                {(() => {
+                  if (activeFolder) {
+                    return (
+                      <ul className={CLASS_PAGE} role="tabpanel">
+                        {activeFolder.tiles.map(renderOp)}
+                      </ul>
+                    );
+                  }
+                  return null;
+                })()}
+              </>
+            )}
           </>
         )}
       </div>

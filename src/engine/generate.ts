@@ -36,6 +36,7 @@ import { ALL_LEXICON_NAMES, getLexicon, type LexiconName } from "./lexicon";
 import { getOp, OP_ADD_K, OP_AFFINE, OP_MUL_K, OP_SUB_K } from "./ops";
 import { TYPE_NUM_LIST, type Value } from "./ops-types";
 import { phrasePipeline } from "./phrase";
+import { computePanelOps } from "./panel";
 import {
   behaviorClasses,
   fingerprintOfSteps,
@@ -62,13 +63,14 @@ export interface IoPair {
   readonly output: Value;
 }
 
-/** One machine of a day: its pipeline, reveal sentence, examples, and challenges. */
+/** One machine of a day: its pipeline, reveal sentence, examples, challenges, and panel. */
 export interface DayMachine {
   readonly difficulty: Difficulty;
   readonly steps: readonly PipelineStep[];
   readonly rule: string;
   readonly examples: readonly IoPair[];
   readonly challenges: readonly IoPair[];
+  readonly panelOps: readonly string[];
   readonly notes?: string;
 }
 
@@ -603,6 +605,7 @@ function assembleSelection(
  */
 function buildMachine(
   difficulty: Difficulty,
+  date: string,
   steps: readonly PipelineStep[],
   pipeline: Pipeline,
   selection: Selection,
@@ -615,6 +618,7 @@ function buildMachine(
     rule: phrasePipeline(pipeline),
     examples: selection.exampleInputs.map(toPair),
     challenges: selection.challengeInputs.map(toPair),
+    panelOps: computePanelOps(steps, difficulty, selection.exampleInputs, date),
   };
   return notes === undefined ? machine : { ...machine, notes };
 }
@@ -643,7 +647,12 @@ function drawerFor(rng: Rng, universe: Universe): (() => Value) | null {
  * @param forbidden The signatures forbidden by repeat suppression.
  * @returns A day machine, or null when this attempt failed.
  */
-function attemptSlot(difficulty: Difficulty, rng: Rng, forbidden: ReadonlySet<string>): DayMachine | null {
+function attemptSlot(
+  difficulty: Difficulty,
+  date: string,
+  rng: Rng,
+  forbidden: ReadonlySet<string>,
+): DayMachine | null {
   const repPool = chooseRepPool(generationReps(difficulty), rng);
   if (!repPool) return null;
 
@@ -671,7 +680,7 @@ function attemptSlot(difficulty: Difficulty, rng: Rng, forbidden: ReadonlySet<st
   const result = validate(candidate);
   if (!result.ok) return null;
 
-  return buildMachine(difficulty, steps, pipeline, selection, result.notes);
+  return buildMachine(difficulty, date, steps, pipeline, selection, result.notes);
 }
 
 /**
@@ -684,7 +693,7 @@ function attemptSlot(difficulty: Difficulty, rng: Rng, forbidden: ReadonlySet<st
 function generateSlot(difficulty: Difficulty, date: string, forbidden: ReadonlySet<string>): DayMachine {
   for (let nonce = 0; nonce < MAX_SLOT_NONCE; nonce++) {
     const rng = createRng(seedFor(date, difficulty, nonce));
-    const machine = attemptSlot(difficulty, rng, forbidden);
+    const machine = attemptSlot(difficulty, date, rng, forbidden);
     if (machine) return machine;
   }
   throw new Error(ERROR_SLOT_DEADLOCK + difficulty + SEED_SEPARATOR + date);

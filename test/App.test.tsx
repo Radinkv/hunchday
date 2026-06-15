@@ -22,7 +22,6 @@ import {
 
 const MULTIPLY_RULE = "It multiplies every chip by 2.";
 const MULTIPLY_OP = "multiplies every chip by 2";
-const TAB_MATH = "Math";
 const NUMBER_MACHINE: Machine = {
   difficulty: "easy",
   rule: MULTIPLY_RULE,
@@ -34,11 +33,11 @@ const NUMBER_MACHINE: Machine = {
     ["3 4", "6 8"],
     ["5 1", "10 2"],
   ],
+  panelOps: ["mul_k", "add_k", "sum", "max", "min", "reverse"],
 };
 
 const LETTERS_RULE = "It counts the letters in every chip.";
 const LETTERS_OP = "counts the letters in every chip";
-const TAB_LETTERS = "Letters";
 const WORD_MACHINE: Machine = {
   difficulty: "medium",
   rule: LETTERS_RULE,
@@ -50,6 +49,7 @@ const WORD_MACHINE: Machine = {
     ["cat bee", "3 3"],
     ["fig ace", "3 3"],
   ],
+  panelOps: ["length_map", "sort_alpha", "longest", "reverse"],
 };
 
 const MYSTERY_MACHINE: Machine = {
@@ -63,6 +63,7 @@ const MYSTERY_MACHINE: Machine = {
     ["3 4", "6 8"],
     ["5 1", "10 2"],
   ],
+  panelOps: ["mul_k"],
 };
 
 const LABEL_EASY = "Easy";
@@ -82,12 +83,11 @@ function play(): void {
 }
 
 /**
- * Switches to the named tab, pulls the operation into the recipe, and feeds it.
- * @param tab The tab heading holding the operation.
+ * Picks the operation from the flat panel and feeds it. The easy and medium fixtures
+ * render the flat operation list, so the operation is a button with no tab to open first.
  * @param operation The operation phrase to pull out.
  */
-function pullOutAndFeed(tab: string, operation: string): void {
-  fireEvent.click(screen.getByRole("tab", { name: tab }));
+function pickAndFeed(operation: string): void {
   fireEvent.click(screen.getByRole("button", { name: operation }));
   fireEvent.click(screen.getByRole("button", { name: COPY_FEED_BUTTON }));
 }
@@ -114,7 +114,7 @@ describe("App", () => {
   it("cracks a number machine when a matching recipe is proven twice", () => {
     const { container } = render(<App machines={[NUMBER_MACHINE]} />);
     play();
-    pullOutAndFeed(TAB_MATH, MULTIPLY_OP);
+    pickAndFeed(MULTIPLY_OP);
     feedAgain();
     expect(container.textContent).toContain(COPY_RULE_CRACKED_LABEL + MULTIPLY_RULE);
   });
@@ -122,7 +122,7 @@ describe("App", () => {
   it("cracks a word machine when a matching recipe is proven twice", () => {
     const { container } = render(<App machines={[WORD_MACHINE]} />);
     play();
-    pullOutAndFeed(TAB_LETTERS, LETTERS_OP);
+    pickAndFeed(LETTERS_OP);
     feedAgain();
     expect(container.textContent).toContain(COPY_RULE_CRACKED_LABEL + LETTERS_RULE);
   });
@@ -132,7 +132,7 @@ describe("App", () => {
     play();
     expect(screen.getByText(LABEL_EASY)).toBeTruthy();
 
-    pullOutAndFeed(TAB_MATH, MULTIPLY_OP);
+    pickAndFeed(MULTIPLY_OP);
     feedAgain();
     fireEvent.click(screen.getByRole("button", { name: COPY_NEXT_MACHINE }));
 
@@ -148,7 +148,7 @@ describe("App", () => {
   it("resumes the saved game on reload instead of showing the intro", () => {
     const first = render(<App machines={[NUMBER_MACHINE]} />);
     play();
-    pullOutAndFeed(TAB_MATH, MULTIPLY_OP);
+    pickAndFeed(MULTIPLY_OP);
     first.unmount();
 
     render(<App machines={[NUMBER_MACHINE]} />);

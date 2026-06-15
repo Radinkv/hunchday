@@ -282,7 +282,13 @@ export function MachineCard({
       </div>
 
       {playing ? (
-        <ChipBuilder key={state.machineIndex} challengeInput={challengeInput} onFeed={handleFeed} />
+        <ChipBuilder
+          key={state.machineIndex}
+          challengeInput={challengeInput}
+          difficulty={machine.difficulty}
+          panelOps={machine.panelOps}
+          onFeed={handleFeed}
+        />
       ) : (
         <div className={CLASS_BOTTOM + " " + CLASS_RULE_BOX}>
           <RuleBanner won={won} rule={machine.rule} />

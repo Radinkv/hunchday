@@ -69,12 +69,18 @@ export type Difficulty =
 /** A single input and output pairing, both expressed as space separated chip text. */
 export type ChipPair = readonly [input: string, output: string];
 
-/** One mystery machine: its difficulty, its rule, its seeded examples, and its challenges. */
+/**
+ * One mystery machine: its difficulty, its rule, its seeded examples, its challenges,
+ * and the operation panel the player builds from. The panel is the ordered set of
+ * operation identifiers offered for this machine, sized to its difficulty and baked in
+ * at build time so every player sees the same operations in the same order.
+ */
 export interface Machine {
   readonly difficulty: Difficulty;
   readonly rule: string;
   readonly ex: ReadonlyArray<ChipPair>;
   readonly ch: ReadonlyArray<ChipPair>;
+  readonly panelOps: ReadonlyArray<string>;
 }
 
 /**

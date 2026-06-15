@@ -46,6 +46,7 @@ function machineFromDay(machine: DayMachine): Machine {
     rule: machine.rule,
     ex: machine.examples.map(pairToChipPair),
     ch: machine.challenges.map(pairToChipPair),
+    panelOps: machine.panelOps,
   };
 }
 

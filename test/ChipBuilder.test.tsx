@@ -2,6 +2,7 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { ChipBuilder } from "../src/ui/ChipBuilder";
+import { OP_TILES } from "../src/ui/palette";
 import { COPY_FEED_BUTTON, COPY_NUMBER_TAG_PREFIX, COPY_REMOVE_FROM_PREFIX } from "../src/ui/constants";
 
 /**
@@ -23,6 +24,21 @@ const TAB_LETTERS = "Letters";
 const FIRST_STEP_TAG = COPY_NUMBER_TAG_PREFIX + "1";
 const FIRST_STEP_REMOVE = COPY_REMOVE_FROM_PREFIX + "1";
 const SECOND_STEP_REMOVE = COPY_REMOVE_FROM_PREFIX + "2";
+
+/** Every panel operation, so the builder shows the full tabbed palette. */
+const ALL_OPS: readonly string[] = OP_TILES.map((tile) => tile.opId);
+
+/** The mystery difficulty renders the searchable tabbed palette these tests drive. */
+const MYSTERY = "mystery" as const;
+
+/**
+ * Renders the builder with the full panel in tabbed mode.
+ * @param challengeInput The challenge input chips.
+ * @param onFeed The feed handler.
+ */
+function renderBuilder(challengeInput: string, onFeed: (guess: string) => void): void {
+  render(<ChipBuilder challengeInput={challengeInput} difficulty={MYSTERY} panelOps={ALL_OPS} onFeed={onFeed} />);
+}
 
 afterEach(cleanup);
 
@@ -47,7 +63,7 @@ function pullOut(tab: string, operation: string): void {
 describe("ChipBuilder recipe", () => {
   it("folds an authored recipe over the input and feeds the result", () => {
     const onFeed = vi.fn();
-    render(<ChipBuilder challengeInput="3 1 4 1" onFeed={onFeed} />);
+    renderBuilder("3 1 4 1", onFeed);
 
     pullOut(TAB_MATH, MULTIPLY_BY_TWO);
     pullOut(TAB_TOTALS, SUM);
@@ -58,7 +74,7 @@ describe("ChipBuilder recipe", () => {
 
   it("keeps building after a reduction, applying the next op to the single result", () => {
     const onFeed = vi.fn();
-    render(<ChipBuilder challengeInput="2 3" onFeed={onFeed} />);
+    renderBuilder("2 3", onFeed);
 
     pullOut(TAB_TOTALS, SUM);
     expect((screen.getByRole("tab", { name: TAB_MATH }) as HTMLButtonElement).disabled).toBe(false);
@@ -70,7 +86,7 @@ describe("ChipBuilder recipe", () => {
 
   it("feeds the unchanged input when the recipe is empty", () => {
     const onFeed = vi.fn();
-    render(<ChipBuilder challengeInput="3 1 4 1" onFeed={onFeed} />);
+    renderBuilder("3 1 4 1", onFeed);
 
     clickButton(COPY_FEED_BUTTON);
     expect(onFeed).toHaveBeenCalledWith("3 1 4 1");
@@ -78,7 +94,7 @@ describe("ChipBuilder recipe", () => {
 
   it("changes a step's number by tapping its tag", () => {
     const onFeed = vi.fn();
-    render(<ChipBuilder challengeInput="2 5" onFeed={onFeed} />);
+    renderBuilder("2 5", onFeed);
 
     pullOut(TAB_MATH, MULTIPLY_BY_TWO);
     clickButton(FIRST_STEP_TAG);
@@ -88,7 +104,7 @@ describe("ChipBuilder recipe", () => {
 
   it("removes only the chosen step and keeps the rest", () => {
     const onFeed = vi.fn();
-    render(<ChipBuilder challengeInput="3 1 4 1" onFeed={onFeed} />);
+    renderBuilder("3 1 4 1", onFeed);
 
     pullOut(TAB_MATH, MULTIPLY_BY_TWO);
     pullOut(TAB_TOTALS, SUM);
@@ -99,7 +115,7 @@ describe("ChipBuilder recipe", () => {
 
   it("removes the last remaining step back to the unchanged input", () => {
     const onFeed = vi.fn();
-    render(<ChipBuilder challengeInput="3 1 4 1" onFeed={onFeed} />);
+    renderBuilder("3 1 4 1", onFeed);
 
     pullOut(TAB_MATH, MULTIPLY_BY_TWO);
     pullOut(TAB_TOTALS, SUM);
@@ -111,7 +127,7 @@ describe("ChipBuilder recipe", () => {
 
   it("finds an operation by search and adds it across tabs", () => {
     const onFeed = vi.fn();
-    render(<ChipBuilder challengeInput="3 1 4 1" onFeed={onFeed} />);
+    renderBuilder("3 1 4 1", onFeed);
 
     fireEvent.change(screen.getByRole("searchbox"), { target: { value: "double" } });
     clickButton(MULTIPLY_BY_TWO);
@@ -121,7 +137,7 @@ describe("ChipBuilder recipe", () => {
 
   it("shows only the tabs valid for the recipe's running type", () => {
     const onFeed = vi.fn();
-    render(<ChipBuilder challengeInput="ox cat horse" onFeed={onFeed} />);
+    renderBuilder("ox cat horse", onFeed);
 
     expect(screen.queryByRole("tab", { name: TAB_MATH })).toBeNull();
     pullOut(TAB_LETTERS, COUNT_LETTERS);

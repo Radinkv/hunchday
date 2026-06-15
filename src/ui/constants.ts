@@ -87,6 +87,29 @@ export const DIFFICULTY_LABELS: Readonly<Record<Difficulty, string>> = {
   [DIFFICULTY_HARD]: "Hard",
   [DIFFICULTY_MYSTERY]: "???",
 };
+
+/**
+ * Difficulty ordering for presentation thresholds, easy lowest. The panel renders as a
+ * flat list of operations at or below the flat rank, and as the searchable tabbed palette
+ * above it. This is the single knob for where the panel switches from list to palette.
+ */
+const DIFFICULTY_RANK: Readonly<Record<Difficulty, number>> = {
+  [DIFFICULTY_EASY]: 0,
+  [DIFFICULTY_MEDIUM]: 1,
+  [DIFFICULTY_HARD]: 2,
+  [DIFFICULTY_MYSTERY]: 3,
+};
+export const PANEL_FLAT_MAX_RANK = 1;
+
+/**
+ * Reports whether a difficulty shows the flat operation list rather than the tabbed,
+ * searchable palette.
+ * @param difficulty The machine difficulty.
+ * @returns True for a flat list, false for the tabbed palette.
+ */
+export function panelIsFlat(difficulty: Difficulty): boolean {
+  return DIFFICULTY_RANK[difficulty] <= PANEL_FLAT_MAX_RANK;
+}
 export const COPY_RULE_CRACKED_LABEL = "Cracked it: ";
 export const COPY_RULE_REVEALED_LABEL = "It reveals itself: ";
 export const COPY_NEXT_MACHINE = "Next machine";
