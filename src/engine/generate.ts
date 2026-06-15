@@ -105,7 +105,7 @@ const MAX_SLOT_NONCE = 96;
 const REPEAT_WINDOW = 90;
 
 const MIN_DRAW_LENGTH = 2;
-const MAX_DRAW_LENGTH = 6;
+const MAX_DRAW_LENGTH = 5;
 const MIN_DRAW_VALUE = 1;
 const MAX_DRAW_VALUE = 12;
 

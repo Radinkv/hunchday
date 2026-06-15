@@ -30,13 +30,13 @@ const VARIETY_FLOOR: readonly number[] = [180, 300, 300, 300];
 const PINNED_SIGNATURES: Readonly<Record<string, string>> = {
   "2026-06-16": 'add_k{"k":9}>reverse{} ## keep_gt_k{"k":6}>sum{} ## min_normalize{}>affine{"a":3,"b":1}>keep_last_k{"k":3} ## deltas{}>running_total{}>keep_gt_k{"k":3}',
   "2026-06-18": 'add_k{"k":1}>keep_last_k{"k":3} ## distinct_letters_map{}>keep_dups{} ## drop_last{}>rotate_left{}>units_digit{} ## running_total{}>add_k{"k":1}>keep_gt_k{"k":5}',
-  "2026-06-20": 'sub_k{"k":5}>keep_first_k{"k":2} ## add_k{"k":3}>keep_gt_k{"k":4}>keep_first_k{"k":4} ## mul_k{"k":3}>min_normalize{}>keep_dups{} ## running_total{}>every_other{}>range{}',
-  "2026-06-22": 'add_k{"k":8}>keep_last_k{"k":2} ## sub_k{"k":3}>keep_lt_k{"k":4}>keep_first_k{"k":2} ## length_map{}>add_k{"k":2}>keep_first_k{"k":2} ## first_letter_pos{}>keep_lt_k{"k":5}>min{}',
+  "2026-06-20": 'sub_k{"k":5}>keep_first_k{"k":2} ## sub_k{"k":4}>sub_k{"k":5}>affine{"a":3,"b":2} ## mul_k{"k":3}>min_normalize{}>keep_dups{} ## keep_gt_k{"k":3}>digit_sum_map{}>keep_first_k{"k":2}',
+  "2026-06-22": 'add_k{"k":8}>keep_last_k{"k":2} ## sub_k{"k":3}>keep_lt_k{"k":4}>keep_first_k{"k":2} ## length_map{}>add_k{"k":2}>keep_first_k{"k":2} ## deltas{}>add_k{"k":1}>product{}',
   "2026-06-25": 'sub_k{"k":3}>sort_desc{} ## sub_k{"k":3}>drop_last{}>keep_lt_k{"k":7} ## units_digit{}>add_k{"k":9}>keep_odd{} ## deltas{}>keep_last_k{"k":3}>keep_lt_k{"k":5}',
-  "2026-06-28": 'add_k{"k":1}>drop_last{} ## sub_k{"k":2}>keep_odd{}>dedup{} ## keep_lt_k{"k":5}>add_k{"k":9}>mode{} ## add_k{"k":3}>digit_sum_map{}>add_k{"k":9}',
-  "2026-07-01": 'add_k{"k":1}>keep_first_k{"k":2} ## letter_count_squared{}>mul_k{"k":2} ## units_digit{}>keep_last_k{"k":4}>max{} ## affine{"a":2,"b":2}>digit_sum_map{}>keep_lt_k{"k":9}',
-  "2026-07-05": 'add_k{"k":5}>sort_asc{} ## add_k{"k":1}>keep_last_k{"k":3}>keep_gt_k{"k":8} ## mul_k{"k":3}>min_normalize{}>keep_odd{} ## dedup{}>deltas{}>keep_lt_k{"k":6}',
-  "2026-07-10": 'sub_k{"k":1}>drop_last{} ## sub_k{"k":2}>drop_last{}>keep_gt_k{"k":5} ## reverse{}>keep_gt_first{}>rotate_left{} ## reverse_digits{}>keep_gt_k{"k":5}>keep_first_k{"k":3}',
+  "2026-06-28": 'add_k{"k":1}>drop_last{} ## sub_k{"k":2}>keep_odd{}>dedup{} ## mul_k{"k":2}>swap_ends{}>keep_gt_first{} ## add_k{"k":3}>digit_sum_map{}>add_k{"k":9}',
+  "2026-07-01": 'add_k{"k":1}>keep_first_k{"k":2} ## letter_count_squared{}>mul_k{"k":2} ## drop_last{}>keep_odd{}>min_normalize{} ## digit_sum_map{}>add_k{"k":6}>keep_first_k{"k":4}',
+  "2026-07-05": 'add_k{"k":5}>sort_asc{} ## add_k{"k":1}>keep_last_k{"k":3}>keep_gt_k{"k":8} ## mul_k{"k":3}>min_normalize{}>keep_odd{} ## deltas{}>keep_gt_k{"k":4}>units_digit{}',
+  "2026-07-10": 'sub_k{"k":1}>drop_last{} ## sub_k{"k":2}>drop_last{}>keep_gt_k{"k":5} ## reverse{}>keep_gt_first{}>rotate_left{} ## keep_gt_k{"k":6}>reverse_digits{}>every_other{}',
   "2026-07-15": 'add_k{"k":1}>reverse{} ## keep_lt_k{"k":5}>keep_first_k{"k":2}>sum{} ## units_digit{}>keep_lt_k{"k":9}>keep_dups{} ## deltas{}>keep_lt_k{"k":9}>running_total{}',
 };
 
