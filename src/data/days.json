@@ -1083,7 +1083,7 @@
     },
     {
       "difficulty": "hard",
-      "rule": "It takes the smallest chip away from every chip, then keeps only the last 3 chips, then keeps only the even chips.",
+      "rule": "It subtracts the smallest chip from every chip, then keeps only the last 3 chips, then keeps only the even chips.",
       "ex": [
         [
           "6 8 9 6",
@@ -1650,7 +1650,7 @@
     },
     {
       "difficulty": "hard",
-      "rule": "It takes the smallest chip away from every chip, then keeps only chips bigger than 8, then adds 7 to them.",
+      "rule": "It subtracts the smallest chip from every chip, then keeps only chips bigger than 8, then adds 7 to them.",
       "ex": [
         [
           "10 11 8 3 2",
@@ -4473,7 +4473,7 @@
     },
     {
       "difficulty": "hard",
-      "rule": "It counts the letters in every chip, then throws away the first chip, then takes the smallest chip away from them.",
+      "rule": "It counts the letters in every chip, then throws away the first chip, then subtracts the smallest chip from them.",
       "ex": [
         [
           "kiwi apricot raisin mango avocado",
@@ -4847,7 +4847,7 @@
     },
     {
       "difficulty": "hard",
-      "rule": "It throws away the last chip, then keeps only the last 3 chips, then takes the smallest chip away from them.",
+      "rule": "It throws away the last chip, then keeps only the last 3 chips, then subtracts the smallest chip from them.",
       "ex": [
         [
           "9 4 1 10 3",
@@ -5788,7 +5788,7 @@
     },
     {
       "difficulty": "hard",
-      "rule": "It keeps only the first 4 chips, then takes the smallest chip away from them, then keeps the chip that appears most often.",
+      "rule": "It keeps only the first 4 chips, then subtracts the smallest chip from them, then keeps the chip that appears most often.",
       "ex": [
         [
           "10 10 3 12 6",
@@ -6922,7 +6922,7 @@
     },
     {
       "difficulty": "hard",
-      "rule": "It keeps only chips bigger than the first one, then swaps the first and last chips, then takes the smallest chip away from them.",
+      "rule": "It keeps only chips bigger than the first one, then swaps the first and last chips, then subtracts the smallest chip from them.",
       "ex": [
         [
           "2 12 12 6 2",
@@ -7302,7 +7302,7 @@
     },
     {
       "difficulty": "hard",
-      "rule": "It takes the smallest chip away from every chip, then throws away the first chip, then swaps the first and last chips.",
+      "rule": "It subtracts the smallest chip from every chip, then throws away the first chip, then swaps the first and last chips.",
       "ex": [
         [
           "3 7 10 10",
@@ -8426,7 +8426,7 @@
     },
     {
       "difficulty": "hard",
-      "rule": "It takes the smallest chip away from every chip, then keeps only chips bigger than 6, then keeps only the first 2 chips.",
+      "rule": "It subtracts the smallest chip from every chip, then keeps only chips bigger than 6, then keeps only the first 2 chips.",
       "ex": [
         [
           "11 2 2 12 12",
@@ -13122,7 +13122,7 @@
     },
     {
       "difficulty": "hard",
-      "rule": "It takes the smallest chip away from every chip, then keeps only chips smaller than 9, then keeps only chips bigger than the first one.",
+      "rule": "It subtracts the smallest chip from every chip, then keeps only chips smaller than 9, then keeps only chips bigger than the first one.",
       "ex": [
         [
           "1 3 8 11 12",
@@ -13312,7 +13312,7 @@
     },
     {
       "difficulty": "hard",
-      "rule": "It takes the smallest chip away from every chip, then keeps only the first 4 chips, then keeps only chips bigger than 7.",
+      "rule": "It subtracts the smallest chip from every chip, then keeps only the first 4 chips, then keeps only chips bigger than 7.",
       "ex": [
         [
           "2 12 9 4 12",
@@ -15194,7 +15194,7 @@
     },
     {
       "difficulty": "hard",
-      "rule": "It takes the smallest chip away from every chip, then keeps only chips bigger than 8, then adds 2 to them.",
+      "rule": "It subtracts the smallest chip from every chip, then keeps only chips bigger than 8, then adds 2 to them.",
       "ex": [
         [
           "11 9 6 6 1",
