@@ -142,7 +142,20 @@ describe("feed", () => {
     expect(state.won).toBe(true);
     expect(state.results[0]).toBe(true);
     expect(state.misses).toBe(0);
-    expect(state.evidence.at(-1)?.mark).toBe(MARK_HIT);
+    expect(state.evidence.some((row) => row.mark === MARK_HIT)).toBe(true);
+  });
+
+  /**
+   * Revealing a machine fills in its whole behaviour: every generated example and challenge input
+   * appears in the evidence once the machine is cracked, so the player sees the full set.
+   */
+  it("reveals every example and challenge input when the machine is cracked", () => {
+    let state = startGame(MACHINES);
+    state = feed(state, MACHINES, recipe(true));
+    const allInputs = [...FIRST_MACHINE.ex, ...FIRST_MACHINE.ch].map(([input]) => input);
+    for (const input of allInputs) {
+      expect(state.evidence.some((row) => row.input === input)).toBe(true);
+    }
   });
 
   it("reveals the next example with no player chips when a recipe misses", () => {

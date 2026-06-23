@@ -2,7 +2,9 @@ import { describe, expect, it } from "vitest";
 import { generateDay, type DayMachine, type DaySpec } from "../src/engine/generate";
 import { behaviorClasses, wordBehaviorClasses } from "../src/engine/universe";
 import { hash64hex } from "../src/engine/rng";
-import { validate } from "../src/engine/validate";
+import { OUTPUT_FLOOR, validate } from "../src/engine/validate";
+import { compose, execute } from "../src/engine/compose";
+import { TYPE_NUM_LIST, type Value } from "../src/engine/ops-types";
 
 /**
  * These are the non-negotiable determinism and soak guards. They pin the size and the
@@ -46,7 +48,7 @@ const VARIETY_FLOOR: readonly number[] = [20, 150, 300, 300];
 
 const PINNED_SIGNATURES: Readonly<Record<string, string>> = {
   "2026-06-16": 'add_k{"k":3} ## add_k{"k":9}>reverse{} ## keep_gt_k{"k":6}>sum{} ## min_normalize{}>keep_gt_k{"k":8}>add_k{"k":7}',
-  "2026-06-18": 'sort_asc{} ## add_k{"k":1}>keep_last_k{"k":3} ## reverse_digits{}>mode{} ## drop_last{}>rotate_left{}>units_digit{}',
+  "2026-06-18": 'sort_asc{} ## add_k{"k":1}>keep_last_k{"k":3} ## reverse_digits{}>mode{} ## length_map{}>add_k{"k":7}>sort_asc{}',
   "2026-06-20": 'length_map{} ## sub_k{"k":5}>keep_first_k{"k":2} ## mul_k{"k":2}>keep_first_k{"k":2}>keep_lt_k{"k":9} ## length_map{}>dedup{}>rotate_left{}',
   "2026-06-22": 'max{} ## add_k{"k":8}>keep_last_k{"k":2} ## sub_k{"k":3}>keep_lt_k{"k":4}>keep_first_k{"k":2} ## length_map{}>add_k{"k":2}>keep_first_k{"k":2}',
   "2026-06-25": 'count{} ## sub_k{"k":3}>sort_desc{} ## sub_k{"k":3}>drop_last{}>keep_lt_k{"k":7} ## length_map{}>add_k{"k":5}>sort_desc{}',
@@ -125,6 +127,41 @@ describe("generateDay pinned dates", () => {
       expect(daySignature(generateDay(date))).toBe(signature);
     });
   }
+});
+
+/**
+ * Reduces an output value to its numeric parts, ignoring word outputs, so the floor can be checked.
+ * @param output The output value.
+ * @returns The numeric parts of the output.
+ */
+function toNumberArray(output: Value): number[] {
+  if (typeof output === "number") return [output];
+  if (Array.isArray(output)) return output.filter((item): item is number => typeof item === "number");
+  return [];
+}
+
+describe("output floor", () => {
+  const FLOOR_PROBE_DAYS = 60;
+  const FLOOR_PROBE_LENGTHS = [1, 2, 3, 4, 5, 6];
+  const FLOOR_PROBE_INPUTS: number[][] = FLOOR_PROBE_LENGTHS.flatMap((length) => [
+    Array.from({ length }, () => 1),
+    Array.from({ length }, () => 2),
+  ]);
+
+  it("never lets a generated machine fall below the output floor on small inputs", () => {
+    for (let dayIndex = 0; dayIndex < FLOOR_PROBE_DAYS; dayIndex++) {
+      const spec = generateDay(shiftDate(EPOCH, dayIndex));
+      for (const machine of spec.machines) {
+        const pipeline = compose(machine.steps);
+        if (pipeline.inputType !== TYPE_NUM_LIST) continue;
+        for (const input of FLOOR_PROBE_INPUTS) {
+          for (const value of toNumberArray(execute(pipeline, input))) {
+            expect(value).toBeGreaterThanOrEqual(OUTPUT_FLOOR);
+          }
+        }
+      }
+    }
+  });
 });
 
 describe("year long soak", () => {

@@ -78,6 +78,7 @@ export const REASON_EXAMPLE_COUNT = "example_count";
 export const REASON_INPUT_RANGE = "input_range";
 export const REASON_LIST_LENGTH = "list_length";
 export const REASON_OUTPUT_RANGE = "output_range";
+export const REASON_DOMAIN_FLOOR = "domain_floor";
 export const REASON_OUTPUT_EQUALS_INPUT = "output_equals_input";
 export const REASON_DUPLICATE_EXAMPLE = "duplicate_example";
 export const REASON_EXAMPLES_SAME_OUTPUT = "examples_same_output";
@@ -126,8 +127,14 @@ const MAX_INPUT_VALUE = 99;
 const MIN_LIST_LENGTH = 1;
 const MAX_LIST_LENGTH = 6;
 
-/** The inclusive range a numeric output value may take. */
-const MIN_OUTPUT_VALUE = 0;
+/**
+ * The single floor every output the player can ever see must respect, whether a curated example or
+ * a value computed in the Test bench. A subtracting machine may dip to a small, hand countable
+ * negative, but never to a jarring one. This one constant controls the whole floor.
+ */
+export const OUTPUT_FLOOR = -5;
+
+/** The inclusive ceiling a numeric output value may take. */
 const MAX_OUTPUT_VALUE = 99;
 
 /** The largest number of surviving decoys a solvable slot may leave after examples. */
@@ -213,13 +220,55 @@ export function valuesEqual(a: Value, b: Value): boolean {
  * @returns True when every numeric part of the output is in range.
  */
 export function outputInRange(output: Value): boolean {
-  if (typeof output === "number") return output >= MIN_OUTPUT_VALUE && output <= MAX_OUTPUT_VALUE;
+  if (typeof output === "number") return output >= OUTPUT_FLOOR && output <= MAX_OUTPUT_VALUE;
   if (Array.isArray(output)) {
-    return output.every(
-      (item) => typeof item !== "number" || (item >= MIN_OUTPUT_VALUE && item <= MAX_OUTPUT_VALUE),
-    );
+    return output.every((item) => typeof item !== "number" || (item >= OUTPUT_FLOOR && item <= MAX_OUTPUT_VALUE));
   }
   return true;
+}
+
+/**
+ * The numeric stress inputs the domain floor gate runs a candidate over: the smallest valid inputs
+ * of every length, where a subtraction and any later amplification are most negative. Because a
+ * subtract is most negative at the smallest input, holding the floor here holds it across the whole
+ * Test input domain.
+ */
+const FLOOR_STRESS_LENGTHS: readonly number[] = Array.from(
+  { length: MAX_LIST_LENGTH - MIN_LIST_LENGTH + 1 },
+  (_value, index) => index + MIN_LIST_LENGTH,
+);
+const FLOOR_STRESS_INPUTS: readonly Value[] = FLOOR_STRESS_LENGTHS.flatMap((length) => [
+  Array.from({ length }, () => MIN_INPUT_VALUE),
+  Array.from({ length }, () => MIN_INPUT_VALUE + 1),
+  Array.from({ length }, (_value, index) => index + MIN_INPUT_VALUE),
+]);
+
+/**
+ * Reports whether every numeric part of an output is at or above the output floor, ignoring the
+ * ceiling, since the floor gate only guards against jarring negatives.
+ * @param output The output to check.
+ * @returns True when no numeric part falls below the floor.
+ */
+function outputAboveFloor(output: Value): boolean {
+  if (typeof output === "number") return output >= OUTPUT_FLOOR;
+  if (Array.isArray(output)) return output.every((item) => typeof item !== "number" || item >= OUTPUT_FLOOR);
+  return true;
+}
+
+/**
+ * Rejects a numeric machine that can drop below the output floor anywhere in the Test input domain,
+ * so the Test bench can never surface a jarring negative. Word machines never produce negatives and
+ * always pass.
+ * @param candidate The candidate machine to check.
+ * @returns A passing result, or a domain floor failure.
+ */
+function checkDomainFloor(candidate: Candidate): ValidationResult {
+  const pipeline = compose(candidate.steps);
+  if (pipeline.inputType !== TYPE_NUM_LIST) return PASS;
+  for (const input of FLOOR_STRESS_INPUTS) {
+    if (!outputAboveFloor(execute(pipeline, input))) return fail(REASON_DOMAIN_FLOOR);
+  }
+  return PASS;
 }
 
 /**
@@ -572,6 +621,9 @@ function checkDiscrimination(
 export function validate(candidate: Candidate): ValidationResult {
   const sanity = checkSanity(candidate);
   if (!sanity.ok) return sanity;
+
+  const domainFloor = checkDomainFloor(candidate);
+  if (!domainFloor.ok) return domainFloor;
 
   const interestingness = checkInterestingness(candidate);
   if (!interestingness.ok) return interestingness;

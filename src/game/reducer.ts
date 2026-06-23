@@ -148,10 +148,29 @@ export function startGame(machines: readonly Machine[]): GameState {
 }
 
 /**
+ * Appends every generated example and challenge that has not already been shown, as example rows,
+ * so a revealed machine displays its full behaviour. On a crack this confirms the rule against the
+ * whole set; on a loss it fills in the remaining answers the player never reached. Rows whose input
+ * is already in the evidence, whether a shown example, a tested input, a hit, or a miss, are not
+ * repeated.
+ * @param machine The current machine whose full example and challenge set is revealed.
+ * @param evidence The evidence gathered so far.
+ * @returns The evidence with the remaining example and challenge rows appended.
+ */
+function withRemainingRevealed(machine: Machine, evidence: EvidenceRow[]): EvidenceRow[] {
+  const remaining = [...machine.ex, ...machine.ch].filter(
+    ([input]) => !evidence.some((row) => chipsEqual(row.input, input)),
+  );
+  return [...evidence, ...remaining.map(([input, output]) => buildEvidenceRow(input, output, MARK_EXAMPLE))];
+}
+
+/**
  * Produces the revealed state for the current machine and records its outcome.
  * The transition writes the outcome into a copied results list so the input state
- * remains unchanged, then marks the machine phase as revealed.
+ * remains unchanged, appends the machine's remaining examples and answers, then marks
+ * the machine phase as revealed.
  * @param state The current state whose machine is being revealed.
+ * @param machine The current machine, whose full example set is revealed.
  * @param evidence The evidence list to carry into the revealed state.
  * @param streak The streak value to record.
  * @param misses The cumulative miss count to record.
@@ -160,6 +179,7 @@ export function startGame(machines: readonly Machine[]): GameState {
  */
 function reveal(
   state: GameState,
+  machine: Machine,
   evidence: EvidenceRow[],
   streak: number,
   misses: number,
@@ -167,7 +187,8 @@ function reveal(
 ): GameState {
   const results = state.results.slice();
   results[state.machineIndex] = won;
-  return { ...state, streak, misses, results, evidence, feedback: null, phase: PHASE_REVEALED, won };
+  const fullEvidence = withRemainingRevealed(machine, evidence);
+  return { ...state, streak, misses, results, evidence: fullEvidence, feedback: null, phase: PHASE_REVEALED, won };
 }
 
 /**
@@ -189,7 +210,7 @@ function recordMiss(state: GameState, machine: Machine, guess?: string): GameSta
   const challengeIndex = state.challengeIndex + NEXT_INDEX_DELTA;
   const missesThisMachine = evidence.filter((row) => row.mark === MARK_MISS).length;
   if (missesThisMachine >= MISSES_TO_FAIL || challengeIndex >= machine.ch.length) {
-    return reveal(state, evidence, RESET_STREAK, misses, false);
+    return reveal(state, machine, evidence, RESET_STREAK, misses, false);
   }
   return { ...state, streak: RESET_STREAK, misses, evidence, challengeIndex };
 }
@@ -218,7 +239,7 @@ export function feed(state: GameState, machines: readonly Machine[], submission:
   if (submission.kind === SUBMISSION_RECIPE) {
     if (submission.matchesAllExamples) {
       const evidence = [...state.evidence, buildEvidenceRow(challengeInput, challengeOutput, MARK_HIT)];
-      return reveal(state, evidence, state.streak, state.misses, true);
+      return reveal(state, machine, evidence, state.streak, state.misses, true);
     }
     return recordMiss(state, machine, submission.chips);
   }
@@ -230,11 +251,11 @@ export function feed(state: GameState, machines: readonly Machine[], submission:
   const streak = state.streak + NEXT_INDEX_DELTA;
   const evidence = [...state.evidence, buildEvidenceRow(challengeInput, challengeOutput, MARK_HIT)];
   if (streak >= STREAK_TO_CRACK) {
-    return reveal(state, evidence, streak, state.misses, true);
+    return reveal(state, machine, evidence, streak, state.misses, true);
   }
   const challengeIndex = state.challengeIndex + NEXT_INDEX_DELTA;
   if (challengeIndex >= machine.ch.length) {
-    return reveal(state, evidence, streak, state.misses, true);
+    return reveal(state, machine, evidence, streak, state.misses, true);
   }
   return { ...state, streak, evidence, challengeIndex };
 }

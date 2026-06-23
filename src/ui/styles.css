@@ -18,7 +18,7 @@
   --green-soft: #e1f5ee;
   --green-ink: #06432f;
 
-  --pad-width: 216px;
+  --pad-width: 240px;
   --r-control: 10px;
   --r-card: 14px;
   --r-chip: 999px;
@@ -748,7 +748,7 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 16px;
   padding: 12px 16px;
   border-top: 1px solid var(--line);
 }
@@ -800,6 +800,12 @@ footer {
   justify-content: center;
   gap: 6px;
   min-height: 34px;
+}
+
+/* With no chips built, the preview tray collapses so it reads as a small margin over the pad
+   rather than a reserved empty band, which matters most on a short mobile screen. */
+.comprev:empty {
+  min-height: 0;
 }
 
 /* A placed chip in the preview: a thumb sized chip that removes itself when tapped. */
@@ -1321,8 +1327,12 @@ footer {
     height: 16px;
   }
 
+  /* Bottom align the evidence so the chips and the active challenge sit just above the pad rather
+     than pinned to the top with a wide void beneath. Any slack moves up under the navbar, and a
+     long log still scrolls because the safe keyword falls back to the start when it overflows. */
   .evidence {
     padding: 8px 8px;
+    justify-content: safe flex-end;
   }
 
   .modes {
