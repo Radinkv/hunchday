@@ -1,29 +1,31 @@
 import { useEffect, useState } from "react";
-import { feed, nextMachine, restart, startGame } from "../game/reducer";
+import { feed, finish, nextMachine, recordTest, restart, startGame } from "../game/reducer";
 import { todayDate } from "../game/calendar";
-import { DIFFICULTY_EASY, type GameState, type Machine } from "../game/types";
-import { Dots } from "./Dots";
+import type { GameState, Machine } from "../game/types";
+import { Juice } from "./Juice";
+import { Help } from "./Help";
 import { Bot, MachineCard } from "./MachineCard";
 import { loadGame, saveGame } from "./storage";
 import {
   CLASS_APP,
-  CLASS_DIFFICULTY,
   CLASS_FEED,
   CLASS_HEADER,
   CLASS_HEADER_LEFT,
+  CLASS_HEADER_RIGHT,
   CLASS_INTRO,
+  CLASS_INTRO_COPY,
+  CLASS_INTRO_TITLE,
   CLASS_INTRO_LEAD,
-  CLASS_TIER_PIP,
+  CLASS_SHELL,
+  COPY_INTRO_TITLE,
   COPY_INTRO_LEAD,
   COPY_PLAY,
   COPY_WORDMARK,
   LIGHT_COLOR_IDLE,
-  POSITION_LABELS,
-  tierColorOf,
 } from "./constants";
 
-/** The starting machine index shown by the progress dots before a game has begun. */
-const FIRST_MACHINE_INDEX = 0;
+/** The progress of a day with no machine finished yet, used before the first reveal. */
+const NO_PROGRESS = 0;
 
 /**
  * The whole interface as a full height flex column. It owns the single piece of game
@@ -41,46 +43,45 @@ export function App({ machines }: { readonly machines: readonly Machine[] }) {
     if (state) saveGame(today, state, machines);
   }, [state, today, machines]);
 
-  const idleResults = machines.map(() => null);
-  const machineIndex = state?.machineIndex ?? FIRST_MACHINE_INDEX;
-  const tierColors = machines.map((machine) => tierColorOf(machine.difficulty));
-  const tierColor = tierColors.at(machineIndex) ?? tierColorOf(DIFFICULTY_EASY);
-  const positionLabel = POSITION_LABELS.at(machineIndex) ?? "";
+  const finished = (state?.results ?? []).filter((result) => result !== null).length;
+  const fraction = machines.length === 0 ? NO_PROGRESS : finished / machines.length;
 
   return (
-    <div className={CLASS_APP}>
+    <div className={CLASS_SHELL}>
       <header className={CLASS_HEADER}>
         <div className={CLASS_HEADER_LEFT}>
           <Bot lightColor={LIGHT_COLOR_IDLE} chomping={false} />
           <h1>{COPY_WORDMARK}</h1>
-          <span className={CLASS_DIFFICULTY}>
-            <span className={CLASS_TIER_PIP} style={{ backgroundColor: tierColor }} aria-hidden="true" />
-            {positionLabel}
-          </span>
         </div>
-        <Dots
-          machineIndex={machineIndex}
-          results={state?.results ?? idleResults}
-          tierColors={tierColors}
-        />
+        <div className={CLASS_HEADER_RIGHT}>
+          <Juice fraction={fraction} />
+          <Help />
+        </div>
       </header>
-      {state ? (
-        <MachineCard
-          machines={machines}
-          state={state}
-          onFeed={(guess) => setState((current) => (current ? feed(current, machines, guess) : current))}
-          onNext={() => setState((current) => (current ? nextMachine(current, machines) : current))}
-          onRestart={() => setState(restart(machines))}
-        />
-      ) : (
-        <div className={CLASS_INTRO}>
-          <Bot lightColor={LIGHT_COLOR_IDLE} chomping={false} />
-          <p className={CLASS_INTRO_LEAD}>{COPY_INTRO_LEAD}</p>
-          <button type="button" className={CLASS_FEED} onClick={() => setState(startGame(machines))}>
-            {COPY_PLAY}
-          </button>
-        </div>
-      )}
+      <div className={CLASS_APP}>
+        {state ? (
+          <MachineCard
+            machines={machines}
+            state={state}
+            onFeed={(submission) => setState((current) => (current ? feed(current, machines, submission) : current))}
+            onTest={(result) => setState((current) => (current ? recordTest(current, result) : current))}
+            onNext={() => setState((current) => (current ? nextMachine(current, machines) : current))}
+            onFinish={() => setState((current) => (current ? finish(current) : current))}
+            onRestart={() => setState(restart(machines))}
+          />
+        ) : (
+          <div className={CLASS_INTRO}>
+            <Bot lightColor={LIGHT_COLOR_IDLE} chomping={false} />
+            <div className={CLASS_INTRO_COPY}>
+              <h2 className={CLASS_INTRO_TITLE}>{COPY_INTRO_TITLE}</h2>
+              <p className={CLASS_INTRO_LEAD}>{COPY_INTRO_LEAD}</p>
+            </div>
+            <button type="button" className={CLASS_FEED} onClick={() => setState(startGame(machines))}>
+              {COPY_PLAY}
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

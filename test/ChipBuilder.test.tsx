@@ -3,41 +3,53 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { ChipBuilder } from "../src/ui/ChipBuilder";
 import { OP_TILES } from "../src/ui/palette";
-import { COPY_FEED_BUTTON, COPY_NUMBER_TAG_PREFIX, COPY_REMOVE_FROM_PREFIX } from "../src/ui/constants";
+import { SUBMISSION_RECIPE, type ChipPair, type Submission } from "../src/game/types";
+import {
+  COPY_FEED_BUTTON,
+  COPY_NO_MATCHES,
+  COPY_NUMBER_TAG_PREFIX,
+  COPY_REMOVE_FROM_PREFIX,
+} from "../src/ui/constants";
 
 /**
- * These tests cover the recipe builder. Operations are filed into tabs the player flips
- * between to pull a plain English step out, only the tabs valid for the running type are
- * shown, a step's number is changed by tapping its tag, removing a step rolls the recipe
- * back to before it, a recipe that ends on a single chip locks, and feeding folds the
- * recipe over the input into the string the reducer compares.
+ * These tests cover the recipe builder now that a submission reports whether the recipe
+ * reproduces every example rather than a per challenge output string. Operations are found
+ * only by searching over the machine's panel set, with no browsable list or tabs. Only
+ * operations valid for the running type match, removing a step rolls the recipe back, and
+ * cycling a step's number changes what the recipe computes, all observable through the
+ * match against the supplied examples.
  */
 
 const MULTIPLY_BY_TWO = "multiplies every chip by 2";
 const SUM = "adds all the chips together";
 const COUNT_LETTERS = "counts the letters in every chip";
 
-const TAB_MATH = "Math";
-const TAB_TOTALS = "Totals";
-const TAB_LETTERS = "Letters";
+const SEARCH_DOUBLE = "double";
+const SEARCH_SUM = "sum";
+const SEARCH_COUNT_LETTERS = "count letters";
 
 const FIRST_STEP_TAG = COPY_NUMBER_TAG_PREFIX + "1";
 const FIRST_STEP_REMOVE = COPY_REMOVE_FROM_PREFIX + "1";
-const SECOND_STEP_REMOVE = COPY_REMOVE_FROM_PREFIX + "2";
 
-/** Every panel operation, so the builder shows the full tabbed palette. */
+/** Every panel operation, so the builder can search across the whole palette. */
 const ALL_OPS: readonly string[] = OP_TILES.map((tile) => tile.opId);
 
-/** The hard difficulty renders the searchable tabbed palette these tests drive. */
-const HARD = "hard" as const;
+/**
+ * The recipe verdicts the builder reports for a matching and a non matching recipe. A
+ * submission also carries the chips the recipe produced for the challenge, which these
+ * verdict tests do not pin, so the calls are matched on the verdict fields alone.
+ */
+const MATCHES_ALL = expect.objectContaining<Submission>({ kind: SUBMISSION_RECIPE, matchesAllExamples: true });
+const MATCHES_NONE = expect.objectContaining<Submission>({ kind: SUBMISSION_RECIPE, matchesAllExamples: false });
 
 /**
- * Renders the builder with the full panel in tabbed mode.
+ * Renders the search only builder over the full panel and the given truth pairs.
  * @param challengeInput The challenge input chips.
- * @param onFeed The feed handler.
+ * @param truth The pairs the recipe is checked against.
+ * @param onFeed The submission handler.
  */
-function renderBuilder(challengeInput: string, onFeed: (guess: string) => void): void {
-  render(<ChipBuilder challengeInput={challengeInput} difficulty={HARD} panelOps={ALL_OPS} onFeed={onFeed} />);
+function renderBuilder(challengeInput: string, truth: readonly ChipPair[], onFeed: (s: Submission) => void): void {
+  render(<ChipBuilder challengeInput={challengeInput} truth={truth} panelOps={ALL_OPS} misses={0} onFeed={onFeed} />);
 }
 
 afterEach(cleanup);
@@ -51,100 +63,74 @@ function clickButton(name: string): void {
 }
 
 /**
- * Switches to the named tab and adds the operation with the given phrase from it.
- * @param tab The tab heading.
- * @param operation The operation phrase shown on the tab's page.
+ * Types a query into the search box and adds the operation with the given phrase.
+ * @param query The words to search.
+ * @param operation The operation phrase shown in the results.
  */
-function pullOut(tab: string, operation: string): void {
-  fireEvent.click(screen.getByRole("tab", { name: tab }));
+function searchAndAdd(query: string, operation: string): void {
+  fireEvent.change(screen.getByRole("searchbox"), { target: { value: query } });
   clickButton(operation);
 }
 
 describe("ChipBuilder recipe", () => {
-  it("folds an authored recipe over the input and feeds the result", () => {
+  it("reports a recipe that reproduces every example as a match", () => {
     const onFeed = vi.fn();
-    renderBuilder("3 1 4 1", onFeed);
+    renderBuilder("3 1", [["3 1", "4"], ["2 5", "7"]], onFeed);
 
-    pullOut(TAB_MATH, MULTIPLY_BY_TWO);
-    pullOut(TAB_TOTALS, SUM);
-
+    searchAndAdd(SEARCH_SUM, SUM);
     clickButton(COPY_FEED_BUTTON);
-    expect(onFeed).toHaveBeenCalledWith("18");
+    expect(onFeed).toHaveBeenCalledWith(MATCHES_ALL);
   });
 
-  it("keeps building after a reduction, applying the next op to the single result", () => {
+  it("reports an empty recipe that fits no example as a miss", () => {
     const onFeed = vi.fn();
-    renderBuilder("2 3", onFeed);
-
-    pullOut(TAB_TOTALS, SUM);
-    expect((screen.getByRole("tab", { name: TAB_MATH }) as HTMLButtonElement).disabled).toBe(false);
-    pullOut(TAB_MATH, MULTIPLY_BY_TWO);
+    renderBuilder("3 1", [["3 1", "4"], ["2 5", "7"]], onFeed);
 
     clickButton(COPY_FEED_BUTTON);
-    expect(onFeed).toHaveBeenCalledWith("10");
+    expect(onFeed).toHaveBeenCalledWith(MATCHES_NONE);
   });
 
-  it("feeds the unchanged input when the recipe is empty", () => {
+  it("rolls back a removed step, flipping the verdict", () => {
     const onFeed = vi.fn();
-    renderBuilder("3 1 4 1", onFeed);
+    renderBuilder("3 1", [["3 1", "4"], ["2 5", "7"]], onFeed);
 
+    searchAndAdd(SEARCH_DOUBLE, MULTIPLY_BY_TWO);
+    searchAndAdd(SEARCH_SUM, SUM);
     clickButton(COPY_FEED_BUTTON);
-    expect(onFeed).toHaveBeenCalledWith("3 1 4 1");
+    expect(onFeed).toHaveBeenLastCalledWith(MATCHES_NONE);
+
+    clickButton(FIRST_STEP_REMOVE);
+    clickButton(COPY_FEED_BUTTON);
+    expect(onFeed).toHaveBeenLastCalledWith(MATCHES_ALL);
   });
 
-  it("changes a step's number by tapping its tag", () => {
+  it("flips the verdict when a step's number is cycled", () => {
     const onFeed = vi.fn();
-    renderBuilder("2 5", onFeed);
+    renderBuilder("3 1", [["3 1", "6 2"], ["2 5", "4 10"]], onFeed);
 
-    pullOut(TAB_MATH, MULTIPLY_BY_TWO);
+    searchAndAdd(SEARCH_DOUBLE, MULTIPLY_BY_TWO);
+    clickButton(COPY_FEED_BUTTON);
+    expect(onFeed).toHaveBeenLastCalledWith(MATCHES_ALL);
+
     clickButton(FIRST_STEP_TAG);
     clickButton(COPY_FEED_BUTTON);
-    expect(onFeed).toHaveBeenCalledWith("6 15");
+    expect(onFeed).toHaveBeenLastCalledWith(MATCHES_NONE);
   });
 
-  it("removes only the chosen step and keeps the rest", () => {
+  it("only matches operations valid for the recipe's running type", () => {
     const onFeed = vi.fn();
-    renderBuilder("3 1 4 1", onFeed);
+    renderBuilder("ox cat horse", [["ox cat horse", "2 3 5"]], onFeed);
 
-    pullOut(TAB_MATH, MULTIPLY_BY_TWO);
-    pullOut(TAB_TOTALS, SUM);
-    clickButton(FIRST_STEP_REMOVE);
+    fireEvent.change(screen.getByRole("searchbox"), { target: { value: SEARCH_DOUBLE } });
+    expect(screen.queryByRole("button", { name: MULTIPLY_BY_TWO })).toBeNull();
+    expect(screen.getByText(COPY_NO_MATCHES)).toBeTruthy();
+
+    searchAndAdd(SEARCH_COUNT_LETTERS, COUNT_LETTERS);
+    fireEvent.change(screen.getByRole("searchbox"), { target: { value: SEARCH_DOUBLE } });
+    expect(screen.getByRole("button", { name: MULTIPLY_BY_TWO })).toBeTruthy();
+
+    fireEvent.change(screen.getByRole("searchbox"), { target: { value: "" } });
     clickButton(COPY_FEED_BUTTON);
-    expect(onFeed).toHaveBeenCalledWith("9");
-  });
-
-  it("removes the last remaining step back to the unchanged input", () => {
-    const onFeed = vi.fn();
-    renderBuilder("3 1 4 1", onFeed);
-
-    pullOut(TAB_MATH, MULTIPLY_BY_TWO);
-    pullOut(TAB_TOTALS, SUM);
-    clickButton(SECOND_STEP_REMOVE);
-    clickButton(FIRST_STEP_REMOVE);
-    clickButton(COPY_FEED_BUTTON);
-    expect(onFeed).toHaveBeenCalledWith("3 1 4 1");
-  });
-
-  it("finds an operation by search and adds it across tabs", () => {
-    const onFeed = vi.fn();
-    renderBuilder("3 1 4 1", onFeed);
-
-    fireEvent.change(screen.getByRole("searchbox"), { target: { value: "double" } });
-    clickButton(MULTIPLY_BY_TWO);
-    clickButton(COPY_FEED_BUTTON);
-    expect(onFeed).toHaveBeenCalledWith("6 2 8 2");
-  });
-
-  it("shows only the tabs valid for the recipe's running type", () => {
-    const onFeed = vi.fn();
-    renderBuilder("ox cat horse", onFeed);
-
-    expect(screen.queryByRole("tab", { name: TAB_MATH })).toBeNull();
-    pullOut(TAB_LETTERS, COUNT_LETTERS);
-    expect(screen.getByRole("tab", { name: TAB_MATH })).toBeTruthy();
-    expect(screen.queryByRole("tab", { name: TAB_LETTERS })).toBeNull();
-
-    clickButton(COPY_FEED_BUTTON);
-    expect(onFeed).toHaveBeenCalledWith("2 3 5");
+    expect(onFeed).toHaveBeenCalledWith(MATCHES_ALL);
   });
 });

@@ -16,8 +16,18 @@
 
 import type { GameState, Machine } from "../game/types";
 
-/** The localStorage key prefix; the version guards against reading an old state shape. */
-const STORAGE_PREFIX = "hunchday:v2:";
+/** The localStorage key prefix; the version guards against reading an old state shape. The bump
+ * to v3 discards saves seeded with two examples, so resuming starts fresh under one-example play. */
+const STORAGE_PREFIX = "hunchday:v3:";
+
+/**
+ * The flag, not scoped to any day, recording that the chip thrower has been shown once.
+ * The self teaching pulse on the ghost slot fires only on the very first machine a player
+ * ever sees, so the flag is set the first time the thrower mounts and read on every later
+ * mount to suppress the pulse.
+ */
+const FIRST_THROWER_KEY = "hunchday:thrower-seen";
+const FIRST_THROWER_SEEN = "1";
 
 /** The FNV-1a constants used to derive a compact signature of the day's machine set. */
 const FNV_OFFSET_BASIS = 0x811c9dc5;
@@ -87,7 +97,7 @@ export function loadGame(dateKey: string, machines: readonly Machine[]): GameSta
     if (typeof parsed !== "object" || parsed === null) return null;
     const record = parsed as Partial<SavedRecord>;
     if (record.sig !== machinesSignature(machines)) return null;
-    return isSavedGame(record.state, machines.length) ? (record.state as GameState) : null;
+    return isSavedGame(record.state, machines.length) ? (record.state) : null;
   } catch {
     return null;
   }
@@ -106,5 +116,23 @@ export function saveGame(dateKey: string, state: GameState, machines: readonly M
     localStorage.setItem(STORAGE_PREFIX + dateKey, JSON.stringify(record));
   } catch {
     return;
+  }
+}
+
+/**
+ * Reports whether this is the first chip thrower the player has ever seen and, when it is,
+ * records that it has now been seen so the self teaching pulse never fires again. The read
+ * and the write are a single step so the pulse shows exactly once across all sessions, and
+ * a storage failure is treated as already seen so no pulse loops on a device that cannot
+ * persist the flag.
+ * @returns True only the first time it is ever called on a device.
+ */
+export function takeFirstThrower(): boolean {
+  try {
+    if (localStorage.getItem(FIRST_THROWER_KEY) !== null) return false;
+    localStorage.setItem(FIRST_THROWER_KEY, FIRST_THROWER_SEEN);
+    return true;
+  } catch {
+    return false;
   }
 }

@@ -47,6 +47,7 @@ function machineFromDay(machine: DayMachine): Machine {
     ex: machine.examples.map(pairToChipPair),
     ch: machine.challenges.map(pairToChipPair),
     panelOps: machine.panelOps,
+    steps: machine.steps.map((pipelineStep) => ({ opId: pipelineStep.opId, params: pipelineStep.params })),
   };
 }
 

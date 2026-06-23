@@ -18,6 +18,7 @@
   --green-soft: #e1f5ee;
   --green-ink: #06432f;
 
+  --pad-width: 216px;
   --r-control: 10px;
   --r-card: 14px;
   --r-chip: 999px;
@@ -71,30 +72,145 @@ body {
   line-height: 1.55;
 }
 
-/* The whole game is one full height flex column, centered on wide screens; only the
-   evidence log grows. No card, no shadow — the raw page is the background. */
-.app {
+/* The outer shell owns the full viewport height and width. The navbar spans the whole screen
+   across its top; the centered content column lives beneath it. No card, no shadow. */
+.shell {
   height: 100vh;
   height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* The content column under the navbar: centered on wide screens and capped, while it fills the
+   remaining height as one flex column in which only the evidence log grows. */
+.app {
+  flex: 1 1 0;
+  min-height: 0;
+  width: 100%;
   max-width: 480px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
 }
 
-/* Header: one compact bar. Tiny machine icon, wordmark and difficulty left; dots right. */
+/* The play area is a column: the stage with the evidence and the input widget on top, and the
+   mode toggle as its own bar stuck to the bottom, centered, below everything. */
+.play {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* The stage holds the evidence log and the input widget. On a phone it stacks them, the log above
+   and the input below; on a wide screen it lays them side by side, the input on the left and the
+   log on the right. The wide layout is in the breakpoint at the foot of this file. */
+.stage {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header: a navigation bar across the top. Tiny machine icon, wordmark and difficulty pinned
+   to the left, the progress dots pinned to the right, and a hairline under the whole bar so it
+   reads as a fixed navbar separate from the evidence below. */
 .hdr {
-  flex: 0 0 44px;
+  flex: 0 0 52px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 16px;
+  padding: 0 18px;
+  border-bottom: 1px solid var(--line);
 }
 
 .hleft {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+/* The right cluster of the navbar: the day progress bar and the help question mark. */
+.hright {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* The help affordance: a small round question mark that opens an explainer popover beneath it. */
+.help {
+  position: relative;
+  display: flex;
+}
+
+.helpbtn {
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  padding: 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink-3);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: var(--r-chip);
+  transition: color var(--fast) var(--ease-out), border-color var(--fast) var(--ease-out);
+}
+
+.helpbtn:hover,
+.helpbtn[aria-expanded="true"] {
+  color: var(--machine);
+  border-color: var(--machine-line);
+}
+
+/* The explainer popover: a small card dropped under the question mark, the only place the rules
+   are written out. It is right aligned so it never spills off the screen edge. */
+.helppop {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 20;
+  width: 280px;
+  max-width: 80vw;
+  padding: 14px 16px;
+  text-align: left;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  box-shadow: var(--shadow-card);
+  animation: ctrl-pop var(--fast) var(--ease-out);
+}
+
+.helpgoal {
+  margin: 0 0 10px;
+  font-size: 14px;
+  color: var(--ink);
+}
+
+.helplist {
+  list-style: none;
+  margin: 0 0 10px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.helplist li {
+  margin: 0;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+
+.helpmode {
+  color: var(--machine);
+  font-weight: 700;
+}
+
+.helpnote {
+  margin: 0;
+  font-size: 12px;
+  color: var(--ink-3);
 }
 
 .hdr .bot {
@@ -110,31 +226,28 @@ h1 {
   margin: 0;
 }
 
-.diff {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 2px 9px 2px 7px;
-  font-size: 11px;
-  color: var(--ink-3);
-  border: 1px solid var(--line);
-  border-radius: var(--r-chip);
-}
-
-.tierpip {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
+/* The day progress bar: a small soft track on the right of the navbar holding a liquid fill in
+   the machine purple. The fill starts empty and grows as machines are finished. No label. */
+.juice {
+  width: 72px;
+  height: 8px;
   flex: none;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+  border-radius: var(--r-chip);
+  background: var(--machine-soft);
+  border: 1px solid var(--machine-line);
+  overflow: hidden;
 }
 
-.dots {
-  display: flex;
-  gap: 5px;
+.juicefill {
+  display: block;
+  height: 100%;
+  background: var(--machine);
+  border-radius: var(--r-chip);
+  transition: width var(--feature) var(--ease-out);
 }
 
-/* Intro: the machine, a one line lead, and the play button, centered in the open space. */
+/* Intro: the machine, a display headline with its lead, and the play button, centered in the
+   open space. The headline uses the brand display face so the home screen reads like the app. */
 .intro {
   flex: 1 1 0;
   min-height: 0;
@@ -142,33 +255,43 @@ h1 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 22px;
+  gap: 24px;
   padding: 16px;
   text-align: center;
 }
 
 .intro .bot {
   width: auto;
-  height: 140px;
+  height: 132px;
+}
+
+.introcopy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.introtitle {
+  margin: 0;
+  font-family: "Bricolage Grotesque", system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 28px;
+  letter-spacing: -0.01em;
+  color: var(--ink);
 }
 
 .introlead {
   max-width: 30ch;
   margin: 0;
-  font-size: 17px;
+  font-size: 15px;
   color: var(--ink-2);
 }
 
 .intro .feed {
   width: 100%;
   max-width: 260px;
-}
-
-.dot {
-  width: 7px;
-  height: 7px;
-  border-radius: var(--r-chip);
-  transition: opacity var(--base) var(--ease-out), box-shadow var(--base) var(--ease-out);
+  height: 46px;
 }
 
 /* Machine zone: the machine on the raw background, scaled up, with a small caption. */
@@ -226,24 +349,31 @@ h1 {
   padding: 12px 8px;
 }
 
-/* Every row snaps to a two column grid with a fixed arrow spine, so the arrow lands in
-   the same place no matter the chip count: input right aligned, output left aligned. */
+/* Every row centers its whole input, arrow, and output as one unit, so the chips read as a
+   centered group rather than being pinned to a fixed arrow column. The input and output stay on
+   one line beside the arrow and wrap within themselves when a side overflows. */
 .row {
-  display: grid;
-  grid-template-columns: 1fr 24px 1fr;
+  display: flex;
+  flex-wrap: nowrap;
   align-items: center;
+  justify-content: center;
+  gap: 6px;
   width: 100%;
   max-width: 440px;
   min-height: 40px;
   margin: 0 auto;
 }
 
+/* The input chips wrap top to bottom in reading order, so when a row overflows the first
+   chips stay on the upper line and the later ones fall to the line below, keeping first and
+   last unambiguous. They stay right aligned so the sequence ends against the arrow. */
 .cleft {
   display: flex;
-  flex-wrap: wrap-reverse;
+  flex-wrap: wrap;
   justify-content: flex-end;
   align-items: center;
   gap: 3px;
+  min-width: 0;
 }
 
 .cright {
@@ -252,6 +382,7 @@ h1 {
   justify-content: flex-start;
   align-items: center;
   gap: 3px;
+  min-width: 0;
 }
 
 .row.miss {
@@ -297,12 +428,12 @@ h1 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 30px;
-  min-width: 30px;
-  padding: 0 9px;
+  height: 33px;
+  min-width: 33px;
+  padding: 0 10px;
   font-family: "IBM Plex Mono", ui-monospace, monospace;
   font-weight: 500;
-  font-size: 12px;
+  font-size: 13px;
   border-radius: var(--r-chip);
   border: 1px solid;
 }
@@ -338,7 +469,7 @@ h1 {
 
 .feed {
   width: 100%;
-  height: 48px;
+  height: 32px;
   border-radius: var(--r-control);
 }
 
@@ -380,14 +511,6 @@ h1 {
   gap: 6px;
 }
 
-.recipeempty {
-  padding: 16px 12px;
-  border: 1px dashed var(--line);
-  border-radius: var(--r-control);
-  color: var(--ink-3);
-  font-size: 14px;
-  text-align: center;
-}
 
 .step {
   display: flex;
@@ -453,7 +576,7 @@ h1 {
   color: var(--amber);
 }
 
-/* The operations drawer: a search box over a manila folder with tabs. */
+/* The operations drawer: a search box over its ranked results. */
 .picker {
   display: flex;
   flex-direction: column;
@@ -490,44 +613,6 @@ h1 {
   color: var(--ink-3);
   border: 1px dashed var(--line);
   border-radius: var(--r-control);
-}
-
-/* Category tabs: a single horizontally scrolling row of pills, never wrapping. */
-.tabs {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  overflow-x: auto;
-}
-
-.foldericon {
-  flex: 0 0 auto;
-  color: var(--machine);
-}
-
-.tab {
-  flex: 0 0 auto;
-  height: 28px;
-  min-width: 0;
-  padding: 0 16px;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  white-space: nowrap;
-  color: var(--ink-3);
-  background: var(--paper);
-  border: none;
-  border-radius: 0;
-  clip-path: polygon(9px 0, calc(100% - 9px) 0, 100% 100%, 0 100%);
-}
-
-.tab:hover {
-  color: var(--ink-2);
-}
-
-.tab.on {
-  color: var(--machine);
-  background: var(--machine-soft);
 }
 
 .page {
@@ -677,6 +762,596 @@ footer {
 
 .light {
   transition: fill var(--base) var(--ease-out);
+}
+
+/* The borderless mode toggle: two display words split by a quiet divider, no chrome of its
+   own. The active word carries the machine accent and full weight; the other stays muted. */
+/* The toggle is its own bar at the very bottom of the play area, centered, separate from the
+   input column and the evidence. A hairline sets it off as a distinct bottom bar. */
+.modes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-top: 1px solid var(--line);
+}
+
+.mode {
+  height: auto;
+  min-width: 0;
+  padding: 2px 4px;
+  font-family: "Bricolage Grotesque", system-ui, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink-3);
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  transition: color var(--fast) var(--ease-out);
+}
+
+.mode:not(.modeon):hover {
+  color: var(--ink-2);
+}
+
+.mode.modeon {
+  color: var(--machine);
+  font-weight: 800;
+}
+
+.modesep {
+  color: var(--ink-3);
+  font-size: 15px;
+  opacity: 0.55;
+  user-select: none;
+}
+
+/* The shared chip composer: a live preview of the composed chips above the entry, which is a
+   number pad for number machines and a text field for word machines. Guess and Test both use it. */
+.composer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* The preview row: the composed chips centered above the pad, empty until a chip is built. */
+.comprev {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 34px;
+}
+
+/* A placed chip in the preview: a thumb sized chip that removes itself when tapped. */
+.compchip {
+  height: 34px;
+  min-width: 34px;
+  padding: 0 11px;
+  font-size: 13px;
+  cursor: pointer;
+  animation: chip-pop var(--base) var(--ease-out);
+}
+
+/* The word entry, used only by word machines where chips cannot be tapped out. */
+.compfield {
+  width: 100%;
+  height: 44px;
+  padding: 0 14px;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 15px;
+  color: var(--ink);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-control);
+}
+
+.compfield::placeholder {
+  color: var(--ink-3);
+}
+
+.compfield:focus-visible {
+  outline: 3px solid var(--machine-soft);
+  outline-offset: 2px;
+  border-color: var(--machine-line);
+}
+
+/* The number pad: a three column grid of big tap keys, the friendly way to enter small numbers
+   without a keyboard. The last row is delete, zero, and the new chip key. */
+.pad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  max-width: var(--pad-width);
+  align-self: center;
+  width: 100%;
+}
+
+/* The Guess and Test submit button is sized to the pad above it, so the keypad and its action
+   read as one centered block rather than a full width bar under a narrow pad. The recipe builder
+   keeps its own full width feed button, since it has no pad. */
+.guesspane .feed,
+.tester .feed {
+  max-width: var(--pad-width);
+  align-self: center;
+}
+
+.padkey {
+  height: 36px;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--machine-ink);
+  background: var(--machine-soft);
+  border: 1px solid var(--machine-line);
+  border-radius: var(--r-control);
+  touch-action: manipulation;
+}
+
+.padkey:active {
+  transform: scale(0.96);
+}
+
+.padkey:disabled {
+  opacity: 0.4;
+}
+
+/* The guess pane and the test bench: the composer with its submit button. The test bench adds a
+   row of budget pips above and shows a short guidance line only when a built set is rejected. */
+.guesspane,
+.tester {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* The test budget as pips: one per allowed test, in the machine accent, dimming as they are spent. */
+/* The pips counter: a centered row of small dots. A pip is faint by default; an on pip is filled,
+   in the machine accent for the test budget and amber for the miss counter. */
+.pips {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  min-height: 8px;
+}
+
+.pip {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--r-chip);
+  background: var(--machine-line);
+  opacity: 0.45;
+}
+
+.pips.testpips .pip.pipon {
+  background: var(--machine);
+  opacity: 1;
+}
+
+.pips.misspips .pip.pipon {
+  background: var(--amber);
+  opacity: 1;
+}
+
+
+/* A probe chip: the output of a player's own test, in a neutral tone so it reads as exploration
+   rather than a graded amber answer. */
+.chip.probe {
+  background: transparent;
+  border-color: var(--line);
+  color: var(--ink-2);
+}
+
+/* The composing row. Position context for the floating control; wraps if it must, but the
+   five chip cap and the ghost slot keep it to one line on a phone. */
+.throwrow {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 4px 0;
+}
+
+/* A placed guess chip: an output coloured chip large enough to thumb, tappable to adjust. */
+.chip.guess {
+  height: 40px;
+  min-width: 40px;
+  padding: 0 12px;
+  font-size: 14px;
+  cursor: pointer;
+  background: var(--amber-soft);
+  border-color: var(--amber-line);
+  color: var(--amber-ink);
+  transition: box-shadow var(--fast) var(--ease-out), border-color var(--fast) var(--ease-out);
+  animation: chip-pop var(--base) var(--ease-out);
+}
+
+/* The selected chip wears a machine accent ring, tying it to the control floating above. */
+.chip.guess.sel {
+  border-color: var(--machine);
+  box-shadow: 0 0 0 3px var(--machine-soft);
+}
+
+/* The ghost slot: a dashed outline the size of a chip that reads as tap to add a chip. */
+.ghost {
+  height: 40px;
+  min-width: 40px;
+  padding: 0 12px;
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--ink-3);
+  background: transparent;
+  border: 1.5px dashed var(--machine-line);
+  border-radius: var(--r-chip);
+  transition: color var(--fast) var(--ease-out), border-color var(--fast) var(--ease-out);
+}
+
+.ghost:hover {
+  color: var(--machine);
+  border-color: var(--machine);
+}
+
+/* The self teaching pulse: a slow breathing scale shown once, on the first ever thrower,
+   to invite the tap to add gesture. It is a breath, never a blink. */
+.ghost.teach {
+  animation: breathe 2.4s ease-in-out infinite;
+}
+
+/* The fixed toolbar buttons beside the add slot: type, pull in the problem, and clear. They
+   are the same size as the add slot and sit at the head of the row, so they never move. */
+.tool {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  min-width: 40px;
+  padding: 0;
+  color: var(--machine);
+  background: var(--machine-soft);
+  border: 1px solid var(--machine-line);
+  border-radius: var(--r-control);
+  touch-action: manipulation;
+}
+
+.tool:active {
+  transform: scale(0.94);
+}
+
+/* A placed chip mid drag: it lifts and follows the pointer, with reflow and pop suppressed
+   so it tracks the finger exactly. Dragged clear of the row it dims to read as a removal. */
+.chip.guess.dragging {
+  z-index: 6;
+  cursor: grabbing;
+  animation: none;
+  transition: none;
+  box-shadow: var(--shadow-card);
+  pointer-events: none;
+}
+
+.chip.guess.dropx {
+  opacity: 0.45;
+  border-color: var(--amber);
+}
+
+/* A wrong guess in the evidence log: the player's chips greyed and translucent, set before a
+   cross and the true gold output, so a miss reads at a glance without a word of feedback. */
+.chip.wrong {
+  background: transparent;
+  border-color: var(--ink-3);
+  color: var(--ink-3);
+  opacity: 0.7;
+}
+
+/* The cross on a miss row is a toggle, not a label: a small tappable circle that reveals or
+   hides the chips the player guessed, so the row stays one line until the player asks for it. */
+.vs {
+  flex: 0 0 auto;
+  height: 24px;
+  min-width: 24px;
+  padding: 0;
+  margin: 0 2px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-3);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: var(--r-chip);
+  cursor: pointer;
+  transition: color var(--fast) var(--ease-out), border-color var(--fast) var(--ease-out);
+}
+
+.vs:hover {
+  color: var(--amber);
+  border-color: var(--amber-line);
+}
+
+.vs[aria-expanded="true"] {
+  color: var(--amber);
+  border-color: var(--amber-line);
+}
+
+/* The held chip's control: a themed dark card, not a default popup, that drops in under the
+   toolbar at the head of the row, with thumb sized add, subtract, type, and remove targets.
+   It sits in the flow under the add slot rather than floating over the chip. */
+.ctrl {
+  position: relative;
+  align-self: flex-start;
+  display: flex;
+  gap: 8px;
+  padding: 10px;
+  background: var(--card);
+  border: 1px solid var(--machine-line);
+  border-radius: var(--r-card);
+  box-shadow: var(--shadow-card);
+  animation: ctrl-pop var(--fast) var(--ease-out);
+}
+
+/* The caret above the card, pointing up to the toolbar the control belongs to. */
+.caret {
+  position: absolute;
+  bottom: 100%;
+  left: 18px;
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 8px solid var(--card);
+}
+
+.ctrlbtn {
+  flex: 0 0 auto;
+  height: 52px;
+  min-width: 52px;
+  padding: 0;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--machine);
+  background: var(--machine-soft);
+  border: 1px solid var(--machine-line);
+  border-radius: var(--r-control);
+  touch-action: manipulation;
+  user-select: none;
+}
+
+.ctrlbtn:active {
+  transform: scale(0.94);
+}
+
+/* Remove sits in the amber register, the colour the app uses for output and undoing. */
+.ctrlx {
+  color: var(--amber);
+  background: var(--amber-soft);
+  border-color: var(--amber-line);
+  font-size: 20px;
+}
+
+/* The small type popup: an input and a confirm, for keying chips in rather than tapping. It
+   is the smaller cousin of the floating control, opened by the pencil tool or a chip's edit. */
+.typepop {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.typein {
+  flex: 1 1 auto;
+  height: 40px;
+  padding: 0 14px;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 15px;
+  color: var(--ink);
+  background: var(--card);
+  border: 1px solid var(--machine-line);
+  border-radius: var(--r-control);
+}
+
+.typein:focus-visible {
+  outline: 3px solid var(--machine-soft);
+  outline-offset: 2px;
+}
+
+.typepop button {
+  height: 40px;
+}
+
+/* The end of day screen: a quiet centred result that reads like the home screen, not a wall
+   of prose. Result dots carry the outcome; one short line carries the tally. */
+.endscreen {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 24px 16px;
+  text-align: center;
+}
+
+.endscreen .bot {
+  width: auto;
+  height: 96px;
+}
+
+.enddots {
+  display: flex;
+  gap: 10px;
+}
+
+.enddot {
+  width: 14px;
+  height: 14px;
+  border-radius: var(--r-chip);
+}
+
+.enddot.crack {
+  background: var(--green);
+}
+
+.enddot.open {
+  background: var(--amber);
+}
+
+.endhead {
+  margin: 0;
+  font-family: "Bricolage Grotesque", system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 22px;
+  letter-spacing: -0.01em;
+}
+
+.endsub {
+  margin: 0;
+  font-size: 13px;
+  color: var(--ink-3);
+}
+
+@keyframes chip-pop {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes ctrl-pop {
+  from {
+    transform: translateY(-4px) scale(0.98);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+}
+
+/* The active mode's input slides up into place each time the mode changes, so switching to Guess
+   or Test eases the pad in rather than snapping it. Keyed on the mode so each switch replays it. */
+/* The input widget sits above the toggle (order 0) and fills the space above it. Where there is
+   room (a wide screen's tall pane) it centres its content in the middle; where there is none (the
+   stacked mobile layout) it stays at its natural height and so attaches right onto the toggle. */
+.modebody {
+  order: 0;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  animation: mode-in var(--base) var(--ease-out);
+}
+
+@keyframes mode-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Wide screens: the stage becomes two INDEPENDENT full-height columns, the input on the left and
+   the evidence on the right, each stretching to the stage height and centring its own content so
+   the two never share a height. The mode toggle stays its own bar below the stage, centered. Below
+   this width the base flex column stacks the stage, the log above and the input below. */
+@media (min-width: 768px) {
+  .app {
+    max-width: none;
+  }
+
+  .stage {
+    flex-direction: row;
+    align-items: stretch;
+    column-gap: 48px;
+    padding: 0 clamp(16px, 4vw, 64px);
+  }
+
+  .stage .bottom {
+    order: 0;
+    flex: 1 1 0;
+    min-width: 0;
+    justify-content: center;
+    border-top: none;
+  }
+
+  /* The input fills its column and centres its content in the middle of the left side. */
+  .stage .bottom > * {
+    width: 100%;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .stage .evidence {
+    order: 1;
+    flex: 1 1 0;
+    min-width: 0;
+    justify-content: safe center;
+  }
+
+  .stage .row {
+    max-width: 520px;
+  }
+
+  .stage .chip {
+    height: 38px;
+    min-width: 38px;
+    padding: 0 11px;
+    font-size: 14px;
+  }
+
+  .stage .cleft,
+  .stage .cright {
+    gap: 5px;
+  }
+}
+
+/* Narrow screens: trim the chrome so the keypad and evidence get more of the short viewport. The
+   navbar slims down, its wordmark and icon shrink, the toggle bar tightens, and the evidence log
+   loses a little padding. The navbar is kept rather than hidden so the progress and help stay
+   reachable. */
+@media (max-width: 767px) {
+  .hdr {
+    flex: 0 0 42px;
+    padding: 0 14px;
+  }
+
+  h1 {
+    font-size: 15px;
+  }
+
+  .hdr .bot {
+    height: 16px;
+  }
+
+  .evidence {
+    padding: 8px 8px;
+  }
+
+  .modes {
+    padding: 9px 16px;
+  }
 }
 
 /* All movement collapses to a near instant change when motion is not wanted. */

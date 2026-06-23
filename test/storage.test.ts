@@ -35,6 +35,7 @@ const STATE: GameState = {
   feedback: null,
   phase: PHASE_PLAYING,
   won: null,
+  ended: false,
 };
 
 afterEach(() => {
