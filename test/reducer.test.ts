@@ -4,22 +4,23 @@ import {
   crackedCount,
   feed,
   isLastMachine,
+  MISSES_TO_FAIL,
   nextMachine,
   shareText,
   startGame,
   tokenize,
 } from "../src/game/reducer";
 import {
-  FEEDBACK_CORRECT_MORE,
-  FEEDBACK_CORRECT_TWICE,
-  FEEDBACK_WRONG,
   MARK_EXAMPLE,
   MARK_HIT,
   MARK_MISS,
   PHASE_PLAYING,
   PHASE_REVEALED,
+  SUBMISSION_GUESS,
+  SUBMISSION_RECIPE,
   type GameState,
   type Machine,
+  type Submission,
 } from "../src/game/types";
 import {
   EMOJI_CRACKED,
@@ -46,13 +47,31 @@ const SECOND_MACHINE = MACHINES[1];
 const WRONG_GUESS = "nope";
 
 /**
- * Builds the expected seeded evidence rows for a machine from its example pairs, so
- * the expectation tracks the source data rather than duplicating chip strings.
- * @param machine The machine whose examples seed the evidence.
+ * Wraps chips as a guess submission, the per challenge answer judged two in a row.
+ * @param chips The composed output chips.
+ * @returns A guess submission.
+ */
+function guess(chips: string): Submission {
+  return { kind: SUBMISSION_GUESS, chips };
+}
+
+/**
+ * Wraps a recipe verdict as a recipe submission, judged against every example at once.
+ * @param matchesAllExamples Whether the recipe reproduces every example.
+ * @returns A recipe submission.
+ */
+function recipe(matchesAllExamples: boolean): Submission {
+  return { kind: SUBMISSION_RECIPE, matchesAllExamples };
+}
+
+/**
+ * Builds the expected seeded evidence rows for a machine, only the first example, so the
+ * expectation tracks the source data rather than duplicating chip strings.
+ * @param machine The machine whose first example seeds the evidence.
  * @returns The evidence rows expected at the start of that machine.
  */
 function expectedExampleRows(machine: Machine) {
-  return machine.ex.map(([input, output]) => ({ input, output, mark: MARK_EXAMPLE }));
+  return machine.ex.slice(0, 1).map(([input, output]) => ({ input, output, mark: MARK_EXAMPLE }));
 }
 
 /**
@@ -63,8 +82,8 @@ function expectedExampleRows(machine: Machine) {
  */
 function crack(state: GameState, machines: readonly Machine[]): GameState {
   const machine = machines[state.machineIndex];
-  let result = feed(state, machines, machine.ch[0][1]);
-  result = feed(result, machines, machine.ch[1][1]);
+  let result = feed(state, machines, guess(machine.ch[0][1]));
+  result = feed(result, machines, guess(machine.ch[1][1]));
   return result;
 }
 
@@ -89,42 +108,65 @@ describe("startGame", () => {
 });
 
 describe("feed", () => {
-  it("returns the same state reference on empty input", () => {
-    const state = startGame(MACHINES);
-    expect(feed(state, MACHINES, "   ")).toBe(state);
+  it("treats an empty computed result as a wrong guess rather than a no-op", () => {
+    let state = startGame(MACHINES);
+    state = feed(state, MACHINES, guess("   "));
+    expect(state.misses).toBe(1);
+    expect(state.streak).toBe(0);
+    expect(state.evidence.at(-1)?.mark).toBe(MARK_MISS);
   });
 
-  it("cracks the machine after two correct answers in a row", () => {
+  it("cracks the machine after two correct guesses in a row", () => {
     let state = startGame(MACHINES);
-    state = feed(state, MACHINES, FIRST_MACHINE.ch[0][1]);
+    state = feed(state, MACHINES, guess(FIRST_MACHINE.ch[0][1]));
     expect(state.phase).toBe(PHASE_PLAYING);
     expect(state.streak).toBe(1);
     expect(state.challengeIndex).toBe(1);
-    expect(state.feedback).toBe(FEEDBACK_CORRECT_MORE);
     expect(state.evidence.at(-1)).toEqual({
       input: FIRST_MACHINE.ch[0][0],
       output: FIRST_MACHINE.ch[0][1],
       mark: MARK_HIT,
     });
 
-    state = feed(state, MACHINES, FIRST_MACHINE.ch[1][1]);
+    state = feed(state, MACHINES, guess(FIRST_MACHINE.ch[1][1]));
     expect(state.phase).toBe(PHASE_REVEALED);
     expect(state.won).toBe(true);
     expect(state.streak).toBe(2);
-    expect(state.feedback).toBe(FEEDBACK_CORRECT_TWICE);
     expect(state.results[0]).toBe(true);
+  });
+
+  it("cracks the machine on a single recipe that matches every example", () => {
+    let state = startGame(MACHINES);
+    state = feed(state, MACHINES, recipe(true));
+    expect(state.phase).toBe(PHASE_REVEALED);
+    expect(state.won).toBe(true);
+    expect(state.results[0]).toBe(true);
+    expect(state.misses).toBe(0);
+    expect(state.evidence.at(-1)?.mark).toBe(MARK_HIT);
+  });
+
+  it("reveals the next example with no player chips when a recipe misses", () => {
+    let state = startGame(MACHINES);
+    state = feed(state, MACHINES, recipe(false));
+    expect(state.misses).toBe(1);
+    expect(state.phase).toBe(PHASE_PLAYING);
+    expect(state.evidence.at(-1)).toEqual({
+      input: FIRST_MACHINE.ch[0][0],
+      output: FIRST_MACHINE.ch[0][1],
+      mark: MARK_MISS,
+    });
   });
 
   it("accepts answers regardless of comma and space formatting", () => {
     let state = startGame(MACHINES);
-    state = feed(state, MACHINES, "6,  8");
+    state = feed(state, MACHINES, guess("6,  8"));
     expect(state.streak).toBe(1);
   });
 
   it("reveals the true output, counts a miss, and resets the streak on a wrong guess", () => {
     let state = startGame(MACHINES);
-    state = feed(state, MACHINES, FIRST_MACHINE.ch[0][1]);
-    state = feed(state, MACHINES, WRONG_GUESS);
+    state = feed(state, MACHINES, guess(FIRST_MACHINE.ch[0][1]));
+    state = feed(state, MACHINES, guess(WRONG_GUESS));
     expect(state.misses).toBe(1);
     expect(state.streak).toBe(0);
     expect(state.phase).toBe(PHASE_PLAYING);
@@ -134,54 +176,50 @@ describe("feed", () => {
       mark: MARK_MISS,
       guess: WRONG_GUESS,
     });
-    expect(state.feedback).toBe(FEEDBACK_WRONG);
   });
 
   /**
-   * The original prototype cracked a machine when the final challenge was answered
-   * correctly even if the streak was only one, because reaching the end of the
-   * challenges with a correct final guess ends the machine as a win. This test pins
-   * that behavior so it stays a deliberate decision rather than an accident.
+   * Two wrong answers are survivable: after two misses the machine stays in play, and two correct
+   * guesses in a row still crack it. This pins that the third miss, not the second, is fatal.
    */
-  it("treats a correct final guess as a crack even at a streak of one", () => {
+  it("survives two wrong answers and still cracks on two correct in a row", () => {
     let state = startGame(MACHINES);
-    const lastChallengeIndex = FIRST_MACHINE.ch.length - 1;
-    for (let attempt = 0; attempt < lastChallengeIndex; attempt++) {
-      state = feed(state, MACHINES, WRONG_GUESS);
-    }
-    expect(state.challengeIndex).toBe(lastChallengeIndex);
-    expect(state.streak).toBe(0);
-    expect(state.misses).toBe(lastChallengeIndex);
+    state = feed(state, MACHINES, guess(WRONG_GUESS));
+    state = feed(state, MACHINES, guess(WRONG_GUESS));
+    expect(state.phase).toBe(PHASE_PLAYING);
+    expect(state.misses).toBe(2);
 
-    state = feed(state, MACHINES, FIRST_MACHINE.ch[lastChallengeIndex][1]);
+    state = feed(state, MACHINES, guess(FIRST_MACHINE.ch[2][1]));
+    state = feed(state, MACHINES, guess(FIRST_MACHINE.ch[3][1]));
     expect(state.phase).toBe(PHASE_REVEALED);
     expect(state.won).toBe(true);
-    expect(state.feedback).toBe(FEEDBACK_CORRECT_MORE);
   });
 
-  it("reveals as a loss when the final guess is wrong", () => {
+  it("reveals as a loss on the third wrong answer", () => {
     let state = startGame(MACHINES);
-    for (const _element of FIRST_MACHINE.ch) {
-      state = feed(state, MACHINES, WRONG_GUESS);
-    }
+    state = feed(state, MACHINES, guess(WRONG_GUESS));
+    state = feed(state, MACHINES, guess(WRONG_GUESS));
+    expect(state.phase).toBe(PHASE_PLAYING);
+
+    state = feed(state, MACHINES, guess(WRONG_GUESS));
     expect(state.phase).toBe(PHASE_REVEALED);
     expect(state.won).toBe(false);
     expect(state.results[0]).toBe(false);
-    expect(state.misses).toBe(FIRST_MACHINE.ch.length);
+    expect(state.misses).toBe(MISSES_TO_FAIL);
   });
 
   it("ignores further feeds once the machine is revealed", () => {
     const revealed = crack(startGame(MACHINES), MACHINES);
-    expect(feed(revealed, MACHINES, WRONG_GUESS)).toBe(revealed);
+    expect(feed(revealed, MACHINES, guess(WRONG_GUESS))).toBe(revealed);
   });
 });
 
 describe("machine progression", () => {
   it("resets per machine fields on advance while carrying results and misses forward", () => {
     let state = startGame(MACHINES);
-    state = feed(state, MACHINES, WRONG_GUESS);
-    state = feed(state, MACHINES, FIRST_MACHINE.ch[1][1]);
-    state = feed(state, MACHINES, FIRST_MACHINE.ch[2][1]);
+    state = feed(state, MACHINES, guess(WRONG_GUESS));
+    state = feed(state, MACHINES, guess(FIRST_MACHINE.ch[1][1]));
+    state = feed(state, MACHINES, guess(FIRST_MACHINE.ch[2][1]));
     expect(state.results[0]).toBe(true);
     expect(state.misses).toBe(1);
 

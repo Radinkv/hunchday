@@ -1,6 +1,16 @@
 import { describe, expect, it } from "vitest";
 import { generateMachinesForDate } from "../src/game/adapter";
 import { feed, startGame } from "../src/game/reducer";
+import { SUBMISSION_GUESS, type Submission } from "../src/game/types";
+
+/**
+ * Wraps chips as a guess submission for the reducer.
+ * @param chips The output chips.
+ * @returns A guess submission.
+ */
+function guess(chips: string): Submission {
+  return { kind: SUBMISSION_GUESS, chips };
+}
 
 /**
  * These tests cover the build time bridge from the generated day to the reducer. They
@@ -34,7 +44,7 @@ describe("generateMachinesForDate", () => {
   it("produces chip strings the reducer accepts as the correct answer", () => {
     for (const machine of machines) {
       const correctOutput = machine.ch[0][1];
-      const state = feed(startGame([machine]), [machine], correctOutput);
+      const state = feed(startGame([machine]), [machine], guess(correctOutput));
       expect(state.streak).toBe(1);
       expect(state.misses).toBe(0);
     }
@@ -42,7 +52,7 @@ describe("generateMachinesForDate", () => {
 
   it("renders a word machine that round trips through the reducer", () => {
     const word = machines[WORD_SLOT];
-    const state = feed(startGame([word]), [word], word.ch[0][1]);
+    const state = feed(startGame([word]), [word], guess(word.ch[0][1]));
     expect(state.streak).toBe(1);
   });
 });

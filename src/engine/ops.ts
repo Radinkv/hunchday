@@ -124,7 +124,7 @@ export const OP_KEEP_STARTSWITH_VOWEL: OpMeta = {
 export const OP_UNITS_DIGIT: OpMeta = { id: "units_digit", phrase: "keeps just the last digit of every chip" };
 export const OP_MIN_NORMALIZE: OpMeta = {
   id: "min_normalize",
-  phrase: "takes the smallest chip away from every chip",
+  phrase: "subtracts the smallest chip from every chip",
 };
 export const OP_RUNNING_TOTAL: OpMeta = {
   id: "running_total",

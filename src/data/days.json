@@ -42,6 +42,14 @@
         "mul_k",
         "add_k",
         "reverse"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 5
+          }
+        }
       ]
     },
     {
@@ -86,6 +94,18 @@
         "mul_k",
         "sort_desc",
         "sum"
+      ],
+      "steps": [
+        {
+          "opId": "mul_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "sum",
+          "params": {}
+        }
       ]
     },
     {
@@ -132,6 +152,26 @@
         "keep_gt_k",
         "add_k",
         "swap_ends"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 2
+          }
+        },
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 9
+          }
+        }
       ]
     },
     {
@@ -186,6 +226,22 @@
         "units_digit",
         "second_largest",
         "keep_dups"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 7
+          }
+        },
+        {
+          "opId": "drop_first",
+          "params": {}
+        },
+        {
+          "opId": "keep_gt_first",
+          "params": {}
+        }
       ]
     }
   ],
@@ -232,6 +288,14 @@
         "last",
         "reverse",
         "add_k"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     },
     {
@@ -276,6 +340,20 @@
         "sort_asc",
         "drop_last",
         "drop_first"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     },
     {
@@ -322,6 +400,24 @@
         "product",
         "keep_even",
         "rotate_left"
+      ],
+      "steps": [
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 5
+          }
+        },
+        {
+          "opId": "swap_ends",
+          "params": {}
+        },
+        {
+          "opId": "keep_lt_k",
+          "params": {
+            "k": 9
+          }
+        }
       ]
     },
     {
@@ -376,6 +472,22 @@
         "index_of_max",
         "swap_ends",
         "mode"
+      ],
+      "steps": [
+        {
+          "opId": "keep_gt_first",
+          "params": {}
+        },
+        {
+          "opId": "rotate_left",
+          "params": {}
+        },
+        {
+          "opId": "keep_lt_k",
+          "params": {
+            "k": 6
+          }
+        }
       ]
     }
   ],
@@ -422,6 +534,14 @@
         "mul_k",
         "last",
         "add_k"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 1
+          }
+        }
       ]
     },
     {
@@ -466,6 +586,18 @@
         "sum",
         "max",
         "drop_last"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 9
+          }
+        },
+        {
+          "opId": "sort_desc",
+          "params": {}
+        }
       ]
     },
     {
@@ -512,6 +644,24 @@
         "range",
         "keep_gt_k",
         "keep_even"
+      ],
+      "steps": [
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "keep_lt_k",
+          "params": {
+            "k": 9
+          }
+        },
+        {
+          "opId": "count",
+          "params": {}
+        }
       ]
     },
     {
@@ -563,6 +713,20 @@
         "first_letter_pos",
         "length_map",
         "distinct_letters_map"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "rotate_left",
+          "params": {}
+        },
+        {
+          "opId": "reverse",
+          "params": {}
+        }
       ]
     }
   ],
@@ -609,6 +773,12 @@
         "length_map",
         "sort_by_length",
         "shortest"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        }
       ]
     },
     {
@@ -653,6 +823,20 @@
         "add_k",
         "sort_asc",
         "drop_first"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     },
     {
@@ -699,6 +883,18 @@
         "shortest",
         "sort_by_length",
         "first_letter_pos"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "mul_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     },
     {
@@ -753,6 +949,24 @@
         "reverse_digits",
         "product",
         "keep_dups"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "every_other",
+          "params": {}
+        }
       ]
     }
   ],
@@ -799,6 +1013,14 @@
         "mul_k",
         "reverse",
         "add_k"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 5
+          }
+        }
       ]
     },
     {
@@ -843,6 +1065,18 @@
         "drop_first",
         "sort_desc",
         "mul_k"
+      ],
+      "steps": [
+        {
+          "opId": "mul_k",
+          "params": {
+            "k": 2
+          }
+        },
+        {
+          "opId": "sort_asc",
+          "params": {}
+        }
       ]
     },
     {
@@ -889,6 +1123,24 @@
         "keep_gt_k",
         "product",
         "range"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "reverse",
+          "params": {}
+        },
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 4
+          }
+        }
       ]
     },
     {
@@ -943,6 +1195,24 @@
         "index_of_max",
         "range",
         "min_normalize"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 1
+          }
+        },
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "keep_dups",
+          "params": {}
+        }
       ]
     }
   ],
@@ -989,6 +1259,12 @@
         "keep_first_k",
         "drop_first",
         "max"
+      ],
+      "steps": [
+        {
+          "opId": "min",
+          "params": {}
+        }
       ]
     },
     {
@@ -1027,12 +1303,26 @@
         ]
       ],
       "panelOps": [
-        "sort_asc",
+        "sort_desc",
+        "count",
         "sum",
-        "drop_last",
-        "max",
+        "keep_last_k",
         "mul_k",
         "keep_first_k"
+      ],
+      "steps": [
+        {
+          "opId": "mul_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     },
     {
@@ -1079,11 +1369,29 @@
         "swap_ends",
         "keep_last_k",
         "keep_lt_k"
+      ],
+      "steps": [
+        {
+          "opId": "rotate_left",
+          "params": {}
+        },
+        {
+          "opId": "keep_lt_k",
+          "params": {
+            "k": 9
+          }
+        },
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     },
     {
       "difficulty": "hard",
-      "rule": "It takes the smallest chip away from every chip, then keeps only the last 3 chips, then keeps only the even chips.",
+      "rule": "It subtracts the smallest chip from every chip, then keeps only the last 3 chips, then keeps only the even chips.",
       "ex": [
         [
           "6 8 9 6",
@@ -1133,6 +1441,22 @@
         "units_digit",
         "keep_last_k",
         "keep_dups"
+      ],
+      "steps": [
+        {
+          "opId": "min_normalize",
+          "params": {}
+        },
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "keep_even",
+          "params": {}
+        }
       ]
     }
   ],
@@ -1179,6 +1503,14 @@
         "first",
         "sub_k",
         "reverse"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     },
     {
@@ -1223,6 +1555,18 @@
         "min",
         "max",
         "drop_first"
+      ],
+      "steps": [
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "sort_desc",
+          "params": {}
+        }
       ]
     },
     {
@@ -1269,6 +1613,22 @@
         "keep_first_k",
         "keep_lt_k",
         "count_even"
+      ],
+      "steps": [
+        {
+          "opId": "keep_even",
+          "params": {}
+        },
+        {
+          "opId": "swap_ends",
+          "params": {}
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     },
     {
@@ -1320,6 +1680,22 @@
         "distinct_letters_map",
         "last_letter_pos",
         "sort_alpha"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "mul_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "swap_ends",
+          "params": {}
+        }
       ]
     }
   ],
@@ -1366,6 +1742,14 @@
         "sub_k",
         "add_k",
         "first"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     },
     {
@@ -1410,6 +1794,18 @@
         "keep_last_k",
         "min",
         "add_k"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 5
+          }
+        },
+        {
+          "opId": "sum",
+          "params": {}
+        }
       ]
     },
     {
@@ -1456,6 +1852,24 @@
         "drop_first",
         "add_k",
         "sort_desc"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 2
+          }
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "sort_desc",
+          "params": {}
+        }
       ]
     },
     {
@@ -1510,6 +1924,22 @@
         "mode",
         "keep_lt_k",
         "keep_odd"
+      ],
+      "steps": [
+        {
+          "opId": "swap_ends",
+          "params": {}
+        },
+        {
+          "opId": "keep_gt_first",
+          "params": {}
+        },
+        {
+          "opId": "keep_lt_k",
+          "params": {
+            "k": 8
+          }
+        }
       ]
     }
   ],
@@ -1556,6 +1986,14 @@
         "add_k",
         "reverse",
         "first"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     },
     {
@@ -1594,12 +2032,24 @@
         ]
       ],
       "panelOps": [
-        "sub_k",
+        "min",
         "add_k",
         "reverse",
-        "mul_k",
-        "last",
-        "first"
+        "sort_desc",
+        "drop_first",
+        "keep_first_k"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 9
+          }
+        },
+        {
+          "opId": "reverse",
+          "params": {}
+        }
       ]
     },
     {
@@ -1646,11 +2096,23 @@
         "count_even",
         "product",
         "rotate_left"
+      ],
+      "steps": [
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 6
+          }
+        },
+        {
+          "opId": "sum",
+          "params": {}
+        }
       ]
     },
     {
       "difficulty": "hard",
-      "rule": "It takes the smallest chip away from every chip, then keeps only chips bigger than 8, then adds 7 to them.",
+      "rule": "It subtracts the smallest chip from every chip, then keeps only chips bigger than 8, then adds 7 to them.",
       "ex": [
         [
           "10 11 8 3 2",
@@ -1700,6 +2162,24 @@
         "units_digit",
         "index_of_max",
         "second_largest"
+      ],
+      "steps": [
+        {
+          "opId": "min_normalize",
+          "params": {}
+        },
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 8
+          }
+        },
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 7
+          }
+        }
       ]
     }
   ],
@@ -1746,6 +2226,14 @@
         "first",
         "reverse",
         "add_k"
+      ],
+      "steps": [
+        {
+          "opId": "mul_k",
+          "params": {
+            "k": 4
+          }
+        }
       ]
     },
     {
@@ -1790,6 +2278,18 @@
         "sort_asc",
         "sort_desc",
         "keep_first_k"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "sort_desc",
+          "params": {}
+        }
       ]
     },
     {
@@ -1836,6 +2336,22 @@
         "range",
         "dedup",
         "keep_gt_k"
+      ],
+      "steps": [
+        {
+          "opId": "reverse",
+          "params": {}
+        },
+        {
+          "opId": "keep_odd",
+          "params": {}
+        },
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 7
+          }
+        }
       ]
     },
     {
@@ -1887,6 +2403,20 @@
         "first_letter_pos",
         "shortest",
         "distinct_letters_map"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "keep_dups",
+          "params": {}
+        },
+        {
+          "opId": "product",
+          "params": {}
+        }
       ]
     }
   ],
@@ -1933,6 +2463,12 @@
         "count",
         "max",
         "drop_first"
+      ],
+      "steps": [
+        {
+          "opId": "sort_asc",
+          "params": {}
+        }
       ]
     },
     {
@@ -1974,9 +2510,23 @@
         "add_k",
         "keep_last_k",
         "keep_first_k",
-        "sort_asc",
+        "sum",
         "min",
-        "max"
+        "dedup"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 1
+          }
+        },
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     },
     {
@@ -2023,6 +2573,16 @@
         "running_total",
         "keep_gt_first",
         "deltas"
+      ],
+      "steps": [
+        {
+          "opId": "reverse_digits",
+          "params": {}
+        },
+        {
+          "opId": "mode",
+          "params": {}
+        }
       ]
     },
     {
@@ -2077,6 +2637,20 @@
         "deltas",
         "product",
         "count_distinct"
+      ],
+      "steps": [
+        {
+          "opId": "drop_last",
+          "params": {}
+        },
+        {
+          "opId": "rotate_left",
+          "params": {}
+        },
+        {
+          "opId": "units_digit",
+          "params": {}
+        }
       ]
     }
   ],
@@ -2123,6 +2697,12 @@
         "drop_first",
         "min",
         "sort_desc"
+      ],
+      "steps": [
+        {
+          "opId": "sum",
+          "params": {}
+        }
       ]
     },
     {
@@ -2161,12 +2741,24 @@
         ]
       ],
       "panelOps": [
-        "drop_first",
-        "sort_desc",
-        "keep_first_k",
+        "count",
+        "sort_asc",
+        "last",
         "drop_last",
-        "sum",
+        "rotate_left",
         "keep_last_k"
+      ],
+      "steps": [
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 2
+          }
+        },
+        {
+          "opId": "drop_last",
+          "params": {}
+        }
       ]
     },
     {
@@ -2213,6 +2805,22 @@
         "rotate_left",
         "median",
         "product"
+      ],
+      "steps": [
+        {
+          "opId": "keep_even",
+          "params": {}
+        },
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 1
+          }
+        },
+        {
+          "opId": "rotate_left",
+          "params": {}
+        }
       ]
     },
     {
@@ -2267,6 +2875,24 @@
         "mul_k",
         "second_largest",
         "keep_even"
+      ],
+      "steps": [
+        {
+          "opId": "every_other",
+          "params": {}
+        },
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 6
+          }
+        },
+        {
+          "opId": "mul_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     }
   ],
@@ -2313,6 +2939,12 @@
         "length_map",
         "keep_startswith_vowel",
         "letter_count_squared"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        }
       ]
     },
     {
@@ -2357,6 +2989,20 @@
         "sub_k",
         "keep_first_k",
         "keep_last_k"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 5
+          }
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     },
     {
@@ -2403,6 +3049,26 @@
         "keep_lt_k",
         "swap_ends",
         "keep_first_k"
+      ],
+      "steps": [
+        {
+          "opId": "mul_k",
+          "params": {
+            "k": 2
+          }
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 2
+          }
+        },
+        {
+          "opId": "keep_lt_k",
+          "params": {
+            "k": 9
+          }
+        }
       ]
     },
     {
@@ -2454,6 +3120,20 @@
         "rotate_left",
         "dedup",
         "last_letter_pos"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "dedup",
+          "params": {}
+        },
+        {
+          "opId": "rotate_left",
+          "params": {}
+        }
       ]
     }
   ],
@@ -2500,6 +3180,14 @@
         "sub_k",
         "reverse",
         "add_k"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 1
+          }
+        }
       ]
     },
     {
@@ -2544,6 +3232,20 @@
         "sub_k",
         "keep_first_k",
         "min"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     },
     {
@@ -2590,6 +3292,24 @@
         "rotate_left",
         "count_even",
         "keep_gt_k"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 5
+          }
+        },
+        {
+          "opId": "rotate_left",
+          "params": {}
+        },
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 4
+          }
+        }
       ]
     },
     {
@@ -2644,6 +3364,20 @@
         "keep_gt_first",
         "keep_even",
         "deltas"
+      ],
+      "steps": [
+        {
+          "opId": "sort_desc",
+          "params": {}
+        },
+        {
+          "opId": "units_digit",
+          "params": {}
+        },
+        {
+          "opId": "rotate_left",
+          "params": {}
+        }
       ]
     }
   ],
@@ -2690,6 +3424,12 @@
         "sum",
         "keep_first_k",
         "count"
+      ],
+      "steps": [
+        {
+          "opId": "max",
+          "params": {}
+        }
       ]
     },
     {
@@ -2728,12 +3468,26 @@
         ]
       ],
       "panelOps": [
-        "sum",
-        "count",
+        "sort_asc",
+        "drop_last",
         "add_k",
-        "keep_first_k",
+        "first",
         "min",
         "keep_last_k"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 8
+          }
+        },
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     },
     {
@@ -2780,6 +3534,26 @@
         "rotate_left",
         "swap_ends",
         "median"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "keep_lt_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     },
     {
@@ -2831,6 +3605,24 @@
         "vowel_count_map",
         "longest",
         "letter_count_squared"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 2
+          }
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     }
   ],
@@ -2877,6 +3669,14 @@
         "reverse",
         "mul_k",
         "sub_k"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     },
     {
@@ -2921,6 +3721,18 @@
         "sort_asc",
         "sub_k",
         "min"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "sort_asc",
+          "params": {}
+        }
       ]
     },
     {
@@ -2967,6 +3779,24 @@
         "keep_even",
         "keep_gt_k",
         "mul_k"
+      ],
+      "steps": [
+        {
+          "opId": "mul_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 2
+          }
+        },
+        {
+          "opId": "range",
+          "params": {}
+        }
       ]
     },
     {
@@ -3018,6 +3848,22 @@
         "shortest",
         "last_letter_pos",
         "length_map"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "last",
+          "params": {}
+        }
       ]
     }
   ],
@@ -3064,6 +3910,14 @@
         "last",
         "reverse",
         "first"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 4
+          }
+        }
       ]
     },
     {
@@ -3108,6 +3962,18 @@
         "max",
         "add_k",
         "min"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 5
+          }
+        },
+        {
+          "opId": "drop_last",
+          "params": {}
+        }
       ]
     },
     {
@@ -3154,6 +4020,24 @@
         "swap_ends",
         "rotate_left",
         "keep_lt_k"
+      ],
+      "steps": [
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "swap_ends",
+          "params": {}
+        },
+        {
+          "opId": "keep_lt_k",
+          "params": {
+            "k": 7
+          }
+        }
       ]
     },
     {
@@ -3205,6 +4089,24 @@
         "keep_startswith_vowel",
         "distinct_letters_map",
         "sub_k"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     }
   ],
@@ -3251,6 +4153,12 @@
         "max",
         "keep_first_k",
         "drop_last"
+      ],
+      "steps": [
+        {
+          "opId": "count",
+          "params": {}
+        }
       ]
     },
     {
@@ -3289,12 +4197,24 @@
         ]
       ],
       "panelOps": [
-        "keep_first_k",
         "drop_first",
+        "dedup",
         "sort_desc",
         "sub_k",
         "min",
-        "count"
+        "sort_asc"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "sort_desc",
+          "params": {}
+        }
       ]
     },
     {
@@ -3341,6 +4261,24 @@
         "rotate_left",
         "sub_k",
         "keep_even"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "drop_last",
+          "params": {}
+        },
+        {
+          "opId": "keep_lt_k",
+          "params": {
+            "k": 7
+          }
+        }
       ]
     },
     {
@@ -3392,6 +4330,22 @@
         "sort_alpha",
         "sort_desc",
         "first_letter_pos"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 5
+          }
+        },
+        {
+          "opId": "sort_desc",
+          "params": {}
+        }
       ]
     }
   ],
@@ -3438,6 +4392,14 @@
         "sub_k",
         "add_k",
         "mul_k"
+      ],
+      "steps": [
+        {
+          "opId": "mul_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     },
     {
@@ -3482,6 +4444,18 @@
         "sort_desc",
         "drop_first",
         "keep_first_k"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 9
+          }
+        },
+        {
+          "opId": "sort_desc",
+          "params": {}
+        }
       ]
     },
     {
@@ -3528,6 +4502,16 @@
         "keep_startswith_vowel",
         "sort_by_length",
         "shortest"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "median",
+          "params": {}
+        }
       ]
     },
     {
@@ -3579,6 +4563,22 @@
         "length_map",
         "vowel_count_map",
         "letter_count_squared"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "count",
+          "params": {}
+        }
       ]
     }
   ],
@@ -3625,6 +4625,14 @@
         "mul_k",
         "add_k",
         "reverse"
+      ],
+      "steps": [
+        {
+          "opId": "mul_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     },
     {
@@ -3669,6 +4677,20 @@
         "drop_first",
         "keep_last_k",
         "min"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     },
     {
@@ -3715,6 +4737,24 @@
         "keep_even",
         "keep_gt_k",
         "keep_lt_k"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 1
+          }
+        },
+        {
+          "opId": "keep_lt_k",
+          "params": {
+            "k": 5
+          }
+        },
+        {
+          "opId": "dedup",
+          "params": {}
+        }
       ]
     },
     {
@@ -3766,6 +4806,24 @@
         "add_k",
         "sort_by_length",
         "keep_lt_k"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "keep_lt_k",
+          "params": {
+            "k": 8
+          }
+        }
       ]
     }
   ],
@@ -3812,6 +4870,14 @@
         "last",
         "mul_k",
         "first"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 4
+          }
+        }
       ]
     },
     {
@@ -3856,6 +4922,18 @@
         "add_k",
         "drop_last",
         "sort_desc"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 1
+          }
+        },
+        {
+          "opId": "drop_last",
+          "params": {}
+        }
       ]
     },
     {
@@ -3902,6 +4980,22 @@
         "range",
         "keep_gt_k",
         "sub_k"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 2
+          }
+        },
+        {
+          "opId": "keep_odd",
+          "params": {}
+        },
+        {
+          "opId": "dedup",
+          "params": {}
+        }
       ]
     },
     {
@@ -3956,6 +5050,22 @@
         "running_total",
         "mul_k",
         "reverse_digits"
+      ],
+      "steps": [
+        {
+          "opId": "mul_k",
+          "params": {
+            "k": 2
+          }
+        },
+        {
+          "opId": "swap_ends",
+          "params": {}
+        },
+        {
+          "opId": "keep_gt_first",
+          "params": {}
+        }
       ]
     }
   ],
@@ -4002,6 +5112,14 @@
         "mul_k",
         "add_k",
         "reverse"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 8
+          }
+        }
       ]
     },
     {
@@ -4046,6 +5164,18 @@
         "keep_last_k",
         "min",
         "max"
+      ],
+      "steps": [
+        {
+          "opId": "mul_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "min",
+          "params": {}
+        }
       ]
     },
     {
@@ -4092,6 +5222,24 @@
         "last",
         "drop_first",
         "min"
+      ],
+      "steps": [
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 2
+          }
+        },
+        {
+          "opId": "max",
+          "params": {}
+        }
       ]
     },
     {
@@ -4143,6 +5291,24 @@
         "last_letter_pos",
         "sort_alpha",
         "keep_first_k"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 5
+          }
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     }
   ],
@@ -4189,6 +5355,14 @@
         "sub_k",
         "mul_k",
         "last"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 5
+          }
+        }
       ]
     },
     {
@@ -4233,6 +5407,20 @@
         "keep_last_k",
         "drop_first",
         "add_k"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     },
     {
@@ -4279,6 +5467,22 @@
         "median",
         "keep_gt_k",
         "keep_lt_k"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 6
+          }
+        },
+        {
+          "opId": "drop_last",
+          "params": {}
+        },
+        {
+          "opId": "median",
+          "params": {}
+        }
       ]
     },
     {
@@ -4333,6 +5537,22 @@
         "count_even",
         "mode",
         "units_digit"
+      ],
+      "steps": [
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "every_other",
+          "params": {}
+        },
+        {
+          "opId": "product",
+          "params": {}
+        }
       ]
     }
   ],
@@ -4379,6 +5599,14 @@
         "mul_k",
         "first",
         "last"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 6
+          }
+        }
       ]
     },
     {
@@ -4423,6 +5651,20 @@
         "sum",
         "sort_desc",
         "sort_asc"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 1
+          }
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     },
     {
@@ -4469,11 +5711,29 @@
         "keep_lt_k",
         "dedup",
         "range"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "sort_asc",
+          "params": {}
+        },
+        {
+          "opId": "keep_lt_k",
+          "params": {
+            "k": 9
+          }
+        }
       ]
     },
     {
       "difficulty": "hard",
-      "rule": "It counts the letters in every chip, then throws away the first chip, then takes the smallest chip away from them.",
+      "rule": "It counts the letters in every chip, then throws away the first chip, then subtracts the smallest chip from them.",
       "ex": [
         [
           "kiwi apricot raisin mango avocado",
@@ -4520,6 +5780,20 @@
         "keep_startswith_vowel",
         "shortest",
         "sort_alpha"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "drop_first",
+          "params": {}
+        },
+        {
+          "opId": "min_normalize",
+          "params": {}
+        }
       ]
     }
   ],
@@ -4566,6 +5840,14 @@
         "mul_k",
         "add_k",
         "last"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 5
+          }
+        }
       ]
     },
     {
@@ -4610,6 +5892,18 @@
         "sum",
         "max",
         "drop_last"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 6
+          }
+        },
+        {
+          "opId": "sort_asc",
+          "params": {}
+        }
       ]
     },
     {
@@ -4656,6 +5950,24 @@
         "swap_ends",
         "keep_gt_k",
         "keep_even"
+      ],
+      "steps": [
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "swap_ends",
+          "params": {}
+        },
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 1
+          }
+        }
       ]
     },
     {
@@ -4707,6 +6019,22 @@
         "shortest",
         "first_letter_pos",
         "letter_count_squared"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 2
+          }
+        },
+        {
+          "opId": "keep_gt_first",
+          "params": {}
+        }
       ]
     }
   ],
@@ -4753,6 +6081,12 @@
         "min",
         "drop_first",
         "sort_asc"
+      ],
+      "steps": [
+        {
+          "opId": "min",
+          "params": {}
+        }
       ]
     },
     {
@@ -4791,12 +6125,24 @@
         ]
       ],
       "panelOps": [
-        "count",
-        "min",
-        "drop_last",
+        "max",
         "sum",
+        "drop_last",
+        "keep_first_k",
         "sort_desc",
         "keep_last_k"
+      ],
+      "steps": [
+        {
+          "opId": "sort_desc",
+          "params": {}
+        },
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     },
     {
@@ -4843,11 +6189,27 @@
         "add_k",
         "sort_asc",
         "min"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "sort_desc",
+          "params": {}
+        },
+        {
+          "opId": "drop_last",
+          "params": {}
+        }
       ]
     },
     {
       "difficulty": "hard",
-      "rule": "It throws away the last chip, then keeps only the last 3 chips, then takes the smallest chip away from them.",
+      "rule": "It throws away the last chip, then keeps only the last 3 chips, then subtracts the smallest chip from them.",
       "ex": [
         [
           "9 4 1 10 3",
@@ -4897,6 +6259,22 @@
         "every_other",
         "min_normalize",
         "reverse_digits"
+      ],
+      "steps": [
+        {
+          "opId": "drop_last",
+          "params": {}
+        },
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "min_normalize",
+          "params": {}
+        }
       ]
     }
   ],
@@ -4943,6 +6321,12 @@
         "min",
         "keep_first_k",
         "drop_last"
+      ],
+      "steps": [
+        {
+          "opId": "sort_asc",
+          "params": {}
+        }
       ]
     },
     {
@@ -4983,10 +6367,24 @@
       "panelOps": [
         "keep_last_k",
         "sub_k",
-        "keep_first_k",
-        "max",
-        "sort_desc",
-        "min"
+        "count",
+        "drop_first",
+        "first",
+        "max"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 2
+          }
+        },
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     },
     {
@@ -5033,6 +6431,24 @@
         "sort_desc",
         "keep_odd",
         "keep_gt_k"
+      ],
+      "steps": [
+        {
+          "opId": "sort_desc",
+          "params": {}
+        },
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 8
+          }
+        },
+        {
+          "opId": "mul_k",
+          "params": {
+            "k": 4
+          }
+        }
       ]
     },
     {
@@ -5084,6 +6500,22 @@
         "vowel_count_map",
         "last_letter_pos",
         "length_map"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "mul_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "last",
+          "params": {}
+        }
       ]
     }
   ],
@@ -5130,6 +6562,12 @@
         "length_map",
         "shortest",
         "keep_startswith_vowel"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        }
       ]
     },
     {
@@ -5174,6 +6612,18 @@
         "sort_asc",
         "count",
         "drop_last"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 5
+          }
+        },
+        {
+          "opId": "sort_asc",
+          "params": {}
+        }
       ]
     },
     {
@@ -5220,6 +6670,26 @@
         "range",
         "add_k",
         "keep_gt_k"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 1
+          }
+        },
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 8
+          }
+        }
       ]
     },
     {
@@ -5271,6 +6741,24 @@
         "vowel_count_map",
         "letter_count_squared",
         "longest"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 5
+          }
+        },
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     }
   ],
@@ -5317,6 +6805,14 @@
         "reverse",
         "last",
         "sub_k"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     },
     {
@@ -5356,11 +6852,23 @@
       ],
       "panelOps": [
         "reverse",
-        "last",
-        "mul_k",
+        "count",
+        "min",
         "add_k",
-        "first",
-        "sub_k"
+        "drop_first",
+        "sum"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 6
+          }
+        },
+        {
+          "opId": "reverse",
+          "params": {}
+        }
       ]
     },
     {
@@ -5407,6 +6915,24 @@
         "sum",
         "min",
         "sort_asc"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 5
+          }
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "sort_desc",
+          "params": {}
+        }
       ]
     },
     {
@@ -5458,6 +6984,22 @@
         "vowel_count_map",
         "sort_by_length",
         "sort_alpha"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 9
+          }
+        },
+        {
+          "opId": "min",
+          "params": {}
+        }
       ]
     }
   ],
@@ -5504,6 +7046,14 @@
         "mul_k",
         "reverse",
         "last"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 7
+          }
+        }
       ]
     },
     {
@@ -5543,11 +7093,23 @@
       ],
       "panelOps": [
         "sub_k",
-        "last",
-        "mul_k",
+        "max",
+        "sort_asc",
         "reverse",
-        "add_k",
-        "first"
+        "min",
+        "keep_last_k"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "reverse",
+          "params": {}
+        }
       ]
     },
     {
@@ -5594,6 +7156,20 @@
         "count_even",
         "keep_even",
         "product"
+      ],
+      "steps": [
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "keep_lt_k",
+          "params": {
+            "k": 5
+          }
+        }
       ]
     },
     {
@@ -5648,6 +7224,22 @@
         "keep_odd",
         "keep_lt_k",
         "keep_gt_first"
+      ],
+      "steps": [
+        {
+          "opId": "every_other",
+          "params": {}
+        },
+        {
+          "opId": "keep_lt_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "product",
+          "params": {}
+        }
       ]
     }
   ],
@@ -5694,6 +7286,12 @@
         "keep_first_k",
         "drop_last",
         "sort_desc"
+      ],
+      "steps": [
+        {
+          "opId": "sort_desc",
+          "params": {}
+        }
       ]
     },
     {
@@ -5733,11 +7331,23 @@
       ],
       "panelOps": [
         "add_k",
+        "max",
         "min",
-        "drop_first",
-        "sum",
+        "count",
         "sort_asc",
-        "drop_last"
+        "drop_first"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "sort_asc",
+          "params": {}
+        }
       ]
     },
     {
@@ -5784,11 +7394,31 @@
         "count_even",
         "keep_gt_k",
         "keep_even"
+      ],
+      "steps": [
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 7
+          }
+        },
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 8
+          }
+        }
       ]
     },
     {
       "difficulty": "hard",
-      "rule": "It keeps only the first 4 chips, then takes the smallest chip away from them, then keeps the chip that appears most often.",
+      "rule": "It keeps only the first 4 chips, then subtracts the smallest chip from them, then keeps the chip that appears most often.",
       "ex": [
         [
           "10 10 3 12 6",
@@ -5838,6 +7468,22 @@
         "keep_first_k",
         "running_total",
         "keep_gt_first"
+      ],
+      "steps": [
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "min_normalize",
+          "params": {}
+        },
+        {
+          "opId": "mode",
+          "params": {}
+        }
       ]
     }
   ],
@@ -5884,6 +7530,14 @@
         "mul_k",
         "reverse",
         "sub_k"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     },
     {
@@ -5928,6 +7582,20 @@
         "drop_first",
         "keep_last_k",
         "min"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 5
+          }
+        },
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     },
     {
@@ -5974,6 +7642,24 @@
         "dedup",
         "count_even",
         "median"
+      ],
+      "steps": [
+        {
+          "opId": "reverse",
+          "params": {}
+        },
+        {
+          "opId": "keep_lt_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "mul_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     },
     {
@@ -6028,6 +7714,22 @@
         "median",
         "min_normalize",
         "count_distinct"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "every_other",
+          "params": {}
+        },
+        {
+          "opId": "drop_last",
+          "params": {}
+        }
       ]
     }
   ],
@@ -6074,6 +7776,12 @@
         "count",
         "max",
         "keep_last_k"
+      ],
+      "steps": [
+        {
+          "opId": "max",
+          "params": {}
+        }
       ]
     },
     {
@@ -6113,11 +7821,23 @@
       ],
       "panelOps": [
         "drop_last",
-        "count",
-        "sort_desc",
+        "min",
+        "keep_first_k",
         "sub_k",
-        "keep_last_k",
-        "min"
+        "sort_asc",
+        "sum"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 1
+          }
+        },
+        {
+          "opId": "drop_last",
+          "params": {}
+        }
       ]
     },
     {
@@ -6164,6 +7884,24 @@
         "keep_lt_k",
         "sub_k",
         "keep_even"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 2
+          }
+        },
+        {
+          "opId": "drop_last",
+          "params": {}
+        },
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 5
+          }
+        }
       ]
     },
     {
@@ -6218,6 +7956,20 @@
         "rotate_left",
         "units_digit",
         "keep_dups"
+      ],
+      "steps": [
+        {
+          "opId": "reverse",
+          "params": {}
+        },
+        {
+          "opId": "keep_gt_first",
+          "params": {}
+        },
+        {
+          "opId": "rotate_left",
+          "params": {}
+        }
       ]
     }
   ],
@@ -6264,6 +8016,12 @@
         "first",
         "add_k",
         "last"
+      ],
+      "steps": [
+        {
+          "opId": "reverse",
+          "params": {}
+        }
       ]
     },
     {
@@ -6308,6 +8066,20 @@
         "keep_last_k",
         "sort_asc",
         "min"
+      ],
+      "steps": [
+        {
+          "opId": "mul_k",
+          "params": {
+            "k": 2
+          }
+        },
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     },
     {
@@ -6354,6 +8126,24 @@
         "keep_lt_k",
         "product",
         "median"
+      ],
+      "steps": [
+        {
+          "opId": "sort_asc",
+          "params": {}
+        },
+        {
+          "opId": "keep_lt_k",
+          "params": {
+            "k": 6
+          }
+        },
+        {
+          "opId": "mul_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     },
     {
@@ -6405,6 +8195,24 @@
         "longest",
         "keep_startswith_vowel",
         "letter_count_squared"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 2
+          }
+        },
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     }
   ],
@@ -6451,6 +8259,14 @@
         "last",
         "mul_k",
         "first"
+      ],
+      "steps": [
+        {
+          "opId": "mul_k",
+          "params": {
+            "k": 4
+          }
+        }
       ]
     },
     {
@@ -6495,6 +8311,18 @@
         "add_k",
         "min",
         "keep_last_k"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 1
+          }
+        },
+        {
+          "opId": "sum",
+          "params": {}
+        }
       ]
     },
     {
@@ -6541,6 +8369,24 @@
         "swap_ends",
         "add_k",
         "count_even"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 6
+          }
+        },
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "median",
+          "params": {}
+        }
       ]
     },
     {
@@ -6592,6 +8438,22 @@
         "vowel_count_map",
         "sort_by_length",
         "length_map"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "drop_first",
+          "params": {}
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     }
   ],
@@ -6638,6 +8500,14 @@
         "last",
         "first",
         "reverse"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 9
+          }
+        }
       ]
     },
     {
@@ -6682,6 +8552,18 @@
         "drop_first",
         "sort_asc",
         "sort_desc"
+      ],
+      "steps": [
+        {
+          "opId": "sort_desc",
+          "params": {}
+        },
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     },
     {
@@ -6728,6 +8610,22 @@
         "swap_ends",
         "sub_k",
         "keep_odd"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 1
+          }
+        },
+        {
+          "opId": "swap_ends",
+          "params": {}
+        },
+        {
+          "opId": "keep_odd",
+          "params": {}
+        }
       ]
     },
     {
@@ -6782,6 +8680,24 @@
         "second_largest",
         "median",
         "index_of_max"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 2
+          }
+        },
+        {
+          "opId": "keep_lt_k",
+          "params": {
+            "k": 8
+          }
+        },
+        {
+          "opId": "second_largest",
+          "params": {}
+        }
       ]
     }
   ],
@@ -6828,6 +8744,14 @@
         "add_k",
         "mul_k",
         "last"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     },
     {
@@ -6866,12 +8790,24 @@
         ]
       ],
       "panelOps": [
-        "sub_k",
-        "first",
+        "count",
+        "min",
         "add_k",
-        "mul_k",
-        "last",
+        "sort_asc",
+        "keep_first_k",
         "reverse"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 8
+          }
+        },
+        {
+          "opId": "reverse",
+          "params": {}
+        }
       ]
     },
     {
@@ -6918,11 +8854,27 @@
         "drop_last",
         "range",
         "min"
+      ],
+      "steps": [
+        {
+          "opId": "drop_last",
+          "params": {}
+        },
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "min",
+          "params": {}
+        }
       ]
     },
     {
       "difficulty": "hard",
-      "rule": "It keeps only chips bigger than the first one, then swaps the first and last chips, then takes the smallest chip away from them.",
+      "rule": "It keeps only chips bigger than the first one, then swaps the first and last chips, then subtracts the smallest chip from them.",
       "ex": [
         [
           "2 12 12 6 2",
@@ -6972,6 +8924,20 @@
         "index_of_max",
         "median",
         "mode"
+      ],
+      "steps": [
+        {
+          "opId": "keep_gt_first",
+          "params": {}
+        },
+        {
+          "opId": "swap_ends",
+          "params": {}
+        },
+        {
+          "opId": "min_normalize",
+          "params": {}
+        }
       ]
     }
   ],
@@ -7018,6 +8984,12 @@
         "keep_last_k",
         "sum",
         "count"
+      ],
+      "steps": [
+        {
+          "opId": "sum",
+          "params": {}
+        }
       ]
     },
     {
@@ -7062,6 +9034,18 @@
         "first",
         "last",
         "sub_k"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 1
+          }
+        },
+        {
+          "opId": "reverse",
+          "params": {}
+        }
       ]
     },
     {
@@ -7108,6 +9092,24 @@
         "sum",
         "median",
         "product"
+      ],
+      "steps": [
+        {
+          "opId": "keep_lt_k",
+          "params": {
+            "k": 5
+          }
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 2
+          }
+        },
+        {
+          "opId": "sum",
+          "params": {}
+        }
       ]
     },
     {
@@ -7162,6 +9164,22 @@
         "product",
         "running_total",
         "median"
+      ],
+      "steps": [
+        {
+          "opId": "keep_odd",
+          "params": {}
+        },
+        {
+          "opId": "mul_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "every_other",
+          "params": {}
+        }
       ]
     }
   ],
@@ -7208,6 +9226,14 @@
         "add_k",
         "mul_k",
         "reverse"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 6
+          }
+        }
       ]
     },
     {
@@ -7252,6 +9278,18 @@
         "mul_k",
         "max",
         "keep_last_k"
+      ],
+      "steps": [
+        {
+          "opId": "mul_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "max",
+          "params": {}
+        }
       ]
     },
     {
@@ -7298,11 +9336,31 @@
         "range",
         "keep_gt_k",
         "rotate_left"
+      ],
+      "steps": [
+        {
+          "opId": "keep_lt_k",
+          "params": {
+            "k": 8
+          }
+        },
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 2
+          }
+        },
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 5
+          }
+        }
       ]
     },
     {
       "difficulty": "hard",
-      "rule": "It takes the smallest chip away from every chip, then throws away the first chip, then swaps the first and last chips.",
+      "rule": "It subtracts the smallest chip from every chip, then throws away the first chip, then swaps the first and last chips.",
       "ex": [
         [
           "3 7 10 10",
@@ -7352,6 +9410,20 @@
         "keep_odd",
         "mode",
         "swap_ends"
+      ],
+      "steps": [
+        {
+          "opId": "min_normalize",
+          "params": {}
+        },
+        {
+          "opId": "drop_first",
+          "params": {}
+        },
+        {
+          "opId": "swap_ends",
+          "params": {}
+        }
       ]
     }
   ],
@@ -7398,6 +9470,14 @@
         "last",
         "sub_k",
         "first"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     },
     {
@@ -7442,6 +9522,20 @@
         "count",
         "sub_k",
         "min"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 1
+          }
+        },
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     },
     {
@@ -7488,6 +9582,26 @@
         "swap_ends",
         "keep_odd",
         "keep_gt_k"
+      ],
+      "steps": [
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     },
     {
@@ -7539,6 +9653,20 @@
         "sort_alpha",
         "vowel_count_map",
         "letter_count_squared"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "drop_first",
+          "params": {}
+        },
+        {
+          "opId": "rotate_left",
+          "params": {}
+        }
       ]
     }
   ],
@@ -7585,6 +9713,14 @@
         "reverse",
         "add_k",
         "mul_k"
+      ],
+      "steps": [
+        {
+          "opId": "mul_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     },
     {
@@ -7629,6 +9765,20 @@
         "drop_last",
         "add_k",
         "drop_first"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 1
+          }
+        },
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     },
     {
@@ -7675,6 +9825,24 @@
         "keep_gt_k",
         "drop_first",
         "rotate_left"
+      ],
+      "steps": [
+        {
+          "opId": "drop_first",
+          "params": {}
+        },
+        {
+          "opId": "keep_lt_k",
+          "params": {
+            "k": 7
+          }
+        },
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 8
+          }
+        }
       ]
     },
     {
@@ -7725,6 +9893,20 @@
         "first_letter_pos",
         "letter_count_squared",
         "length_map"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "drop_first",
+          "params": {}
+        },
+        {
+          "opId": "drop_first",
+          "params": {}
+        }
       ]
     }
   ],
@@ -7771,6 +9953,14 @@
         "add_k",
         "first",
         "reverse"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 4
+          }
+        }
       ]
     },
     {
@@ -7810,11 +10000,23 @@
       ],
       "panelOps": [
         "reverse",
-        "last",
+        "keep_first_k",
         "add_k",
-        "first",
-        "mul_k",
-        "sub_k"
+        "sort_asc",
+        "max",
+        "sum"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "reverse",
+          "params": {}
+        }
       ]
     },
     {
@@ -7861,6 +10063,16 @@
         "length_map",
         "first_letter_pos",
         "longest"
+      ],
+      "steps": [
+        {
+          "opId": "keep_startswith_vowel",
+          "params": {}
+        },
+        {
+          "opId": "sort_by_length",
+          "params": {}
+        }
       ]
     },
     {
@@ -7912,6 +10124,22 @@
         "length_map",
         "distinct_letters_map",
         "longest"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "median",
+          "params": {}
+        }
       ]
     }
   ],
@@ -7958,6 +10186,12 @@
         "sort_by_length",
         "letter_count_squared",
         "distinct_letters_map"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        }
       ]
     },
     {
@@ -8002,6 +10236,18 @@
         "sort_asc",
         "max",
         "sub_k"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "min",
+          "params": {}
+        }
       ]
     },
     {
@@ -8048,6 +10294,16 @@
         "letter_count_squared",
         "longest",
         "drop_last"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "drop_last",
+          "params": {}
+        }
       ]
     },
     {
@@ -8099,6 +10355,20 @@
         "sort_alpha",
         "distinct_letters_map",
         "shortest"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "reverse",
+          "params": {}
+        },
+        {
+          "opId": "rotate_left",
+          "params": {}
+        }
       ]
     }
   ],
@@ -8145,6 +10415,14 @@
         "first",
         "last",
         "add_k"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 5
+          }
+        }
       ]
     },
     {
@@ -8189,6 +10467,20 @@
         "sum",
         "mul_k",
         "keep_last_k"
+      ],
+      "steps": [
+        {
+          "opId": "mul_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     },
     {
@@ -8235,6 +10527,24 @@
         "product",
         "dedup",
         "keep_lt_k"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "keep_lt_k",
+          "params": {
+            "k": 7
+          }
+        },
+        {
+          "opId": "first",
+          "params": {}
+        }
       ]
     },
     {
@@ -8286,6 +10596,24 @@
         "vowel_count_map",
         "shortest",
         "first_letter_pos"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "mul_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 4
+          }
+        }
       ]
     }
   ],
@@ -8332,6 +10660,14 @@
         "last",
         "first",
         "add_k"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 1
+          }
+        }
       ]
     },
     {
@@ -8376,6 +10712,20 @@
         "sub_k",
         "count",
         "max"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 2
+          }
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     },
     {
@@ -8422,11 +10772,31 @@
         "keep_last_k",
         "keep_odd",
         "add_k"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 5
+          }
+        },
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 8
+          }
+        }
       ]
     },
     {
       "difficulty": "hard",
-      "rule": "It takes the smallest chip away from every chip, then keeps only chips bigger than 6, then keeps only the first 2 chips.",
+      "rule": "It subtracts the smallest chip from every chip, then keeps only chips bigger than 6, then keeps only the first 2 chips.",
       "ex": [
         [
           "11 2 2 12 12",
@@ -8476,6 +10846,24 @@
         "rotate_left",
         "keep_odd",
         "keep_dups"
+      ],
+      "steps": [
+        {
+          "opId": "min_normalize",
+          "params": {}
+        },
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 6
+          }
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     }
   ],
@@ -8522,6 +10910,12 @@
         "sum",
         "sort_asc",
         "sort_desc"
+      ],
+      "steps": [
+        {
+          "opId": "sort_asc",
+          "params": {}
+        }
       ]
     },
     {
@@ -8560,12 +10954,26 @@
         ]
       ],
       "panelOps": [
-        "keep_last_k",
-        "count",
-        "min",
-        "keep_first_k",
         "drop_last",
+        "sub_k",
+        "drop_first",
+        "keep_first_k",
+        "max",
         "add_k"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 8
+          }
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     },
     {
@@ -8612,6 +11020,24 @@
         "keep_even",
         "dedup",
         "keep_lt_k"
+      ],
+      "steps": [
+        {
+          "opId": "mul_k",
+          "params": {
+            "k": 2
+          }
+        },
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "drop_first",
+          "params": {}
+        }
       ]
     },
     {
@@ -8663,6 +11089,22 @@
         "shortest",
         "sort_by_length",
         "first_letter_pos"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 6
+          }
+        },
+        {
+          "opId": "drop_last",
+          "params": {}
+        }
       ]
     }
   ],
@@ -8709,6 +11151,12 @@
         "drop_last",
         "drop_first",
         "min"
+      ],
+      "steps": [
+        {
+          "opId": "count",
+          "params": {}
+        }
       ]
     },
     {
@@ -8747,12 +11195,24 @@
         ]
       ],
       "panelOps": [
-        "drop_last",
-        "drop_first",
+        "keep_first_k",
+        "sort_asc",
         "sort_desc",
         "sub_k",
-        "max",
-        "min"
+        "keep_last_k",
+        "count_even"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 1
+          }
+        },
+        {
+          "opId": "sort_desc",
+          "params": {}
+        }
       ]
     },
     {
@@ -8799,6 +11259,22 @@
         "drop_first",
         "keep_last_k",
         "min"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "drop_first",
+          "params": {}
+        },
+        {
+          "opId": "min",
+          "params": {}
+        }
       ]
     },
     {
@@ -8850,6 +11326,22 @@
         "letter_count_squared",
         "shortest",
         "add_k"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 7
+          }
+        },
+        {
+          "opId": "drop_last",
+          "params": {}
+        }
       ]
     }
   ],
@@ -8896,6 +11388,14 @@
         "first",
         "add_k",
         "reverse"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 5
+          }
+        }
       ]
     },
     {
@@ -8940,6 +11440,18 @@
         "keep_first_k",
         "keep_last_k",
         "sum"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 7
+          }
+        },
+        {
+          "opId": "sum",
+          "params": {}
+        }
       ]
     },
     {
@@ -8986,6 +11498,24 @@
         "sum",
         "add_k",
         "drop_first"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "sort_desc",
+          "params": {}
+        },
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     },
     {
@@ -9037,6 +11567,22 @@
         "distinct_letters_map",
         "sub_k",
         "last_letter_pos"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 2
+          }
+        },
+        {
+          "opId": "sum",
+          "params": {}
+        }
       ]
     }
   ],
@@ -9083,6 +11629,14 @@
         "sub_k",
         "add_k",
         "last"
+      ],
+      "steps": [
+        {
+          "opId": "mul_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     },
     {
@@ -9127,6 +11681,20 @@
         "keep_first_k",
         "mul_k",
         "sum"
+      ],
+      "steps": [
+        {
+          "opId": "mul_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     },
     {
@@ -9173,6 +11741,22 @@
         "keep_gt_k",
         "count_even",
         "range"
+      ],
+      "steps": [
+        {
+          "opId": "drop_last",
+          "params": {}
+        },
+        {
+          "opId": "keep_lt_k",
+          "params": {
+            "k": 5
+          }
+        },
+        {
+          "opId": "rotate_left",
+          "params": {}
+        }
       ]
     },
     {
@@ -9224,6 +11808,22 @@
         "longest",
         "keep_dups",
         "distinct_letters_map"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "mul_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "keep_dups",
+          "params": {}
+        }
       ]
     }
   ],
@@ -9270,6 +11870,12 @@
         "last",
         "mul_k",
         "reverse"
+      ],
+      "steps": [
+        {
+          "opId": "reverse",
+          "params": {}
+        }
       ]
     },
     {
@@ -9314,6 +11920,18 @@
         "keep_first_k",
         "min",
         "max"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 1
+          }
+        },
+        {
+          "opId": "sum",
+          "params": {}
+        }
       ]
     },
     {
@@ -9360,6 +11978,26 @@
         "keep_odd",
         "range",
         "product"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "keep_lt_k",
+          "params": {
+            "k": 7
+          }
+        }
       ]
     },
     {
@@ -9411,6 +12049,22 @@
         "vowel_count_map",
         "length_map",
         "median"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 2
+          }
+        },
+        {
+          "opId": "median",
+          "params": {}
+        }
       ]
     }
   ],
@@ -9457,6 +12111,12 @@
         "max",
         "sort_desc",
         "sort_asc"
+      ],
+      "steps": [
+        {
+          "opId": "sort_desc",
+          "params": {}
+        }
       ]
     },
     {
@@ -9495,12 +12155,24 @@
         ]
       ],
       "panelOps": [
-        "sort_asc",
-        "drop_last",
-        "add_k",
+        "keep_first_k",
         "sum",
-        "min",
+        "add_k",
+        "drop_first",
+        "drop_last",
         "sort_desc"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 6
+          }
+        },
+        {
+          "opId": "sort_desc",
+          "params": {}
+        }
       ]
     },
     {
@@ -9547,6 +12219,22 @@
         "swap_ends",
         "product",
         "median"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 6
+          }
+        },
+        {
+          "opId": "keep_odd",
+          "params": {}
+        },
+        {
+          "opId": "median",
+          "params": {}
+        }
       ]
     },
     {
@@ -9598,6 +12286,20 @@
         "sort_alpha",
         "length_map",
         "distinct_letters_map"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "every_other",
+          "params": {}
+        },
+        {
+          "opId": "count_distinct",
+          "params": {}
+        }
       ]
     }
   ],
@@ -9644,6 +12346,14 @@
         "reverse",
         "add_k",
         "first"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 7
+          }
+        }
       ]
     },
     {
@@ -9688,6 +12398,18 @@
         "add_k",
         "sort_desc",
         "keep_first_k"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 2
+          }
+        },
+        {
+          "opId": "sort_desc",
+          "params": {}
+        }
       ]
     },
     {
@@ -9734,6 +12456,20 @@
         "rotate_left",
         "keep_odd",
         "keep_even"
+      ],
+      "steps": [
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 7
+          }
+        },
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 7
+          }
+        }
       ]
     },
     {
@@ -9785,6 +12521,24 @@
         "sort_alpha",
         "vowel_count_map",
         "sort_by_length"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 1
+          }
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     }
   ],
@@ -9831,6 +12585,14 @@
         "mul_k",
         "reverse",
         "first"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     },
     {
@@ -9875,6 +12637,20 @@
         "sort_desc",
         "drop_first",
         "sum"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     },
     {
@@ -9921,6 +12697,26 @@
         "rotate_left",
         "keep_lt_k",
         "keep_last_k"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 1
+          }
+        },
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 2
+          }
+        },
+        {
+          "opId": "keep_lt_k",
+          "params": {
+            "k": 5
+          }
+        }
       ]
     },
     {
@@ -9975,6 +12771,22 @@
         "count_distinct",
         "mode",
         "keep_dups"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 1
+          }
+        },
+        {
+          "opId": "drop_last",
+          "params": {}
+        },
+        {
+          "opId": "second_largest",
+          "params": {}
+        }
       ]
     }
   ],
@@ -10021,6 +12833,14 @@
         "sub_k",
         "first",
         "mul_k"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 4
+          }
+        }
       ]
     },
     {
@@ -10065,6 +12885,20 @@
         "add_k",
         "max",
         "count"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 6
+          }
+        },
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     },
     {
@@ -10111,6 +12945,26 @@
         "count_even",
         "keep_lt_k",
         "keep_odd"
+      ],
+      "steps": [
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 2
+          }
+        },
+        {
+          "opId": "keep_lt_k",
+          "params": {
+            "k": 8
+          }
+        },
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 7
+          }
+        }
       ]
     },
     {
@@ -10162,6 +13016,24 @@
         "vowel_count_map",
         "sort_alpha",
         "shortest"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     }
   ],
@@ -10208,6 +13080,14 @@
         "sub_k",
         "reverse",
         "mul_k"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 1
+          }
+        }
       ]
     },
     {
@@ -10252,6 +13132,18 @@
         "sort_asc",
         "sort_desc",
         "sum"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 2
+          }
+        },
+        {
+          "opId": "sort_asc",
+          "params": {}
+        }
       ]
     },
     {
@@ -10298,6 +13190,24 @@
         "add_k",
         "dedup",
         "keep_lt_k"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "drop_last",
+          "params": {}
+        },
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 9
+          }
+        }
       ]
     },
     {
@@ -10349,6 +13259,22 @@
         "first_letter_pos",
         "dedup",
         "length_map"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 2
+          }
+        },
+        {
+          "opId": "dedup",
+          "params": {}
+        }
       ]
     }
   ],
@@ -10395,6 +13321,14 @@
         "first",
         "add_k",
         "reverse"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 9
+          }
+        }
       ]
     },
     {
@@ -10439,6 +13373,18 @@
         "min",
         "count",
         "keep_last_k"
+      ],
+      "steps": [
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "sort_asc",
+          "params": {}
+        }
       ]
     },
     {
@@ -10485,6 +13431,24 @@
         "sub_k",
         "last",
         "keep_gt_k"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 2
+          }
+        },
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "last",
+          "params": {}
+        }
       ]
     },
     {
@@ -10536,6 +13500,20 @@
         "distinct_letters_map",
         "keep_startswith_vowel",
         "shortest"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "keep_gt_first",
+          "params": {}
+        },
+        {
+          "opId": "reverse",
+          "params": {}
+        }
       ]
     }
   ],
@@ -10582,6 +13560,14 @@
         "first",
         "last",
         "add_k"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 4
+          }
+        }
       ]
     },
     {
@@ -10626,6 +13612,18 @@
         "sum",
         "add_k",
         "min"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 8
+          }
+        },
+        {
+          "opId": "sort_asc",
+          "params": {}
+        }
       ]
     },
     {
@@ -10672,6 +13670,24 @@
         "median",
         "keep_gt_k",
         "keep_lt_k"
+      ],
+      "steps": [
+        {
+          "opId": "mul_k",
+          "params": {
+            "k": 2
+          }
+        },
+        {
+          "opId": "drop_first",
+          "params": {}
+        },
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 8
+          }
+        }
       ]
     },
     {
@@ -10726,6 +13742,22 @@
         "mul_k",
         "dedup",
         "keep_odd"
+      ],
+      "steps": [
+        {
+          "opId": "mul_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "keep_even",
+          "params": {}
+        },
+        {
+          "opId": "every_other",
+          "params": {}
+        }
       ]
     }
   ],
@@ -10772,6 +13804,14 @@
         "add_k",
         "reverse",
         "last"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 6
+          }
+        }
       ]
     },
     {
@@ -10816,6 +13856,20 @@
         "keep_last_k",
         "sort_desc",
         "drop_first"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 9
+          }
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     },
     {
@@ -10862,6 +13916,18 @@
         "keep_startswith_vowel",
         "sort_alpha",
         "keep_lt_k"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "keep_lt_k",
+          "params": {
+            "k": 5
+          }
+        }
       ]
     },
     {
@@ -10913,6 +13979,24 @@
         "keep_startswith_vowel",
         "last_letter_pos",
         "add_k"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 8
+          }
+        },
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     }
   ],
@@ -10959,6 +14043,12 @@
         "keep_startswith_vowel",
         "last_letter_pos",
         "letter_count_squared"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        }
       ]
     },
     {
@@ -11003,6 +14093,18 @@
         "sum",
         "count",
         "sort_desc"
+      ],
+      "steps": [
+        {
+          "opId": "sort_asc",
+          "params": {}
+        },
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     },
     {
@@ -11049,6 +14151,26 @@
         "keep_lt_k",
         "count_even",
         "rotate_left"
+      ],
+      "steps": [
+        {
+          "opId": "mul_k",
+          "params": {
+            "k": 2
+          }
+        },
+        {
+          "opId": "keep_lt_k",
+          "params": {
+            "k": 9
+          }
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     },
     {
@@ -11100,6 +14222,24 @@
         "sort_by_length",
         "length_map",
         "letter_count_squared"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "keep_lt_k",
+          "params": {
+            "k": 5
+          }
+        },
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 9
+          }
+        }
       ]
     }
   ],
@@ -11146,6 +14286,14 @@
         "add_k",
         "reverse",
         "first"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 5
+          }
+        }
       ]
     },
     {
@@ -11190,6 +14338,18 @@
         "add_k",
         "sort_desc",
         "count"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 7
+          }
+        },
+        {
+          "opId": "sort_asc",
+          "params": {}
+        }
       ]
     },
     {
@@ -11236,6 +14396,24 @@
         "keep_gt_k",
         "keep_even",
         "add_k"
+      ],
+      "steps": [
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 6
+          }
+        },
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 5
+          }
+        },
+        {
+          "opId": "sum",
+          "params": {}
+        }
       ]
     },
     {
@@ -11290,6 +14468,24 @@
         "units_digit",
         "keep_dups",
         "rotate_left"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 1
+          }
+        },
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 7
+          }
+        },
+        {
+          "opId": "every_other",
+          "params": {}
+        }
       ]
     }
   ],
@@ -11336,6 +14532,12 @@
         "max",
         "count",
         "keep_first_k"
+      ],
+      "steps": [
+        {
+          "opId": "min",
+          "params": {}
+        }
       ]
     },
     {
@@ -11374,12 +14576,24 @@
         ]
       ],
       "panelOps": [
+        "drop_first",
+        "sort_asc",
         "drop_last",
-        "max",
-        "sort_desc",
-        "keep_last_k",
+        "count_even",
         "sum",
         "keep_first_k"
+      ],
+      "steps": [
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "sum",
+          "params": {}
+        }
       ]
     },
     {
@@ -11426,6 +14640,24 @@
         "sort_desc",
         "product",
         "range"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "sort_desc",
+          "params": {}
+        },
+        {
+          "opId": "keep_lt_k",
+          "params": {
+            "k": 7
+          }
+        }
       ]
     },
     {
@@ -11477,6 +14709,24 @@
         "last_letter_pos",
         "sort_alpha",
         "keep_first_k"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 6
+          }
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     }
   ],
@@ -11523,6 +14773,14 @@
         "add_k",
         "last",
         "sub_k"
+      ],
+      "steps": [
+        {
+          "opId": "mul_k",
+          "params": {
+            "k": 4
+          }
+        }
       ]
     },
     {
@@ -11567,6 +14825,18 @@
         "keep_first_k",
         "drop_first",
         "sub_k"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 5
+          }
+        },
+        {
+          "opId": "min",
+          "params": {}
+        }
       ]
     },
     {
@@ -11613,6 +14883,26 @@
         "product",
         "keep_gt_k",
         "keep_last_k"
+      ],
+      "steps": [
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 7
+          }
+        },
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     },
     {
@@ -11664,6 +14954,22 @@
         "keep_startswith_vowel",
         "longest",
         "first_letter_pos"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 2
+          }
+        },
+        {
+          "opId": "drop_last",
+          "params": {}
+        }
       ]
     }
   ],
@@ -11710,6 +15016,12 @@
         "min",
         "drop_first",
         "sort_asc"
+      ],
+      "steps": [
+        {
+          "opId": "max",
+          "params": {}
+        }
       ]
     },
     {
@@ -11748,12 +15060,26 @@
         ]
       ],
       "panelOps": [
-        "drop_first",
-        "min",
-        "add_k",
         "sort_desc",
-        "sort_asc",
+        "keep_odd",
+        "add_k",
+        "keep_last_k",
+        "count",
         "keep_first_k"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 1
+          }
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     },
     {
@@ -11800,6 +15126,18 @@
         "count_even",
         "keep_lt_k",
         "product"
+      ],
+      "steps": [
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "rotate_left",
+          "params": {}
+        }
       ]
     },
     {
@@ -11851,6 +15189,20 @@
         "length_map",
         "drop_first",
         "letter_count_squared"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "drop_first",
+          "params": {}
+        },
+        {
+          "opId": "keep_even",
+          "params": {}
+        }
       ]
     }
   ],
@@ -11897,6 +15249,12 @@
         "keep_last_k",
         "sum",
         "min"
+      ],
+      "steps": [
+        {
+          "opId": "sum",
+          "params": {}
+        }
       ]
     },
     {
@@ -11935,12 +15293,24 @@
         ]
       ],
       "panelOps": [
-        "drop_last",
+        "drop_first",
         "keep_last_k",
-        "min",
+        "drop_last",
         "keep_first_k",
         "sort_desc",
-        "drop_first"
+        "sort_asc"
+      ],
+      "steps": [
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "sort_desc",
+          "params": {}
+        }
       ]
     },
     {
@@ -11987,6 +15357,24 @@
         "add_k",
         "dedup",
         "rotate_left"
+      ],
+      "steps": [
+        {
+          "opId": "keep_lt_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "rotate_left",
+          "params": {}
+        },
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 8
+          }
+        }
       ]
     },
     {
@@ -12038,6 +15426,24 @@
         "letter_count_squared",
         "vowel_count_map",
         "sort_by_length"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 8
+          }
+        },
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     }
   ],
@@ -12084,6 +15490,14 @@
         "last",
         "mul_k",
         "add_k"
+      ],
+      "steps": [
+        {
+          "opId": "mul_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     },
     {
@@ -12128,6 +15542,18 @@
         "keep_last_k",
         "drop_first",
         "sum"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "max",
+          "params": {}
+        }
       ]
     },
     {
@@ -12174,6 +15600,22 @@
         "add_k",
         "reverse",
         "drop_last"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "reverse",
+          "params": {}
+        },
+        {
+          "opId": "drop_last",
+          "params": {}
+        }
       ]
     },
     {
@@ -12228,6 +15670,22 @@
         "dedup",
         "min_normalize",
         "count_distinct"
+      ],
+      "steps": [
+        {
+          "opId": "drop_last",
+          "params": {}
+        },
+        {
+          "opId": "keep_lt_k",
+          "params": {
+            "k": 9
+          }
+        },
+        {
+          "opId": "count_distinct",
+          "params": {}
+        }
       ]
     }
   ],
@@ -12274,6 +15732,14 @@
         "sub_k",
         "last",
         "add_k"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 8
+          }
+        }
       ]
     },
     {
@@ -12318,6 +15784,20 @@
         "sub_k",
         "keep_first_k",
         "sort_desc"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     },
     {
@@ -12364,6 +15844,24 @@
         "add_k",
         "drop_last",
         "max"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 6
+          }
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 2
+          }
+        },
+        {
+          "opId": "last",
+          "params": {}
+        }
       ]
     },
     {
@@ -12415,6 +15913,22 @@
         "keep_startswith_vowel",
         "sort_alpha",
         "length_map"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 6
+          }
+        },
+        {
+          "opId": "swap_ends",
+          "params": {}
+        }
       ]
     }
   ],
@@ -12461,6 +15975,14 @@
         "first",
         "add_k",
         "mul_k"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 1
+          }
+        }
       ]
     },
     {
@@ -12505,6 +16027,18 @@
         "count",
         "add_k",
         "drop_last"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 6
+          }
+        },
+        {
+          "opId": "drop_last",
+          "params": {}
+        }
       ]
     },
     {
@@ -12551,6 +16085,26 @@
         "range",
         "count_even",
         "keep_last_k"
+      ],
+      "steps": [
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     },
     {
@@ -12602,6 +16156,22 @@
         "keep_startswith_vowel",
         "letter_count_squared",
         "last_letter_pos"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "swap_ends",
+          "params": {}
+        },
+        {
+          "opId": "keep_lt_k",
+          "params": {
+            "k": 6
+          }
+        }
       ]
     }
   ],
@@ -12648,6 +16218,14 @@
         "reverse",
         "add_k",
         "sub_k"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     },
     {
@@ -12692,6 +16270,20 @@
         "add_k",
         "count",
         "keep_first_k"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 2
+          }
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     },
     {
@@ -12738,6 +16330,24 @@
         "dedup",
         "sum",
         "product"
+      ],
+      "steps": [
+        {
+          "opId": "mul_k",
+          "params": {
+            "k": 2
+          }
+        },
+        {
+          "opId": "keep_lt_k",
+          "params": {
+            "k": 5
+          }
+        },
+        {
+          "opId": "sum",
+          "params": {}
+        }
       ]
     },
     {
@@ -12792,6 +16402,22 @@
         "keep_lt_k",
         "units_digit",
         "min_normalize"
+      ],
+      "steps": [
+        {
+          "opId": "keep_lt_k",
+          "params": {
+            "k": 7
+          }
+        },
+        {
+          "opId": "every_other",
+          "params": {}
+        },
+        {
+          "opId": "min",
+          "params": {}
+        }
       ]
     }
   ],
@@ -12838,6 +16464,14 @@
         "first",
         "add_k",
         "sub_k"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 4
+          }
+        }
       ]
     },
     {
@@ -12882,6 +16516,18 @@
         "sort_desc",
         "max",
         "min"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 2
+          }
+        },
+        {
+          "opId": "min",
+          "params": {}
+        }
       ]
     },
     {
@@ -12928,6 +16574,22 @@
         "min",
         "sum",
         "sub_k"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 5
+          }
+        },
+        {
+          "opId": "drop_first",
+          "params": {}
+        },
+        {
+          "opId": "max",
+          "params": {}
+        }
       ]
     },
     {
@@ -12982,6 +16644,24 @@
         "deltas",
         "keep_odd",
         "keep_even"
+      ],
+      "steps": [
+        {
+          "opId": "every_other",
+          "params": {}
+        },
+        {
+          "opId": "keep_lt_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     }
   ],
@@ -13028,6 +16708,14 @@
         "mul_k",
         "sub_k",
         "add_k"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 1
+          }
+        }
       ]
     },
     {
@@ -13072,6 +16760,20 @@
         "sort_desc",
         "drop_first",
         "drop_last"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 1
+          }
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     },
     {
@@ -13118,11 +16820,31 @@
         "keep_odd",
         "product",
         "count_even"
+      ],
+      "steps": [
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 5
+          }
+        },
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     },
     {
       "difficulty": "hard",
-      "rule": "It takes the smallest chip away from every chip, then keeps only chips smaller than 9, then keeps only chips bigger than the first one.",
+      "rule": "It subtracts the smallest chip from every chip, then keeps only chips smaller than 9, then keeps only chips bigger than the first one.",
       "ex": [
         [
           "1 3 8 11 12",
@@ -13172,6 +16894,22 @@
         "digit_sum_map",
         "mode",
         "count_distinct"
+      ],
+      "steps": [
+        {
+          "opId": "min_normalize",
+          "params": {}
+        },
+        {
+          "opId": "keep_lt_k",
+          "params": {
+            "k": 9
+          }
+        },
+        {
+          "opId": "keep_gt_first",
+          "params": {}
+        }
       ]
     }
   ],
@@ -13218,6 +16956,14 @@
         "sub_k",
         "mul_k",
         "last"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     },
     {
@@ -13262,6 +17008,20 @@
         "count",
         "keep_last_k",
         "add_k"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     },
     {
@@ -13308,11 +17068,23 @@
         "shortest",
         "longest",
         "length_map"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 1
+          }
+        }
       ]
     },
     {
       "difficulty": "hard",
-      "rule": "It takes the smallest chip away from every chip, then keeps only the first 4 chips, then keeps only chips bigger than 7.",
+      "rule": "It subtracts the smallest chip from every chip, then keeps only the first 4 chips, then keeps only chips bigger than 7.",
       "ex": [
         [
           "2 12 9 4 12",
@@ -13362,6 +17134,24 @@
         "count_distinct",
         "units_digit",
         "keep_dups"
+      ],
+      "steps": [
+        {
+          "opId": "min_normalize",
+          "params": {}
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 7
+          }
+        }
       ]
     }
   ],
@@ -13408,6 +17198,12 @@
         "drop_first",
         "sort_desc",
         "keep_first_k"
+      ],
+      "steps": [
+        {
+          "opId": "sort_desc",
+          "params": {}
+        }
       ]
     },
     {
@@ -13446,12 +17242,26 @@
         ]
       ],
       "panelOps": [
-        "max",
-        "drop_first",
+        "drop_last",
+        "sort_asc",
         "add_k",
-        "sort_desc",
-        "keep_last_k",
+        "sum",
+        "count",
         "keep_first_k"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 6
+          }
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     },
     {
@@ -13498,6 +17308,26 @@
         "keep_last_k",
         "rotate_left",
         "product"
+      ],
+      "steps": [
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 6
+          }
+        },
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 5
+          }
+        }
       ]
     },
     {
@@ -13552,6 +17382,24 @@
         "keep_last_k",
         "every_other",
         "mode"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 2
+          }
+        },
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "second_largest",
+          "params": {}
+        }
       ]
     }
   ],
@@ -13598,6 +17446,12 @@
         "keep_first_k",
         "max",
         "drop_last"
+      ],
+      "steps": [
+        {
+          "opId": "sort_asc",
+          "params": {}
+        }
       ]
     },
     {
@@ -13636,12 +17490,26 @@
         ]
       ],
       "panelOps": [
-        "max",
+        "sum",
         "sub_k",
-        "sort_desc",
+        "count",
         "keep_last_k",
-        "drop_last",
-        "keep_first_k"
+        "sort_desc",
+        "min"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     },
     {
@@ -13688,6 +17556,24 @@
         "keep_gt_k",
         "product",
         "rotate_left"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 1
+          }
+        },
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 6
+          }
+        },
+        {
+          "opId": "first",
+          "params": {}
+        }
       ]
     },
     {
@@ -13739,6 +17625,22 @@
         "last_letter_pos",
         "shortest",
         "first_letter_pos"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "mul_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "swap_ends",
+          "params": {}
+        }
       ]
     }
   ],
@@ -13785,6 +17687,12 @@
         "first_letter_pos",
         "longest",
         "keep_startswith_vowel"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        }
       ]
     },
     {
@@ -13829,6 +17737,20 @@
         "add_k",
         "keep_first_k",
         "count"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 7
+          }
+        },
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     },
     {
@@ -13875,6 +17797,26 @@
         "keep_lt_k",
         "product",
         "range"
+      ],
+      "steps": [
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     },
     {
@@ -13925,6 +17867,22 @@
         "first_letter_pos",
         "last_letter_pos",
         "shortest"
+      ],
+      "steps": [
+        {
+          "opId": "sort_alpha",
+          "params": {}
+        },
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "mul_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     }
   ],
@@ -13971,6 +17929,12 @@
         "sub_k",
         "mul_k",
         "last"
+      ],
+      "steps": [
+        {
+          "opId": "reverse",
+          "params": {}
+        }
       ]
     },
     {
@@ -14015,6 +17979,18 @@
         "add_k",
         "keep_last_k",
         "keep_first_k"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "drop_last",
+          "params": {}
+        }
       ]
     },
     {
@@ -14061,6 +18037,24 @@
         "count_even",
         "keep_even",
         "swap_ends"
+      ],
+      "steps": [
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 7
+          }
+        },
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 7
+          }
+        },
+        {
+          "opId": "sum",
+          "params": {}
+        }
       ]
     },
     {
@@ -14115,6 +18109,22 @@
         "mode",
         "swap_ends",
         "index_of_max"
+      ],
+      "steps": [
+        {
+          "opId": "mul_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "drop_first",
+          "params": {}
+        },
+        {
+          "opId": "keep_gt_first",
+          "params": {}
+        }
       ]
     }
   ],
@@ -14161,6 +18171,12 @@
         "drop_last",
         "drop_first",
         "sort_asc"
+      ],
+      "steps": [
+        {
+          "opId": "count",
+          "params": {}
+        }
       ]
     },
     {
@@ -14199,12 +18215,26 @@
         ]
       ],
       "panelOps": [
-        "sum",
+        "sort_desc",
         "keep_first_k",
-        "keep_last_k",
-        "min",
+        "max",
+        "swap_ends",
         "add_k",
-        "sort_desc"
+        "keep_last_k"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     },
     {
@@ -14251,6 +18281,24 @@
         "swap_ends",
         "keep_odd",
         "add_k"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 1
+          }
+        },
+        {
+          "opId": "rotate_left",
+          "params": {}
+        },
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 9
+          }
+        }
       ]
     },
     {
@@ -14301,6 +18349,20 @@
         "length_map",
         "sort_by_length",
         "distinct_letters_map"
+      ],
+      "steps": [
+        {
+          "opId": "keep_startswith_vowel",
+          "params": {}
+        },
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "swap_ends",
+          "params": {}
+        }
       ]
     }
   ],
@@ -14347,6 +18409,14 @@
         "mul_k",
         "first",
         "last"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 9
+          }
+        }
       ]
     },
     {
@@ -14391,6 +18461,18 @@
         "sort_asc",
         "keep_last_k",
         "sum"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 6
+          }
+        },
+        {
+          "opId": "max",
+          "params": {}
+        }
       ]
     },
     {
@@ -14437,6 +18519,24 @@
         "range",
         "keep_lt_k",
         "keep_gt_k"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 2
+          }
+        },
+        {
+          "opId": "keep_lt_k",
+          "params": {
+            "k": 9
+          }
+        },
+        {
+          "opId": "drop_first",
+          "params": {}
+        }
       ]
     },
     {
@@ -14491,6 +18591,24 @@
         "reverse_digits",
         "sub_k",
         "units_digit"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "keep_lt_k",
+          "params": {
+            "k": 8
+          }
+        },
+        {
+          "opId": "keep_gt_first",
+          "params": {}
+        }
       ]
     }
   ],
@@ -14537,6 +18655,14 @@
         "first",
         "add_k",
         "last"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 5
+          }
+        }
       ]
     },
     {
@@ -14581,6 +18707,18 @@
         "count",
         "min",
         "keep_first_k"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 5
+          }
+        },
+        {
+          "opId": "sort_desc",
+          "params": {}
+        }
       ]
     },
     {
@@ -14627,6 +18765,20 @@
         "swap_ends",
         "add_k",
         "keep_gt_k"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 1
+          }
+        },
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 9
+          }
+        }
       ]
     },
     {
@@ -14677,6 +18829,20 @@
         "letter_count_squared",
         "last_letter_pos",
         "first_letter_pos"
+      ],
+      "steps": [
+        {
+          "opId": "sort_alpha",
+          "params": {}
+        },
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "dedup",
+          "params": {}
+        }
       ]
     }
   ],
@@ -14723,6 +18889,14 @@
         "sub_k",
         "reverse",
         "add_k"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 4
+          }
+        }
       ]
     },
     {
@@ -14767,6 +18941,18 @@
         "drop_last",
         "sort_asc",
         "sub_k"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 5
+          }
+        },
+        {
+          "opId": "sort_asc",
+          "params": {}
+        }
       ]
     },
     {
@@ -14813,6 +18999,22 @@
         "median",
         "count_even",
         "keep_lt_k"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "keep_odd",
+          "params": {}
+        },
+        {
+          "opId": "max",
+          "params": {}
+        }
       ]
     },
     {
@@ -14864,6 +19066,20 @@
         "dedup",
         "last_letter_pos",
         "sort_alpha"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "dedup",
+          "params": {}
+        },
+        {
+          "opId": "last",
+          "params": {}
+        }
       ]
     }
   ],
@@ -14910,6 +19126,14 @@
         "sub_k",
         "last",
         "first"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     },
     {
@@ -14954,6 +19178,20 @@
         "max",
         "keep_first_k",
         "sub_k"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     },
     {
@@ -15000,6 +19238,20 @@
         "keep_lt_k",
         "rotate_left",
         "median"
+      ],
+      "steps": [
+        {
+          "opId": "keep_lt_k",
+          "params": {
+            "k": 7
+          }
+        },
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 6
+          }
+        }
       ]
     },
     {
@@ -15054,6 +19306,24 @@
         "keep_lt_k",
         "every_other",
         "keep_dups"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "keep_lt_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "every_other",
+          "params": {}
+        }
       ]
     }
   ],
@@ -15100,6 +19370,14 @@
         "add_k",
         "sub_k",
         "mul_k"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 7
+          }
+        }
       ]
     },
     {
@@ -15144,6 +19422,18 @@
         "sum",
         "keep_first_k",
         "sort_desc"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 2
+          }
+        },
+        {
+          "opId": "sum",
+          "params": {}
+        }
       ]
     },
     {
@@ -15190,11 +19480,27 @@
         "swap_ends",
         "keep_odd",
         "keep_lt_k"
+      ],
+      "steps": [
+        {
+          "opId": "keep_lt_k",
+          "params": {
+            "k": 9
+          }
+        },
+        {
+          "opId": "drop_last",
+          "params": {}
+        },
+        {
+          "opId": "drop_last",
+          "params": {}
+        }
       ]
     },
     {
       "difficulty": "hard",
-      "rule": "It takes the smallest chip away from every chip, then keeps only chips bigger than 8, then adds 2 to them.",
+      "rule": "It subtracts the smallest chip from every chip, then keeps only chips bigger than 8, then adds 2 to them.",
       "ex": [
         [
           "11 9 6 6 1",
@@ -15244,6 +19550,24 @@
         "count_even",
         "count_distinct",
         "mode"
+      ],
+      "steps": [
+        {
+          "opId": "min_normalize",
+          "params": {}
+        },
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 8
+          }
+        },
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     }
   ],
@@ -15290,6 +19614,14 @@
         "reverse",
         "sub_k",
         "mul_k"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 5
+          }
+        }
       ]
     },
     {
@@ -15334,6 +19666,18 @@
         "count",
         "sort_desc",
         "sum"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 8
+          }
+        },
+        {
+          "opId": "sort_desc",
+          "params": {}
+        }
       ]
     },
     {
@@ -15380,6 +19724,24 @@
         "median",
         "rotate_left",
         "keep_odd"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 6
+          }
+        },
+        {
+          "opId": "keep_even",
+          "params": {}
+        },
+        {
+          "opId": "keep_lt_k",
+          "params": {
+            "k": 9
+          }
+        }
       ]
     },
     {
@@ -15434,6 +19796,24 @@
         "count_distinct",
         "keep_gt_first",
         "index_of_max"
+      ],
+      "steps": [
+        {
+          "opId": "every_other",
+          "params": {}
+        },
+        {
+          "opId": "keep_lt_k",
+          "params": {
+            "k": 5
+          }
+        },
+        {
+          "opId": "mul_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     }
   ],
@@ -15480,6 +19860,14 @@
         "first",
         "sub_k",
         "mul_k"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 1
+          }
+        }
       ]
     },
     {
@@ -15524,6 +19912,18 @@
         "keep_last_k",
         "drop_last",
         "max"
+      ],
+      "steps": [
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "sum",
+          "params": {}
+        }
       ]
     },
     {
@@ -15570,6 +19970,24 @@
         "add_k",
         "max",
         "keep_first_k"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 2
+          }
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "sum",
+          "params": {}
+        }
       ]
     },
     {
@@ -15621,6 +20039,20 @@
         "last_letter_pos",
         "length_map",
         "first_letter_pos"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "keep_gt_first",
+          "params": {}
+        },
+        {
+          "opId": "range",
+          "params": {}
+        }
       ]
     }
   ],
@@ -15667,6 +20099,14 @@
         "mul_k",
         "sub_k",
         "reverse"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 8
+          }
+        }
       ]
     },
     {
@@ -15711,6 +20151,18 @@
         "min",
         "keep_last_k",
         "max"
+      ],
+      "steps": [
+        {
+          "opId": "sort_asc",
+          "params": {}
+        },
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     },
     {
@@ -15757,6 +20209,16 @@
         "letter_count_squared",
         "longest",
         "keep_startswith_vowel"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "index_of_max",
+          "params": {}
+        }
       ]
     },
     {
@@ -15811,6 +20273,20 @@
         "keep_gt_first",
         "index_of_max",
         "keep_even"
+      ],
+      "steps": [
+        {
+          "opId": "reverse",
+          "params": {}
+        },
+        {
+          "opId": "keep_gt_first",
+          "params": {}
+        },
+        {
+          "opId": "sort_asc",
+          "params": {}
+        }
       ]
     }
   ],
@@ -15857,6 +20333,14 @@
         "mul_k",
         "first",
         "last"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     },
     {
@@ -15901,6 +20385,18 @@
         "sort_desc",
         "keep_first_k",
         "keep_last_k"
+      ],
+      "steps": [
+        {
+          "opId": "sort_desc",
+          "params": {}
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     },
     {
@@ -15947,6 +20443,22 @@
         "drop_last",
         "keep_even",
         "rotate_left"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 5
+          }
+        },
+        {
+          "opId": "drop_last",
+          "params": {}
+        },
+        {
+          "opId": "rotate_left",
+          "params": {}
+        }
       ]
     },
     {
@@ -15998,6 +20510,22 @@
         "longest",
         "sort_alpha",
         "keep_first_k"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "swap_ends",
+          "params": {}
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 4
+          }
+        }
       ]
     }
   ],
@@ -16044,6 +20572,14 @@
         "sub_k",
         "add_k",
         "reverse"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 4
+          }
+        }
       ]
     },
     {
@@ -16088,6 +20624,18 @@
         "drop_last",
         "sum",
         "keep_last_k"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "sum",
+          "params": {}
+        }
       ]
     },
     {
@@ -16134,6 +20682,24 @@
         "keep_gt_k",
         "median",
         "keep_even"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "drop_last",
+          "params": {}
+        },
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 6
+          }
+        }
       ]
     },
     {
@@ -16185,6 +20751,22 @@
         "sort_by_length",
         "add_k",
         "distinct_letters_map"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 2
+          }
+        },
+        {
+          "opId": "every_other",
+          "params": {}
+        }
       ]
     }
   ],
@@ -16231,6 +20813,14 @@
         "last",
         "add_k",
         "sub_k"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     },
     {
@@ -16275,6 +20865,20 @@
         "sort_desc",
         "keep_last_k",
         "add_k"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     },
     {
@@ -16321,6 +20925,26 @@
         "product",
         "keep_odd",
         "median"
+      ],
+      "steps": [
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 7
+          }
+        }
       ]
     },
     {
@@ -16375,6 +20999,24 @@
         "units_digit",
         "second_largest",
         "keep_last_k"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 8
+          }
+        },
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "keep_dups",
+          "params": {}
+        }
       ]
     }
   ],
@@ -16421,6 +21063,12 @@
         "max",
         "drop_last",
         "sum"
+      ],
+      "steps": [
+        {
+          "opId": "max",
+          "params": {}
+        }
       ]
     },
     {
@@ -16465,6 +21113,18 @@
         "reverse",
         "mul_k",
         "sub_k"
+      ],
+      "steps": [
+        {
+          "opId": "mul_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "first",
+          "params": {}
+        }
       ]
     },
     {
@@ -16511,6 +21171,16 @@
         "index_of_max",
         "units_digit",
         "every_other"
+      ],
+      "steps": [
+        {
+          "opId": "every_other",
+          "params": {}
+        },
+        {
+          "opId": "keep_dups",
+          "params": {}
+        }
       ]
     },
     {
@@ -16562,6 +21232,22 @@
         "keep_lt_k",
         "sort_alpha",
         "vowel_count_map"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "keep_lt_k",
+          "params": {
+            "k": 5
+          }
+        },
+        {
+          "opId": "count_distinct",
+          "params": {}
+        }
       ]
     }
   ],
@@ -16608,6 +21294,12 @@
         "shortest",
         "letter_count_squared",
         "keep_startswith_vowel"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        }
       ]
     },
     {
@@ -16652,6 +21344,20 @@
         "keep_last_k",
         "sort_asc",
         "min"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 9
+          }
+        },
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     },
     {
@@ -16698,6 +21404,22 @@
         "median",
         "count_even",
         "dedup"
+      ],
+      "steps": [
+        {
+          "opId": "rotate_left",
+          "params": {}
+        },
+        {
+          "opId": "swap_ends",
+          "params": {}
+        },
+        {
+          "opId": "keep_lt_k",
+          "params": {
+            "k": 7
+          }
+        }
       ]
     },
     {
@@ -16749,6 +21471,22 @@
         "keep_startswith_vowel",
         "last_letter_pos",
         "first_letter_pos"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "dedup",
+          "params": {}
+        }
       ]
     }
   ],
@@ -16795,6 +21533,14 @@
         "mul_k",
         "reverse",
         "last"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 6
+          }
+        }
       ]
     },
     {
@@ -16839,6 +21585,20 @@
         "max",
         "keep_last_k",
         "drop_last"
+      ],
+      "steps": [
+        {
+          "opId": "mul_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     },
     {
@@ -16885,6 +21645,26 @@
         "keep_lt_k",
         "swap_ends",
         "sub_k"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 1
+          }
+        },
+        {
+          "opId": "keep_lt_k",
+          "params": {
+            "k": 9
+          }
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     },
     {
@@ -16939,6 +21719,22 @@
         "mode",
         "swap_ends",
         "sub_k"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 5
+          }
+        },
+        {
+          "opId": "keep_even",
+          "params": {}
+        },
+        {
+          "opId": "second_largest",
+          "params": {}
+        }
       ]
     }
   ],
@@ -16985,6 +21781,14 @@
         "last",
         "add_k",
         "reverse"
+      ],
+      "steps": [
+        {
+          "opId": "mul_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     },
     {
@@ -17029,6 +21833,20 @@
         "count",
         "min",
         "keep_first_k"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 7
+          }
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     },
     {
@@ -17075,6 +21893,24 @@
         "product",
         "add_k",
         "keep_gt_k"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 1
+          }
+        },
+        {
+          "opId": "keep_lt_k",
+          "params": {
+            "k": 6
+          }
+        },
+        {
+          "opId": "drop_first",
+          "params": {}
+        }
       ]
     },
     {
@@ -17129,6 +21965,20 @@
         "range",
         "index_of_max",
         "every_other"
+      ],
+      "steps": [
+        {
+          "opId": "dedup",
+          "params": {}
+        },
+        {
+          "opId": "keep_gt_first",
+          "params": {}
+        },
+        {
+          "opId": "sort_desc",
+          "params": {}
+        }
       ]
     }
   ],
@@ -17175,6 +22025,14 @@
         "last",
         "add_k",
         "reverse"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 9
+          }
+        }
       ]
     },
     {
@@ -17219,6 +22077,18 @@
         "drop_last",
         "sum",
         "keep_last_k"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "drop_last",
+          "params": {}
+        }
       ]
     },
     {
@@ -17265,6 +22135,26 @@
         "keep_even",
         "dedup",
         "keep_odd"
+      ],
+      "steps": [
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 4
+          }
+        },
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     },
     {
@@ -17316,6 +22206,22 @@
         "letter_count_squared",
         "length_map",
         "first_letter_pos"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 5
+          }
+        },
+        {
+          "opId": "dedup",
+          "params": {}
+        }
       ]
     }
   ],
@@ -17362,6 +22268,12 @@
         "mul_k",
         "last",
         "sub_k"
+      ],
+      "steps": [
+        {
+          "opId": "reverse",
+          "params": {}
+        }
       ]
     },
     {
@@ -17402,10 +22314,22 @@
       "panelOps": [
         "reverse",
         "sub_k",
-        "mul_k",
-        "last",
-        "add_k",
-        "first"
+        "sort_desc",
+        "max",
+        "min",
+        "count"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 5
+          }
+        },
+        {
+          "opId": "reverse",
+          "params": {}
+        }
       ]
     },
     {
@@ -17452,6 +22376,16 @@
         "length_map",
         "max",
         "distinct_letters_map"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "max",
+          "params": {}
+        }
       ]
     },
     {
@@ -17503,6 +22437,22 @@
         "swap_ends",
         "add_k",
         "last_letter_pos"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 2
+          }
+        },
+        {
+          "opId": "swap_ends",
+          "params": {}
+        }
       ]
     }
   ],
@@ -17549,6 +22499,12 @@
         "sum",
         "sort_asc",
         "keep_last_k"
+      ],
+      "steps": [
+        {
+          "opId": "sort_asc",
+          "params": {}
+        }
       ]
     },
     {
@@ -17587,12 +22543,26 @@
         ]
       ],
       "panelOps": [
-        "drop_last",
+        "product",
         "add_k",
-        "keep_last_k",
+        "min",
         "keep_first_k",
-        "sort_desc",
-        "sort_asc"
+        "max",
+        "sort_desc"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 2
+          }
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     },
     {
@@ -17639,6 +22609,24 @@
         "swap_ends",
         "count_even",
         "keep_even"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 8
+          }
+        },
+        {
+          "opId": "swap_ends",
+          "params": {}
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     },
     {
@@ -17690,6 +22678,22 @@
         "drop_first",
         "first_letter_pos",
         "length_map"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "drop_first",
+          "params": {}
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     }
   ],
@@ -17736,6 +22740,14 @@
         "reverse",
         "first",
         "add_k"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 1
+          }
+        }
       ]
     },
     {
@@ -17780,6 +22792,20 @@
         "keep_first_k",
         "sub_k",
         "drop_first"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 5
+          }
+        },
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     },
     {
@@ -17826,6 +22852,18 @@
         "last_letter_pos",
         "letter_count_squared",
         "sort_by_length"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 4
+          }
+        }
       ]
     },
     {
@@ -17877,6 +22915,20 @@
         "sort_alpha",
         "shortest",
         "distinct_letters_map"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "swap_ends",
+          "params": {}
+        },
+        {
+          "opId": "every_other",
+          "params": {}
+        }
       ]
     }
   ],
@@ -17923,6 +22975,14 @@
         "last",
         "reverse",
         "mul_k"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 4
+          }
+        }
       ]
     },
     {
@@ -17967,6 +23027,18 @@
         "sum",
         "keep_last_k",
         "count"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 1
+          }
+        },
+        {
+          "opId": "sort_asc",
+          "params": {}
+        }
       ]
     },
     {
@@ -18013,6 +23085,26 @@
         "mul_k",
         "keep_lt_k",
         "rotate_left"
+      ],
+      "steps": [
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 2
+          }
+        },
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 6
+          }
+        },
+        {
+          "opId": "mul_k",
+          "params": {
+            "k": 4
+          }
+        }
       ]
     },
     {
@@ -18064,6 +23156,24 @@
         "sort_alpha",
         "add_k",
         "distinct_letters_map"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 6
+          }
+        },
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     }
   ],
@@ -18110,6 +23220,14 @@
         "first",
         "last",
         "reverse"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 5
+          }
+        }
       ]
     },
     {
@@ -18154,6 +23272,20 @@
         "keep_last_k",
         "max",
         "drop_last"
+      ],
+      "steps": [
+        {
+          "opId": "mul_k",
+          "params": {
+            "k": 2
+          }
+        },
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     },
     {
@@ -18200,6 +23332,16 @@
         "keep_startswith_vowel",
         "distinct_letters_map",
         "length_map"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "rotate_left",
+          "params": {}
+        }
       ]
     },
     {
@@ -18254,6 +23396,24 @@
         "units_digit",
         "median",
         "keep_lt_k"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 1
+          }
+        },
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 2
+          }
+        },
+        {
+          "opId": "keep_gt_first",
+          "params": {}
+        }
       ]
     }
   ],
@@ -18300,6 +23460,14 @@
         "mul_k",
         "reverse",
         "first"
+      ],
+      "steps": [
+        {
+          "opId": "mul_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     },
     {
@@ -18344,6 +23512,18 @@
         "keep_first_k",
         "sort_asc",
         "add_k"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "sort_asc",
+          "params": {}
+        }
       ]
     },
     {
@@ -18390,6 +23570,24 @@
         "range",
         "keep_gt_k",
         "keep_odd"
+      ],
+      "steps": [
+        {
+          "opId": "keep_lt_k",
+          "params": {
+            "k": 7
+          }
+        },
+        {
+          "opId": "drop_first",
+          "params": {}
+        },
+        {
+          "opId": "keep_gt_k",
+          "params": {
+            "k": 4
+          }
+        }
       ]
     },
     {
@@ -18441,6 +23639,24 @@
         "sort_alpha",
         "first_letter_pos",
         "last_letter_pos"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 6
+          }
+        },
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 4
+          }
+        }
       ]
     }
   ],
@@ -18487,6 +23703,14 @@
         "add_k",
         "reverse",
         "sub_k"
+      ],
+      "steps": [
+        {
+          "opId": "sub_k",
+          "params": {
+            "k": 5
+          }
+        }
       ]
     },
     {
@@ -18531,6 +23755,20 @@
         "sort_asc",
         "keep_first_k",
         "drop_last"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 7
+          }
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 3
+          }
+        }
       ]
     },
     {
@@ -18577,6 +23815,22 @@
         "rotate_left",
         "product",
         "dedup"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 2
+          }
+        },
+        {
+          "opId": "sort_asc",
+          "params": {}
+        },
+        {
+          "opId": "dedup",
+          "params": {}
+        }
       ]
     },
     {
@@ -18628,6 +23882,22 @@
         "last_letter_pos",
         "shortest",
         "sort_by_length"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 1
+          }
+        },
+        {
+          "opId": "mode",
+          "params": {}
+        }
       ]
     }
   ],
@@ -18674,6 +23944,14 @@
         "first",
         "last",
         "reverse"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 7
+          }
+        }
       ]
     },
     {
@@ -18713,11 +23991,23 @@
       ],
       "panelOps": [
         "reverse",
-        "last",
-        "first",
-        "mul_k",
+        "drop_first",
+        "max",
+        "sort_desc",
         "add_k",
-        "sub_k"
+        "count"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 3
+          }
+        },
+        {
+          "opId": "reverse",
+          "params": {}
+        }
       ]
     },
     {
@@ -18764,6 +24054,24 @@
         "median",
         "keep_even",
         "count_even"
+      ],
+      "steps": [
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 7
+          }
+        },
+        {
+          "opId": "swap_ends",
+          "params": {}
+        },
+        {
+          "opId": "keep_last_k",
+          "params": {
+            "k": 4
+          }
+        }
       ]
     },
     {
@@ -18815,6 +24123,24 @@
         "sort_by_length",
         "sort_alpha",
         "shortest"
+      ],
+      "steps": [
+        {
+          "opId": "length_map",
+          "params": {}
+        },
+        {
+          "opId": "add_k",
+          "params": {
+            "k": 1
+          }
+        },
+        {
+          "opId": "keep_first_k",
+          "params": {
+            "k": 2
+          }
+        }
       ]
     }
   ]

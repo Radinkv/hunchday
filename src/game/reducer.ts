@@ -9,16 +9,16 @@
  */
 
 import {
-  FEEDBACK_CORRECT_MORE,
-  FEEDBACK_CORRECT_TWICE,
-  FEEDBACK_WRONG,
   MARK_EXAMPLE,
   MARK_HIT,
   MARK_MISS,
+  MARK_TEST,
+  MAX_TESTS,
   PHASE_PLAYING,
   PHASE_REVEALED,
+  SUBMISSION_RECIPE,
 } from "./types";
-import type { EvidenceRow, FeedbackKind, GameState, Machine } from "./types";
+import type { EvidenceRow, GameState, Machine, Submission, TestResult } from "./types";
 import {
   EMOJI_CRACKED,
   EMOJI_REVEALED,
@@ -32,6 +32,15 @@ import {
 
 /** Number of consecutive correct answers that cracks a machine. */
 const STREAK_TO_CRACK = 2;
+
+/**
+ * Number of wrong answers on a machine that ends it without a crack. A machine reveals as a loss
+ * on the third miss, so two wrong guesses or recipes are survivable and the third is fatal.
+ */
+export const MISSES_TO_FAIL = 3;
+
+/** Number of example pairs shown for free when a machine loads; the rest are earned by playing. */
+export const SEEDED_EXAMPLE_COUNT = 1;
 
 /** Initial indexes and counters used when loading a machine or starting a game. */
 const FIRST_MACHINE_INDEX = 0;
@@ -61,7 +70,7 @@ export function tokenize(value: string): string[] {
  * @param b The second chip string.
  * @returns True when the two strings tokenize to the same sequence.
  */
-function chipsEqual(a: string, b: string): boolean {
+export function chipsEqual(a: string, b: string): boolean {
   return tokenize(a).join(",") === tokenize(b).join(",");
 }
 
@@ -80,12 +89,14 @@ function buildEvidenceRow(input: string, output: string, mark: EvidenceRow["mark
 }
 
 /**
- * Builds the seeded evidence rows for a machine from its example pairs.
- * @param machine The machine whose examples become the initial evidence.
- * @returns One evidence row per example, each carrying the example mark.
+ * Builds the seeded evidence rows for a machine. Only the first example is shown for free; the
+ * player earns more of the machine's behaviour by testing and by guessing the challenges that the
+ * Guess tab reveals one at a time.
+ * @param machine The machine whose first example becomes the initial evidence.
+ * @returns A single evidence row carrying the example mark.
  */
 function exampleRows(machine: Machine): EvidenceRow[] {
-  return machine.ex.map(([input, output]) => buildEvidenceRow(input, output, MARK_EXAMPLE));
+  return machine.ex.slice(0, SEEDED_EXAMPLE_COUNT).map(([input, output]) => buildEvidenceRow(input, output, MARK_EXAMPLE));
 }
 
 /**
@@ -109,6 +120,7 @@ function loadMachine(previous: GameState, machines: readonly Machine[], machineI
     feedback: null,
     phase: PHASE_PLAYING,
     won: null,
+    ended: false,
   };
 }
 
@@ -130,6 +142,7 @@ export function startGame(machines: readonly Machine[]): GameState {
     feedback: null,
     phase: PHASE_PLAYING,
     won: null,
+    ended: false,
   };
   return loadMachine(blank, machines, FIRST_MACHINE_INDEX);
 }
@@ -143,7 +156,6 @@ export function startGame(machines: readonly Machine[]): GameState {
  * @param streak The streak value to record.
  * @param misses The cumulative miss count to record.
  * @param won Whether the machine was cracked.
- * @param feedback The feedback kind to display alongside the reveal.
  * @returns The revealed state.
  */
 function reveal(
@@ -152,53 +164,79 @@ function reveal(
   streak: number,
   misses: number,
   won: boolean,
-  feedback: FeedbackKind,
 ): GameState {
   const results = state.results.slice();
   results[state.machineIndex] = won;
-  return { ...state, streak, misses, results, evidence, feedback, phase: PHASE_REVEALED, won };
+  return { ...state, streak, misses, results, evidence, feedback: null, phase: PHASE_REVEALED, won };
 }
 
 /**
- * Processes one guess against the current challenge and returns the next state.
- * Empty input and input submitted after reveal both keep the state unchanged.
- * A correct guess appends a hit row and advances the streak. A wrong guess appends
- * a miss row with the revealed output, increments misses, and resets the streak.
- * When the challenge list is exhausted, the machine reveals with the same win and
- * loss behavior as the original prototype loop.
+ * Records a wrong answer for the current challenge and returns the next state. The true
+ * output is added as a fresh evidence row, the miss count rises, and play advances to the next
+ * challenge. The machine reveals as a loss once this machine has reached the miss limit, so the
+ * second wrong answer ends it, and also if the challenges somehow run out first. Both a guess
+ * and a recipe attach the chips the player produced for the challenge so the row can show them
+ * beside the truth; the chips are omitted only when none were produced, leaving a clean reveal.
  * @param state The current game state.
- * @param machines The full machine set.
- * @param guess The player guess for the current challenge.
+ * @param machine The current machine.
+ * @param guess The player's chips to show beside the truth, or undefined for a clean reveal.
  * @returns The next game state.
  */
-export function feed(state: GameState, machines: readonly Machine[], guess: string): GameState {
-  if (state.phase !== PHASE_PLAYING) return state;
-  if (tokenize(guess).length === 0) return state;
-
-  const machine = machines[state.machineIndex];
+function recordMiss(state: GameState, machine: Machine, guess?: string): GameState {
   const [challengeInput, challengeOutput] = machine.ch[state.challengeIndex];
-  const correct = chipsEqual(guess, challengeOutput);
-
-  if (correct) {
-    const streak = state.streak + 1;
-    const evidence = [...state.evidence, buildEvidenceRow(challengeInput, challengeOutput, MARK_HIT)];
-    if (streak >= STREAK_TO_CRACK) {
-      return reveal(state, evidence, streak, state.misses, true, FEEDBACK_CORRECT_TWICE);
-    }
-    const challengeIndex = state.challengeIndex + NEXT_INDEX_DELTA;
-    if (challengeIndex >= machine.ch.length) {
-      return reveal(state, evidence, streak, state.misses, true, FEEDBACK_CORRECT_MORE);
-    }
-    return { ...state, streak, evidence, challengeIndex, feedback: FEEDBACK_CORRECT_MORE };
-  }
-
   const misses = state.misses + NEXT_INDEX_DELTA;
   const evidence = [...state.evidence, buildEvidenceRow(challengeInput, challengeOutput, MARK_MISS, guess)];
   const challengeIndex = state.challengeIndex + NEXT_INDEX_DELTA;
-  if (challengeIndex >= machine.ch.length) {
-    return reveal(state, evidence, RESET_STREAK, misses, false, FEEDBACK_WRONG);
+  const missesThisMachine = evidence.filter((row) => row.mark === MARK_MISS).length;
+  if (missesThisMachine >= MISSES_TO_FAIL || challengeIndex >= machine.ch.length) {
+    return reveal(state, evidence, RESET_STREAK, misses, false);
   }
-  return { ...state, streak: RESET_STREAK, misses, evidence, challengeIndex, feedback: FEEDBACK_WRONG };
+  return { ...state, streak: RESET_STREAK, misses, evidence, challengeIndex };
+}
+
+/**
+ * Processes one submission against the current machine and returns the next state. A
+ * submission after the machine has been revealed keeps the state unchanged. A recipe is
+ * judged against every example at once by the submitting layer: a recipe that reproduces
+ * them all cracks the machine on its own, while a wrong recipe records a miss showing what
+ * the recipe produced on the challenge beside the truth. A guess is judged against the
+ * current challenge: a correct guess appends a hit row and cracks once two land in a row or
+ * the final challenge is answered, while a wrong guess appends a miss row showing the
+ * player's chips beside the truth. No transition sets player facing feedback text; the
+ * evidence rows carry the whole story.
+ * @param state The current game state.
+ * @param machines The full machine set.
+ * @param submission The guess or recipe being judged.
+ * @returns The next game state.
+ */
+export function feed(state: GameState, machines: readonly Machine[], submission: Submission): GameState {
+  if (state.phase !== PHASE_PLAYING) return state;
+
+  const machine = machines[state.machineIndex];
+  const [challengeInput, challengeOutput] = machine.ch[state.challengeIndex];
+
+  if (submission.kind === SUBMISSION_RECIPE) {
+    if (submission.matchesAllExamples) {
+      const evidence = [...state.evidence, buildEvidenceRow(challengeInput, challengeOutput, MARK_HIT)];
+      return reveal(state, evidence, state.streak, state.misses, true);
+    }
+    return recordMiss(state, machine, submission.chips);
+  }
+
+  if (!chipsEqual(submission.chips, challengeOutput)) {
+    return recordMiss(state, machine, submission.chips);
+  }
+
+  const streak = state.streak + NEXT_INDEX_DELTA;
+  const evidence = [...state.evidence, buildEvidenceRow(challengeInput, challengeOutput, MARK_HIT)];
+  if (streak >= STREAK_TO_CRACK) {
+    return reveal(state, evidence, streak, state.misses, true);
+  }
+  const challengeIndex = state.challengeIndex + NEXT_INDEX_DELTA;
+  if (challengeIndex >= machine.ch.length) {
+    return reveal(state, evidence, streak, state.misses, true);
+  }
+  return { ...state, streak, evidence, challengeIndex };
 }
 
 /**
@@ -210,6 +248,40 @@ export function feed(state: GameState, machines: readonly Machine[], guess: stri
  */
 export function nextMachine(state: GameState, machines: readonly Machine[]): GameState {
   return loadMachine(state, machines, state.machineIndex + NEXT_INDEX_DELTA);
+}
+
+/**
+ * Counts the tests already run against the current machine, read from the evidence so the
+ * budget needs no separate state and survives a reload along with the rest of the log.
+ * @param state The current game state.
+ * @returns The number of test marked evidence rows.
+ */
+export function testsRun(state: GameState): number {
+  return state.evidence.filter((row) => row.mark === MARK_TEST).length;
+}
+
+/**
+ * Records one completed test against the current machine as a test marked evidence row, so it
+ * shows in the running log like any other input. A test is ignored once the machine is no longer
+ * being played or the budget is already spent, so the bench cannot be reloaded for more tries.
+ * @param state The current game state.
+ * @param result The completed test to record.
+ * @returns The next game state with the test appended, or the state unchanged.
+ */
+export function recordTest(state: GameState, result: TestResult): GameState {
+  if (state.phase !== PHASE_PLAYING || testsRun(state) >= MAX_TESTS) return state;
+  const evidence = [...state.evidence, buildEvidenceRow(result.input, result.output, MARK_TEST)];
+  return { ...state, evidence };
+}
+
+/**
+ * Ends the game from the final machine's revealed state, so the player dismisses the last
+ * reveal before the results screen is shown rather than skipping straight past it.
+ * @param state The current revealed state of the final machine.
+ * @returns The state marked as ended.
+ */
+export function finish(state: GameState): GameState {
+  return { ...state, ended: true };
 }
 
 /**
