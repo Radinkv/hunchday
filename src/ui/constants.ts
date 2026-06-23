@@ -25,19 +25,13 @@ export const CLASS_HEADER_RIGHT = "hright";
 export const CLASS_HELP = "help";
 export const CLASS_HELP_BUTTON = "helpbtn";
 export const CLASS_HELP_POP = "helppop";
-export const CLASS_HELP_GOAL = "helpgoal";
-export const CLASS_HELP_LIST = "helplist";
-export const CLASS_HELP_MODE = "helpmode";
-export const CLASS_HELP_NOTE = "helpnote";
+export const CLASS_HELP_TEXT = "helptext";
 
-/** Copy for the help popover, the only place the rules are spelled out, kept short. */
+/** Copy for the help popover: a single plain paragraph, the only place the rules are spelled out. */
 export const COPY_HELP_TITLE = "How to play";
 export const COPY_HELP_GLYPH = "?";
-export const COPY_HELP_GOAL = "Every machine hides a rule. Work out what it does, then crack it.";
-export const COPY_HELP_TEST = "feed in chips to see what comes out. Two tries.";
-export const COPY_HELP_GUESS = "predict the output. Two right in a row cracks it.";
-export const COPY_HELP_RECIPE = "build the rule from steps. Match both examples to crack it.";
-export const COPY_HELP_NOTE = "One wrong answer is allowed; the second reveals the rule.";
+export const COPY_HELP_TEXT =
+  "Each machine hides a rule, and you start with a single example of what it does. Use Test to run your own chips through and see what comes back, then switch to Guess to predict the output for the chips it shows you, where two right in a row cracks it. Recipe lets you describe the rule directly as a list of steps, checked against everything the machine does. Two wrong answers are fine, and the third reveals the rule.";
 export const CLASS_WORDMARK_BLOCK = "wblock";
 export const CLASS_TAGLINE = "tagline";
 export const CLASS_MACHINE_ZONE = "mzone";

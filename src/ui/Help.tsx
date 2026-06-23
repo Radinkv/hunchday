@@ -2,38 +2,21 @@ import { useEffect, useRef, useState } from "react";
 import {
   CLASS_HELP,
   CLASS_HELP_BUTTON,
-  CLASS_HELP_GOAL,
-  CLASS_HELP_LIST,
-  CLASS_HELP_MODE,
-  CLASS_HELP_NOTE,
   CLASS_HELP_POP,
+  CLASS_HELP_TEXT,
   COPY_HELP_GLYPH,
-  COPY_HELP_GOAL,
-  COPY_HELP_GUESS,
-  COPY_HELP_NOTE,
-  COPY_HELP_RECIPE,
-  COPY_HELP_TEST,
+  COPY_HELP_TEXT,
   COPY_HELP_TITLE,
-  COPY_MODE_GUESS,
-  COPY_MODE_RECIPE,
-  COPY_MODE_TEST,
 } from "./constants";
 
 /** The key that closes the popover from the keyboard. */
 const ESCAPE_KEY = "Escape";
 
-/** Each mode's one line explainer: the mode word and what to do in it. */
-const HELP_MODES: readonly { readonly name: string; readonly desc: string }[] = [
-  { name: COPY_MODE_TEST, desc: COPY_HELP_TEST },
-  { name: COPY_MODE_GUESS, desc: COPY_HELP_GUESS },
-  { name: COPY_MODE_RECIPE, desc: COPY_HELP_RECIPE },
-];
-
 /**
- * The help affordance in the navbar: a small question mark that opens a compact explainer of the
- * goal and the three modes. The rest of the interface stays word free; the rules live only here,
- * reached on demand. It opens on hover for a mouse and on tap or click for touch, and closes when
- * the pointer leaves, on a click outside, or on Escape, so it never lingers in the way.
+ * The help affordance in the navbar: a small question mark that opens a single plain paragraph
+ * explaining the game. The rest of the interface stays word free; the rules live only here, reached
+ * on demand. It opens on hover for a mouse and on tap or click for touch, and closes when the
+ * pointer leaves, on a click outside, or on Escape, so it never lingers in the way.
  */
 export function Help() {
   const [open, setOpen] = useState(false);
@@ -70,15 +53,7 @@ export function Help() {
       </button>
       {open ? (
         <div className={CLASS_HELP_POP}>
-          <p className={CLASS_HELP_GOAL}>{COPY_HELP_GOAL}</p>
-          <ul className={CLASS_HELP_LIST}>
-            {HELP_MODES.map((helpMode) => (
-              <li key={helpMode.name}>
-                <span className={CLASS_HELP_MODE}>{helpMode.name}</span> {helpMode.desc}
-              </li>
-            ))}
-          </ul>
-          <p className={CLASS_HELP_NOTE}>{COPY_HELP_NOTE}</p>
+          <p className={CLASS_HELP_TEXT}>{COPY_HELP_TEXT}</p>
         </div>
       ) : null}
     </div>

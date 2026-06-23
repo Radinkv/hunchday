@@ -13,7 +13,7 @@ import {
   COPY_END_CRACKED_PREFIX,
   COPY_END_OF,
   COPY_FEED_BUTTON,
-  COPY_HELP_GOAL,
+  COPY_HELP_TEXT,
   COPY_HELP_TITLE,
   COPY_MODE_GUESS,
   COPY_MODE_RECIPE,
@@ -366,13 +366,13 @@ describe("App", () => {
   it("opens the help popover from the navbar and closes it again", () => {
     render(<App machines={[NUMBER_MACHINE]} />);
     const help = screen.getByRole("button", { name: COPY_HELP_TITLE });
-    expect(screen.queryByText(COPY_HELP_GOAL)).toBeNull();
+    expect(screen.queryByText(COPY_HELP_TEXT)).toBeNull();
 
     fireEvent.click(help);
-    expect(screen.getByText(COPY_HELP_GOAL)).toBeTruthy();
+    expect(screen.getByText(COPY_HELP_TEXT)).toBeTruthy();
 
     fireEvent.click(help);
-    expect(screen.queryByText(COPY_HELP_GOAL)).toBeNull();
+    expect(screen.queryByText(COPY_HELP_TEXT)).toBeNull();
   });
 
   it("resumes the saved game mid play on reload instead of showing the intro", () => {
