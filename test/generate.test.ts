@@ -24,8 +24,8 @@ const CHALLENGE_COUNT = 5;
 const SLOT_ORDER: readonly Difficulty[] = [
   DIFFICULTY_SUPER_EASY,
   DIFFICULTY_EASY,
-  DIFFICULTY_MEDIUM,
   DIFFICULTY_HARD,
+  DIFFICULTY_MEDIUM,
 ];
 
 const SOAK_START = "2026-06-20";
@@ -36,8 +36,8 @@ const WINDOW_BY_SLOT: readonly number[] = [SUPER_EASY_NO_REPEAT, NO_REPEAT_WINDO
 const MS_PER_DAY = 86400000;
 
 const PINNED_SIGNATURES: Readonly<Record<string, string>> = {
-  "2026-06-20": 'length_map{} ## sub_k{"k":5}>keep_first_k{"k":2} ## mul_k{"k":2}>keep_first_k{"k":2}>keep_lt_k{"k":9} ## length_map{}>dedup{}>rotate_left{}',
-  "2026-07-01": 'add_k{"k":6} ## add_k{"k":1}>keep_first_k{"k":2} ## add_k{"k":3}>sort_asc{}>keep_lt_k{"k":9} ## length_map{}>drop_first{}>min_normalize{}',
+  "2026-06-20": 'length_map{} ## sub_k{"k":5}>keep_first_k{"k":2} ## length_map{}>dedup{}>rotate_left{} ## mul_k{"k":2}>keep_first_k{"k":2}>keep_lt_k{"k":9}',
+  "2026-07-01": 'add_k{"k":6} ## add_k{"k":1}>keep_first_k{"k":2} ## length_map{}>drop_first{}>min_normalize{} ## add_k{"k":3}>sort_asc{}>keep_lt_k{"k":9}',
 };
 
 /**

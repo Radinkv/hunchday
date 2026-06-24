@@ -12,6 +12,7 @@ import {
   COPY_WAITING,
   COPY_END_CRACKED_PREFIX,
   COPY_END_OF,
+  COPY_COMPOSER_FLIP_PREFIX,
   COPY_FEED_BUTTON,
   COPY_HELP_TEXT,
   COPY_HELP_TITLE,
@@ -350,6 +351,23 @@ describe("App", () => {
 
     toGuess();
     expect(screen.queryByAltText(COPY_WAITING)).toBeTruthy();
+  });
+
+  it("flips a small number chip to negative on tap, but leaves a large one unchanged", () => {
+    render(<App machines={[NUMBER_MACHINE]} />);
+    play();
+
+    composeChips("3");
+    const small = screen.getByRole("button", { name: COPY_COMPOSER_FLIP_PREFIX + "1" });
+    expect(small.textContent).toBe("3");
+    fireEvent.click(small);
+    expect(screen.getByRole("button", { name: COPY_COMPOSER_FLIP_PREFIX + "1" }).textContent).toBe("-3");
+
+    fireEvent.click(screen.getByRole("button", { name: COPY_PAD_NEXT_LABEL }));
+    composeChips("7");
+    const large = screen.getByRole("button", { name: COPY_COMPOSER_FLIP_PREFIX + "2" });
+    fireEvent.click(large);
+    expect(screen.getByRole("button", { name: COPY_COMPOSER_FLIP_PREFIX + "2" }).textContent).toBe("7");
   });
 
   it("fills a miss pip for each wrong answer in Guess", () => {

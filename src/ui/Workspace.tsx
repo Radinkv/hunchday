@@ -12,9 +12,11 @@ import {
   CLASS_CHIP_GUESS,
   CLASS_FEED,
   CLASS_GUESS,
+  CLASS_GUESS_HINT,
   CLASS_MODE_BODY,
   CLASS_WORKSPACE,
   COPY_FEED_BUTTON,
+  COPY_GUESS_HINT,
   MODE_RECIPE,
   MODE_TEST,
   type Mode,
@@ -47,6 +49,8 @@ export function Workspace({
   steps,
   tests,
   misses,
+  testBudget,
+  missLimit,
   onFeed,
   onTest,
 }: {
@@ -58,6 +62,8 @@ export function Workspace({
   readonly steps?: readonly RuleStep[] | undefined;
   readonly tests: readonly TestResult[];
   readonly misses: number;
+  readonly testBudget: number;
+  readonly missLimit: number;
   readonly onFeed: (submission: Submission) => void;
   readonly onTest: (result: TestResult) => void;
 }) {
@@ -82,6 +88,7 @@ export function Workspace({
         challenges={challenges}
         steps={steps}
         tests={tests}
+        budget={testBudget}
         onRun={onTest}
       />
     );
@@ -93,6 +100,7 @@ export function Workspace({
         panelOps={panelOps}
         initialSteps={recipeSteps}
         misses={misses}
+        missLimit={missLimit}
         onStepsChange={setRecipeSteps}
         onFeed={onFeed}
       />
@@ -101,7 +109,8 @@ export function Workspace({
     body = (
       <div className={CLASS_GUESS}>
         <ChipComposer words={guessReadsWords} value={guessDraft} onChange={setGuessDraft} role={CLASS_CHIP_GUESS} />
-        <MissPips misses={misses} />
+        {guessReadsWords ? null : <p className={CLASS_GUESS_HINT}>{COPY_GUESS_HINT}</p>}
+        <MissPips misses={misses} limit={missLimit} />
         <button type="button" className={CLASS_FEED} onClick={feedGuess} disabled={guessChips.length === 0}>
           {COPY_FEED_BUTTON}
         </button>

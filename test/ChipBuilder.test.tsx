@@ -49,7 +49,16 @@ const MATCHES_NONE = expect.objectContaining<Submission>({ kind: SUBMISSION_RECI
  * @param onFeed The submission handler.
  */
 function renderBuilder(challengeInput: string, truth: readonly ChipPair[], onFeed: (s: Submission) => void): void {
-  render(<ChipBuilder challengeInput={challengeInput} truth={truth} panelOps={ALL_OPS} misses={0} onFeed={onFeed} />);
+  render(
+    <ChipBuilder
+      challengeInput={challengeInput}
+      truth={truth}
+      panelOps={ALL_OPS}
+      misses={0}
+      missLimit={3}
+      onFeed={onFeed}
+    />,
+  );
 }
 
 afterEach(cleanup);

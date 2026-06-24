@@ -64,7 +64,9 @@ export function App({ machines }: { readonly machines: readonly Machine[] }) {
             machines={machines}
             state={state}
             onFeed={(submission) => setState((current) => (current ? feed(current, machines, submission) : current))}
-            onTest={(result) => setState((current) => (current ? recordTest(current, result) : current))}
+            onTest={(result) =>
+              setState((current) => (current ? recordTest(current, machines[current.machineIndex], result) : current))
+            }
             onNext={() => setState((current) => (current ? nextMachine(current, machines) : current))}
             onFinish={() => setState((current) => (current ? finish(current) : current))}
             onRestart={() => setState(restart(machines))}

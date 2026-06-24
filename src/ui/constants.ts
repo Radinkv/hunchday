@@ -31,7 +31,7 @@ export const CLASS_HELP_TEXT = "helptext";
 export const COPY_HELP_TITLE = "How to play";
 export const COPY_HELP_GLYPH = "?";
 export const COPY_HELP_TEXT =
-  "Each machine hides a rule, and you start with a single example of what it does. Use Test to run your own chips through and see what comes back, then switch to Guess to predict the output for the chips it shows you, where two right in a row cracks it. Recipe lets you describe the rule directly as a list of steps, checked against everything the machine does. Two wrong answers are fine, and the third reveals the rule.";
+  "Each machine hides a rule, and you start with a single example of what it does. Use Test to run your own chips through and see what comes back, then switch to Guess to predict the output for the chips it shows you, where two right in a row cracks it. An output can dip a little below zero, so when you guess, tap a chip to make it negative. Recipe lets you describe the rule directly as a list of steps, checked against everything the machine does. Two wrong answers are fine, and the third reveals the rule.";
 export const CLASS_WORDMARK_BLOCK = "wblock";
 export const CLASS_TAGLINE = "tagline";
 export const CLASS_MACHINE_ZONE = "mzone";
@@ -152,6 +152,17 @@ export type Mode = typeof MODE_TEST | typeof MODE_GUESS | typeof MODE_RECIPE;
 export const CLASS_WORKSPACE = "workspace";
 export const CLASS_MODE_BODY = "modebody";
 export const CLASS_GUESS = "guesspane";
+export const CLASS_GUESS_HINT = "guesshint";
+
+/**
+ * The most negative a guessed chip may be, mirroring the engine's output floor. A number chip can
+ * be flipped to a negative only while its magnitude keeps it at or above this, so guesses can match
+ * the small negatives a subtracting machine produces without dropping past the floor.
+ */
+export const CHIP_FLOOR = -5;
+
+/** The hint shown under the Guess pad, since outputs can dip a little below zero. */
+export const COPY_GUESS_HINT = "Tap a chip to make it negative.";
 export const CLASS_MODE_TOGGLE = "modes";
 export const CLASS_MODE_OPTION = "mode";
 export const CLASS_MODE_ACTIVE = "modeon";
@@ -182,6 +193,7 @@ export const COPY_PAD_NEXT_LABEL = "New chip";
 export const COPY_PAD_BACK_GLYPH = "⌫";
 export const COPY_PAD_BACK_LABEL = "Delete chip";
 export const COPY_COMPOSER_REMOVE_PREFIX = "Remove chip ";
+export const COPY_COMPOSER_FLIP_PREFIX = "Flip the sign of chip ";
 export const COPY_COMPOSER_LABEL = "Chips";
 export const COPY_COMPOSER_HINT = "type chips";
 

@@ -4,7 +4,6 @@ import { Pips } from "./Pips";
 import {
   checkTestInput,
   machineReadsWords,
-  MAX_TESTS,
   normalizeChips,
   runTest,
   TEST_OK,
@@ -43,6 +42,7 @@ export function ChipTester({
   challenges,
   steps,
   tests,
+  budget,
   onRun,
 }: {
   readonly challengeInput: string;
@@ -50,6 +50,7 @@ export function ChipTester({
   readonly challenges: readonly ChipPair[];
   readonly steps?: readonly RuleStep[] | undefined;
   readonly tests: readonly TestResult[];
+  readonly budget: number;
   readonly onRun: (result: TestResult) => void;
 }) {
   const [draft, setDraft] = useState("");
@@ -58,7 +59,7 @@ export function ChipTester({
   const inPlay = new Set([...examples, ...challenges].map((pair) => normalizeChips(pair[0])));
   const alreadyTested = new Set(tests.map((test) => normalizeChips(test.input)));
   const used = tests.length;
-  const remaining = MAX_TESTS - used;
+  const remaining = budget - used;
   const spent = remaining <= 0;
   const status: TestStatus = checkTestInput(draft, readsWords, inPlay, alreadyTested);
   const canRun = !spent && status === TEST_OK && steps !== undefined;
@@ -74,7 +75,7 @@ export function ChipTester({
       <ChipComposer words={readsWords} value={draft} onChange={setDraft} role={CLASS_CHIP_INPUT} disabled={spent} />
 
       <Pips
-        total={MAX_TESTS}
+        total={budget}
         active={remaining}
         variant={CLASS_TEST_PIPS}
         label={TEST_PIP_LABEL + LABEL_SEPARATOR + remaining}

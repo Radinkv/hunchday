@@ -1,8 +1,7 @@
-import { MISSES_TO_FAIL } from "../game/reducer";
 import { CLASS_MISS_PIPS, CLASS_PIP, CLASS_PIP_ON, CLASS_PIPS, MISS_PIP_LABEL } from "./constants";
 
-/** The number of survivable misses, the pips a player fills before the fatal next one. */
-const SURVIVABLE_MISSES = MISSES_TO_FAIL - 1;
+/** The fatal miss is not shown as a pip, so the survivable count is one below the machine's limit. */
+const FATAL_MISS = 1;
 
 /** The separator between the miss label and its count for assistive technology. */
 const LABEL_SEPARATOR = ": ";
@@ -35,15 +34,17 @@ export function Pips({
 
 /**
  * The miss counter shown in Guess and Recipe: amber pips that start empty and fill as wrong
- * answers accrue. There is one pip per survivable miss; filling the last one means the next wrong
- * answer ends the machine. Guess and Recipe share the same machine miss count, so both show it.
- * @param props The number of wrong answers so far on the current machine.
+ * answers accrue. There is one pip per survivable miss, one below the machine's miss limit; filling
+ * the last one means the next wrong answer ends the machine. The harder finale carries a larger
+ * limit, so it shows more pips. Guess and Recipe share the same machine miss count, so both show it.
+ * @param props The number of wrong answers so far and the machine's miss limit.
  */
-export function MissPips({ misses }: { readonly misses: number }) {
+export function MissPips({ misses, limit }: { readonly misses: number; readonly limit: number }) {
+  const survivable = limit - FATAL_MISS;
   return (
     <Pips
-      total={SURVIVABLE_MISSES}
-      active={Math.min(misses, SURVIVABLE_MISSES)}
+      total={survivable}
+      active={Math.min(misses, survivable)}
       variant={CLASS_MISS_PIPS}
       label={MISS_PIP_LABEL + LABEL_SEPARATOR + misses}
     />

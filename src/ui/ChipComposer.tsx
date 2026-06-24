@@ -1,5 +1,6 @@
 import { tokenize } from "../game/reducer";
 import {
+  CHIP_FLOOR,
   CLASS_CHIP,
   CLASS_COMPOSER,
   CLASS_COMPOSER_CHIP,
@@ -7,6 +8,7 @@ import {
   CLASS_COMPOSER_PREVIEW,
   CLASS_PAD,
   CLASS_PAD_KEY,
+  COPY_COMPOSER_FLIP_PREFIX,
   COPY_COMPOSER_HINT,
   COPY_COMPOSER_LABEL,
   COPY_COMPOSER_REMOVE_PREFIX,
@@ -23,6 +25,9 @@ const MAX_TOKEN_LENGTH = 2;
 
 /** The longest a single word chip may be in the word entry. */
 const MAX_WORD_LENGTH = 12;
+
+/** The largest magnitude a number chip may be flipped to, from the chip floor. */
+const FLOOR_MAGNITUDE = Math.abs(CHIP_FLOOR);
 
 /** The separator that joins chip tokens in the composed value. */
 const TOKEN_JOIN = " ";
@@ -114,6 +119,24 @@ export function ChipComposer({
     onChange(tokens.filter((_token, at) => at !== index).join(TOKEN_JOIN));
   };
 
+  /**
+   * Flips a number chip between positive and negative, but only while its magnitude keeps it at or
+   * above the chip floor, so a guess can reach the small negatives a subtracting machine produces
+   * without dropping past it. A chip too large to negate, or one that is not a whole number, does
+   * nothing. The trailing new chip separator is preserved so the next chip still starts clean.
+   * @param index The chip to flip.
+   */
+  const flipSign = (index: number): void => {
+    if (disabled) return;
+    const token = tokens[index];
+    if (token === undefined) return;
+    const numeric = Number(token);
+    if (!Number.isInteger(numeric) || Math.abs(numeric) > FLOOR_MAGNITUDE) return;
+    const flipped = tokens.map((current, at) => (at === index ? String(-numeric) : current));
+    const trailing = value.endsWith(TOKEN_JOIN) ? TOKEN_JOIN : "";
+    onChange(flipped.join(TOKEN_JOIN) + trailing);
+  };
+
   return (
     <div className={CLASS_COMPOSER}>
       <div className={CLASS_COMPOSER_PREVIEW}>
@@ -122,9 +145,9 @@ export function ChipComposer({
             type="button"
             key={token + TOKEN_JOIN + index}
             className={CLASS_CHIP + " " + role + " " + CLASS_COMPOSER_CHIP}
-            aria-label={COPY_COMPOSER_REMOVE_PREFIX + (index + CHIP_NUMBER_OFFSET)}
+            aria-label={(words ? COPY_COMPOSER_REMOVE_PREFIX : COPY_COMPOSER_FLIP_PREFIX) + (index + CHIP_NUMBER_OFFSET)}
             disabled={disabled}
-            onClick={() => removeChip(index)}
+            onClick={() => (words ? removeChip(index) : flipSign(index))}
           >
             {token}
           </button>

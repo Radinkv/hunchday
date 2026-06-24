@@ -2,11 +2,12 @@ import { useEffect, useRef, useState } from "react";
 import { Workspace } from "./Workspace";
 import { ModeToggle, modesForSteps } from "./ModeToggle";
 import { Chips } from "./Chips";
-import { crackedCount, isLastMachine, shareText } from "../game/reducer";
+import { crackedCount, isLastMachine, missLimitFor, shareText } from "../game/reducer";
 import {
   MARK_MISS,
   MARK_TEST,
   PHASE_PLAYING,
+  testBudgetFor,
   type EvidenceRow,
   type GameState,
   type Machine,
@@ -257,6 +258,8 @@ export function MachineCard({
   const challengeInput = machine.ch.at(state.challengeIndex)?.[0] ?? "";
   const modes = modesForSteps((machine.steps?.length ?? 0) > 0);
   const misses = state.evidence.filter((row) => row.mark === MARK_MISS).length;
+  const testBudget = testBudgetFor(machine.difficulty);
+  const missLimit = missLimitFor(machine.difficulty);
 
   if (state.ended) {
     return <EndScreen state={state} machines={machines} onRestart={onRestart} />;
@@ -303,6 +306,8 @@ export function MachineCard({
             steps={machine.steps}
             tests={testsFrom(state.evidence)}
             misses={misses}
+            testBudget={testBudget}
+            missLimit={missLimit}
             onFeed={onFeed}
             onTest={onTest}
           />

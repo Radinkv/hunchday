@@ -34,6 +34,10 @@ describe("machineReadsWords", () => {
     expect(machineReadsWords(NUMBER_SAMPLE)).toBe(false);
     expect(machineReadsWords(WORD_SAMPLE)).toBe(true);
   });
+
+  it("treats a sample with negative numbers as numeric, not words", () => {
+    expect(machineReadsWords("-1 1 6 7")).toBe(false);
+  });
 });
 
 describe("checkTestInput", () => {

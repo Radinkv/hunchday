@@ -890,6 +890,15 @@ footer {
   gap: 10px;
 }
 
+/* A quiet hint under the Guess pad explaining how to enter a negative output. */
+.guesshint {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.4;
+  text-align: center;
+  color: var(--ink-3);
+}
+
 /* The test budget as pips: one per allowed test, in the machine accent, dimming as they are spent. */
 /* The pips counter: a centered row of small dots. A pip is faint by default; an on pip is filled,
    in the machine accent for the test budget and amber for the miss counter. */

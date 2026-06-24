@@ -9,16 +9,17 @@
  */
 
 import {
+  DIFFICULTY_HARD,
   MARK_EXAMPLE,
   MARK_HIT,
   MARK_MISS,
   MARK_TEST,
-  MAX_TESTS,
   PHASE_PLAYING,
   PHASE_REVEALED,
   SUBMISSION_RECIPE,
+  testBudgetFor,
 } from "./types";
-import type { EvidenceRow, GameState, Machine, Submission, TestResult } from "./types";
+import type { Difficulty, EvidenceRow, GameState, Machine, Submission, TestResult } from "./types";
 import {
   EMOJI_CRACKED,
   EMOJI_REVEALED,
@@ -38,6 +39,19 @@ const STREAK_TO_CRACK = 2;
  * on the third miss, so two wrong guesses or recipes are survivable and the third is fatal.
  */
 export const MISSES_TO_FAIL = 3;
+
+/** The hard finale tolerates one more wrong answer: three survivable, fatal on the fourth. */
+const HARD_MISSES_TO_FAIL = 4;
+
+/**
+ * The miss limit for a machine, by difficulty. The hard machine is more forgiving; every other tier
+ * uses the standard limit.
+ * @param difficulty The machine's difficulty.
+ * @returns The number of misses that ends the machine.
+ */
+export function missLimitFor(difficulty: Difficulty): number {
+  return difficulty === DIFFICULTY_HARD ? HARD_MISSES_TO_FAIL : MISSES_TO_FAIL;
+}
 
 /** Number of example pairs shown for free when a machine loads; the rest are earned by playing. */
 export const SEEDED_EXAMPLE_COUNT = 1;
@@ -209,7 +223,7 @@ function recordMiss(state: GameState, machine: Machine, guess?: string): GameSta
   const evidence = [...state.evidence, buildEvidenceRow(challengeInput, challengeOutput, MARK_MISS, guess)];
   const challengeIndex = state.challengeIndex + NEXT_INDEX_DELTA;
   const missesThisMachine = evidence.filter((row) => row.mark === MARK_MISS).length;
-  if (missesThisMachine >= MISSES_TO_FAIL || challengeIndex >= machine.ch.length) {
+  if (missesThisMachine >= missLimitFor(machine.difficulty) || challengeIndex >= machine.ch.length) {
     return reveal(state, machine, evidence, RESET_STREAK, misses, false);
   }
   return { ...state, streak: RESET_STREAK, misses, evidence, challengeIndex };
@@ -284,13 +298,15 @@ export function testsRun(state: GameState): number {
 /**
  * Records one completed test against the current machine as a test marked evidence row, so it
  * shows in the running log like any other input. A test is ignored once the machine is no longer
- * being played or the budget is already spent, so the bench cannot be reloaded for more tries.
+ * being played or the budget is already spent, so the bench cannot be reloaded for more tries. The
+ * budget depends on the machine's difficulty.
  * @param state The current game state.
+ * @param machine The current machine, whose difficulty sets the test budget.
  * @param result The completed test to record.
  * @returns The next game state with the test appended, or the state unchanged.
  */
-export function recordTest(state: GameState, result: TestResult): GameState {
-  if (state.phase !== PHASE_PLAYING || testsRun(state) >= MAX_TESTS) return state;
+export function recordTest(state: GameState, machine: Machine, result: TestResult): GameState {
+  if (state.phase !== PHASE_PLAYING || testsRun(state) >= testBudgetFor(machine.difficulty)) return state;
   const evidence = [...state.evidence, buildEvidenceRow(result.input, result.output, MARK_TEST)];
   return { ...state, evidence };
 }

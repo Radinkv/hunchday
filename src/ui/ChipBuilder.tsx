@@ -119,6 +119,7 @@ export function ChipBuilder({
   panelOps,
   initialSteps,
   misses,
+  missLimit,
   onStepsChange,
   onFeed,
 }: {
@@ -127,6 +128,7 @@ export function ChipBuilder({
   readonly panelOps: readonly string[];
   readonly initialSteps?: readonly Step[];
   readonly misses: number;
+  readonly missLimit: number;
   readonly onStepsChange?: (steps: readonly Step[]) => void;
   readonly onFeed: (submission: Submission) => void;
 }) {
@@ -265,7 +267,7 @@ export function ChipBuilder({
         {searchResults}
       </div>
 
-      <MissPips misses={misses} />
+      <MissPips misses={misses} limit={missLimit} />
 
       <button type="button" className={CLASS_FEED} onClick={feed}>
         {COPY_FEED_BUTTON}

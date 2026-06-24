@@ -26,8 +26,8 @@ const MAX_NUMBER = 99;
 /** The longest a word test chip may be, a generous bound so any sensible word is allowed. */
 const MAX_WORD_LENGTH = 12;
 
-/** Recognizes a chip token made only of digits, and one made only of letters. */
-const NUMERIC_TOKEN = /^\d+$/;
+/** Recognizes a whole number chip token, negatives included, and one made only of letters. */
+const NUMERIC_TOKEN = /^-?\d+$/;
 const WORD_TOKEN = /^[a-z]+$/;
 
 /** The separator joining chip tokens into a normalized chip string. */

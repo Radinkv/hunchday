@@ -72,8 +72,21 @@ export type Difficulty =
 /** A single input and output pairing, both expressed as space separated chip text. */
 export type ChipPair = readonly [input: string, output: string];
 
-/** The number of tests a player may run on a single machine before the bench locks. */
+/** The number of tests a player may run on most machines before the bench locks. */
 export const MAX_TESTS = 2;
+
+/** The hard finale, the multi-step numeric machine, grants an extra probe since it is the toughest. */
+const HARD_TEST_BUDGET = 3;
+
+/**
+ * The test budget for a machine, by difficulty. The hard machine gets a larger budget; every other
+ * tier uses the standard one.
+ * @param difficulty The machine's difficulty.
+ * @returns The number of tests allowed on that machine.
+ */
+export function testBudgetFor(difficulty: Difficulty): number {
+  return difficulty === DIFFICULTY_HARD ? HARD_TEST_BUDGET : MAX_TESTS;
+}
 
 /** One completed test: the chips fed in and the chips the machine produced for them. */
 export interface TestResult {

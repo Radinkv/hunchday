@@ -108,8 +108,8 @@ const GENERATOR_SALT = "hunchday-v1";
 const DIFFICULTY_ORDER: readonly Difficulty[] = [
   DIFFICULTY_SUPER_EASY,
   DIFFICULTY_EASY,
-  DIFFICULTY_MEDIUM,
   DIFFICULTY_HARD,
+  DIFFICULTY_MEDIUM,
 ];
 
 /** The slot index of the super easy opener, prepended at the front of the day. */

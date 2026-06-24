@@ -5,9 +5,12 @@ import {
   feed,
   isLastMachine,
   MISSES_TO_FAIL,
+  missLimitFor,
   nextMachine,
+  recordTest,
   shareText,
   startGame,
+  testsRun,
   tokenize,
 } from "../src/game/reducer";
 import {
@@ -18,6 +21,7 @@ import {
   PHASE_REVEALED,
   SUBMISSION_GUESS,
   SUBMISSION_RECIPE,
+  testBudgetFor,
   type GameState,
   type Machine,
   type Submission,
@@ -224,6 +228,49 @@ describe("feed", () => {
   it("ignores further feeds once the machine is revealed", () => {
     const revealed = crack(startGame(MACHINES), MACHINES);
     expect(feed(revealed, MACHINES, guess(WRONG_GUESS))).toBe(revealed);
+  });
+});
+
+describe("per difficulty limits", () => {
+  const HARD_MACHINE: Machine = {
+    difficulty: "hard",
+    rule: "It is the hard finale.",
+    ex: [["1", "2"]],
+    ch: [
+      ["1", "0"],
+      ["2", "0"],
+      ["3", "0"],
+      ["4", "0"],
+      ["5", "0"],
+    ],
+    panelOps: [],
+  };
+
+  it("derives the test budget and miss limit from difficulty", () => {
+    expect(testBudgetFor("hard")).toBe(3);
+    expect(testBudgetFor("easy")).toBe(2);
+    expect(missLimitFor("hard")).toBe(4);
+    expect(missLimitFor("easy")).toBe(3);
+  });
+
+  it("lets the hard machine survive three wrong answers and fail on the fourth", () => {
+    let state = startGame([HARD_MACHINE]);
+    for (let attempt = 0; attempt < 3; attempt++) state = feed(state, [HARD_MACHINE], guess(WRONG_GUESS));
+    expect(state.phase).toBe(PHASE_PLAYING);
+    expect(state.misses).toBe(3);
+
+    state = feed(state, [HARD_MACHINE], guess(WRONG_GUESS));
+    expect(state.phase).toBe(PHASE_REVEALED);
+    expect(state.won).toBe(false);
+    expect(state.misses).toBe(missLimitFor("hard"));
+  });
+
+  it("grants the hard machine three test probes before locking", () => {
+    let state = startGame([HARD_MACHINE]);
+    for (let probe = 0; probe < 4; probe++) {
+      state = recordTest(state, HARD_MACHINE, { input: String(probe + 10), output: "x" });
+    }
+    expect(testsRun(state)).toBe(testBudgetFor("hard"));
   });
 });
 
