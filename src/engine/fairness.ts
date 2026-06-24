@@ -91,6 +91,7 @@ export const PATTERN_C1 = "C1";
 export const PATTERN_C2 = "C2";
 export const PATTERN_C3 = "C3";
 export const PATTERN_C4 = "C4";
+export const PATTERN_C5 = "C5";
 export const PATTERN_L5 = "L5";
 export const PATTERN_L6 = "L6";
 
@@ -248,6 +249,7 @@ export const ALL_PATTERNS: readonly string[] = [
   PATTERN_C2,
   PATTERN_C3,
   PATTERN_C4,
+  PATTERN_C5,
   PATTERN_L5,
   PATTERN_L6,
 ];
@@ -293,12 +295,30 @@ function matchLevelDestroyerPattern(ids: string[], matched: Set<string>): void {
   }
 }
 
+/**
+ * Reports whether a consecutive pair is a shift then threshold fusion: a uniform shift that moves
+ * every chip toward the threshold the next step filters on, so the two steps collapse into one
+ * hidden algebraic condition the player must solve. Subtracting then keeping chips below a bound is
+ * keeping chips originally below the bound plus the shift; adding then keeping chips above a bound is
+ * keeping chips originally above the bound minus the shift. The opposite directions, sub then keep
+ * greater and add then keep less, pull apart and stay independently readable, so they are permitted.
+ * @param opA The first operation's identifier.
+ * @param opB The second operation's identifier.
+ * @returns True when the pair fuses a shift into the next threshold.
+ */
+function isShiftThresholdFusion(opA: string, opB: string): boolean {
+  return (
+    (opA === OP_SUB_K.id && opB === OP_KEEP_LT_K.id) || (opA === OP_ADD_K.id && opB === OP_KEEP_GT_K.id)
+  );
+}
+
 function matchPairPatterns(ids: string[], matched: Set<string>): void {
   for (let i = 0; i + 1 < ids.length; i++) {
     if (ELEMENTWISE_MAP.has(ids[i]) && ELEMENTWISE_MAP.has(ids[i + 1])) matched.add(PATTERN_C3);
     if (TRANSFORM.has(ids[i]) && TRANSFORM.has(ids[i + 1]) && (RESHAPE_SET.has(ids[i]) || RESHAPE_SET.has(ids[i + 1]))) {
       matched.add(PATTERN_C4);
     }
+    if (isShiftThresholdFusion(ids[i], ids[i + 1])) matched.add(PATTERN_C5);
     if (MANY_TO_ONE_DIGIT.has(ids[i]) && FILTER_ANY.has(ids[i + 1])) matched.add(PATTERN_L5);
     if (FILTER_ANY.has(ids[i]) && MANY_TO_ONE_DIGIT.has(ids[i + 1])) matched.add(PATTERN_L6);
   }

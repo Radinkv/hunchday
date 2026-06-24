@@ -3560,67 +3560,59 @@
     },
     {
       "difficulty": "hard",
-      "rule": "It takes 3 away from every chip, then keeps only chips smaller than 4, then keeps only the first 2 chips.",
+      "rule": "It keeps only the first 4 chips, then subtracts the smallest chip from them.",
       "ex": [
         [
-          "8 2 5 4",
-          "-1 2"
+          "10 8 11 12 3",
+          "2 0 3 4"
         ],
         [
-          "8 1 2 1",
-          "-2 -1"
+          "11 11 9 12 10",
+          "2 2 0 3"
         ]
       ],
       "ch": [
         [
-          "3 10 4 6",
-          "0 1"
+          "1 1 1 3 1",
+          "0 0 0 2"
         ],
         [
-          "4 6 7 3 9",
-          "1 3"
+          "7 6 10 1 12",
+          "6 5 9 0"
         ],
         [
-          "1 5 11 2",
-          "-2 2"
+          "2 12 3 12 6",
+          "0 10 1 10"
         ],
         [
-          "4 1 2 9",
-          "1 -2"
+          "9 3 2 1 11",
+          "8 2 1 0"
         ],
         [
-          "6 2 6 6 12",
-          "3 -1"
+          "12 5 9 12 3",
+          "7 0 4 7"
         ]
       ],
       "panelOps": [
+        "second_largest",
         "keep_first_k",
-        "sub_k",
-        "keep_lt_k",
-        "range",
-        "keep_even",
-        "rotate_left",
-        "swap_ends",
-        "median"
+        "min_normalize",
+        "keep_dups",
+        "index_of_max",
+        "units_digit",
+        "every_other",
+        "count_distinct"
       ],
       "steps": [
         {
-          "opId": "sub_k",
-          "params": {
-            "k": 3
-          }
-        },
-        {
-          "opId": "keep_lt_k",
+          "opId": "keep_first_k",
           "params": {
             "k": 4
           }
         },
         {
-          "opId": "keep_first_k",
-          "params": {
-            "k": 2
-          }
+          "opId": "min_normalize",
+          "params": {}
         }
       ]
     }
@@ -8565,72 +8557,70 @@
     },
     {
       "difficulty": "medium",
-      "rule": "It takes 2 away from every chip, then keeps only chips smaller than 8, then finds the second biggest chip.",
+      "rule": "It multiplies every chip by 3, then keeps every other chip, starting with the first, then moves the first chip to the end.",
       "ex": [
         [
-          "12 1 8",
-          "-1"
+          "5 6 6 12 6",
+          "18 18 15"
         ],
         [
-          "9 9 10 1",
-          "7"
+          "7 1 8 1 10",
+          "24 30 21"
         ]
       ],
       "ch": [
         [
-          "4 4 11 4",
-          "2"
+          "10 12 1 11",
+          "3 30"
         ],
         [
-          "5 5 11",
-          "3"
+          "5 2 7 4",
+          "21 15"
         ],
         [
-          "6 4 1 12",
-          "2"
+          "6 10 8",
+          "24 18"
         ],
         [
-          "5 5 10 11",
-          "3"
+          "6 10 12 3 12",
+          "36 36 18"
         ],
         [
-          "9 12 8 8 12",
-          "6"
+          "8 3 3",
+          "9 24"
         ]
       ],
       "panelOps": [
-        "keep_lt_k",
-        "keep_dups",
+        "every_other",
+        "count_distinct",
         "reverse_digits",
         "keep_even",
-        "sub_k",
-        "count_distinct",
-        "running_total",
+        "mul_k",
         "mode",
+        "running_total",
+        "keep_gt_first",
         "digit_sum_map",
         "units_digit",
-        "every_other",
-        "keep_gt_first",
         "min_normalize",
         "second_largest",
+        "keep_dups",
+        "rotate_left",
         "median",
         "index_of_max"
       ],
       "steps": [
         {
-          "opId": "sub_k",
+          "opId": "mul_k",
           "params": {
-            "k": 2
+            "k": 3
           }
         },
         {
-          "opId": "keep_lt_k",
-          "params": {
-            "k": 8
-          }
+          "opId": "every_other",
+          "params": {}
         },
         {
-          "opId": "second_largest",
+          "opId": "rotate_left",
           "params": {}
         }
       ]
@@ -17580,64 +17570,64 @@
     },
     {
       "difficulty": "hard",
-      "rule": "It adds 1 to every chip, then keeps only chips bigger than 6, then keeps only the first chip.",
+      "rule": "It adds 2 to every chip, then keeps only chips smaller than 5, then adds them together.",
       "ex": [
         [
-          "3 1 12 10",
-          "13"
+          "1 6 11 2 11",
+          "7"
         ],
         [
-          "6 4 9 12 11",
-          "7"
+          "10 1 11",
+          "3"
         ]
       ],
       "ch": [
         [
-          "9 6 9 4 1",
-          "10"
-        ],
-        [
-          "3 5 6 7",
-          "7"
-        ],
-        [
-          "5 4 8 6 1",
-          "9"
-        ],
-        [
-          "4 10 12 11 7",
+          "1 2 11 2 7",
           "11"
         ],
         [
-          "5 9 4 10 9",
-          "10"
+          "2 4",
+          "4"
+        ],
+        [
+          "1 8 12 2 12",
+          "7"
+        ],
+        [
+          "3 8 2 7",
+          "4"
+        ],
+        [
+          "1 2 8 8 10",
+          "7"
         ]
       ],
       "panelOps": [
         "keep_even",
         "add_k",
-        "first",
+        "sum",
+        "product",
+        "keep_gt_k",
         "keep_lt_k",
         "keep_odd",
-        "keep_gt_k",
-        "product",
         "rotate_left"
       ],
       "steps": [
         {
           "opId": "add_k",
           "params": {
-            "k": 1
+            "k": 2
           }
         },
         {
-          "opId": "keep_gt_k",
+          "opId": "keep_lt_k",
           "params": {
-            "k": 6
+            "k": 5
           }
         },
         {
-          "opId": "first",
+          "opId": "sum",
           "params": {}
         }
       ]
@@ -18476,37 +18466,37 @@
     },
     {
       "difficulty": "medium",
-      "rule": "It takes 4 away from every chip, then keeps only chips smaller than 8, then keeps only chips bigger than the first one.",
+      "rule": "It keeps only the last 4 chips, then keeps every other chip, starting with the first, then reverses the order.",
       "ex": [
         [
-          "1 8 12 9",
-          "4 5"
+          "4 7 7 8 12",
+          "8 7"
         ],
         [
-          "3 9 4 12",
-          "5 0"
+          "9 11 4 4 6",
+          "4 11"
         ]
       ],
       "ch": [
         [
-          "12 3 6 5",
-          "2 1"
+          "8 2 5 1 3",
+          "1 2"
         ],
         [
-          "12 3 10",
-          "6"
+          "9 4 9 5 10",
+          "5 4"
         ],
         [
-          "5 5 10 12 2",
-          "6"
+          "3 7 5 6 1",
+          "6 7"
         ],
         [
-          "2 12 11 7",
-          "7 3"
+          "3 12 2 10 10",
+          "10 12"
         ],
         [
-          "1 12 10 8 6",
-          "6 4 2"
+          "9 12 2 11 10",
+          "11 12"
         ]
       ],
       "panelOps": [
@@ -18515,33 +18505,31 @@
         "dedup",
         "count_distinct",
         "mode",
-        "every_other",
+        "keep_gt_first",
         "second_largest",
         "min_normalize",
-        "keep_gt_first",
+        "reverse",
         "product",
         "keep_dups",
-        "keep_lt_k",
+        "every_other",
         "index_of_max",
         "reverse_digits",
-        "sub_k",
+        "keep_last_k",
         "units_digit"
       ],
       "steps": [
         {
-          "opId": "sub_k",
+          "opId": "keep_last_k",
           "params": {
             "k": 4
           }
         },
         {
-          "opId": "keep_lt_k",
-          "params": {
-            "k": 8
-          }
+          "opId": "every_other",
+          "params": {}
         },
         {
-          "opId": "keep_gt_first",
+          "opId": "reverse",
           "params": {}
         }
       ]
@@ -18786,60 +18774,64 @@
     },
     {
       "difficulty": "hard",
-      "rule": "It adds 1 to every chip, then keeps only chips bigger than 9.",
+      "rule": "It reverses the order, then keeps only chips smaller than 8, then multiplies them by 2.",
       "ex": [
         [
-          "5 5 8 12 8",
-          "13"
+          "12 5 6",
+          "12 10"
         ],
         [
-          "4 9 11 7 9",
-          "10 12 10"
+          "8 5 2",
+          "4 10"
         ]
       ],
       "ch": [
         [
-          "11 5 6 5",
-          "12"
+          "12 3",
+          "6"
         ],
         [
-          "9 10 1 3",
-          "10 11"
+          "2 2 10 2",
+          "4 4 4"
         ],
         [
-          "10 10 3 9",
-          "11 11 10"
+          "12 7 1 9",
+          "2 14"
         ],
         [
-          "9 5 4 7 8",
-          "10"
+          "4 11 8 6 6",
+          "12 12 8"
         ],
         [
-          "11 6 11",
-          "12 12"
+          "3 10 12 9 10",
+          "6"
         ]
       ],
       "panelOps": [
-        "count_even",
+        "rotate_left",
+        "mul_k",
         "dedup",
         "range",
-        "rotate_left",
-        "keep_lt_k",
-        "swap_ends",
-        "add_k",
-        "keep_gt_k"
+        "keep_gt_k",
+        "count_even",
+        "reverse",
+        "keep_lt_k"
       ],
       "steps": [
         {
-          "opId": "add_k",
+          "opId": "reverse",
+          "params": {}
+        },
+        {
+          "opId": "keep_lt_k",
           "params": {
-            "k": 1
+            "k": 8
           }
         },
         {
-          "opId": "keep_gt_k",
+          "opId": "mul_k",
           "params": {
-            "k": 9
+            "k": 2
           }
         }
       ]
@@ -19195,41 +19187,41 @@
     },
     {
       "difficulty": "medium",
-      "rule": "It takes 3 away from every chip, then keeps only chips smaller than 4, then keeps every other chip, starting with the first.",
+      "rule": "It keeps every other chip, starting with the first, then sorts them smallest to biggest, then keeps only chips smaller than 9.",
       "ex": [
         [
-          "2 8 4 1 1",
-          "-1 -2"
+          "9 10 8 3 5",
+          "5 8"
         ],
         [
-          "10 1 3 5",
-          "-2 2"
+          "8 6 12 4 6",
+          "6 8"
         ]
       ],
       "ch": [
         [
-          "2 4 10 3 4",
-          "-1 0"
+          "2 1 10 4 4",
+          "2 4"
         ],
         [
-          "3 3 2 12",
-          "0 -1"
+          "10 2 12 2 5",
+          "5"
         ],
         [
-          "2 3 6 11",
-          "-1 3"
+          "12 11 7 1",
+          "7"
         ],
         [
-          "9 3 9 1 2",
-          "0 -1"
+          "6 6 12 9 9",
+          "6"
         ],
         [
-          "9 1 3 5 11",
-          "-2 2"
+          "12 10 5 5",
+          "5"
         ]
       ],
       "panelOps": [
-        "sub_k",
+        "every_other",
         "digit_sum_map",
         "keep_gt_first",
         "index_of_max",
@@ -19242,26 +19234,24 @@
         "median",
         "second_largest",
         "deltas",
+        "sort_asc",
         "keep_lt_k",
-        "every_other",
         "keep_dups"
       ],
       "steps": [
         {
-          "opId": "sub_k",
-          "params": {
-            "k": 3
-          }
+          "opId": "every_other",
+          "params": {}
+        },
+        {
+          "opId": "sort_asc",
+          "params": {}
         },
         {
           "opId": "keep_lt_k",
           "params": {
-            "k": 4
+            "k": 9
           }
-        },
-        {
-          "opId": "every_other",
-          "params": {}
         }
       ]
     },
@@ -21673,64 +21663,60 @@
     },
     {
       "difficulty": "hard",
-      "rule": "It takes 1 away from every chip, then keeps only chips smaller than 9, then keeps only the first 2 chips.",
+      "rule": "It keeps only the odd chips, then throws away the last chip, then keeps only the last 2 chips.",
       "ex": [
         [
-          "12 1 8 3 4",
-          "0 7"
+          "9 11 10 3 3",
+          "11 3"
         ],
         [
-          "10 5 1 11 5",
-          "4 0"
+          "1 3 11 6 9",
+          "3 11"
         ]
       ],
       "ch": [
         [
-          "7 4 11 8",
-          "6 3"
+          "7 1 8 5 3",
+          "1 5"
         ],
         [
-          "1 9 11 4 12",
-          "0 8"
+          "1 9 7 9 2",
+          "9 7"
         ],
         [
-          "5 12 7 6",
-          "4 6"
+          "5 3 8 3 3",
+          "3 3"
         ],
         [
-          "12 3 9 6",
-          "2 8"
+          "3 6 1 1 7",
+          "1 1"
         ],
         [
-          "10 10 5 8 9",
-          "4 7"
+          "7 10 1 7 11",
+          "1 7"
         ]
       ],
       "panelOps": [
         "keep_gt_k",
-        "product",
-        "count_even",
-        "keep_first_k",
-        "range",
         "keep_lt_k",
+        "count_even",
+        "keep_last_k",
+        "range",
+        "drop_last",
         "swap_ends",
-        "sub_k"
+        "keep_odd"
       ],
       "steps": [
         {
-          "opId": "sub_k",
-          "params": {
-            "k": 1
-          }
+          "opId": "keep_odd",
+          "params": {}
         },
         {
-          "opId": "keep_lt_k",
-          "params": {
-            "k": 9
-          }
+          "opId": "drop_last",
+          "params": {}
         },
         {
-          "opId": "keep_first_k",
+          "opId": "keep_last_k",
           "params": {
             "k": 2
           }

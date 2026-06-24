@@ -7,6 +7,7 @@ import {
   PATTERN_C2,
   PATTERN_C3,
   PATTERN_C4,
+  PATTERN_C5,
   PATTERN_L1,
   PATTERN_L2,
   PATTERN_L3,
@@ -88,6 +89,7 @@ describe("fairness matcher — one positive case per pattern", () => {
     [PATTERN_C2, [OP_AFFINE]],
     [PATTERN_C3, [OP_UNITS_DIGIT, OP_ADD_K]],
     [PATTERN_C4, [OP_DELTAS, OP_RUNNING_TOTAL]],
+    [PATTERN_C5, [OP_SUB_K, OP_KEEP_LT_K]],
     [PATTERN_L5, [OP_UNITS_DIGIT, OP_KEEP_GT_K]],
     [PATTERN_L6, [OP_KEEP_GT_K, OP_UNITS_DIGIT]],
   ];
@@ -152,6 +154,22 @@ describe("fairness matcher — known fair rules pass", () => {
   });
 });
 
+describe("fairness matcher — shift then threshold fusion (C5)", () => {
+  it("rejects a shift that moves chips toward the threshold it filters on", () => {
+    expect(matchPatterns(pipeline(OP_SUB_K, OP_KEEP_LT_K)).has(PATTERN_C5)).toBe(true);
+    expect(matchPatterns(pipeline(OP_ADD_K, OP_KEEP_GT_K)).has(PATTERN_C5)).toBe(true);
+  });
+
+  it("permits a shift that pulls away from the threshold, staying independently readable", () => {
+    expect(matchPatterns(pipeline(OP_SUB_K, OP_KEEP_GT_K)).has(PATTERN_C5)).toBe(false);
+    expect(matchPatterns(pipeline(OP_ADD_K, OP_KEEP_LT_K)).has(PATTERN_C5)).toBe(false);
+  });
+
+  it("checks every consecutive position, not only the start", () => {
+    expect(matchPatterns(pipeline(OP_REVERSE, OP_SUB_K, OP_KEEP_LT_K)).has(PATTERN_C5)).toBe(true);
+  });
+});
+
 describe("fairness matcher — catalog coverage", () => {
   it("has a positive case asserting every catalog pattern is reachable", () => {
     const covered = new Set([
@@ -163,6 +181,7 @@ describe("fairness matcher — catalog coverage", () => {
       PATTERN_C2,
       PATTERN_C3,
       PATTERN_C4,
+      PATTERN_C5,
       PATTERN_L5,
       PATTERN_L6,
     ]);

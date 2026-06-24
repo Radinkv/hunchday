@@ -50,7 +50,7 @@ const PINNED_SIGNATURES: Readonly<Record<string, string>> = {
   "2026-06-16": 'add_k{"k":3} ## add_k{"k":9}>reverse{} ## min_normalize{}>keep_gt_k{"k":8}>add_k{"k":7} ## keep_gt_k{"k":6}>sum{}',
   "2026-06-18": 'sort_asc{} ## add_k{"k":1}>keep_last_k{"k":3} ## length_map{}>add_k{"k":7}>sort_asc{} ## reverse_digits{}>mode{}',
   "2026-06-20": 'length_map{} ## sub_k{"k":5}>keep_first_k{"k":2} ## length_map{}>dedup{}>rotate_left{} ## mul_k{"k":2}>keep_first_k{"k":2}>keep_lt_k{"k":9}',
-  "2026-06-22": 'max{} ## add_k{"k":8}>keep_last_k{"k":2} ## length_map{}>add_k{"k":2}>keep_first_k{"k":2} ## sub_k{"k":3}>keep_lt_k{"k":4}>keep_first_k{"k":2}',
+  "2026-06-22": 'max{} ## add_k{"k":8}>keep_last_k{"k":2} ## length_map{}>add_k{"k":2}>keep_first_k{"k":2} ## keep_first_k{"k":4}>min_normalize{}',
   "2026-06-25": 'count{} ## sub_k{"k":3}>sort_desc{} ## length_map{}>add_k{"k":5}>sort_desc{} ## sub_k{"k":3}>drop_last{}>keep_lt_k{"k":7}',
   "2026-06-28": 'add_k{"k":4} ## add_k{"k":1}>drop_last{} ## mul_k{"k":2}>swap_ends{}>keep_gt_first{} ## sub_k{"k":2}>keep_odd{}>dedup{}',
   "2026-07-01": 'add_k{"k":6} ## add_k{"k":1}>keep_first_k{"k":2} ## length_map{}>drop_first{}>min_normalize{} ## add_k{"k":3}>sort_asc{}>keep_lt_k{"k":9}',

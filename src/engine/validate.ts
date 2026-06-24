@@ -37,6 +37,7 @@ import {
   PATTERN_C2,
   PATTERN_C3,
   PATTERN_C4,
+  PATTERN_C5,
   PATTERN_L1,
   PATTERN_L2,
   PATTERN_L3,
@@ -99,6 +100,7 @@ export const REASON_C1 = "unfair_c1";
 export const REASON_C2 = "unfair_c2";
 export const REASON_C3 = "unfair_c3";
 export const REASON_C4 = "unfair_c4";
+export const REASON_C5 = "shift_threshold_fusion";
 export const REASON_L5 = "unfair_l5";
 export const REASON_L6 = "unfair_l6";
 
@@ -112,6 +114,7 @@ const FAIRNESS_REASONS: Readonly<Record<string, string>> = {
   [PATTERN_C2]: REASON_C2,
   [PATTERN_C3]: REASON_C3,
   [PATTERN_C4]: REASON_C4,
+  [PATTERN_C5]: REASON_C5,
   [PATTERN_L5]: REASON_L5,
   [PATTERN_L6]: REASON_L6,
 };
