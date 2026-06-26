@@ -199,7 +199,7 @@ function EndScreen({
       <div className={CLASS_END_DOTS}>
         {state.results.map((result, index) => (
           <span
-            key={index}
+            key={`dot-${index}-${result}`}
             className={CLASS_END_DOT + " " + (result ? CLASS_END_DOT_CRACKED : CLASS_END_DOT_REVEALED)}
             aria-hidden="true"
           />
