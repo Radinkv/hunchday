@@ -35,3 +35,25 @@ Your game saves on its own as you play. If you close the tab and come back later
 ## Sharing
 
 When you finish the day you get a short summary of how you did. You can copy it and pass it to friends, and it never gives away any of the answers.
+
+## Under the hood
+
+Hunchday is a static, serverless React app with no backend, no database, no API. The day's puzzle is a pure deterministic function of the calendar date, precomputed at build time.
+
+### The puzzle engine
+
+The intellectual core is a typed dataflow compiler in `src/engine/` that generates provably fair daily puzzles.
+
+**Behavioral equivalence classing.** The engine enumerates ~95,000 typed pipeline combinations (up to 3 operations, every parameter value), runs each over a 40-input probe battery, and hashes the outputs into a behavioral fingerprint. Pipelines that compute the same function land in the same equivalence class. This turns expensive fairness questions into O(1) hash lookups.
+
+**Uniqueness guarantee.** A puzzle is only published if no simpler pipeline produces identical outputs on the probe battery. Uniqueness is enforced by equivalence class comparison at generation time.
+
+**Structural fairness theory.** A separate module (`fairness.ts`) rejects puzzles a human couldn't solve by reasoning alone, using 11 named invertibility patterns (L1-L6 information-loss patterns, C1-C5 conceptual-grind patterns) derived from the shape of the operation sequence without running it.
+
+**Determinism as a hard guarantee.** `rng.ts` uses FNV-1a hashing with a MurmurHash3-style finalizer and a Mulberry32 generator, all integer/bitwise arithmetic, byte-identical across every JavaScript engine. A 365-day soak test (`determinism.test.ts`) pins the exact class-table size, a hash of all class keys, and the exact pipeline signatures of 10 specific dates, asserting no slot deadlocks and no rule repeats within a 90-day window.
+
+### Stack
+- React 19, TypeScript, Vite, Vitest
+- Deployed on Vercel
+- ~9,400 lines of TypeScript across src/ and test/
+- ~143 test cases across 20 test files
