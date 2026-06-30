@@ -55,5 +55,4 @@ The intellectual core is a typed dataflow compiler in `src/engine/` that generat
 ### Stack
 - React 19, TypeScript, Vite, Vitest
 - Deployed on Vercel
-- ~9,400 lines of TypeScript across src/ and test/
-- ~143 test cases across 20 test files
+- TypeScript across src/ and test/
